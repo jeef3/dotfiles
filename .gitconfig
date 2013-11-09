@@ -1,0 +1,53 @@
+[alias]
+	c = commit -am
+	up = pull
+	p = push
+	s = status -s
+	df = diff --color --color-words --abbrev
+
+	# Commit graph
+	tree = log --color --graph --pretty=format:'%C(bold magenta)%d%C(reset) %C(white)%s%C(reset) %C(black)(%C(bold black)%h%C(reset)%C(black) %ar, %an)%C(reset)' --decorate=no --all
+[color]
+	ui = always
+[credential]
+	helper = osxkeychain
+[core]
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[merge]
+	log = true
+[help]
+	autocorrect = 1
+[push]
+	default = simple
+
+[url "git@github.com:"]
+	insteadOf = "gh:"
+	pushInsteadOf = "github:"
+	pushInsteadOf = "git://github.com/"
+[url "git://github.com/"]
+	insteadOf = "github:"
+[url "git@gist.github.com:"]
+	insteadOf = "gst:"
+	pushInsteadOf = "gist:"
+	pushInsteadOf = "git://gist.github.com/"
+[url "git://gist.github.com/"]
+	insteadOf = "gist:"
+
+# Any GitHub repo with my username should be checked out r/w by default
+# http://rentzsch.tumblr.com/post/564806957/public-but-hackable-git-submodules
+[url "git@github.com:jeef3/"]
+  insteadOf = "git://github.com/jeef3/"

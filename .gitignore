@@ -1,0 +1,6 @@
+# Folder view configuration files
+.DS_Store
+
+# Sublime projects and workspaces
+*.sublime-project
+*.sublime-workspace
