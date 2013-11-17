@@ -51,3 +51,6 @@
 # http://rentzsch.tumblr.com/post/564806957/public-but-hackable-git-submodules
 [url "git@github.com:jeef3/"]
   insteadOf = "git://github.com/jeef3/"
+
+[diff]
+	tool = vimdiff
