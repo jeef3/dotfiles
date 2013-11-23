@@ -12,8 +12,8 @@ unset file
 export PATH=$PATH:'/Library/Flex SDK/bin'
 
 # rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+export RBENV_ROOT=/usr/local/var/rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Amazon AWS Keys
 if [[ -f "$HOME/.amazon_keys" ]]; then

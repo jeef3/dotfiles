@@ -22,6 +22,9 @@ brew tap homebrew/dupes
 brew install homebrew/dupes/grep
 brew tap josegonzalez/homebrew-php
 
+# rbenv
+brew install rbenv ruby-build
+
 # everything else
 brew install ack
 brew install git bash-completion
