@@ -1,9 +1,10 @@
 [alias]
 	c = commit
-	up = pull
+	u = merge --ff-only
 	p = push
 	s = status -s
 	df = diff --color --color-words --abbrev
+
 
 	# Commit graph
 	tree = log --color --graph --pretty=format:'%C(bold magenta)%d%C(reset) %C(white)%s%C(reset) %C(black)(%C(bold black)%h%C(reset)%C(black) %ar, %an)%C(reset)' --decorate=no --all
@@ -30,6 +31,7 @@
 	untracked = cyan
 [merge]
 	log = true
+	defaultToUpstream = true
 [help]
 	autocorrect = 1
 [push]
