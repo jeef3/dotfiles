@@ -20,7 +20,6 @@ brew install wget --enable-iri
 # more recent versions of some OS X tools
 brew tap homebrew/dupes
 brew install homebrew/dupes/grep
-brew tap josegonzalez/homebrew-php
 
 # rbenv
 brew install rbenv ruby-build
