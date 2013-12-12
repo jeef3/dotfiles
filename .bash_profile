@@ -5,6 +5,9 @@ for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do
 done
 unset file
 
+# Load scripts
+[[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH
+
 # init z
 . ~/tools/z/z.sh
 
