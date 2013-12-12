@@ -31,5 +31,15 @@ brew install node
 brew install rename
 brew install tree
 
+# Stuff needed for gifify
+brew install ffmpeg
+brew tap phinze/homebrew-cask
+brew install brew-cask
+brew cask install x-quartz
+open /usr/local/Cellar/x-quartz/2.7.4/XQuartz.pkg
+# click through the stuff
+brew install gifsicle
+brew install imagemagick
+
 # Remove outdated versions from the cellar
 brew cleanup
