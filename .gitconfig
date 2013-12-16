@@ -3,12 +3,18 @@
 	u = merge --ff-only
 	p = push
 	s = status -s
-	df = diff --color --color-words --abbrev
 
+	df = diff --color --color-words --abbrev
+	staged = diff --color --color-words --abbrev --cached
+
+	# Commit Details
+	# fileschanged = log --pretty=format:'%C(bold black)(%h)%C(reset) %C(bold magenta)%d%C(reset) %C(white)%s%C(reset) %C(black)(%ar, %an)%C(reset)' --decorate --numstat
+	# dr = "!f() { git diff "$1"^.."$1"; }; f"
+	# lc  = "!f() { git fileschanged "$1"^.."$1"; }; f"
 
 	# Commit graph
 	tree = log --color --graph --pretty=format:'%C(bold magenta)%d%C(reset) %C(white)%s%C(reset) %C(black)(%C(bold black)%h%C(reset)%C(black) %ar, %an)%C(reset)' --decorate=no --all
-	t =    !git --no-pager log --color --graph --pretty=tformat:'%C(bold magenta)%d%C(reset) %C(white)%s%C(reset) %C(black)(%C(bold black)%h%C(reset)%C(black) %ar, %an)%C(reset)' --decorate=no --all -n 15
+	t = !git --no-pager log --color --graph --pretty=tformat:'%C(bold magenta)%d%C(reset) %C(white)%s%C(reset) %C(black)(%C(bold black)%h%C(reset)%C(black) %ar, %an)%C(reset)' --decorate=no --all -n 15
 	today = !git --no-pager log --color --pretty=tformat:'%C(bold black)(%h)%C(reset) %C(white)%s%C(reset)' --decorate=no --all --since=midnight --author='Jeff Knaggs'
 [color]
 	ui = always
