@@ -1,9 +1,13 @@
 [alias]
 	c = commit
-	u = merge --ff-only
 	p = push
 	s = status -s
 
+	# Updating local branch
+	u = merge --ff-only
+	r = rebase --autostash
+
+	# Viewing changes
 	df = diff --color --color-words --abbrev
 	staged = diff --color --color-words --abbrev --cached
 
