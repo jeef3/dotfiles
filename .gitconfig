@@ -43,6 +43,13 @@
 [merge]
 	log = true
 	defaultToUpstream = true
+	tool = vimdiff
+[mergetool]
+	prompt = false
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
 [help]
 	autocorrect = 1
 [push]
@@ -65,8 +72,3 @@
 # http://rentzsch.tumblr.com/post/564806957/public-but-hackable-git-submodules
 [url "git@github.com:jeef3/"]
   insteadOf = "git://github.com/jeef3/"
-
-[diff]
-	tool = vimdiff
-[difftool]
-	prompt = false
