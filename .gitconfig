@@ -8,8 +8,8 @@
 	r = rebase --autostash
 
 	# Viewing changes
-	df = diff --color --color-words --abbrev
 	staged = diff --color --color-words --abbrev --cached
+	df = "!f() { if [ -z "$1" ]; then git diff; else git diff "$1"^.."$1"; fi }; f"
 
 	# Commit Details
 	# fileschanged = log --pretty=format:'%C(bold black)(%h)%C(reset) %C(bold magenta)%d%C(reset) %C(white)%s%C(reset) %C(black)(%ar, %an)%C(reset)' --decorate --numstat
