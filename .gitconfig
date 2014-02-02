@@ -53,7 +53,7 @@
 [help]
 	autocorrect = 1
 [push]
-	default = simple
+	default = tracking
 
 [url "git@github.com:"]
 	insteadOf = "gh:"
