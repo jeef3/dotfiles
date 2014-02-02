@@ -11,11 +11,7 @@ unset file
 # init z
 . ~/tools/z/z.sh
 
-# Flex SDK
-export PATH=$PATH:'/Library/Flex SDK/bin'
-
 # rbenv
-export RBENV_ROOT=/usr/local/var/rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Amazon AWS Keys

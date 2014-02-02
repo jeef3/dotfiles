@@ -10,3 +10,9 @@ export MANPAGER="less -X"
 
 # Turn on some more colors
 export CLICOLOR=1
+
+# rbenv
+export RBENV_ROOT=/usr/local/var/rbenv
+
+# Flex SDK
+export PATH=$PATH:'/Library/Flex SDK/bin'
