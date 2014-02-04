@@ -3,6 +3,8 @@
 	p = push
 	s = status -s
 
+	wtf = blame
+
 	# Updating local branch
 	u = merge --ff-only
 	r = rebase --autostash
