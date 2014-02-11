@@ -15,4 +15,5 @@ export CLICOLOR=1
 export RBENV_ROOT=/usr/local/var/rbenv
 
 # Flex SDK
+export FLEX_HOME='/Library/Flex SDK'
 export PATH=$PATH:'/Library/Flex SDK/bin'
