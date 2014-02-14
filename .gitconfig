@@ -1,5 +1,6 @@
 [alias]
 	c = commit
+	cp = commit -p
 	p = push
 	s = status -s
 
