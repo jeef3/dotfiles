@@ -54,6 +54,8 @@
 	tool = vimdiff
 [mergetool]
 	prompt = false
+[rebase]
+	autostash = true
 [diff]
 	tool = vimdiff
 [difftool]
