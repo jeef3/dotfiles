@@ -41,9 +41,9 @@ function git_info() {
     # check if we're in a git repo
     git rev-parse --is-inside-work-tree &>/dev/null || return
 
-    # quickest check for what branch we're on
-    # branch=$(git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||')
-    branch=$(git symbolic-ref --short HEAD)
+    # get current branch name, with fallback for detached HEAD
+    branch=$(git symbolic-ref --short HEAD 2> /dev/null)
+    branch=${branch:-$(git branch --no-color | sed -n '/\* /s///p')}
 
     # check if it's dirty (via github.com/sindresorhus/pure)
     dirty=$(git diff --quiet --ignore-submodules HEAD &>/dev/null; [ $? -eq 1 ]&& echo -e "*")
