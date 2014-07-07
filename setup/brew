@@ -6,6 +6,8 @@ brew update
 # Upgrade any already-installed formulae
 brew upgrade
 
+brew install macvim --override-system-vim
+
 # GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
 
@@ -40,6 +42,8 @@ open /usr/local/Cellar/x-quartz/2.7.4/XQuartz.pkg
 # click through the stuff
 brew install gifsicle
 brew install imagemagick
+
+brew linkapps
 
 # Remove outdated versions from the cellar
 brew cleanup
