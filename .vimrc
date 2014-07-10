@@ -10,7 +10,7 @@ filetype plugin indent on
 syntax on
 set t_Co=256
 set background=dark
-colorscheme badwolf-jeff
+colorscheme molokai
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
