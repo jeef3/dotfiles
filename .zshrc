@@ -54,21 +54,34 @@ function git_status() {
 }
 
 function git_info() {
+  git rev-parse --is-inside-work-tree &> /dev/null || return
+
   local branch="%{$fg[magenta]%}%B$(git_branch_name)%{$reset_color%}"
   echo "$ZSH_THEME_GIT_PROMPT_PREFIX$branch$ZSH_THEME_GIT_PROMPT_SUFFIX"
+}
+
+function git_origin() {
+  git rev-parse --is-inside-work-tree &> /dev/null || return
+  
+  local url="$(git config --get remote.origin.url)"
+  url=${url#*:}
+  url=${url%\.git}
+
+  echo $url
 }
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[black]%}%Bon%{$reset_color%} "
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 
 local user_host=""
-local current_dir="%{$fg[yellow]%}%B%1d%{$reset_color%}"
+local current_dir="%{$fg[yellow]%}%B%~%{$reset_color%}"
 local git_line='$(git_info)'
 
 PROMPT="%{$fg[black]%}%B╭─%{$reset_color%} ${current_dir} ${git_line}
-%{$fg[black]%}%B╰─● %{$reset_color%} "
+%{$fg[black]%}%B╰●%{$reset_color%} "
 
-RPROMPT=""
+local repo='$(git_origin)'
+RPROMPT="%{$fg[black]%}%B${repo}%{$reset_color%}"
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
