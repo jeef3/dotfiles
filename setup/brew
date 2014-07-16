@@ -13,8 +13,9 @@ brew install coreutils
 
 # GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 brew install findutils
-# Bash 4
+# Shells
 brew install bash
+brew install zsh
 
 # wget with IRI support
 brew install wget --enable-iri
