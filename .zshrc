@@ -44,7 +44,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # Prompts
 function git_branch_name() {
   branch=$(command git symbolic-ref HEAD --short 2> /dev/null) || \
-  branch=$(command git branch | sed -n '/\* /s///p' 2> /dev/null) || return 0
+  branch=$(command git branch --no-color | sed -n '/\* /s///p' 2> /dev/null) || return 0
 
   echo $branch
 }
