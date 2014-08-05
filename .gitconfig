@@ -9,7 +9,6 @@
 
 	# Updating local branch
 	u = merge --ff-only
-	r = rebase --autostash
 
 	latest = fetch -avp
 
@@ -32,7 +31,7 @@
 [credential]
 	helper = osxkeychain
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = ~/.gitignore-global
 	attributesfile = ~/.gitattributes
 	pager = less -+F -+X
 [color "branch"]

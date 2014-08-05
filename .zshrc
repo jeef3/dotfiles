@@ -44,7 +44,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # Prompts
 function git_branch_name() {
   branch=$(command git symbolic-ref HEAD --short 2> /dev/null) || \
-  branch=$(command git branch | sed -n '/\* /s///p' 2> /dev/null) || return 0
+  branch=$(command git branch --no-color | sed -n '/\* /s///p' 2> /dev/null) || return 0
 
   echo $branch
 }
@@ -63,10 +63,7 @@ function git_info() {
 function git_origin() {
   git rev-parse --is-inside-work-tree &> /dev/null || return
   
-  local url="$(git config --get remote.origin.url)"
-  url=${url#*:}
-  url=${url%\.git}
-
+  local url=$(git config --get remote.origin.url | sed -En 's/.*github.com(:|\/)(.+)\.git/\2/p')
   echo $url
 }
 

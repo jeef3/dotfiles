@@ -1,6 +1,4 @@
-# Folder view configuration files
-.DS_Store
-
-# Sublime projects and workspaces
-*.sublime-project
-*.sublime-workspace
+.vim/.netrwhist
+.vim/backup/*
+.vim/swaps/*
+.vim/undo/*
