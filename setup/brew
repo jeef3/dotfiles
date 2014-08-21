@@ -32,6 +32,7 @@ brew install ack
 brew install git bash-completion
 brew install rename
 brew install tree
+brew install todo-txt
 
 # codez
 brew install node
