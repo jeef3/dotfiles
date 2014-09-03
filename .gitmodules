@@ -60,7 +60,7 @@
 	url = https://github.com/Chiel92/vim-autoformat.git
 [submodule ".vim/bundle/todo.txt-vim"]
 	path = .vim/bundle/todo.txt-vim
-	url = git://github.com/freitass/todo.txt-vim.git
+	url = https://github.com/freitass/todo.txt-vim.git
 [submodule ".vim/bundle/vim-csharp"]
 	path = .vim/bundle/vim-csharp
 	url = git://github.com/OrangeT/vim-csharp.git
