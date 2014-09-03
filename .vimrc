@@ -12,7 +12,6 @@ set t_Co=256
 set background=dark
 colorscheme molokai
 
-" Mark lines over the print margin (80)
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
@@ -27,12 +26,11 @@ set undodir=~/.vim/undo
 
 " Indentation
 set autoindent " Copy indent from last line when starting new line.
-set smartindent
-set smarttab " At start of line, <Tab> inserts shiftwidth spaces, <Bs> deletes shiftwidth spaces.
-set expandtab " Expand tabs to spaces
-set tabstop=2
 set softtabstop=2 " Tab key results in 2 spaces
+set tabstop=2
 set shiftwidth=2 " The # of spaces for indenting.
+set expandtab " Expand tabs to spaces
+set smarttab " At start of line, <Tab> inserts shiftwidth spaces, <Bs> deletes shiftwidth spaces.
 
 " Folding
 set nofoldenable
@@ -40,6 +38,7 @@ set foldcolumn=1 " Column to show folds
 set foldlevel=20
 set foldlevelstart=20 " Sets `foldlevel` when editing a new buffer
 set foldmethod=syntax " Markers are used to specify folds.
+set foldminlines=0 " Allow folding single lines
 set foldnestmax=3 " Set max fold nesting level
 
 " Quickfix Window Auto-open
@@ -219,7 +218,6 @@ autocmd BufReadPost,BufNewFile * set relativenumber
 " File Type Specific Settings
 let coffee_watch_vert = 1
 let coffee_run_vert = 1
-autocmd BufWritePost *.coffee silent make!
 autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 
 " Common Ruby files
