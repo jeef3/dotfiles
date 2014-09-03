@@ -87,3 +87,4 @@ RPROMPT="%{$fg[black]%}%B${repo}%{$reset_color%}"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias t='todo.sh'
