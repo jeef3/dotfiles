@@ -24,6 +24,7 @@ plugins=(git bundler brew heroku)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+export PATH=/usr/local/sbin:$PATH
 
 # Load ~/.extra, ~/.bash_prompt, ~/.exports, ~/.aliases and ~/.functions
 # ~/.extra can be used for settings you don’t want to commit
