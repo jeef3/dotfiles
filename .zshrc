@@ -19,7 +19,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git bundler brew heroku)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -71,10 +71,13 @@ ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[black]%}%Bon%{$reset_color%} "
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 
 local user_host=""
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  user_host="${USER}@${HOSTNAME} "
+fi
 local current_dir="%{$fg[yellow]%}%B%~%{$reset_color%}"
 local git_line='$(git_info)'
 
-PROMPT="%{$fg[black]%}%B╭─%{$reset_color%} ${current_dir} ${git_line}
+PROMPT="%{$fg[black]%}%B╭─%{$reset_color%} ${user_host}${current_dir} ${git_line}
 %{$fg[black]%}%B╰●%{$reset_color%} "
 
 local repo='$(git_origin)'
