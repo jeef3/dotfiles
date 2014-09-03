@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Web dev essentials
-npm install -g yo grunt-cli bower
+npm install -g yo bower
 
 # Markdown previewer
 npm install -g greadme
