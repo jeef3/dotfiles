@@ -13,6 +13,7 @@ brew install coreutils
 
 # GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 brew install findutils
+
 # Shells
 brew install bash
 brew install zsh
@@ -27,9 +28,13 @@ brew install homebrew/dupes/grep
 # rbenv
 brew install rbenv ruby-build
 
-# everything else
-brew install ack
+# Dev stuff
 brew install git bash-completion
+brew install tig
+
+# everything else
+brew install trash
+brew install ack
 brew install rename
 brew install tree
 brew install todo-txt
