@@ -55,3 +55,18 @@
 [submodule ".vim/bundle/vim-javascript-syntax"]
 	path = .vim/bundle/vim-javascript-syntax
 	url = https://github.com/jelera/vim-javascript-syntax.git
+[submodule ".vim/bundle/vim-autoformat"]
+	path = .vim/bundle/vim-autoformat
+	url = https://github.com/Chiel92/vim-autoformat.git
+[submodule ".vim/bundle/todo.txt-vim"]
+	path = .vim/bundle/todo.txt-vim
+	url = git://github.com/freitass/todo.txt-vim.git
+[submodule ".vim/bundle/vim-csharp"]
+	path = .vim/bundle/vim-csharp
+	url = git://github.com/OrangeT/vim-csharp.git
+[submodule ".vim/bundle/Omnisharp"]
+	path = .vim/bundle/Omnisharp
+	url = https://github.com/nosami/Omnisharp.git
+[submodule "tools/z"]
+	path = tools/z
+	url = https://github.com/rupa/z.git
