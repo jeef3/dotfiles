@@ -77,6 +77,7 @@ set lispwords+=defaction,deffilter,defview,defsection " Ciste core
 set lispwords+=describe,it " Speclj TDD/BDD
 set magic " Enable extended regexes.
 set mouse=a " Enable mouse in all modes.
+set ttymouse=xterm2
 set noerrorbells " Disable error bells.
 set nojoinspaces " Only insert single space after a '.', '?' and '!' with a join command.
 set nostartofline " Don't reset cursor to start of line when moving around.
@@ -107,7 +108,6 @@ set wildmode=list:longest " Complete only until point of ambiguity.
 set winminheight=0 "Allow splits to be reduced to a single line.
 set wrapscan " Searches wrap around end of file
 
-" Changes I found in Simons dotfiles
 set clipboard=unnamed " Share clipboard
 set autoread " Reload changed files
 
@@ -229,6 +229,9 @@ let g:ctrlp_working_path_mode = 2 " Smart path mode
 let g:ctrlp_mru_files = 1 " Enable Most Recently Used files feature
 let g:ctrlp_jump_to_buffer = 2 " Jump to tab AND buffer if already open
 let g:ctrlp_split_window = 1 " <CR> = New Tab
+
+" Allow Angular properties in HTML
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
 " Rainbow Parenthesis
 nnoremap <leader>rp :RainbowParenthesesToggle<CR>
