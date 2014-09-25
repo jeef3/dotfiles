@@ -6,8 +6,6 @@ brew update
 # Upgrade any already-installed formulae
 brew upgrade
 
-brew install macvim --override-system-vim
-
 # GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
 
@@ -31,6 +29,11 @@ brew install rbenv ruby-build
 # Dev stuff
 brew install git bash-completion
 brew install tig
+
+# Mah IDE
+brew install macvim --override-system-vim
+brew install tmux
+brew install reattach-to-user-namespace
 
 # everything else
 brew install trash

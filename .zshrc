@@ -19,7 +19,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bundler brew heroku)
+plugins=(git bundler brew heroku z tmux node npm fabric rake)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -35,9 +35,6 @@ unset file
 
 # Load scripts
 [[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH
-
-# init z
-. ~/tools/z/z.sh
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -78,11 +75,12 @@ fi
 local current_dir="%{$fg[yellow]%}%B%~%{$reset_color%}"
 local git_line='$(git_info)'
 
-PROMPT="%{$fg[black]%}%B╭─%{$reset_color%} ${user_host}${current_dir} ${git_line}
-%{$fg[black]%}%B╰●%{$reset_color%} "
+PROMPT="${user_host}${current_dir} ${git_line}
+%{$fg[black]%}%B$%{$reset_color%} "
 
 local repo='$(git_origin)'
 RPROMPT="%{$fg[black]%}%B${repo}%{$reset_color%}"
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -92,3 +90,4 @@ RPROMPT="%{$fg[black]%}%B${repo}%{$reset_color%}"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias t='todo.sh'
+
