@@ -77,7 +77,7 @@ set lispwords+=defaction,deffilter,defview,defsection " Ciste core
 set lispwords+=describe,it " Speclj TDD/BDD
 set magic " Enable extended regexes.
 set mouse=a " Enable mouse in all modes.
-set ttymouse=xterm2
+set ttymouse=xterm2 " So mouse can work properly in vmux
 set noerrorbells " Disable error bells.
 set nojoinspaces " Only insert single space after a '.', '?' and '!' with a join command.
 set nostartofline " Don't reset cursor to start of line when moving around.
@@ -86,7 +86,7 @@ set nu " Enable line numbers.
 set ofu=syntaxcomplete#Complete " Set omni-completion method.
 set report=0 " Show all changes.
 set ruler " Show the cursor position
-set scrolloff=10 " Start scrolling three lines before horizontal border of window.
+set scrolloff=10 " Start scrolling ten lines before horizontal border of window.
 set shortmess=atI " Don't show the intro message when starting vim.
 set showmode " Show the current mode.
 set showtabline=2 " Always show tab bar.
@@ -97,7 +97,6 @@ set splitright " New windows goes right
 set suffixes=.bak,~,.swp,.swo,.o,.d,.info,.aux,.log,.dvi,.pdf,.bin,.bbl,.blg,.brf,.cb,.dmg,.exe,.ind,.idx,.ilg,.inx,.out,.toc,.pyc,.pyd,.dll
 set title " Show the filename in the window titlebar.
 set ttyfast " Send more characters at a given time.
-set ttymouse=xterm " Set mouse type to xterm.
 set undofile " Persistent Undo.
 set visualbell " Use visual bell instead of audible bell (annnnnoying)
 set wildchar=<TAB> " Character for CLI expansion (TAB-completion).
