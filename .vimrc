@@ -52,6 +52,7 @@ set backspace=indent,eol,start
 set cursorline " Highlight current line
 set diffopt=filler " Add vertical spaces to keep right and left aligned
 set diffopt+=iwhite " Ignore whitespace changes (focus on code changes)
+set diffopt+=vertical " Vertical splits for diff
 set encoding=utf-8 nobomb " BOM often causes trouble
 set esckeys " Allow cursor keys in insert mode.
 set formatoptions=
@@ -101,14 +102,16 @@ set undofile " Persistent Undo.
 set visualbell " Use visual bell instead of audible bell (annnnnoying)
 set wildchar=<TAB> " Character for CLI expansion (TAB-completion).
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js
-set wildignore+=*/smarty/*,*/vendor/*,*/node_modules/*,*/.git/*,*/.hg/*,*/.svn/*,*/.sass-cache/*,*/log/*,*/tmp/*,*/build/*,*/ckeditor/*
 set wildmenu " Hitting TAB in command mode will show possible completions above command line.
 set wildmode=list:longest " Complete only until point of ambiguity.
 set winminheight=0 "Allow splits to be reduced to a single line.
 set wrapscan " Searches wrap around end of file
 
 set clipboard=unnamed " Share clipboard
-set autoread " Reload changed files
+
+" Auto read, and auto-actually-update file changes
+set autoread 
+au FocusGained,BufEnter * :silent! !
 
 " hi User1 guibg=#455354 guifg=fg      ctermbg=238 ctermfg=fg  gui=bold,underline cterm=bold,underline term=bold,underline
 " hi User2 guibg=#455354 guifg=#CC4329 ctermbg=238 ctermfg=196 gui=bold           cterm=bold           term=bold
@@ -151,15 +154,6 @@ if &term == "xterm-ipad"
   inoremap <Tab> <Esc>`^
   inoremap <Leader><Tab> <Tab>
 endif
-
-" Remap keys for auto-completion, disable arrow keys
-" I still need these cuz im nub. so nub.
-" inoremap <expr>  <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-" inoremap <expr>  <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-" inoremap <expr>  <Down>     pumvisible() ? "\<C-n>" : "\<NOP>"
-" inoremap <expr>  <Up>       pumvisible() ? "\<C-p>" : "\<NOP>"
-" inoremap <Left>  <NOP>
-" inoremap <Right> <NOP>
 
 " Indent/unident block (,]) (,[)
 nnoremap <leader>] >i{<CR>
@@ -228,9 +222,28 @@ let g:ctrlp_working_path_mode = 2 " Smart path mode
 let g:ctrlp_mru_files = 1 " Enable Most Recently Used files feature
 let g:ctrlp_jump_to_buffer = 2 " Jump to tab AND buffer if already open
 let g:ctrlp_split_window = 1 " <CR> = New Tab
+let g:ctrlp_custom_ignore = '\v[\/]\.git$'
 
 " Allow Angular properties in HTML
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute ", "trimming empty <", "unescaped &", " is not recognized!"]
 
 " Rainbow Parenthesis
 nnoremap <leader>rp :RainbowParenthesesToggle<CR>
+
+" Emmet
+let g:user_emmet_leader_key='<C-Z>'
+
+" =============================================================================
+" Vim IDE
+
+" Omni Complete
+
+" Stop omni-complete from selecting first item, pop up menu even if only one
+" match
+" set completeopt=longest,menuone
+
+" Make CR select the option, and stay on the same line, like C-y
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" inoremap <expr> <C-n> pumvisible() ? '<C-n>' : <C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+" inoremap <expr> <M-,> pumvisible() ? '<C-n>' : <C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
