@@ -15,7 +15,6 @@ colorscheme molokai
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
-" Status Line
 " Change mapleader
 let mapleader=","
 
@@ -101,7 +100,7 @@ set ttyfast " Send more characters at a given time.
 set undofile " Persistent Undo.
 set visualbell " Use visual bell instead of audible bell (annnnnoying)
 set wildchar=<TAB> " Character for CLI expansion (TAB-completion).
-set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js
+set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js,.DS_Store
 set wildmenu " Hitting TAB in command mode will show possible completions above command line.
 set wildmode=list:longest " Complete only until point of ambiguity.
 set winminheight=0 "Allow splits to be reduced to a single line.
@@ -110,13 +109,9 @@ set wrapscan " Searches wrap around end of file
 set clipboard=unnamed " Share clipboard
 
 " Auto read, and auto-actually-update file changes
-set autoread 
+set autoread
 au FocusGained,BufEnter * :silent! !
 
-" hi User1 guibg=#455354 guifg=fg      ctermbg=238 ctermfg=fg  gui=bold,underline cterm=bold,underline term=bold,underline
-" hi User2 guibg=#455354 guifg=#CC4329 ctermbg=238 ctermfg=196 gui=bold           cterm=bold           term=bold
-" set statusline=[%n]\ %1*%<%.99t%*\ %2*%h%w%m%r%*%y[%{&ff}→%{strlen(&fenc)?&fenc:'No\ Encoding'}]%=%-16(\ L%l,C%c\ %)%P
-let g:Powerline_symbols = 'fancy'
 
 " Speed up viewport scrolling
 nnoremap <C-e> 3<C-e>
@@ -138,7 +133,8 @@ map <C-L> <C-W>l
 nnoremap ' `
 
 " Toggle show tabs and trailing spaces (,c)
-set lcs=tab:›\ ,trail:·,eol:¬,nbsp:_
+set list
+set lcs=tab:›\ ,trail:·,nbsp:_
 set fcs=fold:-
 nnoremap <silent> <leader>c :set nolist!<CR>
 
@@ -207,6 +203,7 @@ autocmd QuickFixCmdPost * nested cwindow 5
 " Set relative line numbers
 set relativenumber " Use relative line numbers. Current line is still in status bar.
 autocmd BufReadPost,BufNewFile * set relativenumber
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 
 " File Type Specific Settings
 let coffee_watch_vert = 1
@@ -217,33 +214,41 @@ autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 au BufRead,BufNewFile Rakefile,Capfile,Gemfile,.autotest,.irbrc,*.treetop,*.tt set ft=ruby syntax=ruby
 
 " CtrlP
-let g:ctrlp_match_window_bottom = 0 " Show at top of window
-let g:ctrlp_working_path_mode = 2 " Smart path mode
-let g:ctrlp_mru_files = 1 " Enable Most Recently Used files feature
-let g:ctrlp_jump_to_buffer = 2 " Jump to tab AND buffer if already open
-let g:ctrlp_split_window = 1 " <CR> = New Tab
-let g:ctrlp_custom_ignore = '\v[\/]\.git$'
+let g:ctrlp_max_files = 0
+let g:ctrlp_max_depth = 400
+let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules)$'
+" let g:ctrlp_working_path_mode = 'ra'
 
-" Allow Angular properties in HTML
+" Syntastic
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute ", "trimming empty <", "unescaped &", " is not recognized!"]
-
-" Rainbow Parenthesis
-nnoremap <leader>rp :RainbowParenthesesToggle<CR>
 
 " Emmet
 let g:user_emmet_leader_key='<C-Z>'
 
-" =============================================================================
-" Vim IDE
+" JsBeautify
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
-" Omni Complete
+autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
+autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
 
-" Stop omni-complete from selecting first item, pop up menu even if only one
-" match
-" set completeopt=longest,menuone
+" OmniSharp
+augroup omnisharp_commands
+  autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
 
-" Make CR select the option, and stay on the same line, like C-y
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
+  autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>
+augroup END
+nnoremap <leader>tp :OmniSharpAddToProject<cr>
 
-" inoremap <expr> <C-n> pumvisible() ? '<C-n>' : <C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-" inoremap <expr> <M-,> pumvisible() ? '<C-n>' : <C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+" JSON Formatting
+com! FormatJSON %!python -m json.tool
+
+" Airline
+let g:airline_powerline_fonts = 1
+
+" Webdev Icons
+let g:webdevicons_enable_nerdtree = 0

@@ -5,10 +5,10 @@ symlinks=(
   .gitconfig
   .gitignore-global
   .oh-my-zsh
-  tools
   .vim
   .vimrc
   .zshrc
+  .editorconfig
 )
 
 info () {

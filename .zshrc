@@ -91,3 +91,5 @@ RPROMPT="%{$fg[black]%}%B${repo}%{$reset_color%}"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias t='todo.sh'
 
+export NVM_DIR="/Users/jeffknaggs/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

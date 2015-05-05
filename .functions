@@ -21,3 +21,7 @@ function gifify() {
     echo "proper usage: gifify <input_movie.mov>. You DO need to include extension."
   fi
 }
+
+function movToMp4() {
+  ffmpeg -i "$1" -vcodec copy -acodec copy "$2"
+}
