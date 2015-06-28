@@ -142,15 +142,6 @@ nnoremap <silent> <leader>c :set nolist!<CR>
 map <silent> <leader>qs <Esc>:noh<CR>
 " map <silent> <leader>qs <Esc>:let @/ = ""<CR>
 
-" Vim on the iPad
-if &term == "xterm-ipad"
-  nnoremap <Tab> <Esc>
-  vnoremap <Tab> <Esc>gV
-  onoremap <Tab> <Esc>
-  inoremap <Tab> <Esc>`^
-  inoremap <Leader><Tab> <Tab>
-endif
-
 " Indent/unident block (,]) (,[)
 nnoremap <leader>] >i{<CR>
 nnoremap <leader>[ <i{<CR>
@@ -220,7 +211,15 @@ let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules)$'
 " let g:ctrlp_working_path_mode = 'ra'
 
 " Syntastic
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '!'
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute ", "trimming empty <", "unescaped &", " is not recognized!"]
 
 " Emmet
@@ -250,5 +249,4 @@ com! FormatJSON %!python -m json.tool
 " Airline
 let g:airline_powerline_fonts = 1
 
-" Webdev Icons
-let g:webdevicons_enable_nerdtree = 0
+imap <Tab> <Plug>snipMateNextOrTrigger

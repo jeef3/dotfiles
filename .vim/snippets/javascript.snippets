@@ -1,0 +1,55 @@
+snippet jsx
+	'use strict';
+
+	import {Component} from 'react';
+
+	const styles = {
+		container: {}
+	};
+
+	export default class ${1:Thing} extends Component {
+		render() : Component {
+			return ${0}<div style={styles.container} />;
+		}
+	}
+snippet jsxpure
+	'use strict';
+
+	import {Component} from 'react';
+	import PureRender from 'react-purerender';
+
+	const styles = {
+		container: {}
+	};
+
+	@PureRender
+	export default class ${1:Thing} extends Component {
+		render() : Component {
+			return ${0}<div style={styles.container} />;
+		}
+	}
+snippet store
+	'use strict';
+
+	import {EventEmitter} from 'events';
+
+	import Dispatcher from '../dispatcher';
+
+	class ${1:ThingStore} extends EventEmitter {
+		constructor() {
+			super();
+
+			this.dispatchToken =
+				Dispatcher.register(this._dispatchTokenFn.bind(this));
+		}
+
+		_dispatchTokenFn(action) {
+			switch (action.name) {
+				${0}
+			}
+		}
+	}
+
+	export default new $1();
+snippet log
+	console.log(${0});
