@@ -9,6 +9,8 @@ symlinks=(
   .vimrc
   .zshrc
   .editorconfig
+  .exports
+  .functions
 )
 
 info () {
