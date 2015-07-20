@@ -249,4 +249,11 @@ com! FormatJSON %!python -m json.tool
 " Airline
 let g:airline_powerline_fonts = 1
 
-imap <Tab> <Plug>snipMateNextOrTrigger
+" YouCompleteMe
+let g:ycm_key_list_select_completion=['<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion=['<C-k>', '<Up>']
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"

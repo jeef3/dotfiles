@@ -12,6 +12,7 @@
   l = fetch -avp
 
   # Show assume unchanged
+  ignore = update-index --assume-unchanged
   ignored = !git ls-files -v | grep '^[[:lower:]]'
 
 	# Viewing changes
