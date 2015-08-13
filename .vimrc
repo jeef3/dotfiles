@@ -257,3 +257,6 @@ let g:ycm_key_list_previous_completion=['<C-k>', '<Up>']
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+
+" Ag
+let g:ag_working_path_mode="r"

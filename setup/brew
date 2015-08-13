@@ -38,6 +38,7 @@ brew install macvim --override-system-vim
 # everything else
 brew install trash
 brew install ack
+brew install the_silver_searcher
 brew install rename
 brew install tree
 brew install todo-txt
