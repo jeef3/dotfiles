@@ -208,7 +208,7 @@ au BufRead,BufNewFile Rakefile,Capfile,Gemfile,.autotest,.irbrc,*.treetop,*.tt s
 let g:ctrlp_max_files = 0
 let g:ctrlp_max_depth = 400
 let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules)$'
-" let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_switch_buffer = 'e'
 
 " Syntastic
 let g:syntastic_error_symbol = '✗'
