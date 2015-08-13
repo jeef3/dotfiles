@@ -1,6 +1,4 @@
 snippet jsx
-	'use strict';
-
 	import React, {Component} from 'react';
 
 	const styles = {
@@ -13,10 +11,8 @@ snippet jsx
 		}
 	}
 snippet jsxpure
-	'use strict';
-
 	import React, {Component} from 'react';
-	import PureRender from 'react-purerender';
+	import PureRender from 'react-pure-render';
 
 	const styles = {
 		container: {}
@@ -26,6 +22,21 @@ snippet jsxpure
 	export default class ${1:Thing} extends Component {
 		render() : Component {
 			return ${0}<div style={styles.container} />;
+		}
+	}
+snippet action
+	export function ${1:action}(${2:value}) {
+		return {
+			type: ${3},
+			payload: $2
+		};
+	}
+snippet reducer
+	export default function (state = {}, action) {
+		switch (action.type) {
+			${0}
+			default:
+				return state;
 		}
 	}
 snippet store
@@ -51,5 +62,19 @@ snippet store
 	}
 
 	export default new $1();
+snippet ngjsx
+	angular.module('react-components')
+		.factory('$1', function () {
+			const { Component, PropTypes } = React;
+
+			return class ${1} extends Component {
+				static propTypes = {
+				}
+
+				render() : Component {
+					return <div>${0}</div>;
+				}
+			}
+		});
 snippet log
 	console.log(${0});
