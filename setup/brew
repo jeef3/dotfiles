@@ -31,6 +31,7 @@ brew install git bash-completion
 brew install tig
 
 # Mah IDE
+brew uninstall macvim
 brew install macvim --override-system-vim
 # brew install tmux
 # brew install reattach-to-user-namespace
@@ -51,13 +52,24 @@ brew install make
 brew install cmake
 brew install mono
 
+# QuickLook
+brew cask install \
+  qlcolorcode \
+  qlstephen \
+  qlmarkdown \
+  quicklook-json \
+  qlprettypatch \
+  quicklook-csv \
+  betterzipql \
+  qlimagesize \
+  suspicious-package
+
 # Stuff needed for gifify
 brew install ffmpeg
 brew tap phinze/homebrew-cask
 brew install brew-cask
 brew cask install x-quartz
 open /usr/local/Cellar/x-quartz/2.7.4/XQuartz.pkg
-# click through the stuff
 brew install gifsicle
 brew install imagemagick
 

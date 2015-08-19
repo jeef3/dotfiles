@@ -7,7 +7,7 @@ npm install -g yo bower
 npm install -g greadme
 
 # Some Yeoman generators
-npm install -g generator-angular
-npm install -g generator-angular-fullstack
-npm install -g generator-jekyllrb
-npm install -g generator-webapp
+# npm install -g generator-angular
+# npm install -g generator-angular-fullstack
+# npm install -g generator-jekyllrb
+# npm install -g generator-webapp
