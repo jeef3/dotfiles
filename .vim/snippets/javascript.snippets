@@ -1,17 +1,20 @@
 snippet jsx
-	import React, {Component} from 'react';
+	import React, { Component, PropTypes } from 'react';
 
 	const styles = {
 		container: {}
 	};
 
 	export default class ${1:Thing} extends Component {
+		static propTypes = {
+		}
+
 		render() : Component {
 			return ${0}<div style={styles.container} />;
 		}
 	}
 snippet jsxpure
-	import React, {Component} from 'react';
+	import React, { Component, PropTypes } from 'react';
 	import PureRender from 'react-pure-render';
 
 	const styles = {
@@ -20,6 +23,9 @@ snippet jsxpure
 
 	@PureRender
 	export default class ${1:Thing} extends Component {
+		statis propTypes = {
+		}
+
 		render() : Component {
 			return ${0}<div style={styles.container} />;
 		}
@@ -39,10 +45,22 @@ snippet reducer
 				return state;
 		}
 	}
+snippet container
+	import { connect } from 'react-redux';
+
+	import ${1} from '../components/$1.jsx';
+
+	function mapStateToProps(state) {
+		return {
+		};
+	}
+
+	export default connect(mapStateToProps)($1);
+
 snippet store
 	'use strict';
 
-	import {EventEmitter} from 'events';
+	import { EventEmitter } from 'events';
 
 	import Dispatcher from '../dispatcher';
 
