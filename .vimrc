@@ -209,6 +209,7 @@ let g:ctrlp_max_files = 0
 let g:ctrlp_max_depth = 400
 let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules)$'
 let g:ctrlp_switch_buffer = 'e'
+let g:ctrlp_by_filename = 1
 
 " Syntastic
 let g:syntastic_error_symbol = '✗'
@@ -220,7 +221,6 @@ set statusline+=%*
 
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_json_checkers = ['jsonlint']
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute ", "trimming empty <", "unescaped &", " is not recognized!"]
 
 " Emmet
 let g:user_emmet_leader_key='<C-Z>'
