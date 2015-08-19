@@ -41,7 +41,6 @@ brew install trash
 brew install ack
 brew install the_silver_searcher
 brew install rename
-brew install tree
 brew install todo-txt
 
 # codez
@@ -51,6 +50,7 @@ brew install python3
 brew install make
 brew install cmake
 brew install mono
+brew install phantomjs
 
 # QuickLook
 brew cask install \
