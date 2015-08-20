@@ -112,49 +112,17 @@ set clipboard=unnamed " Share clipboard
 set autoread
 au FocusGained,BufEnter * :silent! !
 
-
-" Speed up viewport scrolling
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
-
-" Faster split resizing (+,-)
-" if bufwinnr(1)
-"   map + <C-W>+
-"   map - <C-W>-
-" endif
-
 " Better split switching (Ctrl-j, Ctrl-k, Ctrl-h, Ctrl-l)
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-H> <C-W>h
 map <C-L> <C-W>l
 
-" Better mark jumping (line + col)
-nnoremap ' `
-
 " Toggle show tabs and trailing spaces (,c)
 set list
 set lcs=tab:›\ ,trail:·,nbsp:_
 set fcs=fold:-
 nnoremap <silent> <leader>c :set nolist!<CR>
-
-" Clear last search (,qs)
-map <silent> <leader>qs <Esc>:noh<CR>
-" map <silent> <leader>qs <Esc>:let @/ = ""<CR>
-
-" Indent/unident block (,]) (,[)
-nnoremap <leader>] >i{<CR>
-nnoremap <leader>[ <i{<CR>
-
-" Paste toggle (,p)
-set pastetoggle=<leader>p
-map <leader>p :set invpaste paste?<CR>
-
-" Buffer navigation (,,) (,]) (,[) (,ls)
-map <Leader>, <C-^>
-" :map <Leader>] :bnext<CR>
-" :map <Leader>[ :bprev<CR>
-map <Leader>ls :buffers<CR>
 
 " Strip trailing whitespace (,ss)
 function! StripWhitespace ()
@@ -166,21 +134,8 @@ function! StripWhitespace ()
 endfunction
 noremap <leader>ss :call StripWhitespace ()<CR>
 
-" Save and restore folds
-" :au BufWinLeave * mkview
-" :au BufWinEnter * silent loadview
-
 " Join lines and restore cursor location (J)
-nnoremap J mjJ`j
-
-" Toggle folds (<Space>)
-nnoremap <silent> <space> :exe 'silent! normal! '.((foldclosed('.')>0)? 'zMzx' : 'zc')<CR>
-
-" Fix page up and down
-map <PageUp> <C-U>
-map <PageDown> <C-D>
-imap <PageUp> <C-O><C-U>
-imap <PageDown> <C-O><C-D>
+" nnoremap J mjJ`j
 
 " Restore cursor position
 autocmd BufReadPost *
@@ -224,15 +179,6 @@ let g:syntastic_json_checkers = ['jsonlint']
 
 " Emmet
 let g:user_emmet_leader_key='<C-Z>'
-
-" JsBeautify
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-
-autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
-autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
-autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
 
 " OmniSharp
 augroup omnisharp_commands

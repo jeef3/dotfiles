@@ -94,9 +94,6 @@
 [submodule ".vim/bundle/vim-angular"]
 	path = .vim/bundle/vim-angular
 	url = https://github.com/burnettk/vim-angular.git
-[submodule ".vim/bundle/vim-jsbeautify"]
-	path = .vim/bundle/vim-jsbeautify
-	url = https://github.com/maksimr/vim-jsbeautify.git
 [submodule ".vim/bundle/rainbow_parentheses.vim"]
 	path = .vim/bundle/rainbow_parentheses.vim
 	url = https://github.com/kien/rainbow_parentheses.vim.git
