@@ -118,6 +118,9 @@ map <C-k> <C-W>k
 map <C-H> <C-W>h
 map <C-L> <C-W>l
 
+" Quick alternate buffer switching (,,)
+map <leader>, <C-^>
+
 " Toggle show tabs and trailing spaces (,c)
 set list
 set lcs=tab:›\ ,trail:·,nbsp:_
