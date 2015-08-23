@@ -162,6 +162,10 @@ autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 " Common Ruby files
 au BufRead,BufNewFile Rakefile,Capfile,Gemfile,.autotest,.irbrc,*.treetop,*.tt set ft=ruby syntax=ruby
 
+" ==============================================================================
+" Plugin Configuration
+" ==============================================================================
+
 " CtrlP
 let g:ctrlp_max_files = 0
 let g:ctrlp_max_depth = 400
@@ -209,3 +213,8 @@ let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 
 " Ag
 let g:ag_working_path_mode="r"
+
+" BufExplorer
+let g:bufExplorerShowDirectories=0
+let g:bufExplorerShowRelativePath=1
+let g:bufExplorerSplitRight=0
