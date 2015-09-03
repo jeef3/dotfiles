@@ -1,5 +1,5 @@
 #!/bin/sh
-source lib/colors.sh
+source lib/messages
 
 symlinks=(
   .gitconfig
@@ -11,25 +11,8 @@ symlinks=(
   .editorconfig
   .exports
   .functions
+  .tmux.conf
 )
-
-info () {
-  printf "\r\033[2K  [ ${BLUE}..${RESET} ] ${WHITE}${BOLD}$1${RESET}\n"
-}
-
-warn () {
-  printf "\r\033[2K  [${YELLOW}WARN${RESET}] $1\n"
-}
-
-success () {
-  printf "\r\033[2K  [ ${GREEN}OK${RESET} ] $1\n"
-}
-
-fail () {
-  printf "\r\033[2K  [${RED}FAIL${RESET}] $1\n"
-  echo ''
-  exit
-}
 
 # link_file () {
 # }
