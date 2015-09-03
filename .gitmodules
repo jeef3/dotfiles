@@ -136,3 +136,15 @@
 [submodule ".vim/bundle/vim-jsx"]
 	path = .vim/bundle/vim-jsx
 	url = git@github.com:mxw/vim-jsx.git
+[submodule ".vim/bundle/typescript-tools.vim"]
+	path = .vim/bundle/typescript-tools.vim
+	url = https://github.com/clausreinke/typescript-tools.vim.git
+[submodule ".vim/bundle/vimproc.vim"]
+	path = .vim/bundle/vimproc.vim
+	url = git@github.com:Shougo/vimproc.vim.git
+[submodule ".vim/bundle/tsuquyomi"]
+	path = .vim/bundle/tsuquyomi
+	url = git@github.com:Quramy/tsuquyomi.git
+[submodule ".vim/bundle/yats.vim"]
+	path = .vim/bundle/yats.vim
+	url = git@github.com:HerringtonDarkholme/yats.vim.git
