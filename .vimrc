@@ -162,6 +162,9 @@ autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 " Common Ruby files
 au BufRead,BufNewFile Rakefile,Capfile,Gemfile,.autotest,.irbrc,*.treetop,*.tt set ft=ruby syntax=ruby
 
+" The number of times this has got me!
+command W w
+
 " ==============================================================================
 " Plugin Configuration
 " ==============================================================================
