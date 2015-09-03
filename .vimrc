@@ -214,6 +214,10 @@ let g:airline_powerline_fonts = 1
 " YouCompleteMe
 let g:ycm_key_list_select_completion=['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-k>', '<Up>']
+if !exists("g:ycm_semantic_triggers")
+   let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<Tab>"
