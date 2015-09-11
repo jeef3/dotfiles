@@ -12,6 +12,7 @@ symlinks=(
   .exports
   .functions
   .tmux.conf
+  .tmux
 )
 
 # link_file () {
