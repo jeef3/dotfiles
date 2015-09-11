@@ -238,3 +238,8 @@ let g:bufExplorerSplitRight=0
 
 " Typescript
 let g:typescript_compiler_options = '-module'
+
+" Tern
+augroup tern_commands
+  autocmd FileType javascript noremap gd :TernDef<cr>
+augroup END
