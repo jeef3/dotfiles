@@ -193,6 +193,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+if &diff
+  let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+endif
+
 " Emmet
 let g:user_emmet_leader_key='<C-Z>'
 
