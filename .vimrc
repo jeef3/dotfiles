@@ -1,7 +1,4 @@
-" Make vim more useful
-set nocompatible
-
-call pathogen#infect()
+source ~/.vim/plugins.vim
 
 " File type detection
 filetype plugin indent on
