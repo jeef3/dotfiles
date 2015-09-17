@@ -55,5 +55,6 @@ Plugin 'clausreinke/typescript-tools.vim'
 Plugin 'PProvost/vim-ps1'
 Plugin 'mxw/vim-jsx'
 Plugin 'HerringtonDarkholme/yats.vim'
+Plugin 'tmux-plugins/vim-tmux'
 
 call vundle#end()

@@ -8,6 +8,8 @@ syntax on
 set t_Co=256
 set background=dark
 colorscheme molokai
+let g:molokai_original=1
+let g:rehash256 = 1
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
