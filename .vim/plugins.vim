@@ -20,7 +20,11 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'nosami/Omnisharp'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'Raimondi/delimitMate'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe', {
+  \   'build' : {
+  \     'mac' : './install.sh',
+  \   },
+  \ }
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'SirVer/ultisnips'
 Plugin 'rking/ag.vim'
