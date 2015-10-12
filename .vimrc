@@ -242,3 +242,6 @@ let g:typescript_compiler_options = '-module'
 augroup tern_commands
   autocmd FileType javascript noremap gd :TernDef<cr>
 augroup END
+
+" FZF
+set rtp+=~/.fzf

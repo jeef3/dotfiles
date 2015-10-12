@@ -13,6 +13,7 @@ symlinks=(
   .functions
   .tmux.conf
   .tmux
+  .fzf.zsh
 )
 
 # link_file () {
