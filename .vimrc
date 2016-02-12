@@ -161,8 +161,27 @@ autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 " Common Ruby files
 au BufRead,BufNewFile Rakefile,Capfile,Gemfile,.autotest,.irbrc,*.treetop,*.tt set ft=ruby syntax=ruby
 
+" Applescript
+au! BufNewFile,BufRead *.applescript setf applescript
+
 " The number of times this has got me!
 command W w
+
+" Mode-aware Cursor Highlighting (GUI Only)
+set gcr=a:block
+
+set gcr+=o:hor50-Cursor
+set gcr+=n:Cursor
+set gcr+=i-ci-sm:InsertCursor-hor10
+set gcr+=r-cr:ReplaceCursor-hor20
+set gcr+=c:CommandCursor
+set gcr+=v-ve:VisualCursor
+set gcr+=a:blinkon0
+
+hi InsertCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=37  guibg=#2aa198
+hi VisualCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#d33682
+hi ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65  guibg=#dc322f
+hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
 
 " ==============================================================================
 " Plugin Configuration
@@ -176,8 +195,8 @@ let g:ctrlp_switch_buffer = 'e'
 let g:ctrlp_by_filename = 1
 
 " Syntastic
-let g:syntastic_error_symbol = '✖'
-let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_error_symbol = 'X'
+let g:syntastic_warning_symbol = '!'
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -228,7 +247,7 @@ let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 
 " Ag
-let g:ag_working_path_mode="r"
+" let g:ag_working_path_mode="r"
 
 " BufExplorer
 let g:bufExplorerShowDirectories=0

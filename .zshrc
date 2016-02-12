@@ -24,7 +24,7 @@ plugins=(git bundler brew heroku z tmux node npm fabric rake)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH=/usr/local/sbin:/usr/local/bin:$PATH
+export PATH=~/bin:/usr/local/sbin:/usr/local/bin:$PATH
 
 # Load ~/.extra, ~/.bash_prompt, ~/.exports, ~/.aliases and ~/.functions
 # ~/.extra can be used for settings you don’t want to commit
@@ -93,6 +93,9 @@ alias t='todo.sh'
 
 export NVM_DIR="/Users/jeffknaggs/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# For nicer diff highlighting
+ln -sf "$(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight" ~/bin/diff-highlight
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
