@@ -14,6 +14,7 @@ symlinks=(
   .tmux.conf
   .tmux
   .fzf.zsh
+  .scripts
 )
 
 # link_file () {
