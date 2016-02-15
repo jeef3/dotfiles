@@ -14,6 +14,10 @@ tell application "Spotify"
         # If the track doesn't have an artist set and is therefore most likely an advert rather than a song
         "~ " & track_name
       end if
+    else
+      "Paused"
     end if
+  else
+    "Spotify not running"
   end if
 end tell
