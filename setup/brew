@@ -44,6 +44,8 @@ brew install rename
 brew install todo-txt
 brew install httpie
 
+brew install z
+
 # codez
 brew install node
 brew install python
