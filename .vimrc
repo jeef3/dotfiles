@@ -195,7 +195,7 @@ let g:ctrlp_switch_buffer = 'e'
 let g:ctrlp_by_filename = 1
 
 " Syntastic
-let g:syntastic_error_symbol = 'X'
+let g:syntastic_error_symbol = '⨉'
 let g:syntastic_warning_symbol = '!'
 
 set statusline+=%#warningmsg#
@@ -203,6 +203,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_typescript_checkers = []
 let g:syntastic_json_checkers = ['jsonlint']
 
 let g:syntastic_always_populate_loc_list = 1
@@ -247,7 +248,7 @@ let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 
 " Ag
-" let g:ag_working_path_mode="r"
+let g:ag_working_path_mode="r"
 
 " BufExplorer
 let g:bufExplorerShowDirectories=0
@@ -268,3 +269,9 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 
 " Terminus
 let g:TerminusInsertCursorShape=2
+
+" TypeScript
+autocmd FileType typescript call s:typescript_filetype_settings()
+function! s:typescript_filetype_settings()
+  set makeprg=tsc
+endfunction
