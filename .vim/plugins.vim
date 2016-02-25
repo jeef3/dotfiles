@@ -3,71 +3,75 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'benmills/vimux'
+Plugin 'gmarik/Vundle.vim'
+
+" Integration
+Plugin 'benmills/vimux'                   " Run shell commands in Tmux pane
+Plugin 'wincent/terminus'                 " Better terminal integration
 
 " IDE
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-vinegar'
-Plugin 'tpope/vim-dispatch'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-obsession'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'nosami/Omnisharp'
-Plugin 'marijnh/tern_for_vim', {
-\   'build' : {
-\     'mac' : 'npm install'
-\   }
-\}
-Plugin 'Raimondi/delimitMate'
+Plugin 'kien/ctrlp.vim'                   " Fast file searching
+Plugin 'scrooloose/syntastic'             " File error checking
+Plugin 'bling/vim-airline'                " Custom status line
+Plugin 'tpope/vim-commentary'             " gcc to comment line/paragraph
+Plugin 'tpope/vim-fugitive'               " Git wrapper, :Gstatus etc
+Plugin 'tpope/vim-vinegar'                " Better netrw
+Plugin 'tpope/vim-dispatch'               " Async build dispatcher
+Plugin 'tpope/vim-surround'               " Change surrounds, quotes etc
+Plugin 'tpope/vim-obsession'              " Automatically save session state (used with Tmux)
+Plugin 'airblade/vim-gitgutter'           " Git status in gutter
+Plugin 'nosami/Omnisharp'                 " Code completion for c#
+Plugin 'Raimondi/delimitMate'             " Auto-complete quotes, parens etc
+Plugin 'editorconfig/editorconfig-vim'    " Editorconfig
+Plugin 'jlanzarotta/bufexplorer'          " Enhanced buffer explorer
+Plugin 'SirVer/ultisnips'                 " Code snippets
+Plugin 'rking/ag.vim'                     " Fast file text search
+
+" Code-completion engine
 Plugin 'Valloric/YouCompleteMe', {
 \   'build' : {
 \     'mac' : './install.py',
 \   },
 \ }
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'SirVer/ultisnips'
-Plugin 'rking/ag.vim'
-Plugin 'freitass/todo.txt-vim'
 
-" Util (other plugins need these)
-Plugin 'tomtom/tlib_vim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
+" Languages and syntax
+Plugin 'othree/html5.vim'                 " HTML5
+Plugin 'gabrielelana/vim-markdown'        " Markdown
+Plugin 'jeroenbourgois/vim-actionscript'  " ActionScript
+Plugin 'pangloss/vim-javascript'          " JavaScript
+Plugin 'kchmck/vim-coffee-script'         " CoffeeScript
+Plugin 'leafgarland/typescript-vim'       " TypeScript
+Plugin 'mxw/vim-jsx'                      " JSX
+Plugin 'elzr/vim-json'                    " JSON
+Plugin 'OrangeT/vim-csharp'               " c#
+Plugin 'vim-ruby/vim-ruby'                " Ruby
+Plugin 'hail2u/vim-css3-syntax'           " CSS3
+Plugin 'wavded/vim-stylus'                " Stylus (CSS)
+Plugin 'vim-scripts/applescript.vim'      " AppleScript
+Plugin 'PProvost/vim-ps1'                 " PowerShell
+Plugin 'tmux-plugins/vim-tmux'            " Tmux config
+Plugin 'freitass/todo.txt-vim'            " todo.txt
+
+" Language helpers
+Plugin 'moll/vim-node'                    " Node
+Plugin 'Quramy/tsuquyomi'                 " TypeScript tools
+Plugin 'mattn/emmet-vim'                  " HTML/CSS quick completion
+" Plugin 'othree/javascript-libraries-syntax.vim'
+
+" Code analysis for JavaScript
+Plugin 'marijnh/tern_for_vim', {
+\   'build' : {
+\     'mac' : 'npm install'
+\   }
+\}
+
+" Dependencies
+" Plugin 'tomtom/tlib_vim'                " Not sure
+" Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'Shougo/vimproc.vim', {
 \   'build': {
 \     'mac': 'make'
 \   }
 \ }
-
-Plugin 'editorconfig/editorconfig-vim'
-
-Plugin 'mattn/emmet-vim'
-
-" Better terminal integration
-Plugin 'wincent/terminus'
-
-" Languages and syntax
-Plugin 'othree/html5.vim'
-Plugin 'jeroenbourgois/vim-actionscript'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'jtratner/vim-flavored-markdown'
-Plugin 'gabrielelana/vim-markdown'
-Plugin 'elzr/vim-json'
-Plugin 'wavded/vim-stylus'
-Plugin 'moll/vim-node'
-Plugin 'OrangeT/vim-csharp'
-Plugin 'pangloss/vim-javascript'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'vim-scripts/applescript.vim'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'Quramy/tsuquyomi'
-Plugin 'PProvost/vim-ps1'
-Plugin 'mxw/vim-jsx'
-Plugin 'tmux-plugins/vim-tmux'
 
 call vundle#end()
