@@ -4,7 +4,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'benmills/vimux'
-Plugin 'vim-scripts/syntax-highlighting-for-tintinttpp'
 
 " IDE
 Plugin 'kien/ctrlp.vim'
@@ -18,11 +17,15 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-obsession'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'nosami/Omnisharp'
-Plugin 'marijnh/tern_for_vim'
+Plugin 'marijnh/tern_for_vim', {
+\   'build' : {
+\     'mac' : 'npm install'
+\   }
+\}
 Plugin 'Raimondi/delimitMate'
 Plugin 'Valloric/YouCompleteMe', {
 \   'build' : {
-\     'mac' : './install.sh',
+\     'mac' : './install.py',
 \   },
 \ }
 Plugin 'jlanzarotta/bufexplorer'
@@ -32,7 +35,6 @@ Plugin 'freitass/todo.txt-vim'
 
 " Util (other plugins need these)
 Plugin 'tomtom/tlib_vim'
-Plugin 'Quramy/tsuquyomi'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'Shougo/vimproc.vim', {
 \   'build': {
@@ -43,6 +45,9 @@ Plugin 'Shougo/vimproc.vim', {
 Plugin 'editorconfig/editorconfig-vim'
 
 Plugin 'mattn/emmet-vim'
+
+" Better terminal integration
+Plugin 'wincent/terminus'
 
 " Languages and syntax
 Plugin 'othree/html5.vim'
@@ -56,15 +61,13 @@ Plugin 'moll/vim-node'
 Plugin 'OrangeT/vim-csharp'
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/javascript-libraries-syntax.vim'
-" Plugin 'burnettk/vim-angular'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'vim-scripts/applescript.vim'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'clausreinke/typescript-tools.vim'
+Plugin 'Quramy/tsuquyomi'
 Plugin 'PProvost/vim-ps1'
 Plugin 'mxw/vim-jsx'
-Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'tmux-plugins/vim-tmux'
 
 call vundle#end()

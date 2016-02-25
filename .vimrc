@@ -254,9 +254,6 @@ let g:bufExplorerShowDirectories=0
 let g:bufExplorerShowRelativePath=1
 let g:bufExplorerSplitRight=0
 
-" Typescript
-let g:typescript_compiler_options = '-module'
-
 " Tern
 augroup tern_commands
   autocmd FileType javascript noremap gd :TernDef<cr>
@@ -264,3 +261,10 @@ augroup END
 
 " FZF
 set rtp+=~/.fzf
+
+" Vimux
+map <Leader>vp :VimuxPromptCommand<CR>
+map <Leader>vl :VimuxRunLastCommand<CR>
+
+" Terminus
+let g:TerminusInsertCursorShape=2
