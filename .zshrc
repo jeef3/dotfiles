@@ -26,6 +26,8 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export PATH=~/bin:/usr/local/sbin:/usr/local/bin:$PATH
 
+. `brew --prefix`/etc/profile.d/z.sh
+
 # Load ~/.extra, ~/.bash_prompt, ~/.exports, ~/.aliases and ~/.functions
 # ~/.extra can be used for settings you don’t want to commit
 for file in ~/.{extra,exports,aliases,functions}; do
