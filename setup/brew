@@ -6,6 +6,9 @@ brew update
 # Upgrade any already-installed formulae
 brew upgrade
 
+# Brew Cask
+brew install brew-cask
+
 # GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
 
@@ -26,33 +29,37 @@ brew install homebrew/dupes/grep
 # rbenv
 brew install rbenv ruby-build
 
-# Dev stuff
+# Git
 brew install git bash-completion
 brew install tig
 
 # Mah IDE
-brew uninstall macvim
-brew install macvim --override-system-vim
+# Uninstall first, because upgrade drops the override-system-vim
+brew uninstall macvim 
+brew install macvim --with-override-system-vim
 brew install tmux
 brew install reattach-to-user-namespace
 
-# everything else
+# Some more useful tools
 brew install trash
 brew install ack
 brew install the_silver_searcher
 brew install rename
 brew install todo-txt
 brew install httpie
-
 brew install z
 
-# codez
+# Languages
 brew install node
 brew install python
 brew install python3
+
+# Compilers
 brew install make
 brew install cmake
 brew install mono
+
+# Tools
 brew install phantomjs
 
 # QuickLook
@@ -67,10 +74,9 @@ brew cask install \
   qlimagesize \
   suspicious-package
 
-# Stuff needed for gifify
+# Stuff needed for gifify script
 brew install ffmpeg
-brew tap phinze/homebrew-cask
-brew install brew-cask
+# brew tap phinze/homebrew-cask
 brew cask install x-quartz
 open /usr/local/Cellar/x-quartz/2.7.4/XQuartz.pkg
 brew install gifsicle
