@@ -27,6 +27,10 @@
 	tree = log --color --graph --pretty=format:'%C(bold magenta)%d%C(reset)%n %C(bold black)%h%C(reset) %C(white)%s%C(reset)%n         %C(bold white)%aN (%aE)%C(reset)%n         %C(yellow)%ar%C(reset)' --decorate=short --all
 	t = log --color --graph --pretty=format:'%C(bold black)%h%C(reset)%C(bold magenta)%d%C(reset) %C(white)%s%C(reset) %C(black)' --all
 	sh = show --format='%C(bold black)%h%C(reset) %C(black)%aN (%aE)%C(reset)%n%n    %C(white bold)%s%C(reset)%n%+b' --patch-with-stat --ignore-all-space
+
+	# Kaleidoscope
+	dk = difftool -y -t Kaleidoscope
+	mk = mergetool -y -y Kaleidoscope
 [color]
 	ui = auto
 [credential]
@@ -68,6 +72,12 @@
 	tool = vimdiff
 [difftool]
 	prompt = false
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustexitcode = true
+
 [help]
 	autocorrect = 1
 [push]
