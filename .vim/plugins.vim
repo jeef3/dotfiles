@@ -7,7 +7,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " Integration
 Plugin 'benmills/vimux'                   " Run shell commands in Tmux pane
-Plugin 'wincent/terminus'                 " Better terminal integration
+Plugin 'wincent/terminus'                 " Better terminal integration, cursor shapes, colors
 
 " IDE
 Plugin 'kien/ctrlp.vim'                   " Fast file searching
@@ -26,6 +26,7 @@ Plugin 'editorconfig/editorconfig-vim'    " Editorconfig
 Plugin 'jlanzarotta/bufexplorer'          " Enhanced buffer explorer
 Plugin 'SirVer/ultisnips'                 " Code snippets
 Plugin 'rking/ag.vim'                     " Fast file text search
+Plugin 'easymotion/vim-easymotion'        " More motions
 
 " Code-completion engine
 Plugin 'Valloric/YouCompleteMe', {

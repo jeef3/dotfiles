@@ -136,9 +136,6 @@ function! StripWhitespace ()
 endfunction
 noremap <leader>ss :call StripWhitespace ()<CR>
 
-" Join lines and restore cursor location (J)
-" nnoremap J mjJ`j
-
 " Restore cursor position
 autocmd BufReadPost *
   \ if line("'\"") > 1 && line("'\"") <= line("$") |
@@ -165,7 +162,7 @@ au BufRead,BufNewFile Rakefile,Capfile,Gemfile,.autotest,.irbrc,*.treetop,*.tt s
 au! BufNewFile,BufRead *.applescript setf applescript
 
 " The number of times this has got me!
-command W w
+com! W w
 
 " Mode-aware Cursor Highlighting (GUI Only)
 set gcr=a:block
@@ -231,6 +228,9 @@ nnoremap <leader>tp :OmniSharpAddToProject<cr>
 " JSON Formatting
 com! FormatJSON %!python -m json.tool
 
+" HTML Formatting
+com! FormatHTML %!tidy -iq -xml -wrap 0
+
 " Airline
 let g:airline_powerline_fonts = 1
 
@@ -275,3 +275,8 @@ autocmd FileType typescript call s:typescript_filetype_settings()
 function! s:typescript_filetype_settings()
   set makeprg=tsc
 endfunction
+
+" EasyMotion
+map <Leader> <Plug>(easymotion-prefix)
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
