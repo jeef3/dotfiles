@@ -9,11 +9,11 @@
 
 	# Updating local branch
 	u = merge --ff-only
-  l = fetch -avp
+	l = fetch -avp
 
-  # Show assume unchanged
-  ignore = update-index --assume-unchanged
-  ignored = !git ls-files -v | grep '^[[:lower:]]'
+	# Show assume unchanged
+	ignore = update-index --assume-unchanged
+	ignored = !git ls-files -v | grep '^[[:lower:]]'
 
 	# Viewing changes
 	# staged = diff --color --color-words --abbrev --cached
@@ -21,16 +21,16 @@
 	# Commit Details
 	# fileschanged = log --pretty=format:'%C(bold black)(%h)%C(reset) %C(bold magenta)%d%C(reset) %C(white)%s%C(reset) %C(black)(%ar, %an)%C(reset)' --decorate --numstat
 	# dr = "!f() { git diff "$1"^.."$1"; }; f"
-	# lc  = "!f() { git fileschanged "$1"^.."$1"; }; f"
+	# lc = "!f() { git fileschanged "$1"^.."$1"; }; f"
 
 	# Commit graph
-	tree = log --color --graph --pretty=format:'%C(bold magenta)%d%C(reset)%n %C(bold black)%h%C(reset) %C(white)%s%C(reset)%n         %C(bold white)%aN (%aE)%C(reset)%n         %C(yellow)%ar%C(reset)' --decorate=short --all
+	tree = log --color --graph --pretty=format:'%C(bold magenta)%d%C(reset)%n %C(bold black)%h%C(reset) %C(white)%s%C(reset)%n				 %C(bold white)%aN (%aE)%C(reset)%n					%C(yellow)%ar%C(reset)' --decorate=short --all
 	t = log --color --graph --pretty=format:'%C(bold black)%h%C(reset)%C(bold magenta)%d%C(reset) %C(white)%s%C(reset) %C(black)' --all
-	sh = show --format='%C(bold black)%h%C(reset) %C(black)%aN (%aE)%C(reset)%n%n    %C(white bold)%s%C(reset)%n%+b' --patch-with-stat --ignore-all-space
+	sh = show --format='%C(bold black)%h%C(reset) %C(black)%aN (%aE)%C(reset)%n%n		 %C(white bold)%s%C(reset)%n%+b' --patch-with-stat --ignore-all-space
 
 	# Kaleidoscope
 	dk = difftool -y -t Kaleidoscope
-	mk = mergetool -y -y Kaleidoscope
+	mk = mergetool -y -t Kaleidoscope
 [color]
 	ui = auto
 [credential]
