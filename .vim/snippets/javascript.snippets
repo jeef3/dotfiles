@@ -1,35 +1,25 @@
-snippet jsx
+snippet jsxc "Class component"
 	import React, { Component, PropTypes } from 'react';
 
 	const styles = {
 		container: {}
 	};
 
-	export default class ${1:Thing} extends Component {
-		static propTypes = {
-		}
-
+	class ${1:Thing} extends Component {
 		render() : Component {
 			return ${0}<div style={styles.container} />;
 		}
 	}
-snippet jsxpure
-	import React, { Component, PropTypes } from 'react';
-	import PureRender from 'react-pure-render';
 
-	const styles = {
-		container: {}
+	$1.propTypes = {
+		
 	};
 
-	@PureRender
-	export default class ${1:Thing} extends Component {
-		static propTypes = {
-		}
+	export default $1;
+snippet jsxf "Function component"
+	import React from 'react';
 
-		render() : Component {
-			return ${0}<div style={styles.container} />;
-		}
-	}
+	export default () => (<div ${0}/>);
 snippet action
 	export function ${1:action}(${2:value}) {
 		return {
@@ -40,9 +30,9 @@ snippet action
 snippet reducer
 	export default function (state = {}, action) {
 		switch (action.type) {
-			${0}
-			default:
-				return state;
+		${0}
+		default:
+			return state;
 		}
 	}
 snippet container
@@ -50,49 +40,17 @@ snippet container
 
 	import ${1} from '../components/$1.jsx';
 
-	function mapStateToProps(state) {
-		return {
-		};
+	function mapStateToProps({ ${2} }) {
+		return { $2 };
 	}
 
-	export default connect(mapStateToProps)($1);
-
-snippet store
-	'use strict';
-
-	import { EventEmitter } from 'events';
-
-	import Dispatcher from '../dispatcher';
-
-	class ${1:ThingStore} extends EventEmitter {
-		constructor() {
-			super();
-
-			this.dispatchToken =
-				Dispatcher.register(this._dispatchTokenFn.bind(this));
-		}
-
-		_dispatchTokenFn(action) {
-			switch (action.name) {
-				${0}
-			}
-		}
+	function mapDispatchToProps(dispatch) {
+		return { };
 	}
 
-	export default new $1();
-snippet ngjsx
-	angular.module('react-components')
-		.factory('$1', function () {
-			const { Component, PropTypes } = React;
-
-			return class ${1} extends Component {
-				static propTypes = {
-				}
-
-				render() : Component {
-					return <div>${0}</div>;
-				}
-			}
-		});
+	export default connect(
+		mapStateToProps,
+		mapDispatchToProps
+	)($1);
 snippet log
 	console.log(${0});
