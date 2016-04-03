@@ -6,8 +6,14 @@ git submodule init
 git submodule update --recursive
 
 # Homebrew
-info "Installing Homebrew"
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+info "Checking Homebrew install"
+brew --version
+if [ $? -eq 0 ]; then
+  success "Homebrew already installed"
+else
+  info "Installing Homebrew"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 
 # Install Vim plugins
 vim +PluginInstall +qall
