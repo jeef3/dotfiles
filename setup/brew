@@ -48,6 +48,7 @@ brew install rename
 brew install todo-txt
 brew install httpie
 brew install z
+brew install fzf
 
 # Languages
 brew install node

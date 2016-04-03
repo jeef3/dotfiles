@@ -10,7 +10,7 @@ Plugin 'benmills/vimux'                   " Run shell commands in Tmux pane
 Plugin 'wincent/terminus'                 " Better terminal integration, cursor shapes, colors
 
 " IDE
-Plugin 'kien/ctrlp.vim'                   " Fast file searching
+" Plugin 'ctrlpvim/ctrlp.vim'               " Fast file searching
 Plugin 'scrooloose/syntastic'             " File error checking
 Plugin 'bling/vim-airline'                " Custom status line
 Plugin 'tpope/vim-commentary'             " gcc to comment line/paragraph
@@ -26,7 +26,13 @@ Plugin 'editorconfig/editorconfig-vim'    " Editorconfig
 Plugin 'jlanzarotta/bufexplorer'          " Enhanced buffer explorer
 Plugin 'SirVer/ultisnips'                 " Code snippets
 Plugin 'rking/ag.vim'                     " Fast file text search
-Plugin 'easymotion/vim-easymotion'        " More motions
+Plugin 'easymotion/vim-easymotion'        " Advanced motions navigation
+Plugin 'haya14busa/incsearch.vim'         " Enhanved / searching
+Plugin 'vim-scripts/autoresize.vim'       " Auto-resizing splits
+
+" Fast file searching with FZF
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
 
 " Code-completion engine
 Plugin 'Valloric/YouCompleteMe', {
