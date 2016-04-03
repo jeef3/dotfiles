@@ -22,3 +22,6 @@ else
   success "Not using Zsh, switching"
   chsh -s /bin/zsh
 fi
+
+info "Adding italics"
+tic xterm-256color-italic.terminfo

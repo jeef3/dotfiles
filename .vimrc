@@ -11,11 +11,13 @@ colorscheme molokai
 let g:molokai_original=1
 let g:rehash256 = 1
 
+highlight Comment cterm=italic
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
-" Change mapleader
-let mapleader=","
+" Set leaders
+let mapleader = ","
+let maplocalleader = "\\"
 
 " Local dirs
 set backupdir=~/.vim/backups
@@ -40,10 +42,13 @@ set foldminlines=0 " Allow folding single lines
 set foldnestmax=3 " Set max fold nesting level
 
 " Quickfix Window Auto-open
-autocmd QuickFixCmdPost [^l]* nested cwindow 5
-autocmd QuickFixCmdPost    l* nested lwindow 5
+augroup nested_window_auto_open
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* nested cwindow 5
+  autocmd QuickFixCmdPost    l* nested lwindow 5
+augroup END
 " Quickfix Window Close (,qq)
-map <leader>qq :cclose<CR>
+noremap <leader>qq :cclose<CR>
 
 " Set some junk
 set backspace=indent,eol,start
@@ -109,16 +114,19 @@ set clipboard=unnamed " Share clipboard
 
 " Auto read, and auto-actually-update file changes
 set autoread
-au FocusGained,BufEnter * :silent! !
+augroup auto_read
+  autocmd!
+  autocmd FocusGained,BufEnter * :silent! !
+augroup END
 
 " Better split switching (Ctrl-j, Ctrl-k, Ctrl-h, Ctrl-l)
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-H> <C-W>h
-map <C-L> <C-W>l
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
+noremap <C-H> <C-W>h
+noremap <C-L> <C-W>l
 
 " Quick alternate buffer switching (,,)
-map <leader>, <C-^>
+noremap <leader>, <C-^>
 
 " Toggle show tabs and trailing spaces (,c)
 set list
@@ -134,35 +142,37 @@ function! StripWhitespace ()
     call setpos('.', save_cursor)
     call setreg('/', old_query)
 endfunction
-noremap <leader>ss :call StripWhitespace ()<CR>
+noremap <silent> <leader>ss :call StripWhitespace ()<CR>
 
 " Restore cursor position
-autocmd BufReadPost *
-  \ if line("'\"") > 1 && line("'\"") <= line("$") |
-  \   exe "normal! g`\"" |
-  \ endif
+augroup cursor_restore
+  autocmd!
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+augroup END
 
 " Auto-open Quickfix window
-autocmd QuickFixCmdPost * nested cwindow 5
+augroup open_quickfix_window
+  autocmd!
+  autocmd QuickFixCmdPost * nested cwindow 5
+augroup END
 
 " Set relative line numbers
 set relativenumber " Use relative line numbers. Current line is still in status bar.
-autocmd BufReadPost,BufNewFile * set relativenumber
+augroup relative_line_numbers
+  autocmd!
+  autocmd BufReadPost,BufNewFile * set relativenumber
+augroup END
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
-
-" File Type Specific Settings
-let coffee_watch_vert = 1
-let coffee_run_vert = 1
-autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
-
-" Common Ruby files
-au BufRead,BufNewFile Rakefile,Capfile,Gemfile,.autotest,.irbrc,*.treetop,*.tt set ft=ruby syntax=ruby
 
 " Applescript
 au! BufNewFile,BufRead *.applescript setf applescript
 
 " The number of times this has got me!
 com! W w
+com! Q q
 
 " Mode-aware Cursor Highlighting (GUI Only)
 set gcr=a:block
@@ -180,6 +190,14 @@ hi VisualCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#d33682
 hi ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65  guibg=#dc322f
 hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
 
+" Quickly edit me
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+nnoremap H ^
+nnoremap L $
+
+
 " ==============================================================================
 " Plugin Configuration
 " ==============================================================================
@@ -189,7 +207,8 @@ let g:ctrlp_max_files = 0
 let g:ctrlp_max_depth = 400
 let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules)$'
 let g:ctrlp_switch_buffer = 'e'
-let g:ctrlp_by_filename = 1
+let g:ctrlp_show_hidden = 1
+
 
 " Syntastic
 let g:syntastic_error_symbol = '⨉'
@@ -218,8 +237,8 @@ let g:user_emmet_leader_key='<C-Z>'
 
 " OmniSharp
 augroup omnisharp_commands
+  autocmd!
   autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
-
   autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
   autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>
 augroup END
@@ -257,21 +276,22 @@ let g:bufExplorerSplitRight=0
 
 " Tern
 augroup tern_commands
+  autocmd!
   autocmd FileType javascript noremap gd :TernDef<cr>
 augroup END
 
-" FZF
-set rtp+=~/.fzf
-
 " Vimux
-map <Leader>vp :VimuxPromptCommand<CR>
-map <Leader>vl :VimuxRunLastCommand<CR>
+noremap <Leader>vp :VimuxPromptCommand<CR>
+noremap <Leader>vl :VimuxRunLastCommand<CR>
 
 " Terminus
 let g:TerminusInsertCursorShape=2
 
 " TypeScript
-autocmd FileType typescript call s:typescript_filetype_settings()
+augroup typescript_commands
+  autocmd!
+  autocmd FileType typescript call s:typescript_filetype_settings()
+augroup END
 function! s:typescript_filetype_settings()
   set makeprg=tsc
 endfunction
@@ -280,3 +300,26 @@ endfunction
 map <Leader> <Plug>(easymotion-prefix)
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" Incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+" Incsearch - noh after motion
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
+" fzf
+inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
+map <c-p> :GitFiles<cr>
+
+" Auto-resize Splits
+let g:AUTORESIZE_AUTOCMD_DISABLE = 1
+let g:AUTORESIZE_ANOTHER_WINDOW_WIDTH = 30
+" nmap <LocalLeader>s :AutoWindowResize<CR>
