@@ -29,7 +29,7 @@ Plugin 'SirVer/ultisnips'                 " Code snippets
 Plugin 'rking/ag.vim'                     " Fast file text search
 Plugin 'easymotion/vim-easymotion'        " Advanced motions navigation
 Plugin 'haya14busa/incsearch.vim'         " Enhanved / searching
-Plugin 'vim-scripts/autoresize.vim'       " Auto-resizing splits
+Plugin 'jeef3/splitsizer.vim'             " Split resizing
 
 " Fast file searching with FZF
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
