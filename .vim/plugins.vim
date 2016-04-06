@@ -15,11 +15,12 @@ Plugin 'scrooloose/syntastic'             " File error checking
 Plugin 'bling/vim-airline'                " Custom status line
 Plugin 'tpope/vim-commentary'             " gcc to comment line/paragraph
 Plugin 'tpope/vim-fugitive'               " Git wrapper, :Gstatus etc
+Plugin 'airblade/vim-gitgutter'           " Git status in gutter
+Plugin 'jreybert/vimagit'                 " Another Git wrapper/editor
 Plugin 'tpope/vim-vinegar'                " Better netrw
 Plugin 'tpope/vim-dispatch'               " Async build dispatcher
 Plugin 'tpope/vim-surround'               " Change surrounds, quotes etc
 Plugin 'tpope/vim-obsession'              " Automatically save session state (used with Tmux)
-Plugin 'airblade/vim-gitgutter'           " Git status in gutter
 Plugin 'nosami/Omnisharp'                 " Code completion for c#
 Plugin 'Raimondi/delimitMate'             " Auto-complete quotes, parens etc
 Plugin 'editorconfig/editorconfig-vim'    " Editorconfig
