@@ -7,7 +7,7 @@ filetype plugin indent on
 syntax on
 set t_Co=256
 set background=dark
-colorscheme molokai
+colorscheme princess
 let g:molokai_original=1
 let g:rehash256 = 1
 
