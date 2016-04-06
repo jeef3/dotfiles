@@ -168,7 +168,16 @@ augroup END
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 
 " Applescript
-au! BufNewFile,BufRead *.applescript setf applescript
+augroup applescript_au
+  autocmd!
+  autocmd BufNewFile,BufRead *.applescript setf applescript
+augroup END
+
+" Snippets
+augroup snippets_au
+  autocmd!
+  autocmd BufNewFile,BufRead *.snippets set noexpandtab
+augroup END
 
 " The number of times this has got me!
 com! W w
@@ -317,7 +326,8 @@ map g# <Plug>(incsearch-nohl-g#)
 
 " fzf
 inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
-map <c-p> :GitFiles<cr>
+noremap <c-p> :GitFiles<cr>
+
 
 " Auto-resize Splits
 let g:AUTORESIZE_AUTOCMD_DISABLE = 1
