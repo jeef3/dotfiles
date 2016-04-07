@@ -173,10 +173,11 @@ augroup applescript_au
   autocmd BufNewFile,BufRead *.applescript setf applescript
 augroup END
 
-" Snippets
-augroup snippets_au
+" Files specifically with tabs
+augroup files_with_tabs
   autocmd!
-  autocmd BufNewFile,BufRead *.snippets set noexpandtab
+  autocmd BufNewFile,BufRead *.snippets setl noexpandtab
+  autocmd BufNewFile,BufRead *.gitconfig setl noexpandtab
 augroup END
 
 " The number of times this has got me!
