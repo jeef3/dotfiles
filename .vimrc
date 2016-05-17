@@ -94,7 +94,8 @@ set scrolloff=10 " Start scrolling ten lines before horizontal border of window.
 set shortmess=atI " Don't show the intro message when starting vim.
 set showmode " Show the current mode.
 set showtabline=2 " Always show tab bar.
-set sidescrolloff=3 " Start scrolling three columns before vertical border of window.
+set sidescrolloff=10 " Start scrolling three columns before vertical border of window.
+set sidescroll=1 " Scroll 1 col at a time
 set smartcase " Ignore 'ignorecase' if search patter contains uppercase characters.
 set splitbelow " New window goes below
 set splitright " New windows goes right
