@@ -1,0 +1,8 @@
+#!/bin/sh
+clear
+git tree -5 | cat
+
+fswatch -0 .git | while read -d "" event
+do
+  clear; git tree -5 | cat
+done
