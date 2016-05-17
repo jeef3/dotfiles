@@ -113,6 +113,10 @@ set wrapscan " Searches wrap around end of file
 
 set clipboard=unnamed " Share clipboard
 
+" ==============================================================================
+" Custom scripts and shit
+" ==============================================================================
+
 " Auto read, and auto-actually-update file changes
 set autoread
 augroup auto_read
@@ -131,7 +135,8 @@ noremap <leader>, <C-^>
 
 " Toggle show tabs and trailing spaces (,c)
 set list
-set lcs=tab:›\ ,trail:·,nbsp:_
+set lcs=tab:›\ ,trail:·,nbsp:_,extends:…,precedes:…
+
 set fcs=fold:-
 nnoremap <silent> <leader>c :set nolist!<CR>
 
