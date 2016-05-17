@@ -13,7 +13,7 @@ let g:rehash256 = 1
 
 highlight Comment cterm=italic
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+match OverLength /\%101v.\+/
 
 " Set leaders
 let mapleader = ","
