@@ -25,7 +25,7 @@
 
 	# Commit graph
 	tree = log --color --graph --pretty=format:'%C(bold magenta)%d%C(reset)%n %C(bold black)%h%C(reset) %C(white)%s%C(reset)%n				 %C(bold white)%aN (%aE)%C(reset)%n					%C(yellow)%ar%C(reset)' --decorate=short --all
-	t = log --color --graph --pretty=format:'%C(bold black)%h%C(reset)%C(bold magenta)%d%C(reset) %C(white)%s%C(reset) %C(black)' --all
+	t = log --color --graph --pretty=format:'%C(bold black)%h%C(reset)%C(bold magenta)%d%C(reset) %C(white)%s%C(reset)' --all
 	sh = show --format='%C(bold black)%h%C(reset) %C(black)%aN (%aE)%C(reset)%n%n		 %C(white bold)%s%C(reset)%n%+b' --patch-with-stat --ignore-all-space
 
 	# Kaleidoscope
@@ -40,6 +40,7 @@
 	attributesfile = ~/.gitattributes
 	pager = less -+F -+X -S
 	autocrlf = input
+	ignorecase = false
 [color "branch"]
 	current = yellow reverse
 	local = yellow
@@ -103,6 +104,7 @@
 [user]
 	name = Jeff Knaggs
 	email = mail@jeef3.com
+	signingkey = 7FA7746B
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
