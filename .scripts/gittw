@@ -1,8 +1,11 @@
 #!/bin/sh
-clear
-git t -10 | cat
+# clear
+eval `resize`
+git t -$LINES | cat
 
 fswatch -0 .git | while read -d "" event
 do
-  clear; git t -10 | cat
+  clear
+  eval `resize`
+  git t -$LINES | cat
 done
