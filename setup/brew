@@ -9,6 +9,9 @@ brew upgrade
 # Brew Cask
 brew install brew-cask
 
+# Identity
+brew install keybase
+
 # GNU core utilities (those that come with OS X are outdated)
 brew install coreutils
 
@@ -33,8 +36,14 @@ brew install homebrew/dupes/grep
 brew install rbenv ruby-build
 
 # Git
-brew install git bash-completion
+brew install git
 brew install tig
+
+# Completion
+brew install \
+  bash-completion \
+  docker-completion
+
 
 # Mah IDE
 # Uninstall first, because upgrade drops the override-system-vim

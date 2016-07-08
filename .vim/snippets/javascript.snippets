@@ -88,3 +88,7 @@ snippet log
 	console.log(${0});
 snippet rlog
 	(console.log(${0})) |
+snippet reduce
+	reduce((p, ${1}) => { ${2} })
+snippet bind
+	this.${1:handle} = this.$1.bind(this);

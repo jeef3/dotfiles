@@ -23,6 +23,10 @@ let maplocalleader = "\\"
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 set undodir=~/.vim/undo
+" Do I really need swap/backup/undo?
+set noswapfile
+set nobackup
+set nowritebackup
 
 " Indentation
 set autoindent " Copy indent from last line when starting new line.
@@ -131,6 +135,7 @@ noremap <C-H> <C-W>h
 noremap <C-L> <C-W>l
 
 " Quick alternate buffer switching (,,)
+" FIXME: Not working, conflicting with easymotion
 noremap <leader>, <C-^>
 
 " Toggle show tabs and trailing spaces (,c)
@@ -210,9 +215,107 @@ hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-nnoremap H ^
-nnoremap L $
+" Map Y to act like D and C, Yank til EOL
+noremap Y y$
 
+" New file under string
+" nnoremap <leader>v :call NewFileAt()<cr>
+" function! NewFileAt ()
+"   " lcd %:p:h
+"   normal! vi'ay
+"   echom "new file " . @a
+" endfunction
+
+" Home motion toggle
+" http://ddrscott.github.io/blog/2016/vim-toggle-movement/
+function! ToggleMovement(firstOp, thenOp)
+  let pos = getpos('.')
+  execute "normal! " . a:firstOp
+  if pos == getpos('.')
+    execute "normal! " . a:thenOp
+  endif
+endfunction
+nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
+
+" Center the view if n/N moves out of view
+function! s:nice_next(cmd)
+  let view = winsaveview()
+  execute "normal! " . a:cmd
+  if view.topline != winsaveview().topline
+    normal! zz
+  endif
+endfunction
+
+nnoremap <silent> n :call <SID>nice_next('n')<cr>
+nnoremap <silent> N :call <SID>nice_next('N')<cr>
+
+" Custom Status Line
+function! WindowNumber()
+  return tabpagewinnr(tabpagenr())
+endfunction
+function! TrailingSpaceWarning()
+  if !exists("b:statline_trailing_space_warning")
+    let lineno = search('\s$', 'nw')
+    if lineno != 0
+      let b:statline_trailing_space_warning = '[trailing:'.lineno.']'
+    else
+      let b:statline_trailing_space_warning = ''
+    endif
+  endif
+  return b:statline_trailing_space_warning
+endfunction
+
+function! ReadOnlyIcon()
+  if &readonly
+    return "🔒"
+  else
+    return ""
+  endif
+endfunction
+
+" recalculate when idle, and after saving
+augroup statline_trail
+  autocmd!
+  autocmd cursorhold,bufwritepost * unlet! b:statline_trailing_space_warning
+augroup END
+
+" hi clear StatusLine
+" hi clear StatusLineNC
+" hi StatusLine   term=bold cterm=bold ctermfg=White ctermbg=235
+" hi StatusLineNC term=bold cterm=bold ctermfg=White ctermbg=235
+
+" " highlight values in terminal vim, colorscheme solarized
+" hi User1                      ctermfg=4          guifg=#40ffff            " Identifier
+" hi User2                      ctermfg=2 gui=bold guifg=#ffff60            " Statement
+" hi User3 term=bold cterm=bold ctermfg=1          guifg=White   guibg=Red  " Error
+" hi User4                      ctermfg=1          guifg=Orange             " Special
+" hi User5                      ctermfg=10         guifg=#80a0ff            " Comment
+" hi User6 term=bold cterm=bold ctermfg=1          guifg=Red                " WarningMsg
+
+" set statusline=
+" set statusline+=\ %{ReadOnlyIcon()}
+" set statusline+=\ 
+" set statusline+=%5*%{expand('%:h')}/               " relative path to file's directory
+" set statusline+=%1*%t%*                            " file name
+" set statusline+=\ 
+" set statusline+=\ 
+" set statusline+=%<                                 " truncate here if needed
+" set statusline+=%5*%L\ lines%*                     " number of lines
+" set statusline+=\ 
+" set statusline+=\ 
+" set statusline+=%3*%{TrailingSpaceWarning()}%*     " trailing whitespace
+
+" set statusline+=%=                                 " switch to RHS
+
+" set statusline+=%5*col:%-3.c%*                      " column
+" set statusline+=\ 
+" set statusline+=\ 
+" set statusline+=%2*buf:%-3n%*                      " buffer number
+" set statusline+=\ 
+" set statusline+=\ 
+" set statusline+=%2*win:%-3.3{WindowNumber()}%*     " window number
+
+nnoremap <leader>k :Lex<cr>
 
 " ==============================================================================
 " Plugin Configuration
@@ -272,10 +375,12 @@ let g:airline_powerline_fonts = 1
 " YouCompleteMe
 let g:ycm_key_list_select_completion=['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-k>', '<Up>']
+let g:ycm_autoclose_preview_window_after_completion=1
 if !exists("g:ycm_semantic_triggers")
    let g:ycm_semantic_triggers = {}
 endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
+let g:ycm_semantic_triggers['css'] = ['  ', ': ']
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<Tab>"
@@ -307,13 +412,15 @@ let g:TerminusInsertCursorShape=2
 augroup typescript_commands
   autocmd!
   autocmd FileType typescript call s:typescript_filetype_settings()
+  autocmd FileType typescript noremap gd :TsuDefinition<cr>
 augroup END
 function! s:typescript_filetype_settings()
   set makeprg=tsc
 endfunction
 
 " EasyMotion
-map <Leader> <Plug>(easymotion-prefix)
+" FIXME: EasyMotion steals my leader-leader quick switch
+" map <Leader> <Plug>(easymotion-prefix)
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
 
@@ -333,10 +440,16 @@ map g# <Plug>(incsearch-nohl-g#)
 
 " fzf
 inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
-noremap <c-p> :GitFiles<cr>
+noremap <C-p> :Files<cr>
 
+" JSX Helpers
+augroup jsx_helpers
+  autocmd!
+  autocmd FileType javascript nnoremap <leader>ja :call JSXEncloseReturn()<CR>
+  autocmd FileType javascript nnoremap <leader>ji :call JSXEachAttributeInLine()<CR>
+  autocmd FileType javascript nnoremap <leader>ve :call JSXExtractPartialPrompt()<CR>
+  autocmd FileType javascript nnoremap <leader>jc :call JSXChangeTagPrompt()<CR>
+  autocmd FileType javascript nnoremap vat :call JSXSelectTag()<CR>
+augroup END
 
-" Auto-resize Splits
-let g:AUTORESIZE_AUTOCMD_DISABLE = 1
-let g:AUTORESIZE_ANOTHER_WINDOW_WIDTH = 30
-" nmap <LocalLeader>s :AutoWindowResize<CR>
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci

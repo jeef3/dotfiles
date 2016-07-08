@@ -1,11 +1,14 @@
 #!/bin/sh
 # clear
 eval `resize`
-git t -$LINES | cat
+SIZE=$((LINES-1))
+# git t | head -n $SIZE
+git t | awk 'NR >= 0 && NR <= '${SIZE}
 
 fswatch -0 .git | while read -d "" event
 do
   clear
   eval `resize`
-  git t -$LINES | cat
+  SIZE=$((LINES-1))
+  git t | head -$SIZE
 done
