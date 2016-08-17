@@ -15,11 +15,15 @@ else
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-# Install Vim plugins
-vim +PluginInstall +qall
-
 # Link files
 ./link.sh
+
+# Install Vim Plug
+info "Installing/updating Vim Plug"
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim +PlugUpdate +qall
+success "Vim plug-ins installed"
 
 info "Switching to Zsh"
 if [ $(basename $SHELL) == 'zsh' ]; then
