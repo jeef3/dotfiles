@@ -452,4 +452,16 @@ augroup jsx_helpers
   autocmd FileType javascript nnoremap vat :call JSXSelectTag()<CR>
 augroup END
 
+" CSS completion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
+
+" Emoji
+if emoji#available()
+  let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
+  let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
+  let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
+  let g:gitgutter_sign_modified_removed = emoji#for('collision')
+endif
+
+set completefunc=emoji#complete
+
