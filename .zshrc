@@ -63,7 +63,7 @@ function git_info() {
 function git_origin() {
   git rev-parse --is-inside-work-tree &> /dev/null || return
 
-  local url=$(git config --get remote.origin.url | sed -En 's/.*github.com(:|\/)(.+)\.git/\2/p')
+  local url=$(git config --get remote.origin.url | sed -En 's/(https:\/\/|git@)[^:\/]+(:|\/)(.+)\.git/\3/p')
   echo $url
 }
 
