@@ -77,8 +77,9 @@ fi
 local current_dir="%{$fg[yellow]%}%B%~%{$reset_color%}"
 local git_line='$(git_info)'
 
+local exit_status="%(?.%{$fg_bold[black]%}$ .%{$fg_bold[red]%}$ ${reset_color})"
 PROMPT="${user_host}${current_dir} ${git_line}
-%{$fg[black]%}%B$%{$reset_color%} "
+${exit_status}"
 
 local repo='$(git_origin)'
 RPROMPT="%{$fg[black]%}%B${repo}%{$reset_color%}"
