@@ -1,12 +1,29 @@
 # Jeff's .files
 
-I was going to fork a dotfiles from elsewhere, but there were too many good ones to choose from, so I decided to just start my own and grab what I wanted as I needed it.
-
 ## Install
 
-`git clone git@github.com:jeef3/dotfiles.git`
+Run the initial Bootstrap:
 
-`./install-deps.sh`
+```
+curl -fsSL https://raw.github.com/jeef3/dotfiles/master/bootstrap.sh | bash
+```
+
+This will install Homebrew then Git and then clone this rpository to `~/projects/dotfiles`
+
+## Next Steps
+
+Link the actual dotfiles to `~`:
+
+```
+./link.sh
+```
+
+Then run the set-up which installs a bunch of Brew packages and sets up some OS defaults and Vim and
+Tmux initial bits.
+
+```
+./setup.sh
+```
 
 ## Set-up Custom/private
 
@@ -21,7 +38,3 @@ GIT_AUTHOR_EMAIL="mr.smith@example.com"
 GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 git config --global user.email "$GIT_AUTHOR_EMAIL"
 ```
-
-## Update
-
-`./sync.sh`
