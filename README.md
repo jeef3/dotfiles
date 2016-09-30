@@ -12,18 +12,11 @@ This will install Homebrew then Git and then clone this rpository to `~/projects
 
 ## Next Steps
 
-Link the actual dotfiles to `~`:
-
-```
-./link.sh
-```
-
-Then run the set-up which installs a bunch of Brew packages and sets up some OS defaults and Vim and
-Tmux initial bits.
-
 ```
 ./setup.sh
 ```
+
+Links the dotfiles and installs all my base Brews and settings.
 
 ## Set-up Custom/private
 
