@@ -10,17 +10,17 @@ Plug 'wincent/terminus'                 " Better terminal integration, cursor sh
 
 " Misc Vim stuff
 Plug 'vim-scripts/BufOnly.vim'          " Close all but current buffer
+
 Plug 'tpope/vim-sleuth'                 " Smarter shiftwidth and expandtab
 
 " IDE
-" Plug 'ctrlpvim/ctrlp.vim'             " Fast file searching (fzf replaces)
 Plug 'scrooloose/syntastic'             " File error checking
 Plug 'pmsorhaindo/syntastic-local-eslint.vim' " Use local ESLint
 Plug 'bling/vim-airline'                " Custom status line
 Plug 'tpope/vim-commentary'             " gcc to comment line/paragraph
 Plug 'tpope/vim-fugitive'               " Git wrapper, :Gstatus etc
 Plug 'airblade/vim-gitgutter'           " Git status in gutter
-Plug 'jreybert/vimagit'                 " Another Git wrapper/editor
+Plug 'junegunn/gv.vim'                  " Git browser
 Plug 'tpope/vim-vinegar'                " Better netrw
 Plug 'tpope/vim-dispatch'               " Async build dispatcher
 Plug 'tpope/vim-surround'               " Change surrounds, quotes etc
@@ -30,11 +30,13 @@ Plug 'jiangmiao/auto-pairs'             " Better(?) complete quotes, parends etc
 Plug 'editorconfig/editorconfig-vim'    " Editorconfig
 Plug 'jlanzarotta/bufexplorer'          " Enhanced buffer explorer
 Plug 'SirVer/ultisnips'                 " Code snippets
-" Plug 'rking/ag.vim'                     " Fast file text search (fzf replaces)
 Plug 'easymotion/vim-easymotion'        " Advanced motions navigation
-Plug 'haya14busa/incsearch.vim'         " Enhanved / searching
+Plug 'haya14busa/incsearch.vim'         " Enhanced / searching
 Plug 'jeef3/splitsizer.vim'             " Split resizing
 Plug 'junegunn/vim-emoji'               " Emoji!
+Plug 'junegunn/goyo.vim'                " Zen coding
+Plug 'junegunn/vim-pseudocl'
+Plug 'junegunn/vim-fnr'                 " Find and replace
 
 " Fast file searching with FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -73,7 +75,10 @@ Plug 'mattn/emmet-vim'                  " HTML/CSS quick completion
 Plug 'samuelsimoes/vim-jsx-utils'       " JSX helpers
 
 " Code analysis for JavaScript
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+
+" Snippets
+Plug 'ahmedelgabri/vim-ava-snippets'
 
 " Dependencies
 " Plug 'tomtom/tlib_vim'                " Not sure
