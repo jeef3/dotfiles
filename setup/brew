@@ -47,14 +47,13 @@ brew install \
 
 # Mah IDE
 # Uninstall first, because upgrade drops the override-system-vim
-brew uninstall macvim 
+brew uninstall macvim
 brew install macvim --with-override-system-vim
 brew install tmux
 brew install reattach-to-user-namespace
 
 # Environments
 brew cask install \
-  virtualbox \
   vagrant
 
 # Some more useful tools
@@ -76,9 +75,6 @@ brew install python3
 brew install make
 brew install cmake
 brew install mono
-
-# Tools
-brew install phantomjs
 
 # QuickLook
 brew cask install \
