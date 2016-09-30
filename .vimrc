@@ -107,6 +107,7 @@ set suffixes=.bak,~,.swp,.swo,.o,.d,.info,.aux,.log,.dvi,.pdf,.bin,.bbl,.blg,.br
 set title " Show the filename in the window titlebar.
 set ttyfast " Send more characters at a given time.
 set undofile " Persistent Undo.
+set updatetime=250 " For faster response to file cursor changes
 set visualbell " Use visual bell instead of audible bell (annnnnoying)
 set wildchar=<TAB> " Character for CLI expansion (TAB-completion).
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js,.DS_Store
@@ -321,14 +322,6 @@ nnoremap <leader>k :Lex<cr>
 " Plugin Configuration
 " ==============================================================================
 
-" CtrlP
-let g:ctrlp_max_files = 0
-let g:ctrlp_max_depth = 400
-let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules)$'
-let g:ctrlp_switch_buffer = 'e'
-let g:ctrlp_show_hidden = 1
-
-
 " Syntastic
 let g:syntastic_error_symbol = '⨉'
 let g:syntastic_warning_symbol = '!'
@@ -439,10 +432,15 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
 " fzf
-inoremap <expr> <c-x><c-k> fzf#complete('cat /usr/share/dict/words')
-noremap <C-p> :Files<cr>
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+" Use this if it keeps crashing
+" noremap <C-t> :Files!<cr>
+noremap <C-t> :Files<cr>
 
-" JSX Helpers
+" JSX
+let g:jsx_ext_required = 0
+
 augroup jsx_helpers
   autocmd!
   autocmd FileType javascript nnoremap <leader>ja :call JSXEncloseReturn()<CR>
@@ -456,12 +454,16 @@ augroup END
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
 
 " Emoji
-if emoji#available()
-  let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
-  let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
-  let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
-  let g:gitgutter_sign_modified_removed = emoji#for('collision')
-endif
-
 set completefunc=emoji#complete
 
+" Goyo
+augroup goyo_commands
+  nnoremap <leader>go :Goyo<CR>
+
+  autocmd! User GoyoEnter nested call <SID>goyo_enter()
+augroup END
+
+function! s:goyo_enter()
+  set nu
+  set relativenumber
+endfunction
