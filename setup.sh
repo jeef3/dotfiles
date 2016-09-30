@@ -1,22 +1,16 @@
 #!/bin/sh
-source lib/messages
+
+set -e
+
+info() { printf "  [ \033[00;34m..\033[0m ] $1\n"; }
+success() { printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"; }
+
+# Link files
+./link.sh
 
 info "Installing Git submodules"
 git submodule init
 git submodule update --recursive
-
-# Homebrew
-info "Checking Homebrew install"
-brew --version
-if [ $? -eq 0 ]; then
-  success "Homebrew already installed"
-else
-  info "Installing Homebrew"
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
-# Link files
-./link.sh
 
 # Install Vim Plug
 info "Installing/updating Vim Plug"
