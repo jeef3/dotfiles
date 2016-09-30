@@ -3,7 +3,6 @@
 .vim/swaps/*
 .vim/undo/*
 .vim/bundle/*
-!.vim/bundle/Vundle.vim
 .vim/plugged
 
 .tmux/plugins
