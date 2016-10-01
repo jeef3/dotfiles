@@ -21,5 +21,5 @@ success "Git installed"
 
 info "Cloning repository"
 mkdir -p ~/projects
-git clone git@github.com:jeef3/dotfiles.git ~/projects/dotfiles
+git clone https://github.com/jeef3/dotfiles.git ~/projects/dotfiles
 success "Dotfiles cloned"
