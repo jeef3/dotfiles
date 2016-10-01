@@ -29,3 +29,6 @@ fi
 
 info "Adding italics"
 tic xterm-256color-italic.terminfo
+
+info "Installing brew packages"
+./setups/brew
