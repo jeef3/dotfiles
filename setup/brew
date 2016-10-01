@@ -47,6 +47,7 @@ brew install \
 
 # Mah IDE
 # Uninstall first, because upgrade drops the override-system-vim
+brew cask install iterm2
 brew uninstall macvim
 brew install macvim --with-override-system-vim
 brew install tmux
