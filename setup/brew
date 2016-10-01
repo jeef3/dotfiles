@@ -1,13 +1,13 @@
 #!/bin/bash
 
+# Ask for the administrator password upfront
+sudo -v
+
 # Make sure we’re using the latest Homebrew
 brew update
 
 # Upgrade any already-installed formulae
 brew upgrade
-
-# Brew Cask
-brew install brew-cask
 
 # Identity
 brew install keybase
