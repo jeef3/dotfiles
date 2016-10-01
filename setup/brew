@@ -91,8 +91,7 @@ brew cask install \
 
 # Stuff needed for gifify script
 brew install ffmpeg
-# brew tap phinze/homebrew-cask
-brew cask install x-quartz
+brew cask install xquartz
 open /usr/local/Cellar/x-quartz/2.7.4/XQuartz.pkg
 brew install gifsicle
 brew install imagemagick
