@@ -1,29 +1,130 @@
 #!/bin/sh
 
+source ./lib/util
+
 # Ask for the administrator password upfront
 sudo -v
 
 # Make sure we’re using the latest Homebrew
-brew update
+info "Update and upgrade brew"
+brew update && brew upgrade
 
-# Upgrade any already-installed formulae
-brew upgrade
+FORMULAS=(
+  # Identity
+  keybase
 
-# Identity
-brew install keybase
+  # GNU core utilities (those that come with OS X are outdated)
+  coreutils
 
-# GNU core utilities (those that come with OS X are outdated)
-brew install coreutils
+  # GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
+  findutils
 
-# GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
-brew install findutils
+  # Shells
+  bash
+  zsh
 
-# Shells
-brew install bash
-brew install zsh
+  # Wget with iri
+  "wget --enable-iri"
 
-# wget with IRI support
-brew install wget --enable-iri
+  # Git
+  git
+  tig
+
+  # Completion
+  bash-completion
+  docker-completion
+
+  # Mah IDE
+  # Uninstall first? Upgrade drops the override-system-vim
+  "macvim --with-override-system-vim"
+  tmux
+  reattach-to-user-namespace
+
+  # Useful tools
+  trash
+  ack
+  the_silver_searcher
+  rename
+  todo-txt
+  httpie
+  fzf
+  z
+
+  # Languages
+  node
+  python
+  python3
+  
+  # Ruby stuff
+  rbenv
+  ruby-build
+
+  # Compilers
+  make
+  cmake
+  mono
+
+  # Gifiy
+  ffmpeg
+  gifsicle
+  imagemagik
+)
+
+CASKS=(
+  iterm2
+
+  vagrant
+
+  # Quicklook Add-ins
+  qlcolorcode
+  qlstephen
+  qlmarkdown
+  quicklook-json
+  qlprettypatch
+  quicklook-csv
+  betterzipql
+  qlimagesize
+  suspicious-package
+
+  # Gifify
+  xquartz
+)
+
+formula_exists() {
+  if $(brew list $1 > /dev/null); then
+    return 0
+  fi
+
+  return 1
+}
+
+cask_exists() {
+  if $(brew cask list $1 > /dev/null); then
+    return 0
+  fi
+
+  return 1
+}
+
+for index in ${!FORMULAS[*]}
+do
+  if ! formula_exists ${FORMULAS[$index]}; then
+    info "Installing ${FORMULAS[$index]}"
+    brew install ${FORMULAS[$index]}
+  else
+    success "${FORMULAS[$index]} already installed, skipping"
+  fi
+done
+
+for index in ${!CASKS[*]}
+do
+  if ! cask_exists ${CASKS[$index]}; then
+    info "Installing cask ${CASKS[$index]}"
+    brew cask isntall ${CASKS[$index]}
+  else
+    success "${CASKS[$index]} already installed, skipping"
+  fi
+done
 
 # Taps
 brew tap homebrew/dupes
@@ -32,69 +133,8 @@ brew tap homebrew/completions
 # more recent versions of some OS X tools
 brew install homebrew/dupes/grep
 
-# rbenv
-brew install rbenv ruby-build
-
-# Git
-brew install git
-brew install tig
-
-# Completion
-brew install \
-  bash-completion \
-  docker-completion
-
-
-# Mah IDE
-# Uninstall first, because upgrade drops the override-system-vim
-brew cask install iterm2
-brew uninstall macvim
-brew install macvim --with-override-system-vim
-brew install tmux
-brew install reattach-to-user-namespace
-
-# Environments
-brew cask install \
-  vagrant
-
-# Some more useful tools
-brew install trash
-brew install ack
-brew install the_silver_searcher
-brew install rename
-brew install todo-txt
-brew install httpie
-brew install z
-brew install fzf
-
-# Languages
-brew install node
-brew install python
-brew install python3
-
-# Compilers
-brew install make
-brew install cmake
-brew install mono
-
-# QuickLook
-brew cask install \
-  qlcolorcode \
-  qlstephen \
-  qlmarkdown \
-  quicklook-json \
-  qlprettypatch \
-  quicklook-csv \
-  betterzipql \
-  qlimagesize \
-  suspicious-package
-
-# Stuff needed for gifify script
-brew install ffmpeg
-brew cask install xquartz
-open /usr/local/Cellar/x-quartz/2.7.4/XQuartz.pkg
-brew install gifsicle
-brew install imagemagick
+# TODO: Needed?
+# open /usr/local/Cellar/x-quartz/2.7.4/XQuartz.pkg
 
 brew linkapps
 
