@@ -19,7 +19,11 @@ info "Installing Git"
 brew install git
 success "Git installed"
 
-info "Cloning repository"
+info "Cloning dotfiles repository"
 mkdir -p ~/projects
 git clone https://github.com/jeef3/dotfiles.git ~/projects/dotfiles
 success "Dotfiles cloned"
+
+echo "cd ~/projects/dofiles"
+echo ""
+echo "./setup.sh"
