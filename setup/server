@@ -1,0 +1,11 @@
+#!/bin/bash
+
+brew cask install \
+  nginx \
+  sabnzdb \
+  sonarr \
+  couchpotato
+
+# TODO: Copy configs for nginx
+#
+# TODO: Copy set-up for schedulers (from backups?)
