@@ -2,6 +2,8 @@
 
 ## Install
 
+First, make sure full Xcode is installed.
+
 Run the initial Bootstrap:
 
 ```
