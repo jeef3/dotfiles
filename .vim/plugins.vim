@@ -2,50 +2,45 @@ filetype off
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'gmarik/Vundle.vim'
-
-" Integration
+" Shell Integration
 Plug 'benmills/vimux'                   " Run shell commands in Tmux pane
 Plug 'wincent/terminus'                 " Better terminal integration, cursor shapes, colors
+Plug 'tpope/vim-obsession'              " Automatically save session state (used with Tmux)
 
 " Misc Vim stuff
-Plug 'vim-scripts/BufOnly.vim'          " Close all but current buffer
+Plug 'junegunn/vim-emoji'               " Emoji!
 
-Plug 'tpope/vim-sleuth'                 " Smarter shiftwidth and expandtab
+" Customization
+Plug 'bling/vim-airline'                " Custom status and tab line
+Plug 'junegunn/goyo.vim'                " Zen coding
+Plug 'tpope/vim-vinegar'                " Better netrw
+Plug 'jlanzarotta/bufexplorer'          " Enhanced buffer explorer <leader>be
+Plug 'easymotion/vim-easymotion'        " Advanced motions navigation <leader>f
+Plug 'haya14busa/incsearch.vim'         " Enhanced / searching
+Plug 'jeef3/splitsizer.vim'             " Split resizing <c-a>, <c-s>
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'                 " Fast file searching <c-t>
 
-" IDE
+" ===== My IDE =====
+
+" Editing
+Plug 'editorconfig/editorconfig-vim'    " Editorconfig
+Plug 'tpope/vim-sleuth'                 " Set shiftwidth and expandtab based on current file
+Plug 'tpope/vim-commentary'             " gcc to comment line/paragraph
+Plug 'tpope/vim-surround'               " Change surrounds, quotes etc
+Plug 'jiangmiao/auto-pairs'             " complete quotes, parends etc
+Plug 'SirVer/ultisnips'                 " Code snippets
+
+" Errors and lints
 Plug 'scrooloose/syntastic'             " File error checking
 Plug 'pmsorhaindo/syntastic-local-eslint.vim' " Use local ESLint
-Plug 'bling/vim-airline'                " Custom status line
-Plug 'tpope/vim-commentary'             " gcc to comment line/paragraph
-Plug 'tpope/vim-fugitive'               " Git wrapper, :Gstatus etc
+
+" Git
 Plug 'airblade/vim-gitgutter'           " Git status in gutter
+Plug 'tpope/vim-fugitive'               " Git wrapper, :Gstatus etc
 Plug 'junegunn/gv.vim'                  " Git browser
-Plug 'tpope/vim-vinegar'                " Better netrw
-Plug 'tpope/vim-dispatch'               " Async build dispatcher
-Plug 'tpope/vim-surround'               " Change surrounds, quotes etc
-Plug 'tpope/vim-obsession'              " Automatically save session state (used with Tmux)
-Plug 'nosami/Omnisharp'                 " Code completion for c#
-Plug 'jiangmiao/auto-pairs'             " Better(?) complete quotes, parends etc
-Plug 'editorconfig/editorconfig-vim'    " Editorconfig
-Plug 'jlanzarotta/bufexplorer'          " Enhanced buffer explorer
-Plug 'SirVer/ultisnips'                 " Code snippets
-Plug 'easymotion/vim-easymotion'        " Advanced motions navigation
-Plug 'haya14busa/incsearch.vim'         " Enhanced / searching
-Plug 'jeef3/splitsizer.vim'             " Split resizing
-Plug 'junegunn/vim-emoji'               " Emoji!
-Plug 'junegunn/goyo.vim'                " Zen coding
-Plug 'junegunn/vim-pseudocl'
-Plug 'junegunn/vim-fnr'                 " Find and replace
 
-" Fast file searching with FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-" Code-completion engine
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
-
-" Languages and syntax
+" Language Syntax
 Plug 'othree/html5.vim'                 " HTML5
 " Plug 'gabrielelana/vim-markdown'        " Markdown
 Plug 'plasticboy/vim-markdown'          " Markdown
@@ -57,7 +52,6 @@ Plug 'mxw/vim-jsx'                      " JSX
 Plug 'elzr/vim-json'                    " JSON
 Plug 'OrangeT/vim-csharp'               " c#
 Plug 'vim-ruby/vim-ruby'                " Ruby
-Plug 'othree/csscomplete.vim'           " CSS completion
 Plug 'hail2u/vim-css3-syntax'           " CSS3
 Plug 'wavded/vim-stylus'                " Stylus (CSS)
 Plug 'groenewege/vim-less'              " Less (CSS)
@@ -65,24 +59,23 @@ Plug 'vim-scripts/applescript.vim'      " AppleScript
 Plug 'PProvost/vim-ps1'                 " PowerShell
 Plug 'tmux-plugins/vim-tmux'            " Tmux config
 Plug 'freitass/todo.txt-vim'            " todo.txt
-Plug 'ap/vim-css-color'                 " Color preview in CSS
 
-" Language helpers
+" Language Completion
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+Plug 'nosami/Omnisharp'                 " c#
+Plug 'othree/csscomplete.vim'           " CSS
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " JavaScript
+
+" Language Tools and Helpers
 Plug 'moll/vim-node'                    " Node
 Plug 'Quramy/tsuquyomi'                 " TypeScript tools
 Plug 'mattn/emmet-vim'                  " HTML/CSS quick completion
-" Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'samuelsimoes/vim-jsx-utils'       " JSX helpers
-
-" Code analysis for JavaScript
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-
-" Snippets
-Plug 'ahmedelgabri/vim-ava-snippets'
+Plug 'ap/vim-css-color'                 " Color preview in CSS
 
 " Dependencies
-" Plug 'tomtom/tlib_vim'                " Not sure
-" Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+" Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+
+" Plug 'tpope/vim-dispatch'               " Async build dispatcher
 
 call plug#end()
