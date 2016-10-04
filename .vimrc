@@ -376,6 +376,11 @@ endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
 let g:ycm_semantic_triggers['css'] = ['  ', ': ']
 
+augroup tcm_commands
+  autocmd!
+  autocmd FileType javascript noremap gd :YcmCompleter GoToDefinition<cr>
+augroup END
+
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<Tab>"
@@ -388,12 +393,6 @@ let g:ag_working_path_mode="r"
 let g:bufExplorerShowDirectories=0
 let g:bufExplorerShowRelativePath=1
 let g:bufExplorerSplitRight=0
-
-" Tern
-augroup tern_commands
-  autocmd!
-  autocmd FileType javascript noremap gd :TernDef<cr>
-augroup END
 
 " Vimux
 noremap <Leader>vp :VimuxPromptCommand<CR>
