@@ -67,7 +67,7 @@ FORMULAS=(
   # Gifiy
   ffmpeg
   gifsicle
-  imagemagik
+  imagemagick
 )
 
 CASKS=(
