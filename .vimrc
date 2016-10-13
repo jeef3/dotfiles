@@ -365,6 +365,11 @@ com! FormatHTML %!tidy -iq -xml -wrap 0
 " Airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#close_symbol = '𝗫'
+let g:airline#extensions#tabline#show_tab_type = 0
 
 " YouCompleteMe
 let g:ycm_key_list_select_completion=['<C-j>', '<Down>']
