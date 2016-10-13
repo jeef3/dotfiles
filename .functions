@@ -25,3 +25,7 @@ function gifify() {
 function movToMp4() {
   ffmpeg -i "$1" -vcodec copy -acodec copy "$2"
 }
+
+function port() {
+  ps -o pid,command -p $(lsof -i:$1 -t)
+}
