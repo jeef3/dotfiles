@@ -75,7 +75,6 @@ Plug 'ap/vim-css-color'                 " Color preview in CSS
 
 " Dependencies
 " Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-
-" Plug 'tpope/vim-dispatch'               " Async build dispatcher
+Plug 'tpope/vim-dispatch'               " Omnisharp
 
 call plug#end()
