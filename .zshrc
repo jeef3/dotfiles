@@ -61,7 +61,7 @@ collapsed_wd() {
 
 local user_host=""
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-  user_host="${USER}@${HOSTNAME} "
+  user_host="${USER}@%m "
 fi
 local current_dir='%F{11}%B$(collapsed_wd)%{$reset_color%}'
 local git_line='$(git_info)'
