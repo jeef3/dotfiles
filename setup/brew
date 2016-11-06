@@ -54,7 +54,7 @@ FORMULAS=(
   node
   python
   python3
-  
+
   # Ruby stuff
   rbenv
   ruby-build
