@@ -11,7 +11,6 @@ export PATH=~/bin:/usr/local/sbin:/usr/local/bin:$PATH
 
 . `brew --prefix`/etc/profile.d/z.sh
 
-# Load ~/.extra, ~/.bash_prompt, ~/.exports, ~/.aliases and ~/.functions
 # ~/.extra can be used for settings you don’t want to commit
 for file in ~/.{extra,exports,aliases,functions}; do
     [ -r "$file" ] && source "$file"
@@ -25,6 +24,7 @@ unset file
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Prompts
+
 git_branch_name() {
   branch=$(command git symbolic-ref HEAD --short 2> /dev/null) || \
   branch=$(command git branch --no-color | sed -n '/\* /s///p' 2> /dev/null) || return 0
