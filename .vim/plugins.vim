@@ -59,6 +59,7 @@ Plug 'vim-scripts/applescript.vim'      " AppleScript
 Plug 'PProvost/vim-ps1'                 " PowerShell
 Plug 'tmux-plugins/vim-tmux'            " Tmux config
 Plug 'freitass/todo.txt-vim'            " todo.txt
+Plug 'ajford/vimkivy'                   " Kivy (python)
 
 " Language Completion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
