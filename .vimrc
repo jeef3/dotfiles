@@ -316,14 +316,12 @@ augroup END
 " set statusline+=\ 
 " set statusline+=%2*win:%-3.3{WindowNumber()}%*     " window number
 
-nnoremap <leader>k :Lex<cr>
-
 " ==============================================================================
 " Plugin Configuration
 " ==============================================================================
 
 " Syntastic
-let g:syntastic_error_symbol = '⨉'
+let g:syntastic_error_symbol = 'x'
 let g:syntastic_warning_symbol = '!'
 
 set statusline+=%#warningmsg#
@@ -353,8 +351,8 @@ augroup omnisharp_commands
   autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
   autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
   autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>
+  autocmd FileType cs nnoremap <leader>tp :OmniSharpAddToProject<cr>
 augroup END
-nnoremap <leader>tp :OmniSharpAddToProject<cr>
 
 " JSON Formatting
 com! FormatJSON %!python -m json.tool
@@ -442,6 +440,8 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 " Use this if it keeps crashing
 " noremap <C-t> :Files!<cr>
 noremap <C-t> :Files<cr>
+noremap <C-p> :Ag<cr>
+noremap <leader>t :Buffers<cr>
 
 " JSX
 let g:jsx_ext_required = 0
