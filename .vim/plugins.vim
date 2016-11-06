@@ -74,6 +74,10 @@ Plug 'mattn/emmet-vim'                  " HTML/CSS quick completion
 Plug 'samuelsimoes/vim-jsx-utils'       " JSX helpers
 Plug 'ap/vim-css-color'                 " Color preview in CSS
 
+" Snippets
+" Plug 'epilande/vim-es2015-snippets'     " ES2015
+" Plug 'epilande/vim-react-snippets'      " React
+
 " Dependencies
 " Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'tpope/vim-dispatch'               " Omnisharp

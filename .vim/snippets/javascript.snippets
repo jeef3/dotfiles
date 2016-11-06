@@ -82,16 +82,8 @@ snippet reducer
 	}
 snippet log
 	console.log(${0});
-snippet rlog
-	(console.log(${0})) |
-snippet reduce
-	reduce((p, ${1}) => { ${2} })
 snippet bind
 	this.${1:handle} = this.$1.bind(this);
-snippet import
-	import ${1} from '${2}';
-snippet props
-	const { ${1} } = this.props;
 snippet story
 	/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 	import React from 'react';
