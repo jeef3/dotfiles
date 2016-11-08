@@ -5,6 +5,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/projects/dotfiles/lib/zsh-git-prompt/zshrc.sh
 
 # User configuration
 export PATH=~/bin:/usr/local/sbin:/usr/local/bin:$PATH
@@ -25,22 +26,55 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Prompts
 
-git_branch_name() {
-  branch=$(command git symbolic-ref HEAD --short 2> /dev/null) || \
-  branch=$(command git branch --no-color | sed -n '/\* /s///p' 2> /dev/null) || return 0
-
-  echo $branch
-}
 
 git_status() {
+  precmd_update_git_vars
 
+  local PREFIX="%F{13}\uE0A0%B%{$reset_color%} "
+  local SEPARATOR="%F{8}•%{${reset_color}%}"
+
+  if [ -n "$__CURRENT_GIT_STATUS" ]; then
+    STATUS="$PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}"
+
+    if [ "$GIT_BEHIND" -ne "0" ]; then
+      STATUS="$STATUS $SEPARATOR $ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND%{${reset_color}%}"
+    fi
+    if [ "$GIT_AHEAD" -ne "0" ]; then
+      STATUS="$STATUS $SEPARATOR $ZSH_THEME_GIT_PROMPT_AHEAD$GIT_AHEAD%{${reset_color}%}"
+    fi
+
+    STATUS="$STATUS $SEPARATOR"
+
+    ZSH_THEME_GIT_PROMPT_STAGED="%F{3}☝️ "
+    # ZSH_THEME_GIT_PROMPT_CONFLICTS=""
+    ZSH_THEME_GIT_PROMPT_CHANGED="%F{2}✏️ "
+    ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{6}…"
+
+    if [ "$GIT_STAGED" -ne "0" ]; then
+      STATUS="$STATUS $ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED%{${reset_color}%}"
+    fi
+    if [ "$GIT_CONFLICTS" -ne "0" ]; then
+      STATUS="$STATUS $ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS%{${reset_color}%}"
+    fi
+    if [ "$GIT_CHANGED" -ne "0" ]; then
+      STATUS="$STATUS $ZSH_THEME_GIT_PROMPT_CHANGED$GIT_CHANGED%{${reset_color}%}"
+    fi
+    if [ "$GIT_UNTRACKED" -ne "0" ]; then
+      STATUS="$STATUS $ZSH_THEME_GIT_PROMPT_UNTRACKED%{${reset_color}%}"
+    fi
+    if [ "$GIT_CHANGED" -eq "0" ] && [ "$GIT_CONFLICTS" -eq "0" ] && [ "$GIT_STAGED" -eq "0" ] && [ "$GIT_UNTRACKED" -eq "0" ]; then
+      STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
+    fi
+
+    STATUS="$STATUS%{${reset_color}%}"
+    echo "$STATUS"
+  fi
 }
 
 git_info() {
   git rev-parse --is-inside-work-tree &> /dev/null || return
 
-  local branch="%F{13}\uE0A0 %B$(git_branch_name)%{$reset_color%}"
-  echo "%F{8}%Bon%{$reset_color%} $branch"
+  echo "%F{8}%Bon%{$reset_color%} $branch $gstatus"
 }
 
 git_origin() {
@@ -64,16 +98,15 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   user_host="${USER}@%m "
 fi
 local current_dir='%F{11}%B$(collapsed_wd)%{$reset_color%}'
-local git_line='$(git_info)'
+local git_line='$(git_status)'
 local exit_status="%(?.%F{8}.%F{9})»%{$reset_color%}"
 
-PROMPT=" ${user_host}${current_dir} ${git_line}
+PROMPT="${user_host}${current_dir} ${git_line}
 ${exit_status} "
 
+ITALIC=$'%{\x1b[3m%}'
 local repo='$(git_origin)'
-RPROMPT="%F{8}%B${repo}%{$reset_color%}"
-
-alias t='todo.sh'
+RPROMPT="${ITALIC}%F{8}${repo}%{$reset_color%}"
 
 export NVM_DIR="/Users/jeffknaggs/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
