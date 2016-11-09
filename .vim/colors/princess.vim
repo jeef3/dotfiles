@@ -100,8 +100,8 @@ hi WarningMsg      guifg=#FFFFFF guibg=#333333 gui=bold
 hi WildMenu        guifg=#66D9EF guibg=#000000
 
 hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
-hi Comment         guifg=#ff79c6               gui=italic
-hi CursorLine                    guibg=#291C2D
+hi Comment         guifg=#785E6D               gui=italic
+hi CursorLine                    guibg=#2F2034
 hi CursorColumn                  guibg=#291C2D
 hi LineNr          guifg=#BCBCBC guibg=#232526
 hi NonText         guifg=#BCBCBC guibg=#232526
