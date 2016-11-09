@@ -6,6 +6,9 @@ filetype plugin indent on
 " Colours and syntax highlighting options
 syntax on
 set t_Co=256
+set t_8f=[38;2;%lu;%lu;%lum
+set t_8b=[48;2;%lu;%lu;%lum
+set termguicolors
 set background=dark
 colorscheme princess
 let g:molokai_original=1

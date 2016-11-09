@@ -101,8 +101,8 @@ hi WildMenu        guifg=#66D9EF guibg=#000000
 
 hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
 hi Comment         guifg=#ff79c6               gui=italic
-hi CursorLine                    guibg=#790f5b
-hi CursorColumn                  guibg=#293739
+hi CursorLine                    guibg=#291C2D
+hi CursorColumn                  guibg=#291C2D
 hi LineNr          guifg=#BCBCBC guibg=#232526
 hi NonText         guifg=#BCBCBC guibg=#232526
 
