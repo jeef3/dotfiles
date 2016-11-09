@@ -4,3 +4,5 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 alias t='todo.sh'
 
 alias so='source'
+
+alias ts="tig status"
