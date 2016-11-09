@@ -16,6 +16,7 @@ symlinks=(
   .editorconfig
   .exports
   .functions
+  .tigrc
   .tmux.conf
   .tmux
   .fzf.zsh
