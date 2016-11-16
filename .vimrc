@@ -441,8 +441,6 @@ map g# <Plug>(incsearch-nohl-g#)
 " fzf
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
-" Use this if it keeps crashing
-" noremap <C-t> :Files!<cr>
 noremap <C-t> :Files<cr>
 noremap <C-p> :Ag<cr>
 noremap <leader>t :Buffers<cr>
@@ -460,13 +458,17 @@ augroup jsx_helpers
 augroup END
 
 " CSS completion
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
+augroup css
+  autocmd!
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
+augroup END
 
 " Emoji
 set completefunc=emoji#complete
 
 " Goyo
 augroup goyo_commands
+  autocmd!
   nnoremap <leader>go :Goyo<CR>
 
   autocmd! User GoyoEnter nested call <SID>goyo_enter()
