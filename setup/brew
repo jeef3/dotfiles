@@ -23,6 +23,9 @@ FORMULAS=(
   bash
   zsh
 
+  # Shell highlighting
+  zsh-syntax-highlighting
+
   # Wget with iri
   "wget --enable-iri"
 

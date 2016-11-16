@@ -118,3 +118,4 @@ ln -sf "$(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight" ~
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
