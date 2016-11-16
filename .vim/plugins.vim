@@ -60,6 +60,7 @@ Plug 'PProvost/vim-ps1'                 " PowerShell
 Plug 'tmux-plugins/vim-tmux'            " Tmux config
 Plug 'freitass/todo.txt-vim'            " todo.txt
 Plug 'ajford/vimkivy'                   " Kivy (python)
+Plug 'jplaut/vim-arduino-ino'           " Arduino
 
 " Language Completion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
