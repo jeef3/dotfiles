@@ -373,6 +373,7 @@ let g:airline#extensions#tabline#close_symbol = '𝗫'
 let g:airline#extensions#tabline#show_tab_type = 0
 
 " YouCompleteMe
+set completeopt-=preview
 let g:ycm_key_list_select_completion=['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-k>', '<Up>']
 let g:ycm_autoclose_preview_window_after_completion=1
