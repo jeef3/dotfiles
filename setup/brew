@@ -120,6 +120,11 @@ cask_exists() {
   return 1
 }
 
+# Taps
+brew tap homebrew/dupes
+brew tap homebrew/completions
+brew tap osx-cross/avr
+
 for index in ${!FORMULAS[*]}
 do
   if ! formula_exists ${FORMULAS[$index]}; then
@@ -139,10 +144,6 @@ do
     success "${CASKS[$index]} already installed, skipping"
   fi
 done
-
-# Taps
-brew tap homebrew/dupes
-brew tap homebrew/completions
 
 # more recent versions of some OS X tools
 brew install homebrew/dupes/grep
