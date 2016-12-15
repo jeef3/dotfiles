@@ -78,6 +78,10 @@ FORMULAS=(
   sdl2_ttf
   sdl2_mixer
   gstreamer
+
+  # Arduino
+  avr-libc
+  "avrdude --with-usb"
 )
 
 CASKS=(

@@ -60,7 +60,7 @@ Plug 'PProvost/vim-ps1'                 " PowerShell
 Plug 'tmux-plugins/vim-tmux'            " Tmux config
 Plug 'freitass/todo.txt-vim'            " todo.txt
 Plug 'ajford/vimkivy'                   " Kivy (python)
-Plug 'jplaut/vim-arduino-ino'           " Arduino
+Plug 'sudar/vim-arduino-syntax'         " Arduino
 
 " Language Completion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
@@ -74,6 +74,7 @@ Plug 'Quramy/tsuquyomi'                 " TypeScript tools
 Plug 'mattn/emmet-vim'                  " HTML/CSS quick completion
 Plug 'samuelsimoes/vim-jsx-utils'       " JSX helpers
 Plug 'ap/vim-css-color'                 " Color preview in CSS
+Plug 'jplaut/vim-arduino-ino'           " Arduino compile/build
 
 " Snippets
 " Plug 'epilande/vim-es2015-snippets'     " ES2015

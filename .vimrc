@@ -478,3 +478,7 @@ function! s:goyo_enter()
   set nu
   set relativenumber
 endfunction
+
+" Arduino
+let g:vim_arduino_ino_cmd = 'ano'
+let g:vim_arduino_auto_open_serial = 1
