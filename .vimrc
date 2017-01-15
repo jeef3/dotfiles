@@ -334,6 +334,9 @@ set statusline+=%*
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_typescript_checkers = []
 let g:syntastic_json_checkers = ['jsonlint']
+let g:syntastic_arduino_checkers = ['avrgcc']
+let g:syntastic_c_checkers = ['gcc']
+let g:syntastic_cpp_checkers = ['gcc']
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 3
@@ -377,15 +380,18 @@ set completeopt-=preview
 let g:ycm_key_list_select_completion=['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-k>', '<Up>']
 let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
 if !exists("g:ycm_semantic_triggers")
    let g:ycm_semantic_triggers = {}
 endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
 let g:ycm_semantic_triggers['css'] = ['  ', ': ']
 
-augroup tcm_commands
+augroup ycm_commands
   autocmd!
   autocmd FileType javascript noremap gd :YcmCompleter GoToDefinition<cr>
+  autocmd FileType cpp noremap gd :YcmCompleter GoToDefinition<cr>
 augroup END
 
 " UltiSnips

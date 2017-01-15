@@ -63,7 +63,7 @@ Plug 'ajford/vimkivy'                   " Kivy (python)
 Plug 'sudar/vim-arduino-syntax'         " Arduino
 
 " Language Completion
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --tern-completer' }
 Plug 'nosami/Omnisharp'                 " c#
 Plug 'othree/csscomplete.vim'           " CSS
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " JavaScript

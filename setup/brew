@@ -81,7 +81,9 @@ FORMULAS=(
 
   # Arduino
   avr-libc
-  "avrdude --with-usb"
+  avrdude
+  arduino-mk
+  platformio
 )
 
 CASKS=(
@@ -123,7 +125,9 @@ cask_exists() {
 # Taps
 brew tap homebrew/dupes
 brew tap homebrew/completions
+# Arduino
 brew tap osx-cross/avr
+brew tap sudar/arduino-mk
 
 for index in ${!FORMULAS[*]}
 do
