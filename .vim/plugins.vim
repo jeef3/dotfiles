@@ -20,6 +20,7 @@ Plug 'haya14busa/incsearch.vim'         " Enhanced / searching
 Plug 'jeef3/splitsizer.vim'             " Split resizing <c-a>, <c-s>
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                 " Fast file searching <c-t>
+Plug 'brooth/far.vim'                   " Find And Replace
 
 " ===== My IDE =====
 

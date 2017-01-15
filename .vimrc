@@ -115,7 +115,7 @@ set visualbell " Use visual bell instead of audible bell (annnnnoying)
 set wildchar=<TAB> " Character for CLI expansion (TAB-completion).
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js,.DS_Store
 set wildmenu " Hitting TAB in command mode will show possible completions above command line.
-set wildmode=list:longest " Complete only until point of ambiguity.
+set wildmode=longest:full,full " Complete only until point of ambiguity.
 set winminheight=0 "Allow splits to be reduced to a single line.
 set wrapscan " Searches wrap around end of file
 
