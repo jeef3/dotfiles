@@ -52,6 +52,7 @@ FORMULAS=(
   httpie
   fzf
   z
+  diff-so-fancy
 
   # Languages
   node
