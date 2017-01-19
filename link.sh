@@ -14,6 +14,7 @@ symlinks=(
   .vimrc
   .zshrc
   .editorconfig
+  .aliases
   .exports
   .functions
   .tigrc
