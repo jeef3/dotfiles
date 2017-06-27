@@ -116,6 +116,7 @@ ln -sf "$(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight" ~
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
