@@ -11,16 +11,20 @@ Plug 'tpope/vim-obsession'              " Automatically save session state (used
 Plug 'junegunn/vim-emoji'               " Emoji!
 
 " Customization
-Plug 'bling/vim-airline'                " Custom status and tab line
+" Plug 'bling/vim-airline'                " Custom status and tab line
+" TODO: Try in Markdown/text
 Plug 'junegunn/goyo.vim'                " Zen coding
+Plug 'junegunn/limelight.vim'           " Color focus with Goyo
 Plug 'tpope/vim-vinegar'                " Better netrw
 Plug 'jlanzarotta/bufexplorer'          " Enhanced buffer explorer <leader>be
-Plug 'easymotion/vim-easymotion'        " Advanced motions navigation <leader>f
 Plug 'haya14busa/incsearch.vim'         " Enhanced / searching
+Plug 'haya14busa/incsearch-fuzzy.vim'   " Fuzzy search for incsearch
+Plug 'justinmk/vim-sneak'               " Minimal EasyMotion
 Plug 'jeef3/splitsizer.vim'             " Split resizing <c-a>, <c-s>
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                 " Fast file searching <c-t>
 Plug 'brooth/far.vim'                   " Find And Replace
+Plug 'tpope/vim-repeat'                 " Get more use out of .
 
 " ===== My IDE =====
 
@@ -31,10 +35,15 @@ Plug 'tpope/vim-commentary'             " gcc to comment line/paragraph
 Plug 'tpope/vim-surround'               " Change surrounds, quotes etc
 Plug 'jiangmiao/auto-pairs'             " complete quotes, parends etc
 Plug 'SirVer/ultisnips'                 " Code snippets
+Plug 'rstacruz/vim-xtract'              " Extract selected into a new file
+
+Plug 'metakirby5/codi.vim'              " REPL
 
 " Errors and lints
-Plug 'scrooloose/syntastic'             " File error checking
-Plug 'pmsorhaindo/syntastic-local-eslint.vim' " Use local ESLint
+" Plug 'scrooloose/syntastic'             " File error checking
+" Plug 'pmsorhaindo/syntastic-local-eslint.vim' " Use local ESLint
+Plug 'w0rp/ale'                         " File error checking
+Plug 'ruanyl/coverage.vim'              " Coverage report gutter
 
 " Git
 Plug 'airblade/vim-gitgutter'           " Git status in gutter
@@ -47,8 +56,9 @@ Plug 'othree/html5.vim'                 " HTML5
 Plug 'plasticboy/vim-markdown'          " Markdown
 Plug 'jeroenbourgois/vim-actionscript'  " ActionScript
 Plug 'pangloss/vim-javascript'          " JavaScript
-Plug 'kchmck/vim-coffee-script'         " CoffeeScript
+" Plug 'Quramy/vim-js-pretty-template'    " JavaScript template strings
 Plug 'leafgarland/typescript-vim'       " TypeScript
+Plug 'kchmck/vim-coffee-script'         " CoffeeScript
 Plug 'mxw/vim-jsx'                      " JSX
 Plug 'elzr/vim-json'                    " JSON
 Plug 'OrangeT/vim-csharp'               " c#
@@ -76,13 +86,14 @@ Plug 'mattn/emmet-vim'                  " HTML/CSS quick completion
 Plug 'samuelsimoes/vim-jsx-utils'       " JSX helpers
 Plug 'ap/vim-css-color'                 " Color preview in CSS
 Plug 'jplaut/vim-arduino-ino'           " Arduino compile/build
+Plug 'firegoby/html_entities_helper.vim' " HTML entity conversion
 
 " Snippets
 " Plug 'epilande/vim-es2015-snippets'     " ES2015
 " Plug 'epilande/vim-react-snippets'      " React
 
 " Dependencies
-" Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'Shougo/vimproc.vim', { 'do': 'make' } " TypeScript
 Plug 'tpope/vim-dispatch'               " Omnisharp
 
 call plug#end()

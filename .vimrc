@@ -68,7 +68,7 @@ set esckeys " Allow cursor keys in insert mode.
 set formatoptions=
 set formatoptions+=c " Format comments
 set formatoptions+=r " Continue comments by default
-set formatoptions+=o " Make comment when using o or O from comment line
+" set formatoptions+=o " Make comment when using o or O from comment line
 set formatoptions+=q " Format comments with gq
 set formatoptions+=n " Recognize numbered lists
 set formatoptions+=2 " Use indent from 2nd line of a paragraph
@@ -132,14 +132,13 @@ augroup auto_read
   autocmd FocusGained,BufEnter * :silent! !
 augroup END
 
-" Better split switching (Ctrl-j, Ctrl-k, Ctrl-h, Ctrl-l)
+" Easier split switching (Ctrl-j, Ctrl-k, Ctrl-h, Ctrl-l)
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-H> <C-W>h
 noremap <C-L> <C-W>l
 
 " Quick alternate buffer switching (,,)
-" FIXME: Not working, conflicting with easymotion
 noremap <leader>, <C-^>
 
 " Toggle show tabs and trailing spaces (,c)
@@ -257,6 +256,7 @@ nnoremap <silent> N :call <SID>nice_next('N')<cr>
 function! WindowNumber()
   return tabpagewinnr(tabpagenr())
 endfunction
+
 function! TrailingSpaceWarning()
   if !exists("b:statline_trailing_space_warning")
     let lineno = search('\s$', 'nw')
@@ -271,10 +271,15 @@ endfunction
 
 function! ReadOnlyIcon()
   if &readonly
-    return "🔒"
+    return " "
   else
     return ""
   endif
+endfunction
+
+function! LightLineBufSettings()
+    let et = &et ==# 1 ? "•" : "➜"
+    return ('│ts│'. &tabstop . '│sw│'. &shiftwidth . '│et│' . et . '│')
 endfunction
 
 " recalculate when idle, and after saving
@@ -283,70 +288,80 @@ augroup statline_trail
   autocmd cursorhold,bufwritepost * unlet! b:statline_trailing_space_warning
 augroup END
 
-" hi clear StatusLine
-" hi clear StatusLineNC
-" hi StatusLine   term=bold cterm=bold ctermfg=White ctermbg=235
-" hi StatusLineNC term=bold cterm=bold ctermfg=White ctermbg=235
-
-" " highlight values in terminal vim, colorscheme solarized
-" hi User1                      ctermfg=4          guifg=#40ffff            " Identifier
-" hi User2                      ctermfg=2 gui=bold guifg=#ffff60            " Statement
-" hi User3 term=bold cterm=bold ctermfg=1          guifg=White   guibg=Red  " Error
-" hi User4                      ctermfg=1          guifg=Orange             " Special
-" hi User5                      ctermfg=10         guifg=#80a0ff            " Comment
-" hi User6 term=bold cterm=bold ctermfg=1          guifg=Red                " WarningMsg
-
 " set statusline=
-" set statusline+=\ %{ReadOnlyIcon()}
-" set statusline+=\ 
-" set statusline+=%5*%{expand('%:h')}/               " relative path to file's directory
-" set statusline+=%1*%t%*                            " file name
-" set statusline+=\ 
-" set statusline+=\ 
-" set statusline+=%<                                 " truncate here if needed
-" set statusline+=%5*%L\ lines%*                     " number of lines
-" set statusline+=\ 
-" set statusline+=\ 
-" set statusline+=%3*%{TrailingSpaceWarning()}%*     " trailing whitespace
+" set statusline+=%< " Where to truncate line
+" set statusline+=\ %f " Path to the file in the buffer, as typed or relative to current directory
+" set statusline+=%{&modified?'+':''}
+" set statusline+=%{ReadOnlyIcon()}
+" set statusline+=\ %1*%= " Separation point between left and right aligned items.
+" set statusline+=\ \ %{''!=#&filetype?&filetype:'none'}
+" set statusline+=%(\ %{(&bomb\|\|'^$\|utf-8'!~#&fileencoding?'\ '.&fileencoding.(&bomb?'-bom':''):'')
+"   \.('unix'!=#&fileformat?'\ '.&fileformat:'')}%)
+" " set statusline+=%(\ \ %{&modifiable?(&expandtab?'et\ ':'noet\ ').&shiftwidth:''}%)
+" " set statusline+=%(\ \ %{&modifiable?SleuthIndicator():''}%)
+" set statusline+=%{LightLineBufSettings()}
+" set statusline+=\ %*\ %2v " Virtual column number.
+" set statusline+=\ %3p%% " Percentage through file in lines as in |CTRL-G|
 
-" set statusline+=%=                                 " switch to RHS
+" Move selected block up/down
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
-" set statusline+=%5*col:%-3.c%*                      " column
-" set statusline+=\ 
-" set statusline+=\ 
-" set statusline+=%2*buf:%-3n%*                      " buffer number
-" set statusline+=\ 
-" set statusline+=\ 
-" set statusline+=%2*win:%-3.3{WindowNumber()}%*     " window number
+" Ranger
+noremap <leader>r :!ranger<cr>
+
+" When changing, don't put in clipboard
+nnoremap c "_c
+vnoremap c "_c
+
 
 " ==============================================================================
 " Plugin Configuration
 " ==============================================================================
 
 " Syntastic
-let g:syntastic_error_symbol = 'x'
-let g:syntastic_warning_symbol = '!'
+" let g:syntastic_error_symbol = 'x'
+" let g:syntastic_warning_symbol = '!'
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_typescript_checkers = []
-let g:syntastic_json_checkers = ['jsonlint']
-let g:syntastic_arduino_checkers = ['avrgcc']
-let g:syntastic_c_checkers = ['gcc']
-let g:syntastic_cpp_checkers = ['gcc']
+" let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_typescript_checkers = []
+" let g:syntastic_json_checkers = ['jsonlint']
+" let g:syntastic_arduino_checkers = ['avrgcc']
+" let g:syntastic_c_checkers = ['gcc']
+" let g:syntastic_cpp_checkers = ['gcc']
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 3
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_loc_list_height = 3
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
-if &diff
-  let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-endif
+" if &diff
+"   let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+" endif
+
+" ALE
+let g:ale_sign_error = '⨉ '
+let g:ale_sign_warning = '⚠ '
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+
+let g:ale_error_format = '•%d'
+let g:ale_warning_format = '•%d'
+
+" set statusline+=%#ale_warning#
+" set statusline+=%{ALEGetStatusLine()}
+" set statusline+=%*
+
+hi ale_error   cterm=None ctermfg=124 ctermbg=237
+hi ale_warning cterm=None ctermfg=214 ctermbg=237
+
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
 
 " Emmet
 let g:user_emmet_leader_key='<C-Z>'
@@ -374,6 +389,16 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#close_symbol = '𝗫'
 let g:airline#extensions#tabline#show_tab_type = 0
+
+" Lightline
+" let g:lightline = {
+"       \ 'colorscheme': 'default',
+"       \ 'component': {
+"       \   'readonly': '%{&readonly?"🔒":""}',
+"       \ },
+"       \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+"       \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+"       \ }
 
 " YouCompleteMe
 set completeopt-=preview
@@ -415,25 +440,30 @@ noremap <Leader>vl :VimuxRunLastCommand<CR>
 let g:TerminusInsertCursorShape=2
 
 " TypeScript
+let g:tsuquyomi_disable_default_mappings=1
 augroup typescript_commands
   autocmd!
   autocmd FileType typescript call s:typescript_filetype_settings()
   autocmd FileType typescript noremap gd :TsuDefinition<cr>
 augroup END
 function! s:typescript_filetype_settings()
-  set makeprg=tsc
+  " set makeprg=tsc
 endfunction
 
 " EasyMotion
 " FIXME: EasyMotion steals my leader-leader quick switch
 " map <Leader> <Plug>(easymotion-prefix)
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
+" map  <Leader>f <Plug>(easymotion-bd-f)
+" nmap <Leader>f <Plug>(easymotion-overwin-f)
 
-" Incsearch
+" Incsearch (Fuzzy)
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
+
+map z/  <Plug>(incsearch-fuzzy-/)
+map z?  <Plug>(incsearch-fuzzy-?)
+map z/ <Plug>(incsearch-fuzzy-stay)
 
 " Incsearch - noh after motion
 let g:incsearch#auto_nohlsearch = 1
@@ -478,13 +508,45 @@ augroup goyo_commands
   nnoremap <leader>go :Goyo<CR>
 
   autocmd! User GoyoEnter nested call <SID>goyo_enter()
+  autocmd! User GoyoLeave nested call <SID>goyo_leave()
 augroup END
 
 function! s:goyo_enter()
-  set nu
-  set relativenumber
+  silent !tmux set status off
+  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  set noshowmode
+  " set noshowcmd
+  set wrap
+  set linebreak
+  set scrolloff=999
+  Limelight
+  " ...
+endfunction
+
+function! s:goyo_leave()
+  silent !tmux set status on
+  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  set showmode
+  " set showcmd
+  set nowrap
+  set nolinebreak
+  set scrolloff=10
+  Limelight!
+  " ...
 endfunction
 
 " Arduino
 let g:vim_arduino_ino_cmd = 'ano'
 let g:vim_arduino_auto_open_serial = 1
+
+" Markdown
+augroup markdown
+  autocmd!
+  autocmd FileType markdown setlocal conceallevel=2
+augroup END
+
+" Codi
+noremap <leader>js :tabnew<CR>:Codi javascript<CR>
+
+" Xtract
+vnoremap <leader>x :Xtract

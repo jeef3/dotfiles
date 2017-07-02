@@ -20,5 +20,13 @@ export RBENV_ROOT=/usr/local/var/rbenv
 export FLEX_HOME='/Users/jeffknaggs/flex-4.14.1'
 export PATH=$PATH:"$FLEX_HOME/bin"
 
-# export JAVA_HOME=$(/usr/libexec/java_home)
-export JAVA_HOME=/Library/Internet\ Plug-ins/JavaAppletPlugin.plugin/Contents/Home
+export JAVA_HOME=$(/usr/libexec/java_home)
+# export JAVA_HOME=/Library/Internet\ Plug-ins/JavaAppletPlugin.plugin/Contents/Home
+
+# Fastlane
+export PATH="$HOME/.fastlane/bin:$PATH"
+
+# Android development
+export ANDROID_HOME=${HOME}/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools

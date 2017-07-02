@@ -53,6 +53,8 @@ FORMULAS=(
   fzf
   z
   diff-so-fancy
+  yarn
+  awscli
 
   # Languages
   node
@@ -105,6 +107,13 @@ CASKS=(
 
   # Gifify
   xquartz
+
+  # Dev Tools
+  react-native-debugger
+  fastlane
+
+  # Misc
+  caprine   # Facebook Messenger
 )
 
 formula_exists() {
