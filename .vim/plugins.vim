@@ -11,7 +11,7 @@ Plug 'tpope/vim-obsession'              " Automatically save session state (used
 Plug 'junegunn/vim-emoji'               " Emoji!
 
 " Customization
-" Plug 'bling/vim-airline'                " Custom status and tab line
+Plug 'bling/vim-airline'                " Custom status and tab line
 " TODO: Try in Markdown/text
 Plug 'junegunn/goyo.vim'                " Zen coding
 Plug 'junegunn/limelight.vim'           " Color focus with Goyo
@@ -43,7 +43,7 @@ Plug 'metakirby5/codi.vim'              " REPL
 " Plug 'scrooloose/syntastic'             " File error checking
 " Plug 'pmsorhaindo/syntastic-local-eslint.vim' " Use local ESLint
 Plug 'w0rp/ale'                         " File error checking
-Plug 'ruanyl/coverage.vim'              " Coverage report gutter
+" Plug 'ruanyl/coverage.vim'              " Coverage report gutter
 
 " Git
 Plug 'airblade/vim-gitgutter'           " Git status in gutter
@@ -93,7 +93,7 @@ Plug 'firegoby/html_entities_helper.vim' " HTML entity conversion
 " Plug 'epilande/vim-react-snippets'      " React
 
 " Dependencies
-Plug 'Shougo/vimproc.vim', { 'do': 'make' } " TypeScript
+" Plug 'Shougo/vimproc.vim', { 'do': 'make' } " TypeScript
 Plug 'tpope/vim-dispatch'               " Omnisharp
 
 call plug#end()

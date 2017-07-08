@@ -53,7 +53,7 @@ hi Label           guifg=#E6DB74               cterm=none
 hi Macro           guifg=#C4BE89               cterm=italic
 hi SpecialKey      guifg=#91a6ff               cterm=italic
 
-hi MatchParen      guifg=#000000 guibg=#FD971F cterm=bold
+hi MatchParen      guifg=#FD971F guibg=bg      cterm=bold
 hi ModeMsg         guifg=#E6DB74
 hi MoreMsg         guifg=#E6DB74
 hi Operator        guifg=#F92672
