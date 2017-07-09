@@ -196,7 +196,7 @@ for index in ${!CASKS[*]}
 do
   if ! cask_exists ${CASKS[$index]}; then
     info "Installing cask ${CASKS[$index]}"
-    brew cask isntall ${CASKS[$index]}
+    brew cask install ${CASKS[$index]}
   else
     success "${CASKS[$index]} already installed, skipping"
   fi
