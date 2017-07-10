@@ -10,9 +10,6 @@ info "Update and upgrade brew"
 brew update && brew upgrade
 
 FORMULAS=(
-  # Identity
-  keybase
-
   # GNU core utilities (those that come with OS X are outdated)
   coreutils
 
@@ -53,6 +50,9 @@ FORMULAS=(
   fzf
   z
   diff-so-fancy
+  yarn # Still needed? Comes with Node?
+  awscli
+  watchman
 
   # Languages
   node
@@ -90,8 +90,6 @@ FORMULAS=(
 CASKS=(
   iterm2
 
-  vagrant
-
   # Quicklook Add-ins
   qlcolorcode
   qlstephen
@@ -105,10 +103,62 @@ CASKS=(
 
   # Gifify
   xquartz
+
+  # Dev Tools
+  react-native-debugger
+  android-studio
+
+  # Misc
+  caprine   # Facebook Messenger
+
+  # Other
+  dropbox
+  appcleaner
+
+  docker
+
+  gas-mask # DNS
+  sip # Color select/organise
+
+  slack
+
+  sketch
+  principle
+  balsamiq-mockups
+  zeplin
+  figma
+  google-chrome
+
+  spotify
+  dosbox
+  calibre
+  disk-inventory-x
+  karabiner-elements # Caps lock as Escape
+  the-unarchiver # RAR
 )
 
+# TODO: To Save
+# Fonts
+# Windows VM?
+
+# Not available or still figuring out:
+# Syncplicity
+# OpenVPN
+# MindNode
+# Xcode
+# Day One?
+# IconJar??
+# Kaleidoscope
+# Microsoft Remote Desktop
+# Parallels
+# Pixelmator
+# Sim Daltonism
+# Skitch - can I use something else?
+# Chrome Postman?
+# Textual (IRC)?
+
 formula_exists() {
-  if $(brew list $1 > /dev/null); then
+  if $(brew list | grep $1 > /dev/null); then
     return 0
   fi
 
@@ -116,16 +166,13 @@ formula_exists() {
 }
 
 cask_exists() {
-  if $(brew cask list $1 > /dev/null); then
+  if $(brew cask list | grep $1 > /dev/null); then
     return 0
   fi
 
   return 1
 }
 
-# Taps
-brew tap homebrew/dupes
-brew tap homebrew/completions
 # Arduino
 brew tap osx-cross/avr
 brew tap sudar/arduino-mk
@@ -133,7 +180,7 @@ brew tap sudar/arduino-mk
 for index in ${!FORMULAS[*]}
 do
   if ! formula_exists ${FORMULAS[$index]}; then
-    info "Installing ${FORMULAS[$index]}"
+    info "${FORMULAS[$index]} not installed, installing..."
     brew install ${FORMULAS[$index]}
   else
     success "${FORMULAS[$index]} already installed, skipping"
@@ -143,8 +190,8 @@ done
 for index in ${!CASKS[*]}
 do
   if ! cask_exists ${CASKS[$index]}; then
-    info "Installing cask ${CASKS[$index]}"
-    brew cask isntall ${CASKS[$index]}
+    info "${CASKS[$index]} not installed, installing..."
+    brew cask install ${CASKS[$index]}
   else
     success "${CASKS[$index]} already installed, skipping"
   fi

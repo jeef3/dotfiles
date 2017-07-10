@@ -6,6 +6,7 @@ COMPLETION_WAITING_DOTS="true"
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/projects/dotfiles/lib/zsh-git-prompt/zshrc.sh
+source $HOME/projects/dotfiles/lib/git-status.zsh
 
 # User configuration
 export PATH=~/bin:/usr/local/sbin:/usr/local/bin:$PATH
@@ -26,6 +27,32 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Prompts
 
+# Vi
+# bindkey -v
+# bindkey '^w' backward-kill-word
+
+# function get-arrow {
+#   local ARROW="\uE0B0"
+#   echo "$ARROW"
+# }
+
+# function zle-line-init zle-keymap-select {
+#   local ARROW='$(get-arrow)'
+#   local ARROWS="%(?.%{$bg[green]%}.%{$bg[red]%})$ARROW%{$bg[black]%}%(?.%{$fg[green]%}.%{$fg[red]%})$ARROW%{$reset_color%}"
+#   local EXIT_ARROW="%(?.%F{8}.%F{9})$ARROW%{$reset_color%}"
+
+#   NORMAL_MODE="%{$bg[yellow]$fg_bold[black]%} N %{$fg[yellow]%}$ARROWS %{$reset_color%}"
+#   INSERT_MODE="%{$bg[blue]$fg_bold[black]%} I %{$fg[blue]%}$ARROWS %{$reset_color%}"
+
+#   RPS1="${${KEYMAP/vicmd/$NORMAL_MODE}/(main|viins)/$INSERT_MODE} $EPS1"
+
+#   zle reset-prompt
+# }
+
+# zle -N zle-line-init
+# zle -N zle-keymap-select
+
+# export KEYTIMEOUT=1
 
 git_status() {
   precmd_update_git_vars
@@ -99,7 +126,7 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 fi
 local current_dir='%F{11}%B$(collapsed_wd)%{$reset_color%}'
 local git_line='$(git_status)'
-local exit_status="%(?.%F{8}.%F{9})»%{$reset_color%}"
+local exit_status="%(?.%F{8}.%F{9})❯%{$reset_color%}"
 
 PROMPT="${user_host}${current_dir} ${git_line}
 ${exit_status} "
@@ -120,3 +147,10 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh

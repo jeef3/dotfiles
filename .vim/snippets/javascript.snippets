@@ -2,7 +2,7 @@ snippet jsxac "Airbnb class component"
 	import React, { Component, PropTypes } from 'react';
 
 	const propTypes = {
-		
+
 	};
 
 	export default class ${1:Thing} extends Component {
@@ -65,6 +65,32 @@ snippet jsxui "Skilitics UI function component"
 	$1.propTypes = propTypes;
 
 	export default themeable($1, { styleName: '$1', defaultTheme });
+snippet jsxrn "React Native function component"
+	import React from 'react';
+	import PropTypes from 'prop-types';
+	import {
+		StyleSheet,
+		View,
+	} from 'react-native';
+
+	const propTypes = {
+
+	};
+
+	const ${1:Thing} = () => (
+		<View style={styles.container} />${0}
+	);
+
+	$1.propTypes = propTypes;
+	$1.defaultProps = {};
+
+	export default $1;
+
+	const styles = StyleSheet.create({
+		container: {
+
+		},
+	});
 snippet action
 	export function ${1:action}(${2:value}) {
 		return {
@@ -95,3 +121,24 @@ snippet story
 		.add('Default', () => (
 			<$1 ${0}/>
 		));
+
+snippet connect "Connect container component"
+	const mapStateToProps = state => ({
+	  ${0}
+	});
+
+	const mapDispatchToProps = dispatch => ({
+
+	});
+
+	const ${1:MyComponent}Container = connect(
+		mapStateToProps,
+		mapDispatchToProps,
+	)($1);
+
+	export { $1 as Component };
+	export default $1Container;
+snippet it "it('should ')"
+	it('should ${1}', () => {
+		${2}
+	});

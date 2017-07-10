@@ -53,16 +53,16 @@ hi Label           guifg=#E6DB74               cterm=none
 hi Macro           guifg=#C4BE89               cterm=italic
 hi SpecialKey      guifg=#91a6ff               cterm=italic
 
-hi MatchParen      guifg=#000000 guibg=#FD971F cterm=bold
+hi MatchParen      guifg=#FD971F guibg=bg      cterm=bold
 hi ModeMsg         guifg=#E6DB74
 hi MoreMsg         guifg=#E6DB74
 hi Operator        guifg=#F92672
 
 " complete menu
-hi Pmenu           guifg=#272822 guibg=#FFFFFF
-hi PmenuSel        guifg=#ffffff guibg=#91a6ff cterm=bold
-hi PmenuSbar                     guibg=#91a6ff
-hi PmenuThumb      guifg=#91A6FF
+hi Pmenu           guifg=#ffffff guibg=#465457
+hi PmenuSel        guifg=#272822 guibg=#e6db74 cterm=bold
+hi PmenuSbar                     guibg=#3B3A32
+hi PmenuThumb                    guibg=#ffffff
 
 hi PreCondit       guifg=#A6E22E               cterm=bold
 hi PreProc         guifg=#A6E22E
@@ -82,8 +82,9 @@ if has("spell")
     hi SpellRare   guibg=#FFFFFF cterm=undercurl
 endif
 hi Statement       guifg=#F92672               cterm=bold
-hi StatusLine      guifg=#455354 guibg=fg
+hi StatusLine      guifg=#AE81FF guibg=#080808
 hi StatusLineNC    guifg=#808080 guibg=#080808
+hi User1           guifg=#AE81FF guibg=#3B3A32
 hi StorageClass    guifg=#FD971F               cterm=italic
 hi Structure       guifg=#91A6FF
 hi Tag             guifg=#F92672               cterm=italic

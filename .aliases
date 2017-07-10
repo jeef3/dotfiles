@@ -3,10 +3,24 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 
 alias rake="noglob rake"
 
-alias bubu="brew update && brew upgrade"
-
-alias t="todo.sh"
+alias bubu="brew update && brew upgrade && brew cleanup"
 
 alias so="source"
 
+# App shortcuts
+alias t="todo.sh"
+alias todo="todotxt-machine ./todo.txt"
+
 alias ts="tig status"
+alias ta="tmux attach || tmux"
+
+alias vims="vim -S Session.vim"
+
+alias urldecode='python -c "import sys, urllib as ul; \
+                [sys.stdout.write(ul.unquote_plus(l)) for l in sys.stdin]"'
+
+# alias urldecode='python -c "import sys, urllib as ul; \
+#                 print ul.unquote_plus(sys.argv[1])"'
+
+alias urlencode='python -c "import sys, urllib as ul; \
+                print ul.quote_plus(sys.argv[1])"'
