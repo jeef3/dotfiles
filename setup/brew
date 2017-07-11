@@ -99,7 +99,6 @@ CASKS=(
   quicklook-csv
   betterzipql
   qlimagesize
-  suspicious-package
 
   # Gifify
   xquartz
