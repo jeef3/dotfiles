@@ -139,7 +139,7 @@ export NVM_DIR="/Users/jeffknaggs/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # For nicer diff highlighting
-ln -sf "$(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight" ~/bin/diff-highlight
+# ln -sf "$(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight" ~/bin/diff-highlight
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
