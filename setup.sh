@@ -19,8 +19,13 @@ git submodule update --recursive
 info "Installing/updating Vim Plug"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+info "Installing Vim plug-ins"
 vim +PlugUpdate +qall
 success "Vim plug-ins installed"
+
+info "Installing tmux plug-ins"
+~/.tmux/plugins/tpm/bin/update_plugins all
 
 info "Switching to Zsh"
 if [ $(basename $SHELL) == 'zsh' ]; then
