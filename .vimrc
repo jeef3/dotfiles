@@ -550,3 +550,11 @@ noremap <leader>js :tabnew<CR>:Codi javascript<CR>
 
 " Xtract
 vnoremap <leader>x :Xtract
+
+" JS Imports
+augroup import_js
+  autocmd!
+  
+  autocmd FileType javascript nnoremap <leader>jo :ImportJSWord<CR>
+augroup END
+

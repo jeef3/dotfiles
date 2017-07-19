@@ -1,4 +1,4 @@
 #!/bin/sh
 
 npm install -g react-native-cli
-
+npm install -g import-js

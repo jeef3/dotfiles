@@ -87,6 +87,7 @@ Plug 'samuelsimoes/vim-jsx-utils'       " JSX helpers
 Plug 'ap/vim-css-color'                 " Color preview in CSS
 Plug 'jplaut/vim-arduino-ino'           " Arduino compile/build
 Plug 'firegoby/html_entities_helper.vim' " HTML entity conversion
+Plug 'Galooshi/vim-import-js'           " Import helper
 
 " Snippets
 " Plug 'epilande/vim-es2015-snippets'     " ES2015
