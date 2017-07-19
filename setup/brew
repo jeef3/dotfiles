@@ -106,6 +106,7 @@ CASKS=(
   # Dev Tools
   react-native-debugger
   android-studio
+  java
 
   # Misc
   caprine   # Facebook Messenger
