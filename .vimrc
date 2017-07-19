@@ -352,19 +352,21 @@ let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_error_format = '•%d'
 let g:ale_warning_format = '•%d'
 
-" set statusline+=%#ale_warning#
-" set statusline+=%{ALEGetStatusLine()}
-" set statusline+=%*
+set statusline+=%#ale_warning#
+set statusline+=%{ALEGetStatusLine()}
+set statusline+=%*
 
-hi ale_error   cterm=None ctermfg=124 ctermbg=237
-hi ale_warning cterm=None ctermfg=214 ctermbg=237
+hi ale_error   cterm=bold ctermfg=124 ctermbg=237
+hi ale_warning cterm=bold ctermfg=214 ctermbg=237
 
 let g:ale_linters = {
-\   'javascript': ['eslint'],
-\}
+      \   'javascript': ['eslint', 'prettier_eslint'],
+      \}
 
-" Emmet
-let g:user_emmet_leader_key='<C-Z>'
+" let g:ale_fix_on_save = 1
+" let g:ale_fixers = {
+"       \   'javascript': ['prettier']
+"       \}
 
 " OmniSharp
 augroup omnisharp_commands
