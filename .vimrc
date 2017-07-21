@@ -1,5 +1,7 @@
 source ~/.vim/plugins.vim
 
+set macligatures
+
 " File type detection
 filetype plugin indent on
 
@@ -345,8 +347,8 @@ vnoremap c "_c
 " endif
 
 " ALE
-let g:ale_sign_error = '⨉ '
-let g:ale_sign_warning = '⚠ '
+let g:ale_sign_error = "\uf00d"
+let g:ale_sign_warning = "\uf071"
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 
 let g:ale_error_format = '•%d'
@@ -356,8 +358,8 @@ set statusline+=%#ale_warning#
 set statusline+=%{ALEGetStatusLine()}
 set statusline+=%*
 
-hi ale_error   cterm=bold ctermfg=124 ctermbg=237
-hi ale_warning cterm=bold ctermfg=214 ctermbg=237
+hi ALEErrorSign   guifg=#f92672 guibg=#3b3a32
+hi ALEWarningSign guifg=#fd971f guibg=#3b3a32
 
 let g:ale_linters = {
       \   'javascript': ['eslint', 'prettier_eslint'],
@@ -385,22 +387,24 @@ com! FormatHTML %!tidy -iq -xml -wrap 0
 
 " Airline
 let g:airline_powerline_fonts = 1
+let g:airline_left_sep = "\ue0b8"
+let g:airline_left_alt_sep = "\ue0b9"
+let g:airline_right_sep = "\ue0be"
+let g:airline_right_alt_sep = "\ue0bf"
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#close_symbol = '𝗫'
+let g:airline#extensions#tabline#close_symbol = "\uf00d" " A nice fat X
 let g:airline#extensions#tabline#show_tab_type = 0
 
-" Lightline
-" let g:lightline = {
-"       \ 'colorscheme': 'default',
-"       \ 'component': {
-"       \   'readonly': '%{&readonly?"🔒":""}',
-"       \ },
-"       \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-"       \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
-"       \ }
+function! AirlineInit()
+  let g:airline_section_a = airline#section#create(['mode', ' ', 'foo'])
+  let g:airline_section_b = airline#section#create_left(['ffenc','file'])
+  let g:airline_section_c = airline#section#create(['%{getcwd()}'])
+endfunction
+autocmd User AirlineAfterInit call AirlineInit()
 
 " YouCompleteMe
 set completeopt-=preview
@@ -556,7 +560,17 @@ vnoremap <leader>x :Xtract
 " JS Imports
 augroup import_js
   autocmd!
-  
   autocmd FileType javascript nnoremap <leader>jo :ImportJSWord<CR>
 augroup END
 
+" GitGutter
+let g:gitgutter_sign_added = "\uf457"
+let g:gitgutter_sign_modified = "\uf459"
+let g:gitgutter_sign_removed = "\uf458"
+let g:gitgutter_sign_removed_first_line = "\uf458"
+let g:gitgutter_sign_modified_removed = "\uf459"
+
+hi GitGutterAdd           guifg=#a6e22e guibg=#3b3a32
+hi GitGutterChange        guifg=#fd971f guibg=#3b3a32
+hi GitGutterDelete        guifg=#f92672 guibg=#3b3a32
+hi GitGutterChangeDelete  guifg=#fd971f guibg=#3b3a32

@@ -57,11 +57,18 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 git_status() {
   precmd_update_git_vars
 
-  local PREFIX="%F{13}\uE0A0%B%{$reset_color%} "
   local SEPARATOR="%F{8}•%{${reset_color}%}"
 
+  ZSH_THEME_GIT_PROMPT_BEHIND="\uf433"
+  ZSH_THEME_GIT_PROMPT_AHEAD="\uf431"
+
+  ZSH_THEME_GIT_PROMPT_STAGED="%F{3}\uf429"
+  ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{5}\uf421"
+  ZSH_THEME_GIT_PROMPT_CHANGED="%F{2}\uf040"
+  ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{6}\u2026"
+
   if [ -n "$__CURRENT_GIT_STATUS" ]; then
-    STATUS="$PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}"
+    STATUS="%F{13}\ue725 %B$GIT_BRANCH%{${reset_color}%}"
 
     if [ "$GIT_BEHIND" -ne "0" ]; then
       STATUS="$STATUS $SEPARATOR $ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND%{${reset_color}%}"
@@ -72,10 +79,6 @@ git_status() {
 
     STATUS="$STATUS $SEPARATOR"
 
-    ZSH_THEME_GIT_PROMPT_STAGED="%F{3}☝️ "
-    ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{5}✋ "
-    ZSH_THEME_GIT_PROMPT_CHANGED="%F{2}✏️ "
-    ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{6}…"
 
     if [ "$GIT_CONFLICTS" -ne "0" ]; then
       STATUS="$STATUS $ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS%{${reset_color}%}"

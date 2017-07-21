@@ -12,7 +12,6 @@ Plug 'junegunn/vim-emoji'               " Emoji!
 
 " Customization
 Plug 'bling/vim-airline'                " Custom status and tab line
-" TODO: Try in Markdown/text
 Plug 'junegunn/goyo.vim'                " Zen coding
 Plug 'junegunn/limelight.vim'           " Color focus with Goyo
 Plug 'tpope/vim-vinegar'                " Better netrw
@@ -25,6 +24,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                 " Fast file searching <c-t>
 Plug 'brooth/far.vim'                   " Find And Replace
 Plug 'tpope/vim-repeat'                 " Get more use out of .
+Plug 'ryanoasis/vim-devicons'           " Icon Fonts
 
 " ===== My IDE =====
 
