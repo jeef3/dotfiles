@@ -53,6 +53,10 @@ FORMULAS=(
   yarn # Still needed? Comes with Node?
   awscli
   watchman
+  ranger
+  imgcat
+  jq # JSON parser
+  fontforge # For custom font icon patching
 
   # Languages
   node
