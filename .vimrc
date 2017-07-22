@@ -399,13 +399,6 @@ let g:airline#extensions#tabline#show_tab_nr = 0
 let g:airline#extensions#tabline#close_symbol = "\uf00d" " A nice fat X
 let g:airline#extensions#tabline#show_tab_type = 0
 
-function! AirlineInit()
-  let g:airline_section_a = airline#section#create(['mode', ' ', 'foo'])
-  let g:airline_section_b = airline#section#create_left(['ffenc','file'])
-  let g:airline_section_c = airline#section#create(['%{getcwd()}'])
-endfunction
-autocmd User AirlineAfterInit call AirlineInit()
-
 " YouCompleteMe
 set completeopt-=preview
 let g:ycm_key_list_select_completion=['<C-j>', '<Down>']
