@@ -33,12 +33,11 @@ Plug 'tpope/vim-surround'               " Change surrounds, quotes etc
 Plug 'jiangmiao/auto-pairs'             " complete quotes, parends etc
 Plug 'SirVer/ultisnips'                 " Code snippets
 Plug 'rstacruz/vim-xtract'              " Extract selected into a new file
+Plug 'vim-scripts/matchit.zip'          " More % matching
 
 Plug 'metakirby5/codi.vim'              " REPL
 
-" Errors and lints
-" Plug 'scrooloose/syntastic'             " File error checking
-" Plug 'pmsorhaindo/syntastic-local-eslint.vim' " Use local ESLint
+" Errors and linting
 Plug 'w0rp/ale'                         " File error checking
 " Plug 'ruanyl/coverage.vim'              " Coverage report gutter
 
@@ -78,18 +77,15 @@ Plug 'othree/csscomplete.vim'           " CSS
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " JavaScript
 
 " Language Tools and Helpers
-Plug 'moll/vim-node'                    " Node
-Plug 'Quramy/tsuquyomi'                 " TypeScript tools
-Plug 'mattn/emmet-vim'                  " HTML/CSS quick completion
-Plug 'samuelsimoes/vim-jsx-utils'       " JSX helpers
-Plug 'ap/vim-css-color'                 " Color preview in CSS
-Plug 'jplaut/vim-arduino-ino'           " Arduino compile/build
+Plug 'moll/vim-node'                     " Node
+Plug 'Quramy/tsuquyomi'                  " TypeScript tools
+Plug 'mattn/emmet-vim'                   " HTML/CSS quick completion
+Plug 'samuelsimoes/vim-jsx-utils'        " JSX helpers
+Plug 'ap/vim-css-color'                  " Color preview in CSS
+Plug 'jplaut/vim-arduino-ino'            " Arduino compile/build
 Plug 'firegoby/html_entities_helper.vim' " HTML entity conversion
-Plug 'Galooshi/vim-import-js'           " Import helper
-
-" Snippets
-" Plug 'epilande/vim-es2015-snippets'     " ES2015
-" Plug 'epilande/vim-react-snippets'      " React
+Plug 'Galooshi/vim-import-js'            " JavaScript Import helper
+Plug 'dunckr/js_alternate.vim'           " JavaScript test alternate file switch
 
 " Dependencies
 " Plug 'Shougo/vimproc.vim', { 'do': 'make' } " TypeScript
