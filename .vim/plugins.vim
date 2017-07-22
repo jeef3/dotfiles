@@ -46,8 +46,9 @@ Plug 'w0rp/ale'                         " File error checking
 " Plug 'ruanyl/coverage.vim'              " Coverage report gutter
 
 " Git
-Plug 'airblade/vim-gitgutter'           " Git status in gutter
+Plug 'tpope/vim-git'                    " Git syntax highlightinh
 Plug 'tpope/vim-fugitive'               " Git wrapper, :Gstatus etc
+Plug 'airblade/vim-gitgutter'           " Git status in gutter
 Plug 'junegunn/gv.vim'                  " Git browser
 
 " Language Syntax
