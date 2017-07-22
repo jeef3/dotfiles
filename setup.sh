@@ -39,9 +39,6 @@ info "Adding italics"
 tic xterm-256color-italic.terminfo
 tic tmux-256color-terminfo
 
-info "Install Powerline fonts"
-./setup/fonts
-
 info "Installing brew packages"
 ./setup/brew
 
