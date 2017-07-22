@@ -42,5 +42,8 @@ tic tmux-256color-terminfo
 info "Installing brew packages"
 ./setup/brew
 
-info "Installing misc tools"
-./setup/misc
+info "Setting macos preferences"
+./setup/osx
+
+info "Installing global npm modules"
+./setup/dev
