@@ -505,9 +505,6 @@ augroup css
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
 augroup END
 
-" Emoji
-set completefunc=emoji#complete
-
 " Goyo
 augroup goyo_commands
   autocmd!

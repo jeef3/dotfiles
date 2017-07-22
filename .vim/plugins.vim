@@ -7,9 +7,6 @@ Plug 'benmills/vimux'                   " Run shell commands in Tmux pane
 Plug 'wincent/terminus'                 " Better terminal integration, cursor shapes, colors
 Plug 'tpope/vim-obsession'              " Automatically save session state (used with Tmux)
 
-" Misc Vim stuff
-Plug 'junegunn/vim-emoji'               " Emoji!
-
 " Customization
 Plug 'bling/vim-airline'                " Custom status and tab line
 Plug 'junegunn/goyo.vim'                " Zen coding
