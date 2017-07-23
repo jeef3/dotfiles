@@ -3,7 +3,7 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 
 alias rake="noglob rake"
 
-alias bubu="brew update && brew upgrade && brew cleanup"
+alias bubu="./bubu.sh"
 
 alias so="source"
 
