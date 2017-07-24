@@ -564,3 +564,8 @@ hi GitGutterAdd           guifg=#a6e22e guibg=#3b3a32
 hi GitGutterChange        guifg=#fd971f guibg=#3b3a32
 hi GitGutterDelete        guifg=#f92672 guibg=#3b3a32
 hi GitGutterChangeDelete  guifg=#fd971f guibg=#3b3a32
+
+" Startify
+let g:startify_files_number = 6
+let g:startify_change_to_vcs_root = 1
+source ~/.vim/startify.vim

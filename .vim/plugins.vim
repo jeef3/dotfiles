@@ -8,6 +8,7 @@ Plug 'wincent/terminus'                 " Better terminal integration, cursor sh
 Plug 'tpope/vim-obsession'              " Automatically save session state (used with Tmux)
 
 " Customization
+Plug 'mhinz/vim-startify'               " Start-up screen
 Plug 'bling/vim-airline'                " Custom status and tab line
 Plug 'junegunn/goyo.vim'                " Zen coding
 Plug 'junegunn/limelight.vim'           " Color focus with Goyo
