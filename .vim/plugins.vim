@@ -85,6 +85,7 @@ Plug 'jplaut/vim-arduino-ino'            " Arduino compile/build
 Plug 'firegoby/html_entities_helper.vim' " HTML entity conversion
 Plug 'Galooshi/vim-import-js'            " JavaScript Import helper
 Plug 'dunckr/js_alternate.vim'           " JavaScript test alternate file switch
+Plug 'suan/vim-instant-markdown'         " Markdown previews
 
 " Dependencies
 " Plug 'Shougo/vimproc.vim', { 'do': 'make' } " TypeScript
