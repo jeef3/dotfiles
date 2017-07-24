@@ -53,7 +53,6 @@ Plug 'othree/html5.vim'                 " HTML5
 Plug 'plasticboy/vim-markdown'          " Markdown
 Plug 'jeroenbourgois/vim-actionscript'  " ActionScript
 Plug 'pangloss/vim-javascript'          " JavaScript
-" Plug 'Quramy/vim-js-pretty-template'    " JavaScript template strings
 Plug 'leafgarland/typescript-vim'       " TypeScript
 Plug 'kchmck/vim-coffee-script'         " CoffeeScript
 Plug 'mxw/vim-jsx'                      " JSX
