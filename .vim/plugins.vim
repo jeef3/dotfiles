@@ -36,8 +36,8 @@ Plug 'jiangmiao/auto-pairs'             " complete quotes, parends etc
 Plug 'SirVer/ultisnips'                 " Code snippets
 Plug 'rstacruz/vim-xtract'              " Extract selected into a new file
 Plug 'vim-scripts/matchit.zip'          " More % matching
-
 Plug 'metakirby5/codi.vim'              " REPL
+Plug 'skywind3000/quickmenu.vim'        " Quick Menu
 
 " Errors and linting
 Plug 'w0rp/ale'                         " File error checking

@@ -569,3 +569,8 @@ hi GitGutterChangeDelete  guifg=#fd971f guibg=#3b3a32
 let g:startify_files_number = 6
 let g:startify_change_to_vcs_root = 1
 source ~/.vim/startify.vim
+
+" Quick Menu
+noremap <leader>m :call quickmenu#toggle(0)<cr>
+let g:quickmenu_options = "LH"
+source ~/.vim/quickmenu.vim
