@@ -111,6 +111,7 @@ CASKS=(
   react-native-debugger
   android-studio
   java
+  fastlane
 
   # Misc
   caprine   # Facebook Messenger
