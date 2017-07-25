@@ -17,5 +17,6 @@ let g:startify_list_order = [
 
 let g:startify_bookmarks = [
       \ { 'v': '~/.vimrc' },
-      \ { 'p': '~/.vim/plugins.vim' }
+      \ { 'p': '~/.vim/plugins.vim' },
+      \ { 'c': '~/.vim/colors/princess.vim' }
       \ ]
