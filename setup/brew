@@ -138,7 +138,6 @@ CASKS=(
   dosbox
   calibre
   disk-inventory-x
-  karabiner-elements # Caps lock as Escape
   the-unarchiver # RAR
 )
 
