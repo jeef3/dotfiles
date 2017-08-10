@@ -14,16 +14,22 @@ call g:quickmenu#append(
                   \ 'Gvdiff',
                   \ 'View diff')
 
-" Misc:
-call g:quickmenu#append('# Misc', '')
+" Tools:
+call g:quickmenu#append('# Tools', '')
 
 call g:quickmenu#append(
-                  \ "Run %{expand('%:t')}",
-                  \ '!./%',
-                  \ "Run current file")
+                  \ 'Find and Replace',
+                  \ 'Farp',
+                  \ 'Find and replace in files')
 
 call g:quickmenu#append(
                   \ 'Format',
                   \ 'FormatJSON',
                   \ "Format the JSON",
                   \ 'json')
+
+call g:quickmenu#append(
+                  \ "Run %{expand('%:t')}",
+                  \ '!./%',
+                  \ "Run current file")
+
