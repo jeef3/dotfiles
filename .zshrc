@@ -66,6 +66,7 @@ git_status() {
   ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{5}\uf421"
   ZSH_THEME_GIT_PROMPT_CHANGED="%F{2}\uf040"
   ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{6}\u2026"
+  ZSH_THEME_GIT_PROMPT_CLEAN="%F{2}\uf00c"
 
   if [ -n "$__CURRENT_GIT_STATUS" ]; then
     STATUS="%F{13}\ue725 %B$GIT_BRANCH%{${reset_color}%}"
@@ -101,11 +102,11 @@ git_status() {
   fi
 }
 
-git_info() {
-  git rev-parse --is-inside-work-tree &> /dev/null || return
+# git_info() {
+#   git rev-parse --is-inside-work-tree &> /dev/null || return
 
-  echo "%F{8}%Bon%{$reset_color%} $branch $gstatus"
-}
+#   echo "%F{8}%Bon%{$reset_color%} $branch $gstatus"
+# }
 
 git_origin() {
   git rev-parse --is-inside-work-tree &> /dev/null || return
