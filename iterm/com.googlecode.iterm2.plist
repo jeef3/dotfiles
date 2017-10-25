@@ -10,6 +10,8 @@
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
 	<integer>1</integer>
+	<key>AppleWindowTabbingMode</key>
+	<string>manual</string>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>Monokai Soda</key>
@@ -223,19 +225,29 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>DarkThemeHasBlackTitlebar</key>
+	<true/>
 	<key>Default Bookmark Guid</key>
 	<string>BF048C50-F1BF-4B50-B2D3-CA113D25C50E</string>
 	<key>DimBackgroundWindows</key>
 	<false/>
 	<key>DimInactiveSplitPanes</key>
 	<true/>
+	<key>DisableFullscreenTransparency</key>
+	<false/>
 	<key>EnableDivisionView</key>
 	<false/>
 	<key>EnableProxyIcon</key>
 	<false/>
+	<key>HideActivityIndicator</key>
+	<false/>
 	<key>HideScrollbar</key>
 	<true/>
+	<key>HideTab</key>
+	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
+	<true/>
+	<key>JobName</key>
 	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
@@ -273,7 +285,7 @@
 	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
 	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
 	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
-	DIAIgAlRMSNAdCGdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	DIAIgAlRMSNAdKGdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
 	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
 	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
 	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
@@ -298,18 +310,20 @@
 	<string>-17 1105 597 180 -239 900 1920 1177 </string>
 	<key>NSWindow Frame ProfilesPanel</key>
 	<string>-60 1334 735 382 -239 900 1920 1177 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>410 363 620 392 0 0 1440 877 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>185 1094 606 469 -239 900 1920 1177 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>-88 1598 918 423 -239 900 1920 1177 </string>
+	<string>57 296 918 401 0 0 1440 877 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame com.apple.typography_panel_OperatorMono-Book</key>
 	<string>107 1354 260 222 -239 900 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>770 1275 810 576 -239 900 1920 1177 </string>
+	<string>518 124 901 727 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>-229 928 1900 1139 -239 900 1920 1177 </string>
+	<string>10 91 1418 776 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>10 93 466 774 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
@@ -317,6 +331,8 @@
 		<dict>
 			<key>ASCII Anti Aliased</key>
 			<true/>
+			<key>ASCII Ligatures</key>
+			<false/>
 			<key>Ambiguous Double Width</key>
 			<false/>
 			<key>Ansi 0 Color</key>
@@ -543,10 +559,12 @@
 				<key>Red Component</key>
 				<real>0.76960963010787964</real>
 			</dict>
+			<key>Cursor Type</key>
+			<integer>2</integer>
 			<key>Custom Command</key>
 			<string>No</string>
 			<key>Custom Directory</key>
-			<string>No</string>
+			<string>Recycle</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Description</key>
@@ -917,7 +935,11 @@
 			<false/>
 			<key>Shortcut</key>
 			<string></string>
+			<key>Show Mark Indicators</key>
+			<false/>
 			<key>Silence Bell</key>
+			<false/>
+			<key>Smart Cursor Color</key>
 			<false/>
 			<key>Sync Title</key>
 			<false/>
@@ -933,9 +955,13 @@
 			<true/>
 			<key>Use Bright Bold</key>
 			<true/>
+			<key>Use Cursor Guide</key>
+			<false/>
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
+			<false/>
+			<key>Use Tab Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
@@ -1011,8 +1037,10 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-08-30T01:08:43Z</date>
+	<date>2017-10-03T22:18:11Z</date>
 	<key>SUSendProfileInfo</key>
+	<false/>
+	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowPaneTitles</key>
 	<false/>
@@ -1022,13 +1050,23 @@
 	<false/>
 	<key>TabStyle</key>
 	<integer>1</integer>
+	<key>TabViewType</key>
+	<integer>0</integer>
 	<key>UKCrashReporterLastCrashReportDate</key>
 	<real>1501017728</real>
 	<key>UseBorder</key>
 	<false/>
+	<key>WindowNumber</key>
+	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
+	<key>findMode_iTerm</key>
+	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.1.beta.5</string>
+	<string>3.1.2</string>
+	<key>kCPKSelectionViewPreferredModeKey</key>
+	<integer>0</integer>
+	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
 </dict>
 </plist>
