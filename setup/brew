@@ -112,6 +112,8 @@ CASKS=(
   android-studio
   java
   fastlane
+  imageoptim
+  google-chrome
 
   # Misc
   caprine   # Facebook Messenger
@@ -122,19 +124,16 @@ CASKS=(
 
   docker
 
-  gas-mask # DNS
   sip # Color select/organise
 
   slack
 
   sketch
+  figma
   principle
   balsamiq-mockups
   zeplin
-  figma
-  google-chrome
 
-  spotify
   dosbox
   calibre
   disk-inventory-x

@@ -227,8 +227,12 @@ noremap Y y$
 " nnoremap <leader>v :call NewFileAt()<cr>
 " function! NewFileAt ()
 "   " lcd %:p:h
-"   normal! vi'ay
-"   echom "new file " . @a
+"   let newFile = expand('<cfile>:p')
+"   let currentExtension = expand('%:e')
+
+"   let newFileName = newFile . "." . currentExtension
+"   execute "enew"
+"   execute "w " . newFileName
 " endfunction
 
 " Home motion toggle
@@ -310,7 +314,7 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " Ranger
-noremap <leader>r :!ranger<cr>
+noremap <leader>r :!ranger %:p<cr>
 
 " When changing, don't put in clipboard
 nnoremap c "_c
@@ -354,21 +358,25 @@ let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_error_format = '•%d'
 let g:ale_warning_format = '•%d'
 
-set statusline+=%#ale_warning#
-set statusline+=%{ALEGetStatusLine()}
-set statusline+=%*
+" let g:airline#extensions#ale#enabled = 1
+" set statusline+=%#ale_warning#
+" set statusline+=%{ALEGetStatusLine()}
+" set statusline+=%*
 
 hi ALEErrorSign   guifg=#f92672 guibg=#3b3a32
 hi ALEWarningSign guifg=#fd971f guibg=#3b3a32
 
 let g:ale_linters = {
-      \   'javascript': ['eslint', 'prettier_eslint'],
+      \   'javascript': ['eslint', 'flow'],
       \}
 
-" let g:ale_fix_on_save = 1
-" let g:ale_fixers = {
-"       \   'javascript': ['prettier']
-"       \}
+let g:ale_fix_on_save = 0
+let g:ale_fixers = {
+      \   'javascript': ['eslint']
+      \}
+nnoremap ]a :ALENextWrap<cr>
+nnoremap [a :ALEPreviousWrap<cr>
+nnoremap <leader>af :ALEFix<cr>
 
 " OmniSharp
 augroup omnisharp_commands
@@ -541,9 +549,6 @@ augroup markdown
   autocmd FileType markdown setlocal conceallevel=2
 augroup END
 
-" Codi
-noremap <leader>js :tabnew<CR>:Codi javascript<CR>
-
 " Xtract
 vnoremap <leader>x :Xtract
 
@@ -574,3 +579,17 @@ source ~/.vim/startify.vim
 noremap <leader>m :call quickmenu#toggle(0)<cr>
 let g:quickmenu_options = "LH"
 source ~/.vim/quickmenu.vim
+
+" Coverage
+let g:coverage_interval = 1000
+
+" Flow
+let g:flow#showquickfix = 0
+let g:flow#enable = 1
+" augroup flow
+"   autocmd!
+"   autocmd FileType javascript setlocal omnifunc=flowcomplete#Complete
+" augroup END
+
+" Javascript Syntax
+let g:javascript_plugin_flow = 1

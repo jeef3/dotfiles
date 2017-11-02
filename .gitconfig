@@ -4,6 +4,7 @@
 	co = checkout
 	p = push
 	s = status -s
+	d = difftool
 
 	wtf = blame
 

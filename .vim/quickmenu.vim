@@ -23,6 +23,11 @@ call g:quickmenu#append(
                   \ 'Find and replace in files')
 
 call g:quickmenu#append(
+                  \ 'Javascript Repl',
+                  \ 'Codi',
+                  \ 'Repl')
+
+call g:quickmenu#append(
                   \ 'Format',
                   \ 'FormatJSON',
                   \ "Format the JSON",

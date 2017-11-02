@@ -158,3 +158,7 @@ source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+# . `brew --prefix`/bin/aws_zsh_completer.sh
+
+export PATH="$HOME/.yarn/bin:$PATH"

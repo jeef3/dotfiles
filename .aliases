@@ -24,3 +24,7 @@ alias urldecode='python -c "import sys, urllib as ul; \
 
 alias urlencode='python -c "import sys, urllib as ul; \
                 print ul.quote_plus(sys.argv[1])"'
+
+alias bs="build-status"
+
+alias altool="/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Support/altool"

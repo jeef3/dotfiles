@@ -69,28 +69,26 @@ snippet jsxrn "React Native function component"
 	import React from 'react';
 	import PropTypes from 'prop-types';
 	import {
-		StyleSheet,
 		View,
 	} from 'react-native';
+	import styled from 'styled-components/native';
 
 	const propTypes = {
 
 	};
 
+	const Container = styled.View\`
+		${0}
+	\`;
+
 	const ${1:Thing} = () => (
-		<View style={styles.container} />${0}
+		<Container />
 	);
 
 	$1.propTypes = propTypes;
 	$1.defaultProps = {};
 
 	export default $1;
-
-	const styles = StyleSheet.create({
-		container: {
-
-		},
-	});
 snippet action
 	export function ${1:action}(${2:value}) {
 		return {
@@ -142,3 +140,10 @@ snippet it "it('should ')"
 	it('should ${1}', () => {
 		${0}
 	});
+snippet styled "Styled Component"
+	import styled from 'styled-components/native';
+
+	export default styled.View\`
+		${0}
+	\`;
+
