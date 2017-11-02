@@ -4,3 +4,4 @@ todo.txt
 npm-debug.log
 tmux-client-*.log
 .tern-project
+.build-status/
