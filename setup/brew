@@ -53,6 +53,7 @@ FORMULAS=(
   yarn # Still needed? Comes with Node?
   awscli
   watchman
+  fswatch
   ranger
   imgcat
   jq # JSON parser
@@ -78,6 +79,7 @@ FORMULAS=(
   imagemagick
 
   # Kivy
+  pkg-config
   sdl2
   sdl2_image
   sdl2_ttf

@@ -1,3 +1,19 @@
+snippet jsxp "Pure Component"
+	import React from 'react';
+
+	export default class ${1:Thing} extends React.PureComponent {
+		render() {
+			return (
+				${0}
+			);
+		}
+	}
+snippet jsxs "Styled Component"
+	import styled from 'styled-components';
+
+	export default styled.${1:div}\`
+		${0}
+	\`;
 snippet jsxac "Airbnb class component"
 	import React, { Component, PropTypes } from 'react';
 

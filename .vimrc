@@ -313,9 +313,6 @@ augroup END
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-" Ranger
-noremap <leader>r :!ranger %:p<cr>
-
 " When changing, don't put in clipboard
 nnoremap c "_c
 vnoremap c "_c
@@ -448,6 +445,10 @@ let g:TerminusInsertCursorShape=2
 
 " TypeScript
 let g:tsuquyomi_disable_default_mappings=1
+augroup typescript
+  autocmd!
+  autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+augroup END
 augroup typescript_commands
   autocmd!
   autocmd FileType typescript call s:typescript_filetype_settings()

@@ -56,6 +56,7 @@ Plug 'plasticboy/vim-markdown'          " Markdown
 Plug 'jeroenbourgois/vim-actionscript'  " ActionScript
 Plug 'pangloss/vim-javascript'          " JavaScript
 Plug 'leafgarland/typescript-vim'       " TypeScript
+Plug 'ianks/vim-tsx'                    " More TypeScript
 Plug 'kchmck/vim-coffee-script'         " CoffeeScript
 Plug 'mxw/vim-jsx'                      " JSX
 Plug 'elzr/vim-json'                    " JSON

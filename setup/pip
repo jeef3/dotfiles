@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pip install Cython==0.26.1
+pip install kivy
