@@ -8,4 +8,5 @@
 
 .tmux/plugins
 .tmux/resurrect
+tmux*.log
 
