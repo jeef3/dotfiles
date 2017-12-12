@@ -370,24 +370,16 @@ let g:TerminusInsertCursorShape=2
 
 " TypeScript
 let g:tsuquyomi_disable_default_mappings=1
+let g:tsuquyomi_completion_detail = 1
+let g:tsuquyomi_disable_quickfix = 1
+
+" tsx file detection
 augroup typescript
   autocmd!
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
-augroup END
-augroup typescript_commands
-  autocmd!
-  autocmd FileType typescript call s:typescript_filetype_settings()
+
   autocmd FileType typescript noremap gd :TsuDefinition<cr>
 augroup END
-function! s:typescript_filetype_settings()
-  " set makeprg=tsc
-endfunction
-
-" EasyMotion
-" FIXME: EasyMotion steals my leader-leader quick switch
-" map <Leader> <Plug>(easymotion-prefix)
-" map  <Leader>f <Plug>(easymotion-bd-f)
-" nmap <Leader>f <Plug>(easymotion-overwin-f)
 
 " Incsearch (Fuzzy)
 map /  <Plug>(incsearch-forward)
