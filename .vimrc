@@ -101,14 +101,13 @@ set report=0 " Show all changes.
 set ruler " Show the cursor position
 set scrolloff=10 " Start scrolling ten lines before horizontal border of window.
 set shortmess=atI " Don't show the intro message when starting vim.
-set showmode " Show the current mode.
+set noshowmode " Don't show the current mode, it's in our statusline.
 set showtabline=2 " Always show tab bar.
 set sidescrolloff=10 " Start scrolling three columns before vertical border of window.
 set sidescroll=1 " Scroll 1 col at a time
 set smartcase " Ignore 'ignorecase' if search patter contains uppercase characters.
 set splitbelow " New window goes below
 set splitright " New windows goes right
-set suffixes=.bak,~,.swp,.swo,.o,.d,.info,.aux,.log,.dvi,.pdf,.bin,.bbl,.blg,.brf,.cb,.dmg,.exe,.ind,.idx,.ilg,.inx,.out,.toc,.pyc,.pyd,.dll
 set title " Show the filename in the window titlebar.
 set ttyfast " Send more characters at a given time.
 set undofile " Persistent Undo.
