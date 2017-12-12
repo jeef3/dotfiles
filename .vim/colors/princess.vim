@@ -76,7 +76,7 @@ hi SpecialComment  guifg=#465457               cterm=italic
 hi Special         guifg=#91a6ff guibg=bg      cterm=bold,italic
 hi SpecialKey      guifg=#888A85               cterm=italic
 if has("spell")
-    hi SpellBad    guibg=#FF0000 cterm=undercurl
+    hi SpellBad    guibg=#300817 cterm=undercurl
     hi SpellCap    guibg=#7070F0 cterm=undercurl
     hi SpellLocal  guibg=#70F0F0 cterm=undercurl
     hi SpellRare   guibg=#FFFFFF cterm=undercurl
