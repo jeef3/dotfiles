@@ -257,56 +257,11 @@ endfunction
 nnoremap <silent> n :call <SID>nice_next('n')<cr>
 nnoremap <silent> N :call <SID>nice_next('N')<cr>
 
-" Custom Status Line
-function! WindowNumber()
-  return tabpagewinnr(tabpagenr())
-endfunction
-
-function! TrailingSpaceWarning()
-  if !exists("b:statline_trailing_space_warning")
-    let lineno = search('\s$', 'nw')
-    if lineno != 0
-      let b:statline_trailing_space_warning = '[trailing:'.lineno.']'
-    else
-      let b:statline_trailing_space_warning = ''
-    endif
-  endif
-  return b:statline_trailing_space_warning
-endfunction
-
-function! ReadOnlyIcon()
-  if &readonly
-    return " "
-  else
-    return ""
-  endif
-endfunction
-
-function! LightLineBufSettings()
-    let et = &et ==# 1 ? "•" : "➜"
-    return ('│ts│'. &tabstop . '│sw│'. &shiftwidth . '│et│' . et . '│')
-endfunction
-
 " recalculate when idle, and after saving
 augroup statline_trail
   autocmd!
   autocmd cursorhold,bufwritepost * unlet! b:statline_trailing_space_warning
 augroup END
-
-" set statusline=
-" set statusline+=%< " Where to truncate line
-" set statusline+=\ %f " Path to the file in the buffer, as typed or relative to current directory
-" set statusline+=%{&modified?'+':''}
-" set statusline+=%{ReadOnlyIcon()}
-" set statusline+=\ %1*%= " Separation point between left and right aligned items.
-" set statusline+=\ \ %{''!=#&filetype?&filetype:'none'}
-" set statusline+=%(\ %{(&bomb\|\|'^$\|utf-8'!~#&fileencoding?'\ '.&fileencoding.(&bomb?'-bom':''):'')
-"   \.('unix'!=#&fileformat?'\ '.&fileformat:'')}%)
-" " set statusline+=%(\ \ %{&modifiable?(&expandtab?'et\ ':'noet\ ').&shiftwidth:''}%)
-" " set statusline+=%(\ \ %{&modifiable?SleuthIndicator():''}%)
-" set statusline+=%{LightLineBufSettings()}
-" set statusline+=\ %*\ %2v " Virtual column number.
-" set statusline+=\ %3p%% " Percentage through file in lines as in |CTRL-G|
 
 " Move selected block up/down
 vnoremap J :m '>+1<CR>gv=gv
@@ -321,30 +276,6 @@ vnoremap c "_c
 " Plugin Configuration
 " ==============================================================================
 
-" Syntastic
-" let g:syntastic_error_symbol = 'x'
-" let g:syntastic_warning_symbol = '!'
-
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_typescript_checkers = []
-" let g:syntastic_json_checkers = ['jsonlint']
-" let g:syntastic_arduino_checkers = ['avrgcc']
-" let g:syntastic_c_checkers = ['gcc']
-" let g:syntastic_cpp_checkers = ['gcc']
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_loc_list_height = 3
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
-" if &diff
-"   let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-" endif
 
 " ALE
 let g:ale_sign_error = "\uf00d"
@@ -354,16 +285,11 @@ let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_error_format = '•%d'
 let g:ale_warning_format = '•%d'
 
-" let g:airline#extensions#ale#enabled = 1
-" set statusline+=%#ale_warning#
-" set statusline+=%{ALEGetStatusLine()}
-" set statusline+=%*
-
 hi ALEErrorSign   guifg=#f92672 guibg=#3b3a32
 hi ALEWarningSign guifg=#fd971f guibg=#3b3a32
 
 let g:ale_linters = {
-      \   'javascript': ['eslint', 'flow'],
+      \   'javascript': ['eslint', 'flow', 'tsserver'],
       \}
 
 let g:ale_fix_on_save = 0
