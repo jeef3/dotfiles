@@ -93,7 +93,6 @@ Plug 'dunckr/js_alternate.vim'           " JavaScript test alternate file switch
 Plug 'suan/vim-instant-markdown'         " Markdown previews
 
 " Dependencies
-" Plug 'Shougo/vimproc.vim', { 'do': 'make' } " TypeScript
 Plug 'tpope/vim-dispatch'               " Omnisharp
 
 call plug#end()
