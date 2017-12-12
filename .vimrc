@@ -180,7 +180,7 @@ augroup relative_line_numbers
   autocmd!
   autocmd BufReadPost,BufNewFile * set relativenumber
 augroup END
-let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro rnu'
 
 " Applescript
 augroup applescript_au
