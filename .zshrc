@@ -160,5 +160,6 @@ source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
 # . `brew --prefix`/bin/aws_zsh_completer.sh
+fpath=(/usr/local/share/zsh-completions $fpath)
 
 export PATH="$HOME/.yarn/bin:$PATH"

@@ -33,6 +33,7 @@ FORMULAS=(
   # Completion
   bash-completion
   docker-completion
+  zsh-completions
 
   # Mah IDE
   # Uninstall first? Upgrade drops the override-system-vim
