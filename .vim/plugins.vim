@@ -9,7 +9,7 @@ Plug 'tpope/vim-obsession'              " Automatically save session state (used
 Plug 'tpope/vim-eunuch'                 " Better shell cmds, like :Rename
 
 " Customization
-Plug 'mhinz/vim-startify'               " Start-up screen
+" Plug 'mhinz/vim-startify'               " Start-up screen
 Plug 'bling/vim-airline'                " Custom status and tab line
 Plug 'junegunn/goyo.vim'                " Zen coding
 Plug 'junegunn/limelight.vim'           " Color focus with Goyo

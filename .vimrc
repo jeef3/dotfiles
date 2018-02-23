@@ -17,8 +17,9 @@ let g:molokai_original=1
 let g:rehash256 = 1
 
 highlight Comment cterm=italic
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%101v.\+/
+" Not needed if the project linting sets this
+" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+" match OverLength /\%121v.\+/
 
 " Set leaders
 let mapleader = ","
@@ -292,9 +293,12 @@ let g:ale_linters = {
       \   'javascript': ['eslint', 'flow', 'tsserver'],
       \}
 
-let g:ale_fix_on_save = 0
+let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-      \   'javascript': ['eslint']
+      \   'css': ['prettier'],
+      \   'javascript': ['eslint', 'prettier'],
+      \   'typescript': ['prettier'],
+      \   'typescript.tsx': ['prettier']
       \}
 nnoremap ]a :ALENextWrap<cr>
 nnoremap [a :ALEPreviousWrap<cr>
@@ -377,6 +381,13 @@ let g:tsuquyomi_disable_quickfix = 1
 augroup typescript
   autocmd!
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+
+  " CSS Colors in TypeScript
+  autocmd BufNewFile,BufRead *.ts,*.tsx call css_color#init('hex', 'extended'
+        \, 'typescriptComment,typescriptLineComment,typescriptStringS,typescriptStringD'
+        \. 'jsComment,jsString,jsTemplateString,jsObjectKeyString,jsObjectStringKey,jsClassStringKey'
+        \. 'typescriptStringS,typescriptStringD,typescriptStringB'
+        \)
 
   autocmd FileType typescript noremap gd :TsuDefinition<cr>
 augroup END
@@ -464,7 +475,7 @@ let g:vim_arduino_auto_open_serial = 1
 " Markdown
 augroup markdown
   autocmd!
-  autocmd FileType markdown setlocal conceallevel=2
+  autocmd FileType markdown setlocal wrap lbr conceallevel=2
 augroup END
 
 " Xtract

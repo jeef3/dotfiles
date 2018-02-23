@@ -1,11 +1,11 @@
 snippet tsx "TypeScript Component"
 	import * as React from "react";
 
-	export interface I$1Props {
+	export interface $1Props {
 
 	}
 
-	const ${1:Thing}: React.StatelessComponent<I$1Props> = ({
+	const ${1:Thing}: React.StatelessComponent<$1Props> = ({
 
 	}) => (
 		<div>
@@ -14,3 +14,7 @@ snippet tsx "TypeScript Component"
 	);
 
 	export default $1;
+snippet log
+	console.log(${0});
+snippet bind
+	this.${1:handle} = this.$1.bind(this);

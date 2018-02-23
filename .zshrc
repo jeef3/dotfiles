@@ -23,7 +23,7 @@ unset file
 [[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH
 
 # rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Prompts
 
@@ -139,8 +139,8 @@ ITALIC=$'%{\x1b[3m%}'
 local repo='$(git_origin)'
 RPROMPT="${ITALIC}%F{8}${repo}%{$reset_color%}"
 
-export NVM_DIR="/Users/jeffknaggs/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# export NVM_DIR="/Users/jeffknaggs/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # For nicer diff highlighting
 # ln -sf "$(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight" ~/bin/diff-highlight
@@ -163,3 +163,7 @@ source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 export PATH="$HOME/.yarn/bin:$PATH"
+
+# tabtab source for electron-forge package
+# uninstall by removing these lines or running `tabtab uninstall electron-forge`
+[[ -f /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /usr/local/lib/node_modules/electron-forge/node_modules/tabtab/.completions/electron-forge.zsh
