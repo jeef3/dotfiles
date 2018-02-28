@@ -124,18 +124,31 @@ collapsed_wd() {
 ')
 }
 
+jobies() {
+  list=$(jobs | cut -d " " -f 6)
+
+  if [ -n "${list}" ]; then
+    echo "%F{8}${ITALIC}($(jobs | cut -d " " -f 6))%{$reset_color%} "
+  else
+    echo ''
+  fi
+}
+
 local user_host=""
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
   user_host="${USER}@%m "
 fi
+
+ITALIC=$'%{\x1b[3m%}'
+
 local current_dir='%F{11}%B$(collapsed_wd)%{$reset_color%}'
 local git_line='$(git_status)'
 local exit_status="%(?.%F{8}.%F{9})❯%{$reset_color%}"
+local job_list='$(jobies)'
 
 PROMPT="${user_host}${current_dir} ${git_line}
-${exit_status} "
+${job_list}${exit_status} "
 
-ITALIC=$'%{\x1b[3m%}'
 local repo='$(git_origin)'
 RPROMPT="${ITALIC}%F{8}${repo}%{$reset_color%}"
 
