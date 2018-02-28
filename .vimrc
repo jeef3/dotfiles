@@ -383,7 +383,7 @@ augroup typescript
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
   " CSS Colors in TypeScript
-  autocmd BufNewFile,BufRead *.ts,*.tsx call css_color#init('hex', 'extended'
+  autocmd FileType typescript call css_color#init('hex', 'extended'
         \, 'typescriptComment,typescriptLineComment,typescriptStringS,typescriptStringD'
         \. 'jsComment,jsString,jsTemplateString,jsObjectKeyString,jsObjectStringKey,jsClassStringKey'
         \. 'typescriptStringS,typescriptStringD,typescriptStringB'
