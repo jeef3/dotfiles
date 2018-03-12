@@ -9,6 +9,12 @@ sudo -v
 info "Update and upgrade brew"
 brew update && brew upgrade
 
+# Taps
+info "Tapping"
+brew tap eddieantonio/eddieantonio
+brew tap osx-cross/avr
+brew tap sudar/arduino-mk
+
 FORMULAS=(
   # GNU core utilities (those that come with OS X are outdated)
   coreutils
@@ -51,7 +57,7 @@ FORMULAS=(
   fzf
   z
   diff-so-fancy
-  yarn # Still needed? Comes with Node?
+  yarn
   awscli
   watchman
   fswatch
@@ -117,6 +123,7 @@ CASKS=(
   fastlane
   imageoptim
   google-chrome
+  firefoxdeveloperedition
 
   # Misc
   caprine   # Facebook Messenger
@@ -145,7 +152,6 @@ CASKS=(
 
 # TODO: To Save
 # Fonts
-# Windows VM?
 
 # Not available or still figuring out:
 # Syncplicity
@@ -153,15 +159,7 @@ CASKS=(
 # MindNode
 # Xcode
 # Day One?
-# IconJar??
-# Kaleidoscope
-# Microsoft Remote Desktop
-# Parallels
-# Pixelmator
 # Sim Daltonism
-# Skitch - can I use something else?
-# Chrome Postman?
-# Textual (IRC)?
 
 formula_exists() {
   if $(brew list | grep $1 > /dev/null); then
@@ -179,9 +177,6 @@ cask_exists() {
   return 1
 }
 
-# Arduino
-brew tap osx-cross/avr
-brew tap sudar/arduino-mk
 
 for index in ${!FORMULAS[*]}
 do
@@ -208,8 +203,6 @@ brew install homebrew/dupes/grep
 
 # TODO: Needed?
 # open /usr/local/Cellar/x-quartz/2.7.4/XQuartz.pkg
-
-brew linkapps
 
 # Remove outdated versions from the cellar
 brew cleanup

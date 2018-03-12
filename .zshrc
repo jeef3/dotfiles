@@ -163,6 +163,8 @@ RPROMPT="${ITALIC}%F{8}${repo}%{$reset_color%}"
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+unalias imgcat # I'm using one installed from brew instead
+
 source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # tabtab source for serverless package
