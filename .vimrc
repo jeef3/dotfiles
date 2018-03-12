@@ -475,7 +475,12 @@ let g:vim_arduino_auto_open_serial = 1
 " Markdown
 augroup markdown
   autocmd!
-  autocmd FileType markdown setlocal wrap lbr conceallevel=2
+  autocmd FileType markdown setlocal wrap lbr conceallevel=2 spell
+
+  " This is almost always what I meant anyway.
+  autocmd FileType markdown noremap j gj
+  autocmd FileType markdown noremap k gk
+  autocmd FileType markdown nnoremap $ g$
 augroup END
 
 " Xtract
