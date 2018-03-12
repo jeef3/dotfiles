@@ -6,7 +6,7 @@ alias sd="showdesktop; show.applescript"
 
 alias rake="noglob rake"
 
-alias bubu="./bubu.sh"
+alias bubu="bubu.sh"
 
 alias so="source"
 
