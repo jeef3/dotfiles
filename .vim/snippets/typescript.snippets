@@ -18,3 +18,9 @@ snippet log
 	console.log(${0});
 snippet bind
 	this.${1:handle} = this.$1.bind(this);
+snippet jsxs "Styled Component"
+	import styled from 'styled-components';
+
+	export default styled.${1:div}\`
+		${0}
+	\`;
