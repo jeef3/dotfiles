@@ -28,6 +28,7 @@ FORMULAS=(
 
   # Shell highlighting
   zsh-syntax-highlighting
+  zsh-autosuggestions
 
   # Wget with iri
   "wget --enable-iri"

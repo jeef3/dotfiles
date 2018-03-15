@@ -166,6 +166,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 unalias imgcat # I'm using one installed from brew instead
 
 source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source `brew --prefix`/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
