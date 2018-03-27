@@ -29,3 +29,7 @@ function movToMp4() {
 function port() {
   ps -o pid,command -p $(lsof -i:$1 -t)
 }
+
+function pcat() {
+  cat $1 | pygmentize
+}
