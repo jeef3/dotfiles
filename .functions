@@ -33,3 +33,11 @@ function port() {
 function pcat() {
   cat $1 | pygmentize
 }
+
+function pngToBase64() {
+  local prefix="url('data:image/png;base64,"
+  local encoded=$(openssl base64 -in $1 | tr -d '\n')
+  local suffix="')"
+
+  echo $prefix$encoded$suffix
+}
