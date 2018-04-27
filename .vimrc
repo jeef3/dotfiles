@@ -103,6 +103,7 @@ set ruler " Show the cursor position
 set scrolloff=10 " Start scrolling ten lines before horizontal border of window.
 set shortmess=atI " Don't show the intro message when starting vim.
 set noshowmode " Don't show the current mode, it's in our statusline.
+set showcmd " A little useful
 set showtabline=2 " Always show tab bar.
 set sidescrolloff=10 " Start scrolling three columns before vertical border of window.
 set sidescroll=1 " Scroll 1 col at a time
@@ -289,17 +290,16 @@ let g:ale_warning_format = '•%d'
 hi ALEErrorSign   guifg=#f92672 guibg=#3b3a32
 hi ALEWarningSign guifg=#fd971f guibg=#3b3a32
 
-let g:ale_linters = {
-      \   'javascript': ['eslint', 'flow', 'tsserver'],
-      \}
+let g:ale_linters = {'jsx': ['stylelint', 'eslint']}
+let g:ale_linter_aliases = {'jsx': 'css', 'tsx': 'css'}
 
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-      \   'css': ['prettier'],
+      \   'css': ['stylelint', 'prettier'],
       \   'javascript': ['eslint', 'prettier'],
-      \   'typescript': ['prettier'],
-      \   'typescript.tsx': ['prettier']
+      \   'typescript': ['tslint', 'prettier'],
       \}
+
 nnoremap ]a :ALENextWrap<cr>
 nnoremap [a :ALEPreviousWrap<cr>
 nnoremap <leader>af :ALEFix<cr>
@@ -376,6 +376,7 @@ let g:TerminusInsertCursorShape=2
 let g:tsuquyomi_disable_default_mappings=1
 let g:tsuquyomi_completion_detail = 1
 let g:tsuquyomi_disable_quickfix = 1
+let g:tsuquyomi_shortest_import_path = 1
 
 " tsx file detection
 augroup typescript
@@ -389,6 +390,7 @@ augroup typescript
         \. 'typescriptStringS,typescriptStringD,typescriptStringB'
         \)
 
+  autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
   autocmd FileType typescript noremap gd :TsuDefinition<cr>
 augroup END
 
@@ -415,7 +417,7 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 noremap <C-t> :Files<cr>
 noremap <C-p> :Ag<cr>
-noremap <leader>t :Buffers<cr>
+" noremap <leader>t :Buffers<cr>
 
 " JSX
 let g:jsx_ext_required = 0
