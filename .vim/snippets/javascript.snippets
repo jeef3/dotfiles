@@ -11,9 +11,12 @@ snippet jsxp "Pure Component"
 snippet jsxs "Styled Component"
 	import styled from 'styled-components';
 
-	export default styled.${1:div}\`
+	const ${1:MyComponent} = styled.${2:div}\`
 		${0}
 	\`;
+	$1.displayName = '$1';
+
+	export default $1;
 snippet jsxac "Airbnb class component"
 	import React, { Component, PropTypes } from 'react';
 
@@ -157,9 +160,7 @@ snippet it "it('should ')"
 		${0}
 	});
 snippet styled "Styled Component"
-	import styled from 'styled-components/native';
-
-	export default styled.View\`
+	const ${1} = styled.${2:div}\`
 		${0}
 	\`;
-
+	$1.displayName = '$1';
