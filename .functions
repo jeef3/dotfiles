@@ -1,3 +1,6 @@
+info() { printf "  [ \033[00;34m..\033[0m ] $1\n"; }
+success() { printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"; }
+
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
     local port="${1:-8000}"
@@ -40,4 +43,36 @@ function pngToBase64() {
   local suffix="')"
 
   echo $prefix$encoded$suffix
+}
+
+function startNvm() {
+  which nvm > /dev/null
+
+  if [ $? -eq 0 ]; then
+    success "nvm already started"
+    return;
+  fi
+
+  info "Starting nvm"
+
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+  success "nvm started"
+}
+
+function startRbenv() {
+  which rbenv > /dev/null
+
+  if [ $? -eq 0 ]; then
+    success "rbenv already started"
+    return;
+  fi
+
+  info "Starting rbenv"
+
+  rbenv init -
+
+  success "rbenv started"
 }

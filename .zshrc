@@ -22,8 +22,6 @@ unset file
 # Load scripts
 [[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH
 
-# rbenv
-# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Prompts
 
@@ -152,8 +150,6 @@ ${job_list}${exit_status} "
 local repo='$(git_origin)'
 RPROMPT="${ITALIC}%F{8}${repo}%{$reset_color%}"
 
-# export NVM_DIR="/Users/jeffknaggs/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # For nicer diff highlighting
 # ln -sf "$(brew --prefix)/share/git-core/contrib/diff-highlight/diff-highlight" ~/bin/diff-highlight

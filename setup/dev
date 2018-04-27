@@ -1,6 +1,10 @@
 #!/bin/sh
 
 npm install -g \
-  react-native-cli
+  create-react-app \
+  react-native-cli \
   import-js \
   instant-markdown-d
+
+# NVM
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
