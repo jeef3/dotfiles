@@ -60,6 +60,9 @@ function startNvm() {
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
   success "nvm started"
+
+  info "Switching to lts/carbon"
+  nvm use lts/carbon
 }
 
 function startRbenv() {
