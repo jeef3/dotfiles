@@ -79,3 +79,13 @@ function startRbenv() {
 
   success "rbenv started"
 }
+
+DIR=$(dirname "$(readlink -n $0)")
+function tern() {
+  if [ -e .tern-project ]; then
+    info "Tern project file already exists"
+  else
+    cp $DIR/lib/.tern-project-template .tern-project
+    success ".tern-project template copied"
+  fi
+}
