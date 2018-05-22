@@ -144,11 +144,11 @@ local git_line='$(git_status)'
 local exit_status="%(?.%F{8}.%F{9})❯%{$reset_color%}"
 local job_list='$(jobies)'
 
-PROMPT="${user_host}${current_dir} ${git_line}
-${job_list}${exit_status} "
+PROMPT="${user_host}${current_dir} ${job_list}${exit_status} "
 
 local repo='$(git_origin)'
-RPROMPT="${ITALIC}%F{8}${repo}%{$reset_color%}"
+local repoC="${ITALIC}%F{8}${repo}%{$reset_color%}"
+RPROMPT="${repoC} ${git_line}"
 
 
 # For nicer diff highlighting
