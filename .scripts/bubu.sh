@@ -1,20 +1,25 @@
 #!/bin/bash
 
-title() { printf "\n$(tput bold)$1\n\n"; }
-check() { printf "  \033[00;32m✔︎\033[0m $1\n"; }
-info() { printf "  [ \033[00;34m..\033[0m ] $1\n"; }
-success() { printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"; }
+title() { printf "\n $(tput bold)$1$(tput sgr0)\n\n"; }
+check() { printf " $(tput setaf 8)›  $(tput setaf 10)✓\t$(tput sgr0)$1\n"; }
+info() { printf " $(tput setaf 8)›  $(tput setaf 12)…\t$(tput sgr0)$1\n"; }
+cmd() { printf " $(tput setaf 8)›  $(tput setaf 14)↘️\t$(tput bold)$(tput setaf 8)$1$(tput sgr0)\n"; }
+
+title "Bubu Time!"
 
 info "Updating Homebrew"
+cmd "brew update"
 brew update
 
 OUTDATED=$(brew outdated)
 UPDATED=($OUTDATED)
 
 info "Checking for and updating outdated brews"
+cmd "brew upgrade"
 brew upgrade
 
 info "Cleaning up"
+cmd "brew cleanup"
 brew cleanup
 
 # Summary
@@ -23,4 +28,3 @@ for index in ${!UPDATED[*]}
 do
   check "${UPDATED[$index]}"
 done
-

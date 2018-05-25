@@ -1,5 +1,9 @@
-info() { printf "  [ \033[00;34m..\033[0m ] $1\n"; }
-success() { printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"; }
+#!/bin/bash
+
+tit() { printf "\n $(tput bold)$1$(tput sgr0)\n\n"; }
+success() { printf " $(tput setaf 8)›  $(tput setaf 10)✓\t$(tput sgr0)$1\n"; }
+info() { printf " $(tput setaf 8)›  $(tput setaf 12)…\t$(tput sgr0)$1\n"; }
+cmd() { printf " $(tput setaf 8)›  $(tput setaf 14)↘️\t$(tput bold)$(tput setaf 8)$1$(tput sgr0)\n"; }
 
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
@@ -46,8 +50,9 @@ function pngToBase64() {
 }
 
 function startNvm() {
-  which nvm > /dev/null
+  tit "Start nvm"
 
+  which nvm > /dev/null
   if [ $? -eq 0 ]; then
     success "nvm already started"
     return;
@@ -62,6 +67,7 @@ function startNvm() {
   success "nvm started"
 
   info "Switching to lts/carbon"
+  cmd "nvm use lts/carbon"
   nvm use lts/carbon
 }
 
