@@ -48,7 +48,8 @@ git_status() {
 
     if [ $(tput cols) -gt 100 ]; then
       REMOTE_ORIGIN_URL=$(git config --get remote.origin.url | sed -En 's/(https:\/\/|git@)[^:\/]+(:|\/)(.+)\.git/\3/p')
-      STATUS="$STATUS ${ITALIC}%F{8}${REMOTE_ORIGIN_URL}"
+      REMOTE="${ITALIC}%F{8}${REMOTE_ORIGIN_URL}%{${reset_color}%}"
+      STATUS="$STATUS $REMOTE"
     fi
 
     echo "$STATUS"
