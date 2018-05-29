@@ -31,7 +31,7 @@ unset file
 # Load scripts
 [[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH
 
-PROMPT='$(current_dir)$(jobbies)$(exit_status)${vim_mode} '
+PROMPT='$(current_dir)$(jobbies)$(exit_status)${vim_mode}${RESET} '
 RPROMPT='$(git_status)'
 
 # For nicer diff highlighting

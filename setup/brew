@@ -1,6 +1,10 @@
 #!/bin/sh
 
-source ./lib/util
+set -e
+
+source ./lib/output.sh
+
+tit "Brew Setup"
 
 # Ask for the administrator password upfront
 sudo -v
