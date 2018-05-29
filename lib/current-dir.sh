@@ -6,3 +6,7 @@ collapsed_wd() {
     }; s|^$ENV{HOME}|~|g; s|/([^/.])[^/]*(?=/)|/$1|g; s|/\.([^/])[^/]*(?=/)|/.$1|g
   ')
 }
+
+current_dir() {
+  echo "$YELLOW$BOLD$(collapsed_wd)$RESET"
+}

@@ -1,57 +1,59 @@
-source $HOME/projects/dotfiles/lib/zsh-git-prompt/zshrc.sh
+DIR=$(dirname $0)
 
-ZSH_THEME_GIT_PROMPT_BEHIND="\uf433"
-ZSH_THEME_GIT_PROMPT_AHEAD="\uf431"
+source $DIR/zsh-git-prompt/zshrc.sh
 
-ZSH_THEME_GIT_PROMPT_STAGED="%F{3}\uf429"
-ZSH_THEME_GIT_PROMPT_CONFLICTS="%F{5}\uf421"
-ZSH_THEME_GIT_PROMPT_CHANGED="%F{2}\uf040"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%F{6}\u2026"
-ZSH_THEME_GIT_PROMPT_CLEAN="%F{2}\uf00c"
+BRANCH_ICON="\ue725"
+BEHIND_ICON="\uf433"
+AHEAD_ICON="\uf431"
 
-ITALIC=$'%{\x1b[3m%}'
+STAGED_ICON="\uf429"
+CONFLICTS_ICON="\uf421"
+CHANGED_ICON="\uf040"
+UNTRACKED_ICON="\u2026"
+CLEAN_ICON="\uf00c"
 
 git_status() {
-  local SEPARATOR="%F{8}•%{${reset_color}%}"
+  local SEPARATOR="${DARK_GRAY}•"
 
   if [ -n "$__CURRENT_GIT_STATUS" ]; then
 
-    STATUS="%F{13}\ue725 %B$GIT_BRANCH%{${reset_color}%}"
+    # Branch name
+    STATUS="${MAGENTA}${BOLD}${BRANCH_ICON} ${GIT_BRANCH}${RESET}"
 
     if [ "$GIT_BEHIND" -ne "0" ]; then
-      STATUS="$STATUS $SEPARATOR $ZSH_THEME_GIT_PROMPT_BEHIND$GIT_BEHIND%{${reset_color}%}"
+      STATUS="${STATUS} ${SEPARATOR} ${BEHIND_ICON}${GIT_BEHIND}${RESET}"
     fi
     if [ "$GIT_AHEAD" -ne "0" ]; then
-      STATUS="$STATUS $SEPARATOR $ZSH_THEME_GIT_PROMPT_AHEAD$GIT_AHEAD%{${reset_color}%}"
+      STATUS="${STATUS} ${SEPARATOR} ${AHEAD_ICON}${GIT_AHEAD}${RESET}"
     fi
 
-    STATUS="$STATUS $SEPARATOR"
-
+    STATUS="${STATUS} ${SEPARATOR}"
 
     if [ "$GIT_CONFLICTS" -ne "0" ]; then
-      STATUS="$STATUS $ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS%{${reset_color}%}"
+      STATUS="${STATUS} ${MAGENTA}${CONFLICTS_ICON}${GIT_CONFLICTS}"
     fi
     if [ "$GIT_STAGED" -ne "0" ]; then
-      STATUS="$STATUS $ZSH_THEME_GIT_PROMPT_STAGED$GIT_STAGED%{${reset_color}%}"
+      STATUS="${STATUS} ${ORANGE}${STAGED_ICON}${GIT_STAGED}"
     fi
     if [ "$GIT_CHANGED" -ne "0" ]; then
-      STATUS="$STATUS $ZSH_THEME_GIT_PROMPT_CHANGED$GIT_CHANGED%{${reset_color}%}"
+      STATUS="${STATUS} ${GREEN}${CHANGED_ICON}${GIT_CHANGED}"
     fi
     if [ "$GIT_UNTRACKED" -ne "0" ]; then
-      STATUS="$STATUS $ZSH_THEME_GIT_PROMPT_UNTRACKED%{${reset_color}%}"
+      STATUS="${STATUS} ${CYAN}${UNTRACKED_ICON}"
     fi
     if [ "$GIT_CHANGED" -eq "0" ] && [ "$GIT_CONFLICTS" -eq "0" ] && [ "$GIT_STAGED" -eq "0" ] && [ "$GIT_UNTRACKED" -eq "0" ]; then
-      STATUS="$STATUS $ZSH_THEME_GIT_PROMPT_CLEAN"
+      STATUS="${STATUS} ${GREEN}${CLEAN_ICON}"
     fi
 
-    STATUS="$STATUS%{${reset_color}%}"
+    STATUS="${STATUS}${RESET}"
 
     if [ $(tput cols) -gt 100 ]; then
       REMOTE_ORIGIN_URL=$(git config --get remote.origin.url | sed -En 's/(https:\/\/|git@)[^:\/]+(:|\/)(.+)\.git/\3/p')
-      REMOTE="${ITALIC}%F{8}${REMOTE_ORIGIN_URL}%{${reset_color}%}"
-      STATUS="$STATUS $REMOTE"
+      REMOTE="${ITALIC}${DARK_GRAY}${REMOTE_ORIGIN_URL}"
+
+      STATUS="${STATUS} ${REMOTE}"
     fi
 
-    echo "$STATUS"
+    echo "${STATUS}${RESET}"
   fi
 }

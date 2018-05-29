@@ -5,10 +5,17 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/projects/dotfiles/lib/collapsed-wd.sh
-source $HOME/projects/dotfiles/lib/jobbies.sh
-source $HOME/projects/dotfiles/lib/git-line.sh
-source $HOME/projects/dotfiles/lib/vi-mode.sh
+
+# Source dependencies
+SOURCE=${(%):-%N}
+while [ -h "$SOURCE" ]; do
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+DOTFILES_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+source $DOTFILES_DIR/lib/index.sh
 
 # User configuration
 export PATH=~/bin:/usr/local/sbin:/usr/local/bin:$PATH
@@ -24,11 +31,7 @@ unset file
 # Load scripts
 [[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH
 
-ITALIC=$'%{\x1b[3m%}'
-
-local current_dir="%F{11}%B$(collapsed_wd)%{$reset_color%}"
-local exit_status="%(?.%F{8}.%F{9})$(echo -e '\uf0da')%{$reset_color%}"
-PROMPT='${current_dir} $(jobbies)${exit_status}${vim_mode} '
+PROMPT='$(current_dir)$(jobbies)$(exit_status)${vim_mode} '
 RPROMPT='$(git_status)'
 
 # For nicer diff highlighting
