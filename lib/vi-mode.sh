@@ -1,6 +1,6 @@
 bindkey -v
 
-vim_ins_mode="$YELLOW❯"
+vim_ins_mode="$DARK_GRAY❯"
 vim_cmd_mode="$(hex_to_true 00dfff)❯"
 vim_mode=$vim_ins_mode
 
