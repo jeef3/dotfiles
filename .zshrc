@@ -27,7 +27,7 @@ unset file
 ITALIC=$'%{\x1b[3m%}'
 
 local current_dir="%F{11}%B$(collapsed_wd)%{$reset_color%}"
-local exit_status="%(?.%F{8}.%F{9})⇢ %{$reset_color%}"
+local exit_status="%(?.%F{8}.%F{9})$(echo -e '\uf0da')%{$reset_color%}"
 PROMPT='${current_dir} $(jobbies)${exit_status}${vim_mode} '
 RPROMPT='$(git_status)'
 
