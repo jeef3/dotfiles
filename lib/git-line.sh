@@ -21,10 +21,10 @@ git_status() {
     STATUS="${MAGENTA}${BOLD}${BRANCH_ICON} ${GIT_BRANCH}${RESET}"
 
     if [ "$GIT_BEHIND" -ne "0" ]; then
-      STATUS="${STATUS} ${SEPARATOR} ${BEHIND_ICON}${GIT_BEHIND}${RESET}"
+      STATUS="${STATUS} ${SEPARATOR} ${PINK}${BEHIND_ICON}${GIT_BEHIND}${RESET}"
     fi
     if [ "$GIT_AHEAD" -ne "0" ]; then
-      STATUS="${STATUS} ${SEPARATOR} ${AHEAD_ICON}${GIT_AHEAD}${RESET}"
+      STATUS="${STATUS} ${SEPARATOR} ${PINK}${AHEAD_ICON}${GIT_AHEAD}${RESET}"
     fi
 
     STATUS="${STATUS} ${SEPARATOR}"

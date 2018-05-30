@@ -18,6 +18,7 @@ MAGENTA=$(hex_to_true f92a72)
 GREEN=$(hex_to_true a6e22e)
 CYAN=$(hex_to_true 66d9ef)
 ORANGE=$(hex_to_true fd971f)
+PINK=$(hex_to_true fd64d5)
 
 INDENT_ICON="\uf0da"
 CHECK_ICON="\uf00c"
