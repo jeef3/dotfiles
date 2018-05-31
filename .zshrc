@@ -1,7 +1,8 @@
-# Zsh Plugin
+# Z Plugin
 source ~/.zplugin/bin/zplugin.zsh
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
+source ~/.zsh/plugins.sh
 
 # Source dependencies
 SOURCE=${(%):-%N}
@@ -12,7 +13,6 @@ while [ -h "$SOURCE" ]; do
 done
 DOTFILES_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-source $DOTFILES_DIR/lib/zsh_plugins.sh
 source $DOTFILES_DIR/lib/index.sh
 
 # Plugin Config

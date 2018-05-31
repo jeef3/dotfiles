@@ -12,6 +12,7 @@ symlinks=(
   .oh-my-zsh
   .vim
   .vimrc
+  .zsh
   .zshrc
   .editorconfig
   .aliases
