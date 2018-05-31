@@ -124,6 +124,7 @@ CASKS=(
   # Dev Tools
   react-native-debugger
   android-studio
+  intel-haxm
   java
   fastlane
   imageoptim
