@@ -1,7 +1,7 @@
 # Z Plugin
-source ~/.zplugin/bin/zplugin.zsh
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
+# source ~/.zplugin/bin/zplugin.zsh
+# autoload -Uz _zplugin
+# (( ${+_comps} )) && _comps[zplugin]=_zplugin
 source ~/.zsh/plugins.sh
 
 # Source dependencies
@@ -58,5 +58,15 @@ export SAVEHIST=${HISTSIZE}
 
 setopt hist_expire_dups_first
 
-### Added by Zplugin's installer
-### End of Zplugin's installer chunk
+# The following lines were added by compinstall
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' verbose true
+zstyle :compinstall filename '/Users/jeffknaggs/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall

@@ -26,9 +26,8 @@ FORMULAS=(
   # GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
   findutils
 
-  # Shells
+  # Just, because
   bash
-  zsh
 
   # Wget with iri
   "wget --enable-iri"
@@ -40,6 +39,11 @@ FORMULAS=(
   # Mah IDE
   # Uninstall first? Upgrade drops the override-system-vim
   "macvim --with-override-system-vim"
+
+  # Zsh
+  zsh
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 
   # Useful tools
   trash

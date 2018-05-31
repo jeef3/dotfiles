@@ -1,0 +1,6 @@
+[submodule ".zsh/plugged/zsh-git-prompt"]
+	path = .zsh/plugged/zsh-git-prompt
+	url = https://github.com/olivierverdier/zsh-git-prompt.git
+[submodule ".zsh/plugged/zsh-completions"]
+	path = .zsh/plugged/zsh-completions
+	url = git://github.com/zsh-users/zsh-completions.git
