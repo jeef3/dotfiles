@@ -15,6 +15,10 @@ info "Installing Git submodules"
 git submodule init
 git submodule update --recursive
 
+# Install Zsh Plugin
+info "Installing/updating ZshPlugin"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
+
 # Install Vim Plug
 info "Installing/updating Vim Plug"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \

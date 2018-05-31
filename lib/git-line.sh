@@ -1,7 +1,3 @@
-DIR=$(dirname $0)
-
-source $DIR/zsh-git-prompt/zshrc.sh
-
 BRANCH_ICON="\ue725"
 BEHIND_ICON="\uf433"
 AHEAD_ICON="\uf431"
@@ -11,6 +7,20 @@ CONFLICTS_ICON="\uf421"
 CHANGED_ICON="\uf040"
 UNTRACKED_ICON="\u2026"
 CLEAN_ICON="\uf00c"
+
+# TODO: Display remote tracked branch
+#
+# git for-each-ref --shell --format='
+
+# b=%(refname:short) u=%(upstream:short)
+# # Make a fancy report or do something scripty with the values.
+# if test -n "$u"; then
+#   printf "%s merges from %s\n" "$b" "$u" 
+# else
+#   printf "%s does not merge from anything\n" "$b" 
+# fi
+
+# ' refs/heads/ | sh
 
 git_status() {
   local SEPARATOR="${DARK_GRAY}•"

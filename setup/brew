@@ -30,21 +30,12 @@ FORMULAS=(
   bash
   zsh
 
-  # Shell highlighting
-  zsh-syntax-highlighting
-  zsh-autosuggestions
-
   # Wget with iri
   "wget --enable-iri"
 
   # Git
   git
   tig
-
-  # Completion
-  bash-completion
-  docker-completion
-  zsh-completions
 
   # Mah IDE
   # Uninstall first? Upgrade drops the override-system-vim

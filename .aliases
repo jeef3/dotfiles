@@ -31,3 +31,10 @@ alias urlencode='python -c "import sys, urllib as ul; \
 alias bs="build-status"
 
 alias altool="/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Support/altool"
+
+alias la="ls -la"
+
+alias ..="cd .."
+alias ...="..; .."
+alias ....="...; .."
+alias .....="....; .."
