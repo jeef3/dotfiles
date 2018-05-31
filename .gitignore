@@ -6,7 +6,3 @@
 .vim/plugged
 .vim/autoload
 
-.tmux/plugins
-.tmux/resurrect
-tmux*.log
-

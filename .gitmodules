@@ -1,9 +1,0 @@
-[submodule ".oh-my-zsh"]
-	path = .oh-my-zsh
-	url = https://github.com/robbyrussell/oh-my-zsh.git
-[submodule ".tmux/plugins/tpm"]
-	path = .tmux/plugins/tpm
-	url = https://github.com/tmux-plugins/tpm
-[submodule "lib/zsh-git-prompt"]
-	path = lib/zsh-git-prompt
-	url = https://github.com/olivierverdier/zsh-git-prompt.git

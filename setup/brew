@@ -40,8 +40,6 @@ FORMULAS=(
   # Mah IDE
   # Uninstall first? Upgrade drops the override-system-vim
   "macvim --with-override-system-vim"
-  tmux
-  reattach-to-user-namespace
 
   # Useful tools
   trash

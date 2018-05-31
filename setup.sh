@@ -11,10 +11,6 @@ success() { printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"; }
 # Link files
 ./link.sh
 
-info "Installing Git submodules"
-git submodule init
-git submodule update --recursive
-
 # Install Zsh Plugin
 info "Installing/updating ZshPlugin"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
@@ -28,9 +24,6 @@ info "Installing Vim plug-ins"
 vim +PlugUpdate +qall
 success "Vim plug-ins installed"
 
-info "Installing tmux plug-ins"
-~/.tmux/plugins/tpm/bin/update_plugins all
-
 info "Switching to Zsh"
 if [ $(basename $SHELL) == 'zsh' ]; then
   success "Already using Zsh"
@@ -41,7 +34,6 @@ fi
 
 info "Adding italics"
 tic xterm-256color-italic.terminfo
-tic tmux-256color-terminfo
 
 info "Installing brew packages"
 ./setup/brew
