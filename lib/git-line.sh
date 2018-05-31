@@ -17,8 +17,23 @@ git_status() {
 
   if [ -n "$__CURRENT_GIT_STATUS" ]; then
 
+    local BRANCH=$GIT_BRANCH
+    if [ $(tput cols) -lt 120 ]; then
+      BRANCH="${BRANCH:0:15}"
+    fi
+    if [ $(tput cols) -lt 90 ]; then
+      BRANCH="${BRANCH:0:10}"
+    fi
+    if [ $(tput cols) -lt 60 ]; then
+      BRANCH="${BRANCH:0:5}"
+    fi
+
+    if [ ${#BRANCH} -lt ${#GIT_BRANCH} ] ; then
+      BRANCH="$BRANCH…"
+    fi
+
     # Branch name
-    STATUS="${MAGENTA}${BOLD}${BRANCH_ICON} ${GIT_BRANCH}${RESET}"
+    STATUS="${MAGENTA}${BOLD}${BRANCH_ICON} ${BRANCH}${RESET}"
 
     if [ "$GIT_BEHIND" -ne "0" ]; then
       STATUS="${STATUS} ${SEPARATOR} ${PINK}${BEHIND_ICON}${GIT_BEHIND}${RESET}"
