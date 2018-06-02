@@ -58,15 +58,8 @@ export SAVEHIST=${HISTSIZE}
 
 setopt hist_expire_dups_first
 
-# The following lines were added by compinstall
-zstyle ':completion:*' format 'Completing %d'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' menu select=long
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' verbose true
-zstyle :compinstall filename '/Users/jeffknaggs/.zshrc'
+# Completion
+zstyle ':completion:*' menu select
 
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
