@@ -8,26 +8,14 @@ CHANGED_ICON="\uf040"
 UNTRACKED_ICON="\u2026"
 CLEAN_ICON="\uf00c"
 
-# TODO: Display remote tracked branch
-#
-# git for-each-ref --shell --format='
+SEPARATOR="${DARK_GRAY}•"
 
-# b=%(refname:short) u=%(upstream:short)
-# # Make a fancy report or do something scripty with the values.
-# if test -n "$u"; then
-#   printf "%s merges from %s\n" "$b" "$u" 
-# else
-#   printf "%s does not merge from anything\n" "$b" 
-# fi
-
-# ' refs/heads/ | sh
-
-git_status() {
-  local SEPARATOR="${DARK_GRAY}•"
+git_line() {
+  precmd_update_git_vars
 
   if [ -n "$__CURRENT_GIT_STATUS" ]; then
+    typeset BRANCH=$GIT_BRANCH
 
-    local BRANCH=$GIT_BRANCH
     if [ $(tput cols) -lt 120 ]; then
       BRANCH="${BRANCH:0:15}"
     fi

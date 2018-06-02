@@ -4,3 +4,6 @@
 [submodule ".zsh/plugged/zsh-completions"]
 	path = .zsh/plugged/zsh-completions
 	url = git://github.com/zsh-users/zsh-completions.git
+[submodule ".zsh/plugged/zsh-async"]
+	path = .zsh/plugged/zsh-async
+	url = git@github.com:mafredri/zsh-async.git

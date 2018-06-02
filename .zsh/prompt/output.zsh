@@ -1,8 +1,8 @@
 hex_to_true() {
-  hex=$1
-  r=$(printf "%d" 0x${hex:0:2})
-  g=$(printf "%d" 0x${hex:2:2})
-  b=$(printf "%d" 0x${hex:4:2})
+  typeset hex=$1
+  typeset r=$(printf "%d" 0x${hex:0:2})
+  typeset g=$(printf "%d" 0x${hex:2:2})
+  typeset b=$(printf "%d" 0x${hex:4:2})
 
   echo "%{\x1b[38;2;${r};${g};${b}m%}"
 }
