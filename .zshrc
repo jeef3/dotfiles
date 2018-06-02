@@ -1,7 +1,3 @@
-# Z Plugin
-# source ~/.zplugin/bin/zplugin.zsh
-# autoload -Uz _zplugin
-# (( ${+_comps} )) && _comps[zplugin]=_zplugin
 source ~/.zsh/plugins.sh
 
 # Source dependencies
@@ -30,6 +26,7 @@ unset file
 # Load scripts
 [[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH
 
+setopt PROMPT_SUBST
 PROMPT='$(current_dir)$(jobbies)$(exit_status)${vim_mode}${RESET} '
 RPROMPT='$(git_status)'
 
