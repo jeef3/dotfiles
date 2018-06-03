@@ -8,12 +8,12 @@ sudo -v
 info() { printf "  [ \033[00;34m..\033[0m ] $1\n"; }
 success() { printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"; }
 
+info "Installing Git submodules"
+git submodule init
+git submodule update --recursive
+
 # Link files
 ./link.sh
-
-# Install Zsh Plugin
-info "Installing/updating ZshPlugin"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
 
 # Install Vim Plug
 info "Installing/updating Vim Plug"

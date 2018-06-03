@@ -5,5 +5,3 @@
 .vim/bundle/*
 .vim/plugged
 .vim/autoload
-
-.zsh/plugged
