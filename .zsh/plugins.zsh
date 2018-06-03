@@ -33,9 +33,11 @@ load_plugins
 load_async_plugins() {
   # Git Prompt
   if [ ! -e ~/.zsh/plugged/zsh-git-prompt/.stack-work ]; then
+    echo "\n"
     info "Setting up Haskell support for zsh-git-prompt"
-    stack setup
-    stack build && stack install
+    (cd ~/.zsh/plugged/zsh-git-prompt && \
+      stack setup && \
+      stack build && stack install)
   fi
   GIT_PROMPT_EXECUTABLE="haskell"
   source ~/.zsh/plugged/zsh-git-prompt/zshrc.sh
@@ -44,6 +46,9 @@ load_async_plugins() {
   ZSH_AUTOSUGGEST_USE_ASYNC=1
   source $BREW_HOME/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   fpath=(~/.zsh/plugged/zsh-completions/src $fpath)
+
+  # .. ... .... aliases
+  source ~/.zsh/plugged/up.zsh/up.plugin.zsh
 
   # Syntax Highlighting
   source $BREW_HOME/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
