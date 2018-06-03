@@ -27,7 +27,7 @@ async_load_prompt() {
 
 function precmd() {
 
-  PROMPT='$(current_dir)$(jobbies)$(exit_status)${vim_mode}${RESET} '
+  PROMPT='$(current_dir)$(jobbies)$(exit_status)${VIM_MODE}${RESET} '
   RPROMPT=''
 
   async_load_prompt
