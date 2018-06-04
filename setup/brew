@@ -124,6 +124,9 @@ CASKS=(
   google-chrome
   firefoxdeveloperedition
 
+  # Other languages
+  haskell-platform
+
   # Misc
   caprine   # Facebook Messenger
 
@@ -142,6 +145,7 @@ CASKS=(
   principle
   balsamiq-mockups
   zeplin
+  gimp
 
   dosbox
   calibre
