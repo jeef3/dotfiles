@@ -15,7 +15,6 @@ alias t="todo.sh"
 alias todo="todotxt-machine ./todo.txt"
 
 alias ts="tig status"
-alias ta="tmux attach || tmux"
 
 alias vims="vim -S Session.vim"
 
@@ -35,6 +34,6 @@ alias altool="/Applications/Xcode.app/Contents/Applications/Application\ Loader.
 alias la="ls -la"
 
 alias ..="cd .."
-alias ...="..; .."
-alias ....="...; .."
-alias .....="....; .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
