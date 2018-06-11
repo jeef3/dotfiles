@@ -273,11 +273,14 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap c "_c
 vnoremap c "_c
 
+" HTML/JSON Formatting
+com! FormatJSON %!python -m json.tool
+com! FormatHTML %!tidy -iq -xml -wrap 0
+
 
 " ==============================================================================
 " Plugin Configuration
 " ==============================================================================
-
 
 " ALE
 let g:ale_sign_error = "\uf00d"
@@ -304,21 +307,6 @@ let g:ale_fixers = {
 nnoremap ]a :ALENextWrap<cr>
 nnoremap [a :ALEPreviousWrap<cr>
 nnoremap <leader>af :ALEFix<cr>
-
-" OmniSharp
-augroup omnisharp_commands
-  autocmd!
-  autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
-  autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
-  autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>
-  autocmd FileType cs nnoremap <leader>tp :OmniSharpAddToProject<cr>
-augroup END
-
-" JSON Formatting
-com! FormatJSON %!python -m json.tool
-
-" HTML Formatting
-com! FormatHTML %!tidy -iq -xml -wrap 0
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -366,10 +354,6 @@ let g:bufExplorerShowDirectories=0
 let g:bufExplorerShowRelativePath=1
 let g:bufExplorerSplitRight=0
 
-" Vimux
-noremap <Leader>vp :VimuxPromptCommand<CR>
-noremap <Leader>vl :VimuxRunLastCommand<CR>
-
 " Terminus
 let g:TerminusInsertCursorShape=2
 
@@ -379,7 +363,6 @@ let g:tsuquyomi_completion_detail = 1
 let g:tsuquyomi_disable_quickfix = 1
 let g:tsuquyomi_shortest_import_path = 1
 
-" tsx file detection
 augroup typescript
   autocmd!
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
@@ -506,11 +489,6 @@ hi GitGutterAdd           guifg=#a6e22e guibg=#3b3a32
 hi GitGutterChange        guifg=#fd971f guibg=#3b3a32
 hi GitGutterDelete        guifg=#f92672 guibg=#3b3a32
 hi GitGutterChangeDelete  guifg=#fd971f guibg=#3b3a32
-
-" Startify
-let g:startify_files_number = 6
-let g:startify_change_to_vcs_root = 1
-source ~/.vim/startify.vim
 
 " Quick Menu
 noremap <leader>m :call quickmenu#toggle(0)<cr>

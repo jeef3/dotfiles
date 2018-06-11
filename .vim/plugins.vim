@@ -3,13 +3,10 @@ filetype off
 call plug#begin('~/.vim/plugged')
 
 " Shell Integration
-Plug 'benmills/vimux'                   " Run shell commands in Tmux pane
 Plug 'wincent/terminus'                 " Better terminal integration, cursor shapes, colors
-Plug 'tpope/vim-obsession'              " Automatically save session state (used with Tmux)
 Plug 'tpope/vim-eunuch'                 " Better shell cmds, like :Rename
 
 " Customization
-" Plug 'mhinz/vim-startify'               " Start-up screen
 Plug 'bling/vim-airline'                " Custom status and tab line
 Plug 'junegunn/goyo.vim'                " Zen coding
 Plug 'junegunn/limelight.vim'           " Color focus with Goyo
@@ -67,7 +64,6 @@ Plug 'wavded/vim-stylus'                " Stylus (CSS)
 Plug 'groenewege/vim-less'              " Less (CSS)
 Plug 'vim-scripts/applescript.vim'      " AppleScript
 Plug 'PProvost/vim-ps1'                 " PowerShell
-Plug 'tmux-plugins/vim-tmux'            " Tmux config
 Plug 'freitass/todo.txt-vim'            " todo.txt
 Plug 'ajford/vimkivy'                   " Kivy (python)
 Plug 'sudar/vim-arduino-syntax'         " Arduino
@@ -90,8 +86,5 @@ Plug 'firegoby/html_entities_helper.vim' " HTML entity conversion
 Plug 'Galooshi/vim-import-js'            " JavaScript Import helper
 Plug 'dunckr/js_alternate.vim'           " JavaScript test alternate file switch
 Plug 'suan/vim-instant-markdown'         " Markdown previews
-
-" Dependencies
-Plug 'tpope/vim-dispatch'               " Omnisharp
 
 call plug#end()
