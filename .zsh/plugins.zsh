@@ -20,8 +20,7 @@ async_job load_worker noop
 load_plugins() {
   # Auto-suggestions
   source $BREW_HOME/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  ZSH_AUTOSUGGEST_USE_ASYNC=1
-
+  export ZSH_AUTOSUGGEST_USE_ASYNC=1
   fpath=(~/.zsh/plugged/zsh-completions/src $fpath)
 }
 load_plugins
@@ -39,17 +38,17 @@ load_async_plugins() {
       stack setup && \
       stack build && stack install)
   fi
-  GIT_PROMPT_EXECUTABLE="haskell"
+  export GIT_PROMPT_EXECUTABLE="haskell"
   source ~/.zsh/plugged/zsh-git-prompt/zshrc.sh
-
-  # Autosuggestions
-  ZSH_AUTOSUGGEST_USE_ASYNC=1
-  source $BREW_HOME/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  fpath=(~/.zsh/plugged/zsh-completions/src $fpath)
 
   # .. ... .... aliases
   source ~/.zsh/plugged/up.zsh/up.plugin.zsh
 
   # Syntax Highlighting
   source $BREW_HOME/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+  # FZF
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+  export FZF_DEFAULT_OPTS='--height 40% --border'
 }
