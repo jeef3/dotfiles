@@ -1,4 +1,3 @@
-source ~/.vim/plugins.vim
 
 set macligatures
 
@@ -7,6 +6,10 @@ filetype plugin indent on
 
 " Colours and syntax highlighting options
 syntax on
+
+source ~/.vim/plugins.vim
+runtime macros/matchit.vim
+
 set t_Co=256
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
