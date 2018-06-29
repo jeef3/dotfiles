@@ -39,6 +39,7 @@ FORMULAS=(
   # Mah IDE
   # Uninstall first? Upgrade drops the override-system-vim
   "macvim --with-override-system-vim"
+  "--HEAD universal-ctags/universal-ctags/universal-ctags"
 
   # Zsh
   zsh
@@ -63,6 +64,7 @@ FORMULAS=(
   imgcat
   jq # JSON parser
   fontforge # For custom font icon patching
+  mdv # CLI Markdown viewer
 
   # Languages
   node

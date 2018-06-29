@@ -38,3 +38,5 @@ zstyle ':completion:*' menu select
 
 source ~/.zsh/plugins.zsh
 source ~/.zsh/prompt.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
