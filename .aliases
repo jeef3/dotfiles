@@ -37,3 +37,5 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+
+alias pcat='pygmentize -f terminal256 -O style=monokai -g'
