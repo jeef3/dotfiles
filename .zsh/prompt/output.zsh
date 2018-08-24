@@ -1,10 +1,19 @@
 hex_to_true() {
   typeset hex=$1
-  typeset r=$(printf "%d" 0x${hex:0:2})
-  typeset g=$(printf "%d" 0x${hex:2:2})
-  typeset b=$(printf "%d" 0x${hex:4:2})
+  typeset fr=$(printf "%d" 0x${hex:0:2})
+  typeset fg=$(printf "%d" 0x${hex:2:2})
+  typeset fb=$(printf "%d" 0x${hex:4:2})
 
-  echo "%{\x1b[38;2;${r};${g};${b}m%}"
+  if [ -n "$2" ]; then
+    typeset hexBg=$2
+    typeset br=$(printf "%d" 0x${hexBg:0:2})
+    typeset bg=$(printf "%d" 0x${hexBg:2:2})
+    typeset bb=$(printf "%d" 0x${hexBg:4:2})
+
+    echo "%{\x1b[38;2;${fr};${fg};${fb}m%}%{\x1b[48;2;${br};${bg};${bb}m%}"
+  else
+    echo "%{\x1b[38;2;${fr};${fg};${fb}m%}"
+  fi
 }
 
 BOLD=$(echo "%{\x1b[1m%}")
