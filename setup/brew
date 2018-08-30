@@ -74,6 +74,8 @@ FORMULAS=(
   fontforge # For custom font icon patching
   mdv # CLI Markdown viewer
   bat # Nicer cat
+  ncdu # Nicer du
+  tldr # Nicer man
 
   # Languages
   node
