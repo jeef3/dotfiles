@@ -286,6 +286,7 @@ com! FormatHTML %!tidy -iq -xml -wrap 0
 " ==============================================================================
 
 " ALE
+let b:ale_set_balloons = 1
 let g:ale_sign_error = "\uf00d"
 let g:ale_sign_warning = "\uf071"
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
@@ -296,7 +297,10 @@ let g:ale_warning_format = '•%d'
 hi ALEErrorSign   guifg=#f92672 guibg=#3b3a32
 hi ALEWarningSign guifg=#fd971f guibg=#3b3a32
 
-let g:ale_linters = {'jsx': ['stylelint', 'eslint']}
+let g:ale_linters = {
+      \   'javascript': ['stylelint', 'eslint'],
+      \   'jsx': ['stylelint', 'eslint']
+      \}
 let g:ale_linter_aliases = {'jsx': 'css', 'tsx': 'css'}
 
 let g:ale_fix_on_save = 1
@@ -379,6 +383,7 @@ augroup typescript
 
   autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
   autocmd FileType typescript noremap gd :TsuDefinition<cr>
+  autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
 augroup END
 
 " Incsearch (Fuzzy)
