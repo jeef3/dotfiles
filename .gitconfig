@@ -4,7 +4,8 @@
 	co = checkout
 	p = push
 	s = status -s
-	d = difftool
+	dt = difftool
+	mt = mergetool
 
 	wtf = blame
 
@@ -36,7 +37,7 @@
 [core]
 	excludesfile = ~/.gitignore-global
 	attributesfile = ~/.gitattributes
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = diff-so-fancy | less --tabs=4 -RFXS
 	autocrlf = input
 	ignorecase = false
 [color "diff"]

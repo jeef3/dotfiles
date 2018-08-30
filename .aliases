@@ -38,6 +38,6 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-alias pcat='pygmentize -f terminal256 -O style=monokai -g'
-
 alias -- -='cd -'
+
+alias f="fzf --preview 'bat --color always {}'"
