@@ -22,10 +22,16 @@ success "Nerd Fonts up-to-date"
 info "Patching font..."
 
 fonts=(
-  OperatorMono-Book
-  OperatorMono-BookItalic
   OperatorMono-Bold
   OperatorMono-BoldItalic
+  OperatorMono-Book
+  OperatorMono-BookItalic
+  OperatorMono-Light
+  OperatorMono-LightItalic
+  OperatorMono-Medium
+  OperatorMono-MediumItalic
+  OperatorMono-XLight
+  OperatorMono-XLightItalic
 )
 
 cd $NERD_FONT_PATH
