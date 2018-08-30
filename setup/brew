@@ -2,7 +2,10 @@
 
 set -e
 
-source ./lib/output.sh
+tit() { printf "\n $(tput bold)$1$(tput sgr0)\n\n"; }
+success() { printf " $(tput setaf 8)›  $(tput setaf 10)✓\t$(tput sgr0)$1\n"; }
+info() { printf " $(tput setaf 8)›  $(tput setaf 12)…\t$(tput sgr0)$1\n"; }
+cmd() { printf " $(tput setaf 8)›  $(tput setaf 14)↘️\t$(tput bold)$(tput setaf 8)$1$(tput sgr0)\n"; }
 
 tit "Brew Setup"
 
@@ -22,6 +25,11 @@ brew tap sudar/arduino-mk
 FORMULAS=(
   # GNU core utilities (those that come with OS X are outdated)
   coreutils
+
+  # Compilers
+  make
+  cmake
+  mono
 
   # GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
   findutils
@@ -65,20 +73,16 @@ FORMULAS=(
   jq # JSON parser
   fontforge # For custom font icon patching
   mdv # CLI Markdown viewer
+  bat # Nicer cat
 
   # Languages
   node
-  python
+  python@2
   python3
 
   # Ruby stuff
   rbenv
   ruby-build
-
-  # Compilers
-  make
-  cmake
-  mono
 
   # Gifiy
   ffmpeg
