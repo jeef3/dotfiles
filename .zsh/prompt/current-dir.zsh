@@ -1,5 +1,4 @@
 FOLDER_ICON="\uf07c"
-ARROW="\ue0b0"
 ANGLE="\ue0b0"
 
 START_SEGMENT=$(hex_to_true 999999 555555)
