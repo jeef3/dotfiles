@@ -72,16 +72,16 @@ function startNvm() {
 }
 
 function startRbenv() {
-  which rbenv > /dev/null
+  # which rbenv > /dev/null
 
-  if [ $? -eq 0 ]; then
-    success "rbenv already started"
-    return;
-  fi
+  # if [ $? -eq 0 ]; then
+  #   success "rbenv already started"
+  #   return;
+  # fi
 
   info "Starting rbenv"
 
-  rbenv init -
+  eval "$(rbenv init -)"
 
   success "rbenv started"
 }
