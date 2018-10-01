@@ -505,6 +505,8 @@ source ~/.vim/quickmenu.vim
 
 " Coverage
 let g:coverage_interval = 1000
+let g:coverage_json_report_path = 'coverage/coverage-final.json'
+" let g:coverage_show_covered = 1
 
 " Flow
 let g:flow#showquickfix = 0
