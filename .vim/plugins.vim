@@ -87,4 +87,7 @@ Plug 'Galooshi/vim-import-js'            " JavaScript Import helper
 Plug 'dunckr/js_alternate.vim'           " JavaScript test alternate file switch
 Plug 'suan/vim-instant-markdown'         " Markdown previews
 
+" Trial
+Plug 'alvan/vim-closetag'                " Auto-close HTML tags
+
 call plug#end()

@@ -518,3 +518,7 @@ let g:flow#enable = 1
 
 " Javascript Syntax
 let g:javascript_plugin_flow = 1
+
+" vim-closetag
+let g:closetag_filenames = '*.jsx'
+let g:closetag_xhtml_filenames = '*.jsx'
