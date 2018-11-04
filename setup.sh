@@ -40,6 +40,9 @@ info "Setting macos preferences"
 info "Installing global npm modules"
 ./setup/dev
 
+info "Installing Haskell (can't install with Homebrew)"
+curl -sSL https://get.haskellstack.org/ | sh
+
 info "Installing Vim plug-ins"
 vim +PlugUpdate +qall
 success "Vim plug-ins installed"
