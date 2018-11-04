@@ -20,10 +20,6 @@ info "Installing/updating Vim Plug"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-info "Installing Vim plug-ins"
-vim +PlugUpdate +qall
-success "Vim plug-ins installed"
-
 info "Switching to Zsh"
 if [ $(basename $SHELL) == 'zsh' ]; then
   success "Already using Zsh"
@@ -43,3 +39,7 @@ info "Setting macos preferences"
 
 info "Installing global npm modules"
 ./setup/dev
+
+info "Installing Vim plug-ins"
+vim +PlugUpdate +qall
+success "Vim plug-ins installed"

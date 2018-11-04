@@ -100,10 +100,10 @@ FORMULAS=(
   gstreamer
 
   # Arduino
-  avr-libc
-  avrdude
-  arduino-mk
-  platformio
+  # avr-libc
+  # avrdude
+  # arduino-mk
+  # platformio
 )
 
 CASKS=(
@@ -116,7 +116,7 @@ CASKS=(
   quicklook-json
   qlprettypatch
   quicklook-csv
-  betterzipql
+  # betterzipql
   qlimagesize
 
   # Gifify
@@ -130,10 +130,7 @@ CASKS=(
   fastlane
   imageoptim
   google-chrome
-  firefoxdeveloperedition
-
-  # Other languages
-  haskell-platform
+  homebrew/cask-versions/firefox-developer-edition
 
   # Misc
   caprine   # Facebook Messenger
@@ -152,8 +149,6 @@ CASKS=(
   figma
   principle
   balsamiq-mockups
-  zeplin
-  gimp
 
   dosbox
   calibre
@@ -209,11 +204,7 @@ do
   fi
 done
 
-# more recent versions of some OS X tools
-brew install homebrew/dupes/grep
-
 # TODO: Needed?
 # open /usr/local/Cellar/x-quartz/2.7.4/XQuartz.pkg
 
-# Remove outdated versions from the cellar
 brew cleanup
