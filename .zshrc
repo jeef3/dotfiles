@@ -13,7 +13,6 @@ unset file
 [[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-unalias imgcat # I'm using one installed from brew instead
 
 # History
 export HISTFILE="$HOME/.zsh_history"
