@@ -3,10 +3,10 @@
 	url = https://github.com/olivierverdier/zsh-git-prompt.git
 [submodule ".zsh/plugged/zsh-completions"]
 	path = .zsh/plugged/zsh-completions
-	url = git://github.com/zsh-users/zsh-completions.git
+	url = https://github.com/zsh-users/zsh-completions.git
 [submodule ".zsh/plugged/zsh-async"]
 	path = .zsh/plugged/zsh-async
-	url = git@github.com:mafredri/zsh-async.git
+	url = https://github.com/mafredri/zsh-async.git
 [submodule ".zsh/plugged/up.zsh"]
 	path = .zsh/plugged/up.zsh
-	url = git@github.com:peterhurford/up.zsh.git
+	url = https://github.com/peterhurford/up.zsh.git
