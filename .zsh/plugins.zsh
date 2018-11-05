@@ -22,6 +22,9 @@ load_plugins() {
   source $BREW_HOME/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   export ZSH_AUTOSUGGEST_USE_ASYNC=1
   fpath=(~/.zsh/plugged/zsh-completions/src $fpath)
+
+  # Touchbar
+  source ~/.zsh/plugged/zsh-iterm-touchbar/zsh-iterm-touchbar.plugin.zsh
 }
 load_plugins
 
