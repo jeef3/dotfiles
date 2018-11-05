@@ -10,3 +10,6 @@
 [submodule ".zsh/plugged/up.zsh"]
 	path = .zsh/plugged/up.zsh
 	url = https://github.com/peterhurford/up.zsh.git
+[submodule ".zsh/plugged/zsh-iterm-touchbar"]
+	path = .zsh/plugged/zsh-iterm-touchbar
+	url = https://github.com/iam4x/zsh-iterm-touchbar.git
