@@ -126,7 +126,7 @@ CASKS=(
   react-native-debugger
   android-studio
   intel-haxm
-  java
+  java8
   fastlane
   imageoptim
   google-chrome
