@@ -46,6 +46,11 @@ curl -sSL https://get.haskellstack.org/ | sh
 info "Installing iTerm shell integration"
 curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
 
+# Warning: Not good practice
+info "Copying keys"
+ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.aws ~/
+ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.ssh ~/
+
 info "Installing Vim plug-ins"
 vim +PlugUpdate +qall
 success "Vim plug-ins installed"
