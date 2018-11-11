@@ -152,7 +152,6 @@ CASKS=(
 
   dosbox
   calibre
-  disk-inventory-x
   the-unarchiver # RAR
 )
 
