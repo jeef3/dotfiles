@@ -142,6 +142,7 @@ CASKS=(
   docker
 
   sip # Color select/organise
+  sim-daltonism # Color blindness simulator
 
   slack
 
