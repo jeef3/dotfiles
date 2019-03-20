@@ -20,19 +20,22 @@ info "Installing/updating Vim Plug"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+# Install Brew packages
+info "Installing brew packages"
+./setup/brew
+
+# Switch to Brew zsh
 info "Switching to Zsh"
 if [ $(basename $SHELL) == 'zsh' ]; then
   success "Already using Zsh"
 else
   success "Not using Zsh, switching"
-  chsh -s /bin/zsh
+  echo $(which zsh) >> /etc/shells
+  chsh -s $(which zsh)
 fi
 
 info "Adding italics"
 tic xterm-256color-italic.terminfo
-
-info "Installing brew packages"
-./setup/brew
 
 info "Setting macos preferences"
 ./setup/osx
