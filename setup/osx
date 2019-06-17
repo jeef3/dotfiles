@@ -11,6 +11,9 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # My fonts
 ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Fonts ~/Library/Fonts
 
+# Automator Services
+ln -s ~/Library/Mobile\ Documents/com\~apple\~Automator/Documents/* ~/Library/Services
+
 # Divvy prefs
 open $(cat ./prefs/divvy.url)
 
