@@ -151,6 +151,8 @@ CASKS=(
   principle
   balsamiq-mockups
 
+  bricklink-studio
+
   dosbox
   calibre
   the-unarchiver # RAR
