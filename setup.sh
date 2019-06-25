@@ -38,7 +38,7 @@ info "Adding italics"
 tic xterm-256color-italic.terminfo
 
 info "Setting macos preferences"
-./setup/osx
+./setup/macos
 
 info "Installing global npm modules"
 ./setup/dev
