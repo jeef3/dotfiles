@@ -50,10 +50,13 @@ info "Installing iTerm shell integration"
 curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
 
 # Warning: Not good practice
-info "Copying keys"
+info "Linking keys"
 ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.aws ~/
 ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.ssh ~/
 
 info "Installing Vim plug-ins"
 vim +PlugUpdate +qall
 success "Vim plug-ins installed"
+
+info "Update dotfiles remote for write access"
+git remote set-url origin git@github.com:jeef3/dotfiles.git
