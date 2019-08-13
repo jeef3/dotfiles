@@ -51,8 +51,8 @@ curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
 
 # Warning: Not good practice
 info "Linking keys"
-ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.aws ~/
-ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.ssh ~/
+ln -s ~/Library/CloudStorage/iCloudDrive/Keys/.aws ~/
+ln -s ~/Library/CloudStorage/iCloudDrive/Keys/.ssh ~/
 
 info "Installing Vim plug-ins"
 vim +PlugUpdate +qall
