@@ -1,18 +1,39 @@
 #!/bin/bash
 
+set -e
+
+tit() { printf "\n $(tput bold)$1$(tput sgr0)\n\n"; }
+success() { printf " $(tput setaf 8)›  $(tput setaf 10)✓\t$(tput sgr0)$1\n"; }
+info() { printf " $(tput setaf 8)›  $(tput setaf 12)…\t$(tput sgr0)$1\n"; }
+
+tit "macOS Setup"
+
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # My fonts
-ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Fonts ~/Library/Fonts
+# Symlinked fonts no longer being detected by Font Book?
+# ln -s ~/Library/CloudStorage/iCloudDrive/Fonts/* ~/Library/Fonts
+cp -r ~/Library/CloudStorage/iCloudDrive/Fonts/* ~/Library/Fonts
+success "Fonts copied"
 
 # Automator Services
-ln -s ~/Library/Mobile\ Documents/com\~apple\~Automator/Documents/* ~/Library/Services
+# If they're symlinked, they lose their color.
+# ln -s ~/Library/CloudStorage/iCloudDrive/Automator/* ~/Library/Services
+cp -r ~/Library/CloudStorage/iCloudDrive/Automator/* ~/Library/Services
+success "Automator services copied"
 
 # Divvy prefs
-open $(cat ./prefs/divvy.url)
+if [ ! -f ./prefs/divvy.url ]; then
+  info "Divvy preferences not found, skipping."
+else
+  open $(cat ./prefs/divvy.url)
+  success "Divvy preferences imported"
+fi
 
 ###############################################################################
+
+info "Setting macOS preferences"
 
 # Dark theme
 defaults write AppleInterfaceStyle Dark
