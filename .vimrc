@@ -286,7 +286,7 @@ com! FormatHTML %!tidy -iq -xml -wrap 0
 " ==============================================================================
 
 " ALE
-let b:ale_set_balloons = 1
+let g:ale_set_balloons = 1
 let g:ale_sign_error = "\uf00d"
 let g:ale_sign_warning = "\uf071"
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
@@ -344,7 +344,7 @@ let g:ycm_semantic_triggers['css'] = ['  ', ': ']
 
 augroup ycm_commands
   autocmd!
-  autocmd FileType javascript noremap gd :YcmCompleter GoToDefinition<cr>
+  " autocmd FileType javascript noremap gd :YcmCompleter GoToDefinition<cr>
   autocmd FileType cpp noremap gd :YcmCompleter GoToDefinition<cr>
 augroup END
 
@@ -381,9 +381,9 @@ augroup typescript
         \. 'typescriptStringS,typescriptStringD,typescriptStringB'
         \)
 
-  autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
-  autocmd FileType typescript noremap gd :TsuDefinition<cr>
-  autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+  " autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+  " autocmd FileType typescript noremap gd :TsuDefinition<cr>
+  " autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
 augroup END
 
 " Incsearch (Fuzzy)
@@ -522,3 +522,21 @@ let g:javascript_plugin_flow = 1
 " vim-closetag
 let g:closetag_filenames = '*.jsx'
 let g:closetag_xhtml_filenames = '*.jsx'
+
+" Tern
+" augroup tern_commands
+"   autocmd!
+"   autocmd FileType javascript noremap gD :TernDef<cr>
+" augroup END
+
+" let g:LanguageClient_serverCommands = {
+"     \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+"     \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
+"     \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+"     \ }
+
+" nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
