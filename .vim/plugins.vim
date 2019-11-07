@@ -71,8 +71,8 @@ Plug 'ekalinin/Dockerfile.vim'          " Docker
 Plug 'cespare/vim-toml'                 " TOML
 
 " Language Completion
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --js-completer' }
-" Plug 'othree/csscomplete.vim'           " CSS
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --ts-completer' }
+Plug 'othree/csscomplete.vim'           " CSS
 " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " JavaScript
 " Plug 'autozimu/LanguageClient-neovim', {
 "                   \ 'branch': 'next',

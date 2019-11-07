@@ -141,8 +141,8 @@ augroup END
 " Easier split switching (Ctrl-j, Ctrl-k, Ctrl-h, Ctrl-l)
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
-noremap <C-H> <C-W>h
-noremap <C-L> <C-W>l
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
 
 " Quick alternate buffer switching (,,)
 noremap <leader>, <C-^>
@@ -298,7 +298,7 @@ hi ALEErrorSign   guifg=#f92672 guibg=#3b3a32
 hi ALEWarningSign guifg=#fd971f guibg=#3b3a32
 
 let g:ale_linters = {
-      \   'javascript': ['stylelint', 'eslint'],
+      \   'javascript': ['tsserver', 'stylelint', 'eslint'],
       \   'jsx': ['stylelint', 'eslint']
       \}
 let g:ale_linter_aliases = {'jsx': 'css', 'tsx': 'css'}
@@ -308,7 +308,8 @@ let g:ale_fixers = {
       \   'css': ['stylelint', 'prettier'],
       \   'javascript': ['eslint', 'prettier'],
       \   'typescript': ['tslint', 'prettier'],
-      \   'json': ['prettier']
+      \   'json': ['prettier'],
+      \   'html': ['prettier']
       \}
 
 nnoremap ]a :ALENextWrap<cr>
@@ -344,7 +345,7 @@ let g:ycm_semantic_triggers['css'] = ['  ', ': ']
 
 augroup ycm_commands
   autocmd!
-  " autocmd FileType javascript noremap gd :YcmCompleter GoToDefinition<cr>
+  autocmd FileType javascript noremap gd :YcmCompleter GoToDefinition<cr>
   autocmd FileType cpp noremap gd :YcmCompleter GoToDefinition<cr>
 augroup END
 
@@ -382,8 +383,7 @@ augroup typescript
         \)
 
   " autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
-  " autocmd FileType typescript noremap gd :TsuDefinition<cr>
-  " autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+  autocmd FileType typescript noremap gd :TsuDefinition<cr>
 augroup END
 
 " Incsearch (Fuzzy)
@@ -540,3 +540,10 @@ let g:closetag_xhtml_filenames = '*.jsx'
 " nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 " nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 " nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+" CSS3 Syntax
+augroup VimCSS3Syntax
+  autocmd!
+
+  autocmd FileType css setlocal iskeyword+=-
+augroup END
