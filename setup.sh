@@ -58,8 +58,8 @@ info "Linking keys"
 # ln -s ~/Library/CloudStorage/iCloudDrive/Keys/.ssh ~/
 ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.ssh ~/
 ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.aws ~/
-chmod 700 ~/.ssh ~/.aws
-chmod ^00 ~/.ssh/* ~/.aws/*
+chmod 600 ~/.ssh ~/.aws
+chmod 600 ~/.ssh/* ~/.aws/*
 
 info "Installing Vim plug-ins"
 vim +PlugUpdate +qall
