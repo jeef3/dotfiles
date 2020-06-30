@@ -76,6 +76,7 @@ FORMULAS=(
   bat # Nicer cat
   ncdu # Nicer du
   tldr # Nicer man
+  gnupg
 
   # Languages
   node
