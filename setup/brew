@@ -83,8 +83,8 @@ FORMULAS=(
   python3
 
   # Ruby stuff
-  rbenv
-  ruby-build
+  # rbenv
+  # ruby-build
 
   # Gifiy
   ffmpeg

@@ -71,21 +71,6 @@ function startNvm() {
   nvm use lts/carbon
 }
 
-function startRbenv() {
-  # which rbenv > /dev/null
-
-  # if [ $? -eq 0 ]; then
-  #   success "rbenv already started"
-  #   return;
-  # fi
-
-  info "Starting rbenv"
-
-  eval "$(rbenv init -)"
-
-  success "rbenv started"
-}
-
 DIR=$(dirname "$(readlink -n $0)")
 function tern() {
   if [ -e .tern-project ]; then
