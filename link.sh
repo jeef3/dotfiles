@@ -21,6 +21,7 @@ symlinks=(
   .tigrc
   .fzf.zsh
   .scripts
+  .tmux.conf
 )
 
 info "Linking dotfiles"
