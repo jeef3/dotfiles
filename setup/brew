@@ -111,14 +111,14 @@ CASKS=(
   iterm2
 
   # Quicklook Add-ins
-  qlcolorcode
-  qlstephen
-  qlmarkdown
-  quicklook-json
-  qlprettypatch
-  quicklook-csv
+  # qlcolorcode
+  # qlstephen
+  # qlmarkdown
+  # quicklook-json
+  # qlprettypatch
+  # quicklook-csv
   # betterzipql
-  qlimagesize
+  # qlimagesize
 
   # Gifify
   xquartz
@@ -142,7 +142,7 @@ CASKS=(
 
   docker
 
-  sip # Color select/organise
+  # sip # Color select/organise
   sim-daltonism # Color blindness simulator
 
   slack
@@ -163,9 +163,6 @@ CASKS=(
 # Fonts
 
 # Not available or still figuring out:
-# Syncplicity
-# OpenVPN
-# MindNode
 # Xcode
 # Day One?
 # Sim Daltonism
