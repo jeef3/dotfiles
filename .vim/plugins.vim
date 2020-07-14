@@ -35,6 +35,7 @@ Plug 'rstacruz/vim-xtract'              " Extract selected into a new file
 Plug 'metakirby5/codi.vim'              " REPL
 Plug 'skywind3000/quickmenu.vim'        " Quick Menu
 Plug 'machakann/vim-highlightedyank'    " Highlight yanked
+Plug 'rhysd/vim-grammarous'             " Grammar checking
 
 " Errors and linting
 Plug 'w0rp/ale'                         " File error checking
@@ -69,6 +70,7 @@ Plug 'ajford/vimkivy'                   " Kivy (python)
 Plug 'sudar/vim-arduino-syntax'         " Arduino
 Plug 'ekalinin/Dockerfile.vim'          " Docker
 Plug 'cespare/vim-toml'                 " TOML
+Plug 'mechatroner/rainbow_csv'          " CSV
 
 " Language Completion
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --ts-completer' }
