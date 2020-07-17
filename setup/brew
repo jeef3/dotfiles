@@ -156,7 +156,6 @@ CASKS=(
 
   dosbox
   calibre
-  the-unarchiver # RAR
 )
 
 # TODO: To Save
