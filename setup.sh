@@ -50,7 +50,7 @@ info "Installing rvm (can't install with Homebrew)"
 curl -sSL https://get.rvm.io | bash -s stable
 
 info "Installing iTerm shell integration"
-curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
+curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
 
 # Warning: Not good practice
 info "Linking keys"
