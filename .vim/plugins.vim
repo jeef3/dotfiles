@@ -73,7 +73,8 @@ Plug 'cespare/vim-toml'                 " TOML
 Plug 'mechatroner/rainbow_csv'          " CSV
 
 " Language Completion
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --ts-completer' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --ts-completer' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'othree/csscomplete.vim'           " CSS
 " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " JavaScript
 " Plug 'autozimu/LanguageClient-neovim', {
@@ -83,9 +84,9 @@ Plug 'othree/csscomplete.vim'           " CSS
 
 " Language Tools and Helpers
 Plug 'moll/vim-node'                     " Node
-Plug 'Quramy/tsuquyomi'                  " TypeScript tools
+" Plug 'Quramy/tsuquyomi'                  " TypeScript tools
 Plug 'mattn/emmet-vim'                   " HTML/CSS quick completion
-Plug 'samuelsimoes/vim-jsx-utils'        " JSX helpers
+" Plug 'samuelsimoes/vim-jsx-utils'        " JSX helpers
 Plug 'ap/vim-css-color'                  " Color preview in CSS
 Plug 'jplaut/vim-arduino-ino'            " Arduino compile/build
 Plug 'firegoby/html_entities_helper.vim' " HTML entity conversion

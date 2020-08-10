@@ -24,7 +24,7 @@ load_plugins() {
   fpath=(~/.zsh/plugged/zsh-completions/src $fpath)
 
   # Touchbar
-  source ~/.zsh/plugged/zsh-iterm-touchbar/zsh-iterm-touchbar.plugin.zsh
+  # source ~/.zsh/plugged/zsh-iterm-touchbar/zsh-iterm-touchbar.plugin.zsh
 }
 load_plugins
 

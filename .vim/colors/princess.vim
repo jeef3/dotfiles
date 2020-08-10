@@ -95,7 +95,7 @@ hi Typedef         guifg=#91A6FF
 hi Type            guifg=#91A6FF               cterm=none
 hi Underlined      guifg=#808080               cterm=underline
 
-hi VertSplit       guifg=#808080 guibg=#080808 cterm=bold
+hi VertSplit       guifg=#fd971f guibg=#232526 cterm=bold
 hi VisualNOS                     guibg=#403D3D
 hi Visual                        guibg=#403D3D
 hi WarningMsg      guifg=#FFFFFF guibg=#333333 cterm=bold
