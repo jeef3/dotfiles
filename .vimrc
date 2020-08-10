@@ -47,7 +47,7 @@ set smarttab " At start of line, <Tab> inserts shiftwidth spaces, <Bs> deletes s
 
 " Folding
 set nofoldenable
-set foldcolumn=1 " Column to show folds
+set foldcolumn=0 " Column to show folds
 set foldlevel=20
 set foldlevelstart=20 " Sets `foldlevel` when editing a new buffer
 set foldmethod=syntax " Markers are used to specify folds.
@@ -124,6 +124,8 @@ set wildmenu " Hitting TAB in command mode will show possible completions above 
 set wildmode=longest:full,full " Complete only until point of ambiguity.
 set winminheight=0 "Allow splits to be reduced to a single line.
 set wrapscan " Searches wrap around end of file
+set signcolumn=yes
+set fillchars+=vert:\│
 
 set clipboard=unnamed " Share clipboard
 
@@ -343,11 +345,11 @@ endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
 let g:ycm_semantic_triggers['css'] = ['  ', ': ']
 
-augroup ycm_commands
-  autocmd!
-  autocmd FileType javascript noremap gd :YcmCompleter GoToDefinition<cr>
-  autocmd FileType cpp noremap gd :YcmCompleter GoToDefinition<cr>
-augroup END
+" augroup ycm_commands
+"   autocmd!
+"   autocmd FileType javascript noremap gd :YcmCompleter GoToDefinition<cr>
+"   autocmd FileType cpp noremap gd :YcmCompleter GoToDefinition<cr>
+" augroup END
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<Tab>"
@@ -371,20 +373,20 @@ let g:tsuquyomi_completion_detail = 1
 let g:tsuquyomi_disable_quickfix = 1
 let g:tsuquyomi_shortest_import_path = 1
 
-augroup typescript
-  autocmd!
-  autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+" augroup typescript
+"   autocmd!
+"   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
-  " CSS Colors in TypeScript
-  autocmd FileType typescript call css_color#init('hex', 'extended'
-        \, 'typescriptComment,typescriptLineComment,typescriptStringS,typescriptStringD'
-        \. 'jsComment,jsString,jsTemplateString,jsObjectKeyString,jsObjectStringKey,jsClassStringKey'
-        \. 'typescriptStringS,typescriptStringD,typescriptStringB'
-        \)
+"   " CSS Colors in TypeScript
+"   autocmd FileType typescript call css_color#init('hex', 'extended'
+"         \, 'typescriptComment,typescriptLineComment,typescriptStringS,typescriptStringD'
+"         \. 'jsComment,jsString,jsTemplateString,jsObjectKeyString,jsObjectStringKey,jsClassStringKey'
+"         \. 'typescriptStringS,typescriptStringD,typescriptStringB'
+"         \)
 
-  " autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
-  autocmd FileType typescript noremap gd :TsuDefinition<cr>
-augroup END
+"   " autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+"   autocmd FileType typescript noremap gd :TsuDefinition<cr>
+" augroup END
 
 " Incsearch (Fuzzy)
 map /  <Plug>(incsearch-forward)
@@ -509,8 +511,8 @@ let g:coverage_json_report_path = 'coverage/coverage-final.json'
 " let g:coverage_show_covered = 1
 
 " Flow
-let g:flow#showquickfix = 0
-let g:flow#enable = 1
+" let g:flow#showquickfix = 0
+" let g:flow#enable = 1
 " augroup flow
 "   autocmd!
 "   autocmd FileType javascript setlocal omnifunc=flowcomplete#Complete
@@ -523,27 +525,21 @@ let g:javascript_plugin_flow = 1
 let g:closetag_filenames = '*.jsx'
 let g:closetag_xhtml_filenames = '*.jsx'
 
-" Tern
-" augroup tern_commands
-"   autocmd!
-"   autocmd FileType javascript noremap gD :TernDef<cr>
-" augroup END
-
-" let g:LanguageClient_serverCommands = {
-"     \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-"     \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
-"     \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-"     \ }
-
-" nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" Or map each action separately
-" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
 " CSS3 Syntax
 augroup VimCSS3Syntax
   autocmd!
 
   autocmd FileType css setlocal iskeyword+=-
 augroup END
+
+" COC
+inoremap <silent><expr> <Tab> coc#refresh()
+nmap <leader>rn <Plug>(coc-rename)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
