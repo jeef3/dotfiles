@@ -15,9 +15,11 @@ set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 set termguicolors
 set background=dark
-colorscheme princess
-let g:molokai_original=1
-let g:rehash256 = 1
+
+" colorscheme princess
+" colorscheme monokai-pro
+" colorscheme sonokai
+colorscheme xcodedark
 
 highlight Comment cterm=italic
 " Not needed if the project linting sets this
@@ -104,7 +106,7 @@ set ofu=syntaxcomplete#Complete " Set omni-completion method.
 set report=0 " Show all changes.
 set ruler " Show the cursor position
 set scrolloff=10 " Start scrolling ten lines before horizontal border of window.
-set shortmess=atI " Don't show the intro message when starting vim.
+set shortmess=atIc " Don't show the intro message when starting vim.
 set noshowmode " Don't show the current mode, it's in our statusline.
 set showcmd " A little useful
 set showtabline=2 " Always show tab bar.
@@ -296,8 +298,8 @@ let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_error_format = '•%d'
 let g:ale_warning_format = '•%d'
 
-hi ALEErrorSign   guifg=#f92672 guibg=#3b3a32
-hi ALEWarningSign guifg=#fd971f guibg=#3b3a32
+hi ALEErrorSign   guifg=#f92672
+hi ALEWarningSign guifg=#fd971f
 
 let g:ale_linters = {
       \   'javascript': ['tsserver', 'stylelint', 'eslint'],
@@ -495,10 +497,10 @@ let g:gitgutter_sign_removed = "\uf458"
 let g:gitgutter_sign_removed_first_line = "\uf458"
 let g:gitgutter_sign_modified_removed = "\uf459"
 
-hi GitGutterAdd           guifg=#a6e22e guibg=#3b3a32
-hi GitGutterChange        guifg=#fd971f guibg=#3b3a32
-hi GitGutterDelete        guifg=#f92672 guibg=#3b3a32
-hi GitGutterChangeDelete  guifg=#fd971f guibg=#3b3a32
+hi GitGutterAdd           guifg=#a6e22e
+hi GitGutterChange        guifg=#fd971f
+hi GitGutterDelete        guifg=#f92672
+hi GitGutterChangeDelete  guifg=#fd971f
 
 " Quick Menu
 noremap <leader>m :call quickmenu#toggle(0)<cr>
@@ -533,7 +535,15 @@ augroup VimCSS3Syntax
 augroup END
 
 " COC
-inoremap <silent><expr> <Tab> coc#refresh()
+inoremap <silent><expr> <TAB>
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 nmap <leader>rn <Plug>(coc-rename)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -541,5 +551,19 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocActionAsync('doHover')
+  endif
+endfunction
+
+" Dart LSC
+let g:lsc_auto_map = v:true

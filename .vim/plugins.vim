@@ -71,6 +71,8 @@ Plug 'sudar/vim-arduino-syntax'         " Arduino
 Plug 'ekalinin/Dockerfile.vim'          " Docker
 Plug 'cespare/vim-toml'                 " TOML
 Plug 'mechatroner/rainbow_csv'          " CSV
+Plug 'dart-lang/dart-vim-plugin'        " Dart
+
 
 " Language Completion
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --ts-completer' }
@@ -81,6 +83,8 @@ Plug 'othree/csscomplete.vim'           " CSS
 "                   \ 'branch': 'next',
 "                   \ 'do': 'bash install.sh',
 "                   \ }
+Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc-dart'
 
 " Language Tools and Helpers
 Plug 'moll/vim-node'                     " Node
@@ -96,5 +100,11 @@ Plug 'suan/vim-instant-markdown'         " Markdown previews
 
 " Trial
 Plug 'alvan/vim-closetag'                " Auto-close HTML tags
+
+" Color Themes
+Plug 'lifepillar/vim-colortemplate'
+Plug 'arzg/vim-colors-xcode'
+Plug 'sainnhe/sonokai'
+Plug 'https://github.com/co1ncidence/monokai-pro.vim.git'
 
 call plug#end()
