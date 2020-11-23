@@ -22,6 +22,7 @@ symlinks=(
   .fzf.zsh
   .scripts
   .tmux.conf
+  .config/ranger
 )
 
 info "Linking dotfiles"

@@ -13,3 +13,6 @@
 [submodule ".zsh/plugged/zsh-iterm-touchbar"]
 	path = .zsh/plugged/zsh-iterm-touchbar
 	url = https://github.com/iam4x/zsh-iterm-touchbar.git
+[submodule ".config/ranger/plugins"]
+	path = .config/ranger/plugins
+	url = https://github.com/alexanderjeurissen/ranger_devicons
