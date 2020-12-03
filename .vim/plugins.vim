@@ -5,6 +5,7 @@ call plug#begin('~/.vim/plugged')
 " Shell Integration
 Plug 'wincent/terminus'                 " Better terminal integration, cursor shapes, colors
 Plug 'tpope/vim-eunuch'                 " Better shell cmds, like :Rename
+Plug 'tmux-plugins/vim-tmux-focus-events' " For all those lost focus events
 
 " Customization
 Plug 'bling/vim-airline'                " Custom status and tab line

@@ -16,3 +16,6 @@
 [submodule ".config/ranger/plugins"]
 	path = .config/ranger/plugins
 	url = https://github.com/alexanderjeurissen/ranger_devicons
+[submodule ".tmux/plugins/tpm"]
+	path = .tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm

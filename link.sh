@@ -21,6 +21,7 @@ symlinks=(
   .tigrc
   .fzf.zsh
   .scripts
+  .tmux
   .tmux.conf
   .config/ranger
 )
