@@ -15,5 +15,7 @@ current_dir() {
     }; s|^$ENV{HOME}|~|g; s|/([^/.])[^/]*(?=/)|/$1|g; s|/\.([^/])[^/]*(?=/)|/.$1|g
   ')
 
-  echo "${FOLDER}${YELLOW}${BOLD}${collapsed_dir}${RESET}"
+  if [ $(tput cols) -gt 54 ]; then
+    echo "${FOLDER}${YELLOW}${BOLD}${collapsed_dir}${RESET}"
+  fi
 }

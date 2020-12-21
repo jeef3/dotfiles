@@ -60,11 +60,17 @@ git_line() {
 
     STATUS="${STATUS}${RESET}"
 
-    if [ $(tput cols) -gt 100 ]; then
+    COLS=$(tput cols)
+
+    if [ "$COLS" -gt 100 ]; then
       REMOTE_ORIGIN_URL=$(git config --get remote.origin.url | sed -En 's/(https:\/\/|git@)[^:\/]+(:|\/)(.+)\.git/\3/p')
       REMOTE="${ITALIC}${DARK_GRAY}${REMOTE_ORIGIN_URL}"
 
       STATUS="${STATUS} ${REMOTE}"
+    fi
+
+    if [ "$COLS" -lt 55 ]; then
+      STATUS="$MAGENTA$BOLD$BRANCH_ICON"
     fi
 
     echo "${STATUS}${RESET}"
