@@ -551,11 +551,17 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" nmap <leader>qf <Plug>(coc-fix)
+nmap <silent> <leader>qf :CocFix<CR>
+nmap <silent><nowait> <space>s  :<C-u>CocList -A -I symbols<cr>
+
+" COC lists using fzf
+" nnoremap <silent> <space>s       :<C-u>CocFzfList symbols<CR>
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -567,3 +573,12 @@ endfunction
 
 " Dart LSC
 let g:lsc_auto_map = v:true
+
+" OmniSharp
+augroup omnisharp_commands
+  autocmd!
+
+  autocmd FileType cs nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)
+  autocmd FileType cs nmap <silent> <buffer> K <Plug>(omnisharp_documentation)
+  autocmd FileType cs nmap <silent> <buffer> <space>s <Plug>(omnisharp_find_symbol)
+augroup END
