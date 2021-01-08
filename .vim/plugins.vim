@@ -37,75 +37,89 @@ Plug 'metakirby5/codi.vim'              " REPL
 Plug 'skywind3000/quickmenu.vim'        " Quick Menu
 Plug 'machakann/vim-highlightedyank'    " Highlight yanked
 Plug 'rhysd/vim-grammarous'             " Grammar checking
+Plug 'tpope/vim-obsession'              " Keep my session
 
 " Errors and linting
 Plug 'w0rp/ale'                         " File error checking
 " Plug 'ruanyl/coverage.vim'              " Coverage report gutter
 
 " Git
-Plug 'tpope/vim-git'                    " Git syntax highlightinh
+Plug 'tpope/vim-git'                    " Git syntax highlighting
 Plug 'tpope/vim-fugitive'               " Git wrapper, :Gstatus etc
 Plug 'airblade/vim-gitgutter'           " Git status in gutter
-Plug 'junegunn/gv.vim'                  " Git browser
+" Plug 'junegunn/gv.vim'                  " Git browser
 
 " Language Syntax
-Plug 'othree/html5.vim'                 " HTML5
-" Plug 'gabrielelana/vim-markdown'        " Markdown
-Plug 'plasticboy/vim-markdown'          " Markdown
-Plug 'jeroenbourgois/vim-actionscript'  " ActionScript
-Plug 'pangloss/vim-javascript'          " JavaScript
-Plug 'leafgarland/typescript-vim'       " TypeScript
-Plug 'ianks/vim-tsx'                    " More TypeScript
-Plug 'kchmck/vim-coffee-script'         " CoffeeScript
-Plug 'mxw/vim-jsx'                      " JSX
-Plug 'elzr/vim-json'                    " JSON
-Plug 'OrangeT/vim-csharp'               " c#
-Plug 'vim-ruby/vim-ruby'                " Ruby
-Plug 'hail2u/vim-css3-syntax'           " CSS3
-Plug 'wavded/vim-stylus'                " Stylus (CSS)
-Plug 'groenewege/vim-less'              " Less (CSS)
-Plug 'vim-scripts/applescript.vim'      " AppleScript
-Plug 'PProvost/vim-ps1'                 " PowerShell
+Plug 'sheerun/vim-polyglot'             " Good base syntax package
+" Plug 'othree/html5.vim'                 " HTML5
+" Plug 'plasticboy/vim-markdown'          " Markdown
+" Plug 'jeroenbourgois/vim-actionscript'  " ActionScript
+" Plug 'pangloss/vim-javascript'          " JavaScript
+" TypeScript
+" I was using these --> Plug 'leafgarland/typescript-vim'       " TypeScript
+"                   --> Plug 'ianks/vim-tsx'                    " TypeScript JSX bits
+" Polyglot uses this  --> Plug 'HerringtonDarkholme/yats.vim'     " More TypeScript
+" Plug 'kchmck/vim-coffee-script'         " CoffeeScript
+" I was using this --> Plug 'mxw/vim-jsx'                      " JSX
+" Polyglot uses this --> Plug 'MaxMEllon/vim-jsx-pretty'
+" Plug 'elzr/vim-json'                    " JSON
+" I was using this --> Plug 'OrangeT/vim-csharp'               " c#
+" Not sure what Polyglot uses?
+" Plug 'vim-ruby/vim-ruby'                " Ruby
+" I was using this --> Plug 'hail2u/vim-css3-syntax'           " CSS3
+" Polyglot uses this --> Plug 'vim-language-dept/css-syntax.vim'
+" Plug 'wavded/vim-stylus'                " Stylus (CSS)
+" I was using this --> Plug 'groenewege/vim-less'              " Less (CSS)
+" Polyglot uses this --> Plug 'genoma/vim-less'
+" I was using this --> Plug 'vim-scripts/applescript.vim'      " AppleScript
+" Polyglot uses this --> Plug 'mityu/vim-applescript'
+" Plug 'PProvost/vim-ps1'                 " PowerShell
+" I was using this --> Plug 'ajford/vimkivy'                   " Kivy (python)
+" Plug 'sudar/vim-arduino-syntax'         " Arduino
+" Plug 'ekalinin/Dockerfile.vim'          " Docker
+" Plug 'cespare/vim-toml'                 " TOML
+" I was using this --> Plug 'mechatroner/rainbow_csv'          " CSV
+" Polyglot uses this --> Plug 'chrisbra/csv.vim'
+" Plug 'dart-lang/dart-vim-plugin'        " Dart
+" Plug 'vim-scripts/groovy.vim'           " Groovy
+" I was using this --> Plug 'nikvdp/ejs-syntax'                " EJS (JavaScript template langg)
+" Polyglot uses this -- Plug 'briancollins/vim-jst'
+" Plug 'jxnblk/vim-mdx-js'                " MDX
+" Plug 'martinda/Jenkinsfile-vim-syntax'  " Jenkinsfile
+" Only one I'm using not in Polyglot
 Plug 'freitass/todo.txt-vim'            " todo.txt
-Plug 'ajford/vimkivy'                   " Kivy (python)
-Plug 'sudar/vim-arduino-syntax'         " Arduino
-Plug 'ekalinin/Dockerfile.vim'          " Docker
-Plug 'cespare/vim-toml'                 " TOML
-Plug 'mechatroner/rainbow_csv'          " CSV
-Plug 'dart-lang/dart-vim-plugin'        " Dart
 
-
-" Language Completion
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --ts-completer' }
+" Language completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'antoinemadec/coc-fzf'
+
+" Language support
 Plug 'othree/csscomplete.vim'           " CSS
-" Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " JavaScript
-" Plug 'autozimu/LanguageClient-neovim', {
-"                   \ 'branch': 'next',
-"                   \ 'do': 'bash install.sh',
-"                   \ }
-Plug 'natebosch/vim-lsc'
-Plug 'natebosch/vim-lsc-dart'
+Plug 'natebosch/vim-lsc'      
+Plug 'natebosch/vim-lsc-dart'           " Dart
+Plug 'OmniSharp/omnisharp-vim'          " C#
 
 " Language Tools and Helpers
 Plug 'moll/vim-node'                     " Node
-" Plug 'Quramy/tsuquyomi'                  " TypeScript tools
 Plug 'mattn/emmet-vim'                   " HTML/CSS quick completion
-" Plug 'samuelsimoes/vim-jsx-utils'        " JSX helpers
 Plug 'ap/vim-css-color'                  " Color preview in CSS
 Plug 'jplaut/vim-arduino-ino'            " Arduino compile/build
 Plug 'firegoby/html_entities_helper.vim' " HTML entity conversion
 Plug 'Galooshi/vim-import-js'            " JavaScript Import helper
 Plug 'dunckr/js_alternate.vim'           " JavaScript test alternate file switch
 Plug 'suan/vim-instant-markdown'         " Markdown previews
+Plug 'tmux-plugins/vim-tmux'             " Tmux config helper
+
+" Misc utils
+Plug 'Xvezda/vim-readonly'               " So I don't accidentally edit them files again
 
 " Trial
 Plug 'alvan/vim-closetag'                " Auto-close HTML tags
 
 " Color Themes
 Plug 'lifepillar/vim-colortemplate'
-Plug 'arzg/vim-colors-xcode'
+Plug 'co1ncidence/monokai-pro.vim'
 Plug 'sainnhe/sonokai'
-Plug 'https://github.com/co1ncidence/monokai-pro.vim.git'
+Plug 'arzg/vim-colors-xcode'
 
 call plug#end()

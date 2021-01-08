@@ -1,6 +1,3 @@
-
-set macligatures
-
 " File type detection
 filetype plugin indent on
 
@@ -17,14 +14,13 @@ set termguicolors
 set background=dark
 
 " colorscheme princess
+" colorscheme molokai
 " colorscheme monokai-pro
 " colorscheme sonokai
 colorscheme xcodedark
 
+" I just like my comments in italics
 highlight Comment cterm=italic
-" Not needed if the project linting sets this
-" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-" match OverLength /\%121v.\+/
 
 " Set leaders
 let mapleader = ","
@@ -72,7 +68,6 @@ set diffopt=filler " Add vertical spaces to keep right and left aligned
 set diffopt+=iwhite " Ignore whitespace changes (focus on code changes)
 set diffopt+=vertical " Vertical splits for diff
 set encoding=utf-8 nobomb " BOM often causes trouble
-set esckeys " Allow cursor keys in insert mode.
 set formatoptions=
 set formatoptions+=c " Format comments
 set formatoptions+=r " Continue comments by default
@@ -89,6 +84,7 @@ set history=1000 " Increase history from 20 default to 1000
 set hlsearch " Highlight searches
 set ignorecase " Ignore case of searches.
 set incsearch " Highlight dynamically as pattern is typed.
+set cmdheight=2 " Give a bit more height to cmd line
 set laststatus=2 " Always show status line
 set lispwords+=defroutes " Compojure
 set lispwords+=defpartial,defpage " Noir core
@@ -96,7 +92,6 @@ set lispwords+=defaction,deffilter,defview,defsection " Ciste core
 set lispwords+=describe,it " Speclj TDD/BDD
 set magic " Enable extended regexes.
 set mouse=a " Enable mouse in all modes.
-set ttymouse=xterm2 " So mouse can work properly in vmux
 set noerrorbells " Disable error bells.
 set nojoinspaces " Only insert single space after a '.', '?' and '!' with a join command.
 set nostartofline " Don't reset cursor to start of line when moving around.
@@ -303,15 +298,17 @@ hi ALEWarningSign guifg=#fd971f
 
 let g:ale_linters = {
       \   'javascript': ['tsserver', 'stylelint', 'eslint'],
-      \   'jsx': ['stylelint', 'eslint']
+      \   'cs': ['OmniSharp']
       \}
-let g:ale_linter_aliases = {'jsx': 'css', 'tsx': 'css'}
+" let g:ale_linter_aliases = {'jsx': 'css', 'tsx': 'css'}
 
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
       \   'css': ['stylelint', 'prettier'],
       \   'javascript': ['eslint', 'prettier'],
+      \   'javascriptreact': ['eslint', 'prettier'],
       \   'typescript': ['tslint', 'prettier'],
+      \   'typescriptreact': ['tslint', 'prettier'],
       \   'json': ['prettier'],
       \   'html': ['prettier']
       \}
@@ -328,24 +325,24 @@ let g:airline_right_sep = "\ue0be"
 let g:airline_right_alt_sep = "\ue0bf"
 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_splits = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#close_symbol = "\uf00d" " A nice fat X
 let g:airline#extensions#tabline#show_tab_type = 0
+let g:airline#extensions#tabline#close_symbol = "\uf00d" " A nice fat X
 
 " YouCompleteMe
 set completeopt-=preview
-let g:ycm_key_list_select_completion=['<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion=['<C-k>', '<Up>']
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+" let g:ycm_key_list_select_completion=['<C-j>', '<Down>']
+" let g:ycm_key_list_previous_completion=['<C-k>', '<Up>']
+" let g:ycm_autoclose_preview_window_after_completion=1
+" let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
-if !exists("g:ycm_semantic_triggers")
-   let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
-let g:ycm_semantic_triggers['css'] = ['  ', ': ']
+" if !exists("g:ycm_semantic_triggers")
+"    let g:ycm_semantic_triggers = {}
+" endif
+" let g:ycm_semantic_triggers['typescript'] = ['.']
+" let g:ycm_semantic_triggers['css'] = ['  ', ': ']
 
 " augroup ycm_commands
 "   autocmd!
@@ -508,8 +505,8 @@ let g:quickmenu_options = "LH"
 source ~/.vim/quickmenu.vim
 
 " Coverage
-let g:coverage_interval = 1000
-let g:coverage_json_report_path = 'coverage/coverage-final.json'
+" let g:coverage_interval = 1000
+" let g:coverage_json_report_path = 'coverage/coverage-final.json'
 " let g:coverage_show_covered = 1
 
 " Flow
@@ -535,6 +532,9 @@ augroup VimCSS3Syntax
 augroup END
 
 " COC
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
 inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
@@ -543,6 +543,8 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 nmap <leader>rn <Plug>(coc-rename)
 nmap <silent> gd <Plug>(coc-definition)
