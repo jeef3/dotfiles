@@ -31,6 +31,15 @@ git_branch() {
   echo "${ref#refs/heads/}"
 }
 
+strip_formatting() {
+  echo $1 | perl -pe 's|#\[.*?\]||g'
+}
+
+count_width() {
+  ESCAPED=$(strip_formatting "$1")
+  echo "${#ESCAPED}"
+}
+
 print_title() {
   while [ ! -z "$1"  ]; do
     case "$1" in
@@ -55,7 +64,7 @@ print_title() {
 
   LEFT_BORDER="┤"
   RIGHT_BORDER="├"
-  BORDER="-"
+  LINE="─"
 
   if [ -n "$LEFT" ]; then
     LEFT_CONTENT="${LEFT_BORDER}${LEFT}${RIGHT_BORDER}"
@@ -75,13 +84,12 @@ print_title() {
     RIGHT_CONTENT=""
   fi
 
-  # LEFT_COUNT=$(echo "$LEFT_CONTENT" |  wc -c)
-  # CENTER_COUNT=$(echo "$CENTER_CONTENT" |  wc -c)
-  # RIGHT_COUNT=$(echo "$RIGHT_CONTENT" |  wc -c)
+  LEFT_WIDTH=$(count_width "$LEFT_CONTENT")
+  CENTER_WIDTH=$(count_width "$CENTER_CONTENT")
+  RIGHT_WIDTH=$(count_width "$RIGHT_CONTENT")
 
-  GAP=`expr $COUNT - ${#LEFT_CONTENT} - ${#CENTER_CONTENT} - ${#RIGHT_CONTENT}`
+  GAP=`expr $COUNT - ${LEFT_WIDTH} - ${CENTER_WIDTH} - ${RIGHT_WIDTH}`
   GAP=`expr $GAP / 2`
-  LINE="─"
 
   PAD=$(printf "%.0s$LINE" $(eval "echo {1..$GAP}"))
   echo "${LEFT_CONTENT}\
@@ -97,8 +105,9 @@ elif [ $WIDTH -lt 90 ]; then
   # echo " $(cd $CURRENT_PATH && git_branch) "
   echo "$(print_title)"
 else
-  # STAT=" #[fg=$YELLOW]$PRETTY_PATH#[fg=$INACTIVE_BORDER_COLOR] $(cd $CURRENT_PATH && git_branch) "
+  STAT=" #[fg=$YELLOW]$PRETTY_PATH#[fg=$INACTIVE_BORDER_COLOR,bold] $(cd $CURRENT_PATH && git_branch)#[default] "
+  echo $(print_title -r "$STAT")
   # echo "$(print_title -r "$STAT")"
-  # echo "$(print_title -r " #[fg=$YELLOW]$(git_branch) ")"
-  echo "$(print_title -r " $(git_branch) ")"
+  # echo "$(print_title -r " #[fg=$YELLOW,bold]$(git_branch)#[default] ")"
+  # echo "$(print_title -r " $(git_branch) ")"
 fi
