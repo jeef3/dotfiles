@@ -2,6 +2,14 @@
 
 while [ ! -z "$1"  ]; do
   case "$1" in
+    --pid)
+      shift
+      CURRENT_PID="$1"
+      ;;
+    -c|--command)
+      shift
+      CURRENT_COMMAND="$1"
+      ;;
     -p|--path)
       shift
       CURRENT_PATH="$1"
@@ -19,9 +27,35 @@ while [ ! -z "$1"  ]; do
 shift
 done
 
-BRANCH_ICON="\ue725"
-INACTIVE_BORDER_COLOR='#444444'
+BRANCH_ICON=""
+
+# Xcode Dark Colors
+BASE_0="#292a30"
+BASE_1="#2f3037"
+BASE_2="#393b44"
+BASE_3="#414453"
+BASE_4="#53606e"
+BASE_5="#7f8c98"
+BASE_6="#a3b1bf"
+BASE_7="#dfdfe0"
+DEEP_BLUE_0="#0f5bca"
+DEEP_BLUE_1="#4484d1"
+DEEP_YELLOW="#fef937"
+GREEN_WASH="#243330"
+ORANGE_WASH="#382e27"
+RED_WASH="#3b2d2b"
+BLUE="#4eb0cc"
+LIGHT_BLUE="#6bdfff"
+ORANGE="#ffa14f"
+PINK="#ff7ab2"
+RED="#ff8170"
 YELLOW="#d9c97c"
+PURPLE="#b281eb"
+LIGHT_PURPLE="#dabaff"
+TEAL="#78c2b3"
+LIGHT_TEAL="#acf2e4"
+GREEN="#84b360"
+LIGHT_GREEN="#b0e687"
 
 PRETTY_PATH=$(sed "s:^$HOME:~:" <<< $CURRENT_PATH)
 
@@ -64,6 +98,7 @@ print_title() {
 
   LEFT_BORDER="┤"
   RIGHT_BORDER="├"
+                ╎
   LINE="─"
 
   if [ -n "$LEFT" ]; then
@@ -100,14 +135,17 @@ ${RIGHT_CONTENT}"
 }
 
 if [ $WIDTH -lt 60 ]; then
-  echo "$(print_title)"
+  STAT="#[fg=$BASE_5] $CURRENT_COMMAND #[default]"
+
+  echo "$(print_title -c "$STAT")"
 elif [ $WIDTH -lt 90 ]; then
   # echo " $(cd $CURRENT_PATH && git_branch) "
   echo "$(print_title)"
 else
-  STAT=" #[fg=$YELLOW]$PRETTY_PATH#[fg=$INACTIVE_BORDER_COLOR,bold] $(cd $CURRENT_PATH && git_branch)#[default] "
+  STAT="#[fg=$BASE_0,bg=$BASE_6] $PRETTY_PATH #[fg=$BASE_6,bg=$BASE_5]\
+#[fg=$BASE_0,bg=$BASE_5] $CURRENT_COMMAND #[fg=$BASE_5,bg=$BASE_4]\
+#[fg=$BASE_0,bg=$BASE_4] $BRANCH_ICON $(cd $CURRENT_PATH && git_branch) \
+#[default]"
+#
   echo $(print_title -r "$STAT")
-  # echo "$(print_title -r "$STAT")"
-  # echo "$(print_title -r " #[fg=$YELLOW,bold]$(git_branch)#[default] ")"
-  # echo "$(print_title -r " $(git_branch) ")"
 fi
