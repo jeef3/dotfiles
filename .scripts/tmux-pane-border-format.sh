@@ -135,14 +135,15 @@ ${RIGHT_CONTENT}"
 }
 
 if [ $WIDTH -lt 60 ]; then
-  STAT="#[fg=$BASE_6] $CURRENT_COMMAND #[default]"
+  STAT="#[fg=$BASE_6,bold] $CURRENT_COMMAND #[default]"
 
-  echo "$(print_title -c "$STAT")"
+  echo $(print_title -c "$STAT")
 elif [ $WIDTH -lt 90 ]; then
-  # echo " $(cd $CURRENT_PATH && git_branch) "
-  echo "$(print_title)"
+  STAT="#[fg=$BASE_6,bold] $CURRENT_COMMAND #[default]"
+
+  echo $(print_title -c "$STAT")
 else
-  STAT_L="#[fg=$BASE_4,bg=$YELLOW]#[fg=$BASE_0,bg=$YELLOW] $CURRENT_COMMAND #[fg=$YELLOW,bg=$BASE_3]#[fg=$BASE_3,bg=$BASE_3]"
+  STAT_L="#[fg=$BASE_4,bg=$YELLOW]#[fg=$BASE_0,bg=$YELLOW,bold] $CURRENT_COMMAND #[default]#[fg=$YELLOW,bg=$BASE_3]#[fg=$BASE_3,bg=$BASE_3]"
   STAT_R="#[fg=$BASE_3,bg=$BASE_5]#[fg=$BASE_0,bg=$BASE_5] $PRETTY_PATH #[fg=$BASE_5,bg=$BASE_4]\
 #[fg=$BASE_0,bg=$BASE_4] $BRANCH_ICON $(cd $CURRENT_PATH && git_branch) \
 #[default]"
