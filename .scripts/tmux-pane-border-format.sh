@@ -135,9 +135,15 @@ ${RIGHT_CONTENT}"
 }
 
 if [ $WIDTH -lt 60 ]; then
+  if [ $IS_ACTIVE -eq 0 ]; then
+    C="#[fg=$BASE_3]  #[default]"
+  else
+    C="#[fg=$RED] #[fg=$YELLOW] #[fg=$GREEN]#[default]"
+  fi
+
   STAT="#[fg=$BASE_6,bold] $CURRENT_COMMAND #[default]"
 
-  echo $(print_title -c "$STAT")
+  echo $(print_title -l "$C" -c "$STAT" -r "     ")
 elif [ $WIDTH -lt 90 ]; then
   STAT="#[fg=$BASE_6,bold] $CURRENT_COMMAND #[default]"
 
