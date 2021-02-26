@@ -60,9 +60,15 @@ LIGHT_GREEN="#b0e687"
 PRETTY_PATH=$(sed "s:^$HOME:~:" <<< $CURRENT_PATH)
 
 git_branch() {
-  ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-  ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
-  echo "${ref#refs/heads/}"
+  echo $(cat .git/HEAD | sed 's/ref: refs\/heads\///')
+
+  # echo "ran $(date)" >> log.txt
+  
+  # ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+  # ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+  # echo "${ref#refs/heads/}"
+  
+  # echo "--"
 }
 
 strip_formatting() {
@@ -149,10 +155,16 @@ elif [ $WIDTH -lt 90 ]; then
 
   echo $(print_title -c "$STAT")
 else
-  STAT_L="#[fg=$BASE_4,bg=$YELLOW]#[fg=$BASE_0,bg=$YELLOW,bold] $CURRENT_COMMAND #[default]#[fg=$YELLOW,bg=$BASE_3]#[fg=$BASE_3,bg=$BASE_3]"
-  STAT_R="#[fg=$BASE_3,bg=$BASE_5]#[fg=$BASE_0,bg=$BASE_5] $PRETTY_PATH #[fg=$BASE_5,bg=$BASE_4]\
-#[fg=$BASE_0,bg=$BASE_4] $BRANCH_ICON $(cd $CURRENT_PATH && git_branch) \
-#[default]"
-#
+  STAT_L="#[fg=$BASE_4,bg=$YELLOW]#[fg=$BASE_0,bg=$YELLOW,bold] $CURRENT_COMMAND #[default]\
+#[fg=$YELLOW,bg=$BASE_5]#[fg=$BASE_0,bg=$BASE_5]  $PRETTY_PATH #[fg=$BASE_5,bg=$BASE_3]#[fg=$BASE_3,bg=$BASE_3]"
+
+  GIT_STAT=$(cd $CURRENT_PATH && git_branch)
+
+  if [ -n "$GIT_STAT" ]; then
+    STAT_R="#[fg=$BASE_4,bg=$BASE_3]#[fg=$BASE_0,bg=$BASE_4] $BRANCH_ICON $GIT_STAT#[default]"
+  else
+    STAT_R=""
+  fi
+
   echo $(print_title -l "$STAT_L" -r "$STAT_R")
 fi
