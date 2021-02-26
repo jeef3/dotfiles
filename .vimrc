@@ -320,31 +320,52 @@ nnoremap [a :ALEPreviousWrap<cr>
 " Lightline
 let g:lightline = {
       \ "tab": {
-      \   "active": ["filename", "modified"],
-      \   "inactive": ["filename", "modified"],
+      \   "active": ["tabnum", "filename", "modified"],
+      \   "inactive": ["tabnum", "filename", "modified"],
       \ },
       \ "tabline": {
       \   "right": [ [ "close" ] ],
       \ },
       \ "active": {
       \   "left": [ [ "mode", "paste" ],
+      \             [  ],
       \             [ "readonly", "filename" ] ],
       \   "right": [ [], 
-      \              [ "lineinfo" ],
-      \              [ "fileformat", "fileencoding", "filetype" ] ],
+      \              [ ],
+      \              [ "fileformat", "lineinfo" ] ],
       \ },
       \ "inactive": {
       \   "left": [  [ "filename" ] ],
       \   "right": [ [],
-      \              [ "lineinfo" ],
-      \              [ "fileformat", "fileencoding", "filetype" ] ],
+      \              [ ],
+      \              [ "fileformat", "lineinfo" ] ],
       \ },
       \ "component": {
       \   "close": "%999X \uf00d ",
       \ },
+      \ "component_function": {
+      \   "fileformat": "FileFormatIcon",
+      \ },
+      \ "tab_component_function": {
+      \   "tabnum": "LightlineWebDevIcons",
+      \ },
       \ "separator": { "left": "", "right": "" },
+      \ "subseparator": { "left": "", "right": "" },
       \ "tabline_separator": { "left": "", "right": "" },
       \ }
+
+function! FileNameWithIcon()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . &filename : &filename) : '?'
+endfunction
+
+function! LightlineWebDevIcons(n)
+  let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
+  return WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
+endfunction
+
+function! FileFormatIcon()
+  return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
 
 " Airline
 " let g:airline_powerline_fonts = 1
