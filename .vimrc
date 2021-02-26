@@ -315,40 +315,51 @@ let g:ale_fixers = {
 
 nnoremap ]a :ALENextWrap<cr>
 nnoremap [a :ALEPreviousWrap<cr>
-nnoremap <leader>af :ALEFix<cr>
+" nnoremap <leader>af :ALEFix<cr>
+
+" Lightline
+let g:lightline = {
+      \ "tab": {
+      \   "active": ["filename", "modified"],
+      \   "inactive": ["filename", "modified"],
+      \ },
+      \ "tabline": {
+      \   "right": [ [ "close" ] ],
+      \ },
+      \ "active": {
+      \   "left": [ [ "mode", "paste" ],
+      \             [ "readonly", "filename" ] ],
+      \   "right": [ [], 
+      \              [ "lineinfo" ],
+      \              [ "fileformat", "fileencoding", "filetype" ] ],
+      \ },
+      \ "inactive": {
+      \   "left": [  [ "filename" ] ],
+      \   "right": [ [],
+      \              [ "lineinfo" ],
+      \              [ "fileformat", "fileencoding", "filetype" ] ],
+      \ },
+      \ "component": {
+      \   "close": "%999X \uf00d ",
+      \ },
+      \ "separator": { "left": "", "right": "" },
+      \ "tabline_separator": { "left": "", "right": "" },
+      \ }
 
 " Airline
-let g:airline_powerline_fonts = 1
-let g:airline_left_sep = "\ue0b8"
-let g:airline_left_alt_sep = "\ue0b9"
-let g:airline_right_sep = "\ue0be"
-let g:airline_right_alt_sep = "\ue0bf"
+" let g:airline_powerline_fonts = 1
+" let g:airline_left_sep = "\ue0b8"
+" let g:airline_left_alt_sep = "\ue0b9"
+" let g:airline_right_sep = "\ue0be"
+" let g:airline_right_alt_sep = "\ue0bf"
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_splits = 1
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline#extensions#tabline#show_tab_nr = 0
-let g:airline#extensions#tabline#show_tab_type = 0
-let g:airline#extensions#tabline#close_symbol = "\uf00d" " A nice fat X
-
-" YouCompleteMe
-set completeopt-=preview
-" let g:ycm_key_list_select_completion=['<C-j>', '<Down>']
-" let g:ycm_key_list_previous_completion=['<C-k>', '<Up>']
-" let g:ycm_autoclose_preview_window_after_completion=1
-" let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-
-" if !exists("g:ycm_semantic_triggers")
-"    let g:ycm_semantic_triggers = {}
-" endif
-" let g:ycm_semantic_triggers['typescript'] = ['.']
-" let g:ycm_semantic_triggers['css'] = ['  ', ': ']
-
-" augroup ycm_commands
-"   autocmd!
-"   autocmd FileType javascript noremap gd :YcmCompleter GoToDefinition<cr>
-"   autocmd FileType cpp noremap gd :YcmCompleter GoToDefinition<cr>
-" augroup END
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#show_splits = 0
+" let g:airline#extensions#tabline#show_buffers = 0
+" let g:airline#extensions#tabline#show_tab_nr = 0
+" let g:airline#extensions#tabline#show_tab_type = 0
+" let g:airline#extensions#tabline#show_tab_count = 0
+" let g:airline#extensions#tabline#close_symbol = "\uf00d" " A nice fat X
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<Tab>"

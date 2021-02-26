@@ -8,7 +8,8 @@ Plug 'tpope/vim-eunuch'                 " Better shell cmds, like :Rename
 Plug 'tmux-plugins/vim-tmux-focus-events' " For all those lost focus events
 
 " Customization
-Plug 'bling/vim-airline'                " Custom status and tab line
+" Plug 'bling/vim-airline'                " Custom status and tab line
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'                " Zen coding
 Plug 'junegunn/limelight.vim'           " Color focus with Goyo
 Plug 'tpope/vim-vinegar'                " Better netrw
