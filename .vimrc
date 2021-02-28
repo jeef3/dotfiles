@@ -318,13 +318,17 @@ nnoremap [a :ALEPreviousWrap<cr>
 " nnoremap <leader>af :ALEFix<cr>
 
 " Lightline
+source ~/.vim/xcodedark.vim
+
 let g:lightline = {
+      \ "colorscheme": "xcodedark",
+      \ "tabline": {
+      \   "left": [ [ "tabs" ] ],
+      \   "right": [ [ "close" ] ],
+      \ },
       \ "tab": {
       \   "active": ["tabnum", "filename", "modified"],
       \   "inactive": ["tabnum", "filename", "modified"],
-      \ },
-      \ "tabline": {
-      \   "right": [ [ "close" ] ],
       \ },
       \ "active": {
       \   "left": [ [ "mode", "paste" ],
