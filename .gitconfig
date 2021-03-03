@@ -40,7 +40,7 @@
 [core]
 	excludesfile = ~/.gitignore-global
 	attributesfile = ~/.gitattributes
-	pager = diff-so-fancy | less --tabs=4 -RFXS
+	pager = delta
 	autocrlf = input
 	ignorecase = false
 [color "diff"]
@@ -82,4 +82,17 @@
 	autocorrect = 1
 [push]
 	default = tracking
+
+[delta]
+	line-numbers = true
+	diff-so-fancy = true
+	plus-color = "#012800"
+	minus-color = "#E0348B"
+	syntax-theme = Monokai Extended
+
+[interactive]
+	diffFilter = delta --color-only
+
+[diff "image"]
+	command = ~/git-imgdiff
 
