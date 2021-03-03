@@ -322,54 +322,80 @@ source ~/.vim/xcodedark.vim
 
 let g:lightline = {
       \ "colorscheme": "xcodedark",
+      \ "enable": { "tabline": 0 },
       \ "tabline": {
       \   "left": [ [ "tabs" ] ],
       \   "right": [ [ "close" ] ],
       \ },
       \ "tab": {
-      \   "active": ["tabnum", "filename", "modified"],
+      \   "active": ["modified", "tabnum", "filename", "modified"],
       \   "inactive": ["tabnum", "filename", "modified"],
       \ },
       \ "active": {
       \   "left": [ [ "mode", "paste" ],
-      \             [  ],
+      \             [ ] ,
       \             [ "readonly", "filename" ] ],
-      \   "right": [ [], 
+      \   "right": [ [ "coc_errors", "coc_warnings", "coc_ok" ],
       \              [ ],
       \              [ "fileformat", "lineinfo" ] ],
       \ },
       \ "inactive": {
       \   "left": [  [ "filename" ] ],
-      \   "right": [ [],
+      \   "right": [ [ ],
       \              [ ],
       \              [ "fileformat", "lineinfo" ] ],
       \ },
       \ "component": {
-      \   "close": "%999X \uf00d ",
+      \   "close": "%999X  ",
       \ },
       \ "component_function": {
-      \   "fileformat": "FileFormatIcon",
+      \   "fileformat": "LightlineFileFormat",
+      \   "readonly": "LightlineReadonly",
+      \ },
+      \ "tab_component": {
+      \   "close": "%999X \uf00d ",
       \ },
       \ "tab_component_function": {
       \   "tabnum": "LightlineWebDevIcons",
       \ },
       \ "separator": { "left": "", "right": "" },
       \ "subseparator": { "left": "", "right": "" },
-      \ "tabline_separator": { "left": "", "right": "" },
+      \ "tabline_separator": { "left": "▎", "right": "" },
+      \ "tabline_subseparator": { "left": "▎", "right": "" },
       \ }
 
-function! FileNameWithIcon()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . &filename : &filename) : '?'
-endfunction
+let g:lightline#coc#indicator_warnings = " "
+let g:lightline#coc#indicator_errors = " "
+let g:lightline#coc#indicator_ok = ""
+
+call lightline#coc#register()
 
 function! LightlineWebDevIcons(n)
   let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
   return WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
 endfunction
 
-function! FileFormatIcon()
+function! LightlineFileFormat()
   return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
+
+function LightlineReadonly()
+  return &ft !~? 'help\|vimfiler' && &readonly ? '' : ''
+endfunction
+
+function! LightlineModified()
+  let map = { 'V': 'n', "\<C-v>": 'n', 's': 'n', 'v': 'n', "\<C-s>": 'n', 'c': 'n', 'R': 'n'}
+  let mode = get(map, mode()[0], mode()[0])
+  let bgcolor = {'n': [240, '#585858'], 'i': [31, '#0087af']}
+  let color = get(bgcolor, mode, bgcolor.n)
+  exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d guifg=#ff0000 guibg=%s term=bold cterm=bold',
+        \ color[0], color[1])
+  return &modified ? 'E' : &modifiable ? '' : '-'
+endfunction
+
+" Buffet
+let g:buffet_powerline_separators = 1
+
 
 " Airline
 " let g:airline_powerline_fonts = 1
@@ -385,6 +411,56 @@ endfunction
 " let g:airline#extensions#tabline#show_tab_type = 0
 " let g:airline#extensions#tabline#show_tab_count = 0
 " let g:airline#extensions#tabline#close_symbol = "\uf00d" " A nice fat X
+
+hi FileTypeSel_ guifg=#dfdfe0 guibg=#414453
+hi FileTypeSel_vim guifg=#84b360 guibg=#414453
+hi FileTypeSel_json guifg=#ffa14f guibg=#414453
+hi FileTypeSel_sh guifg=#4484d1 guibg=#414453
+hi FileTypeSel_typescript guifg=#4484d1 guibg=#414453
+hi FileTypeSel_typescriptreact guifg=#4484d1 guibg=#414453
+hi FileTypeSel_javascript guifg=#ffa14f guibg=#414453
+hi FileTypeSel_javascriptreact guifg=#4484d1 guibg=#414453
+
+hi TabLineBorder guifg=#414453 guibg=#393b44
+hi TabLineSelBorder guifg=#4484d1 guibg=#414453
+
+hi TabLineNull guibg=#2f3037
+
+function! MyTabLine()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    let tabnr = i + 1 " range() starts at 0
+    let winnr = tabpagewinnr(tabnr)
+    let buflist = tabpagebuflist(tabnr)
+    let bufnr = buflist[winnr - 1]
+    let bufname = fnamemodify(bufname(bufnr), ':t')
+
+    let s .= '%' . tabnr . 'T'
+
+    let s .= (tabnr == tabpagenr() ? '%#TabLineSelBorder#' : '%#TabLineBorder#')
+    let s .= "▎ "
+ 
+    let s .= (tabnr == tabpagenr() ? '%#FileTypeSel_' . &filetype .'#' : '%#TabLine#') 
+    let s .= WebDevIconsGetFileTypeSymbol(bufname(l:bufnr)) 
+
+    let s .= (tabnr == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
+    let s .= empty(bufname) ? ' [No Name] ' : ' ' . bufname . ' '
+ 
+    let bufmodified = getbufvar(bufnr, "&mod")
+    let s .= (bufmodified ? '●' : ' ') . ' '
+
+  endfor
+
+  let s .= '%#TabLineFill#%T'
+
+  if tabpagenr('$') > 1
+    let s .= '%#TabLineNull#%=%#TabLine#%999X  '
+  endif
+
+  return s
+endfunction
+
+set tabline=%!MyTabLine()
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<Tab>"
@@ -403,25 +479,10 @@ let g:bufExplorerSplitRight=0
 let g:TerminusInsertCursorShape=2
 
 " TypeScript
-let g:tsuquyomi_disable_default_mappings=1
-let g:tsuquyomi_completion_detail = 1
-let g:tsuquyomi_disable_quickfix = 1
-let g:tsuquyomi_shortest_import_path = 1
-
-" augroup typescript
-"   autocmd!
-"   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
-
-"   " CSS Colors in TypeScript
-"   autocmd FileType typescript call css_color#init('hex', 'extended'
-"         \, 'typescriptComment,typescriptLineComment,typescriptStringS,typescriptStringD'
-"         \. 'jsComment,jsString,jsTemplateString,jsObjectKeyString,jsObjectStringKey,jsClassStringKey'
-"         \. 'typescriptStringS,typescriptStringD,typescriptStringB'
-"         \)
-
-"   " autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
-"   autocmd FileType typescript noremap gd :TsuDefinition<cr>
-" augroup END
+" let g:tsuquyomi_disable_default_mappings=1
+" let g:tsuquyomi_completion_detail = 1
+" let g:tsuquyomi_disable_quickfix = 1
+" let g:tsuquyomi_shortest_import_path = 1
 
 " Incsearch (Fuzzy)
 map /  <Plug>(incsearch-forward)
