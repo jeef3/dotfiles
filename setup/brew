@@ -67,6 +67,7 @@ FORMULAS=(
   diff-so-fancy
   yarn
   awscli
+  azure-cli
   watchman
   fswatch
   ranger
@@ -93,50 +94,17 @@ FORMULAS=(
   ffmpeg
   gifsicle
   imagemagick
-
-  # Kivy
-  pkg-config
-  sdl2
-  sdl2_image
-  sdl2_ttf
-  sdl2_mixer
-  gstreamer
-
-  # Arduino
-  # avr-libc
-  # avrdude
-  # arduino-mk
-  # platformio
 )
 
 CASKS=(
   iterm2
-
-  # Quicklook Add-ins
-  # qlcolorcode
-  # qlstephen
-  # qlmarkdown
-  # quicklook-json
-  # qlprettypatch
-  # quicklook-csv
-  # betterzipql
-  # qlimagesize
 
   # Gifify
   xquartz
 
   # Dev Tools
   react-native-debugger
-  android-studio
-  intel-haxm
-  java8
-  fastlane
   imageoptim
-  google-chrome
-  homebrew/cask-versions/firefox-developer-edition
-
-  # Misc
-  caprine   # Facebook Messenger
 
   # Other
   dropbox
@@ -149,10 +117,7 @@ CASKS=(
 
   slack
 
-  sketch
   figma
-  principle
-  balsamiq-mockups
 
   bricklink-studio
 
@@ -165,8 +130,6 @@ CASKS=(
 
 # Not available or still figuring out:
 # Xcode
-# Day One?
-# Sim Daltonism
 
 formula_exists() {
   if $(brew list | grep $1 > /dev/null); then
