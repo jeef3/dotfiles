@@ -1,5 +1,14 @@
 {
-  "diagnostic.displayByAle": true,
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.preferences.formatOnSaveFiletypes":["css", "markdown", "javascript", "javascriptreact", "typescript", "typescriptreact"],
 
-  "coc.preferences.currentFunctionSymbolAutoUpdate": true
+  "diagnostic.errorSign":"\uf00d",
+  "diagnostic.warningSign":"\uf071",
+  "diagnostic.infoSign":"\uf071",
+  "diagnostic.hintSign":"H",
+  "diagnostic.format":"%message",
+
+  "suggest.enablePreview":false,
+
+  "yaml.format.enable": true
 }

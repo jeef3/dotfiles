@@ -40,7 +40,6 @@ Plug 'rhysd/vim-grammarous'             " Grammar checking
 Plug 'tpope/vim-obsession'              " Keep my session
 
 " Errors and linting
-Plug 'w0rp/ale'                         " File error checking
 " Plug 'ruanyl/coverage.vim'              " Coverage report gutter
 
 " Git
@@ -91,7 +90,23 @@ Plug 'freitass/todo.txt-vim'            " todo.txt
 
 " Language completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" CoC Extensions
+Plug 'neoclide/coc-tsserver'
+Plug 'neoclide/coc-snippets'
+Plug 'neoclide/coc-json'
+Plug 'neoclide/coc-vetur'
+Plug 'neoclide/coc-yaml'
+Plug 'neoclide/coc-eslint'
+Plug 'neoclide/coc-highlight'
+Plug 'neoclide/coc-emmet'
+Plug 'neoclide/coc-prettier'
 Plug 'antoinemadec/coc-fzf'
+Plug 'fannheyward/coc-styled-components'
+Plug 'khanghoang/coc-jest'
+Plug 'iamcco/coc-flutter'
+Plug 'josa42/coc-sh'
+Plug 'tjdevries/coc-zsh'
 
 " Language support
 Plug 'othree/csscomplete.vim'           " CSS
@@ -105,7 +120,6 @@ Plug 'mattn/emmet-vim'                   " HTML/CSS quick completion
 Plug 'ap/vim-css-color'                  " Color preview in CSS
 Plug 'jplaut/vim-arduino-ino'            " Arduino compile/build
 Plug 'firegoby/html_entities_helper.vim' " HTML entity conversion
-Plug 'Galooshi/vim-import-js'            " JavaScript Import helper
 Plug 'dunckr/js_alternate.vim'           " JavaScript test alternate file switch
 Plug 'suan/vim-instant-markdown'         " Markdown previews
 Plug 'tmux-plugins/vim-tmux'             " Tmux config helper
