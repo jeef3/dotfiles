@@ -31,7 +31,7 @@ Plug 'tpope/vim-sleuth'                 " Set shiftwidth and expandtab based on 
 Plug 'tpope/vim-commentary'             " gcc to comment line/paragraph
 Plug 'tpope/vim-surround'               " Change surrounds, quotes etc
 Plug 'jiangmiao/auto-pairs'             " complete quotes, parends etc
-Plug 'SirVer/ultisnips'                 " Code snippets
+" Plug 'SirVer/ultisnips'                 " Code snippets
 Plug 'rstacruz/vim-xtract'              " Extract selected into a new file
 Plug 'metakirby5/codi.vim'              " REPL
 Plug 'skywind3000/quickmenu.vim'        " Quick Menu
@@ -111,7 +111,7 @@ Plug 'tjdevries/coc-zsh'
 
 " Language support
 Plug 'othree/csscomplete.vim'           " CSS
-Plug 'natebosch/vim-lsc'      
+Plug 'natebosch/vim-lsc'
 Plug 'natebosch/vim-lsc-dart'           " Dart
 Plug 'OmniSharp/omnisharp-vim'          " C#
 
@@ -126,10 +126,12 @@ Plug 'suan/vim-instant-markdown'         " Markdown previews
 Plug 'tmux-plugins/vim-tmux'             " Tmux config helper
 
 " Misc utils
-Plug 'Xvezda/vim-readonly'               " So I don't accidentally edit them files again
+Plug 'Xvezda/vim-readonly'               " So I don't accidentally edit them (node_modules etc) files again
+Plug 'josa42/vim-lightline-coc'          " CoC -> Lightline components
 
 " Trial
 Plug 'alvan/vim-closetag'                " Auto-close HTML tags
+Plug 'andymass/vim-matchup'
 
 " Color Themes
 Plug 'lifepillar/vim-colortemplate'

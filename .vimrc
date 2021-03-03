@@ -5,7 +5,7 @@ filetype plugin indent on
 syntax on
 
 source ~/.vim/plugins.vim
-runtime macros/matchit.vim
+" runtime macros/matchit.vim
 
 set t_Co=256
 set t_8f=[38;2;%lu;%lu;%lum
@@ -40,6 +40,7 @@ set autoindent " Copy indent from last line when starting new line.
 set softtabstop=2 " Tab key results in 2 spaces
 set tabstop=2
 set shiftwidth=2 " The # of spaces for indenting.
+set shiftround " Round to that shiftwidth
 set expandtab " Expand tabs to spaces
 set smarttab " At start of line, <Tab> inserts shiftwidth spaces, <Bs> deletes shiftwidth spaces.
 
@@ -78,6 +79,7 @@ set formatoptions+=2 " Use indent from 2nd line of a paragraph
 set formatoptions+=l " Don't break lines that are already long
 set formatoptions+=1 " Break before 1-letter words
 set formatoptions+=t " Auto-wrapping
+set completeopt-=preview
 set gdefault " By default add g flag to search/replace. Add g to toggle.
 set hidden " When a buffer is brought to foreground, remember undo history and marks.
 set history=1000 " Increase history from 20 default to 1000
@@ -147,8 +149,8 @@ noremap <C-l> <C-W>l
 noremap <leader>, <C-^>
 
 " Toggle show tabs and trailing spaces (,c)
-set list
-set lcs=tab:›\ ,trail:·,nbsp:_,extends:…,precedes:…
+set nolist
+set lcs=tab:›\ ,trail:-,nbsp:·,space:·,extends:…,precedes:…,eol:↵
 
 set fcs=fold:-
 nnoremap <silent> <leader>c :set nolist!<CR>
@@ -510,16 +512,16 @@ noremap <C-p> :Ag<cr>
 " noremap <leader>t :Buffers<cr>
 
 " JSX
-let g:jsx_ext_required = 0
+" let g:jsx_ext_required = 0
 
-augroup jsx_helpers
-  autocmd!
-  autocmd FileType javascript nnoremap <leader>ja :call JSXEncloseReturn()<CR>
-  autocmd FileType javascript nnoremap <leader>ji :call JSXEachAttributeInLine()<CR>
-  autocmd FileType javascript nnoremap <leader>ve :call JSXExtractPartialPrompt()<CR>
-  autocmd FileType javascript nnoremap <leader>jc :call JSXChangeTagPrompt()<CR>
-  autocmd FileType javascript nnoremap vat :call JSXSelectTag()<CR>
-augroup END
+" augroup jsx_helpers
+"   autocmd!
+"   autocmd FileType javascript nnoremap <leader>ja :call JSXEncloseReturn()<CR>
+"   autocmd FileType javascript nnoremap <leader>ji :call JSXEachAttributeInLine()<CR>
+"   autocmd FileType javascript nnoremap <leader>ve :call JSXExtractPartialPrompt()<CR>
+"   autocmd FileType javascript nnoremap <leader>jc :call JSXChangeTagPrompt()<CR>
+"   autocmd FileType javascript nnoremap vat :call JSXSelectTag()<CR>
+" augroup END
 
 " CSS completion
 augroup css
@@ -578,12 +580,6 @@ augroup END
 " Xtract
 vnoremap <leader>x :Xtract
 
-" JS Imports
-augroup import_js
-  autocmd!
-  autocmd FileType javascript nnoremap <leader>jo :ImportJSWord<CR>
-augroup END
-
 " GitGutter
 let g:gitgutter_sign_added = "\uf457"
 let g:gitgutter_sign_modified = "\uf459"
@@ -615,11 +611,11 @@ source ~/.vim/quickmenu.vim
 " augroup END
 
 " Javascript Syntax
-let g:javascript_plugin_flow = 1
+" let g:javascript_plugin_flow = 1
 
 " vim-closetag
-let g:closetag_filenames = '*.jsx'
-let g:closetag_xhtml_filenames = '*.jsx'
+let g:closetag_filenames = '*.html'
+let g:closetag_xhtml_filenames = '*.html'
 
 " CSS3 Syntax
 augroup VimCSS3Syntax
@@ -629,18 +625,22 @@ augroup VimCSS3Syntax
 augroup END
 
 " COC
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+let g:coc_snippet_next = '<tab>'
 
 inoremap <silent><expr> <TAB>
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+	  \ pumvisible() ? coc#_select_confirm() :
+	  \ coc#expandableOrJumpable() ?
+	  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+	  \ <SID>check_back_space() ? "\<TAB>" :
+	  \ coc#refresh()
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 nmap <leader>rn <Plug>(coc-rename)
@@ -654,11 +654,18 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>qf :CocFix<CR>
 nmap <silent><nowait> <space>s  :<C-u>CocList -A -I symbols<cr>
 
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
 " COC lists using fzf
 " nnoremap <silent> <space>s       :<C-u>CocFzfList symbols<CR>
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+" hi! link CocErrorHighlight ErrorMsg
+" hi! link CocErrorSign ErrorMsg
+hi! CocErrorHighlight guifg=#f92672 gui=undercurl cterm=underline
+hi! CocErrorSign guifg=#f92672
 
 nmap <silent> K :call <SID>show_documentation()<CR>
 
@@ -681,3 +688,15 @@ augroup omnisharp_commands
   autocmd FileType cs nmap <silent> <buffer> K <Plug>(omnisharp_documentation)
   autocmd FileType cs nmap <silent> <buffer> <space>s <Plug>(omnisharp_find_symbol)
 augroup END
+
+" todo.txt
+augroup todotxt_commands
+  autocmd!
+
+  " autocmd FileType todo setlocal omnifunc=todo#Complete
+  " autocmd FileType todo imap <buffer> + +<C-X><C-O>
+  " autocmd FileType todo imap <buffer> @ @<C-X><C-O>
+augroup END
+
+" vim-matchup
+let g:matchup_matchparen_offscreen = {'method': "popup"}
