@@ -24,6 +24,7 @@ symlinks=(
   .tmux
   .tmux.conf
   .config/ranger
+  .todo.cfg
 )
 
 info "Linking dotfiles"

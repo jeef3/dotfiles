@@ -22,7 +22,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                 " Fast file searching <c-t>
 Plug 'brooth/far.vim'                   " Find And Replace
 Plug 'tpope/vim-repeat'                 " Get more use out of .
-Plug 'ryanoasis/vim-devicons'           " Icon Fonts
 
 " ===== My IDE =====
 
@@ -122,5 +121,8 @@ Plug 'lifepillar/vim-colortemplate'
 Plug 'co1ncidence/monokai-pro.vim'
 Plug 'sainnhe/sonokai'
 Plug 'arzg/vim-colors-xcode'
+
+" Icons last
+Plug 'ryanoasis/vim-devicons'           " Icon Fonts
 
 call plug#end()

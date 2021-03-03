@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 while [ ! -z "$1"  ]; do
   case "$1" in
@@ -85,15 +85,15 @@ print_title() {
     case "$1" in
       -l|--left)
         shift
-        LEFT="$1"
+        LEFT_CONTENT="$1"
         ;;
       -c|--center)
         shift
-        CENTER="$1"
+        CENTER_CONTENT="$1"
         ;;
       -r|--right)
         shift
-        RIGHT="$1"
+        RIGHT_CONTENT="$1"
         ;;
       *)
     esac
@@ -102,29 +102,6 @@ print_title() {
 
   COUNT=`expr $WIDTH - 4`
 
-  LEFT_BORDER="┤"
-  RIGHT_BORDER="├"
-                ╎
-  LINE="─"
-
-  if [ -n "$LEFT" ]; then
-    LEFT_CONTENT="${LEFT_BORDER}${LEFT}${RIGHT_BORDER}"
-  else
-    LEFT_CONTENT=""
-  fi
-  
-  if [ -n "$CENTER" ]; then
-    CENTER_CONTENT="${LEFT_BORDER}${CENTER}${RIGHT_BORDER}"
-  else 
-    CENTER_CONTENT=""
-  fi
-
-  if [ -n "$RIGHT" ]; then
-    RIGHT_CONTENT="${LEFT_BORDER}${RIGHT}${RIGHT_BORDER}"
-  else 
-    RIGHT_CONTENT=""
-  fi
-
   LEFT_WIDTH=$(count_width "$LEFT_CONTENT")
   CENTER_WIDTH=$(count_width "$CENTER_CONTENT")
   RIGHT_WIDTH=$(count_width "$RIGHT_CONTENT")
@@ -132,7 +109,7 @@ print_title() {
   GAP=`expr $COUNT - ${LEFT_WIDTH} - ${CENTER_WIDTH} - ${RIGHT_WIDTH}`
   GAP=`expr $GAP / 2`
 
-  PAD=$(printf "%.0s$LINE" $(eval "echo {1..$GAP}"))
+  PAD=$(printf "%.0s-" $(eval "echo {1..$GAP}"))
   echo "${LEFT_CONTENT}\
 ${PAD}\
 ${CENTER_CONTENT}\
@@ -155,13 +132,22 @@ elif [ $WIDTH -lt 90 ]; then
 
   echo $(print_title -c "$STAT")
 else
-  STAT_L="#[fg=$BASE_4,bg=$YELLOW]#[fg=$BASE_0,bg=$YELLOW,bold] $CURRENT_COMMAND #[default]\
-#[fg=$YELLOW,bg=$BASE_5]#[fg=$BASE_0,bg=$BASE_5]  $PRETTY_PATH #[fg=$BASE_5,bg=$BASE_3]#[fg=$BASE_3,bg=$BASE_3]"
-
   GIT_STAT=$(cd $CURRENT_PATH && git_branch)
 
+  if [ $IS_ACTIVE -eq 0 ]; then
+    STAT_L="#[fg=$BASE_1,bg=$BASE_6]#[fg=$BASE_0,bg=$BASE_6,bold] $CURRENT_COMMAND #[default]\
+#[fg=$BASE_6,bg=$BASE_4]#[fg=$BASE_0,bg=$BASE_4]  $PRETTY_PATH #[fg=$BASE_4,bg=$BASE_1]#[default]"
+  else
+    STAT_L="#[fg=$BASE_4,bg=$YELLOW]#[fg=$BASE_0,bg=$YELLOW,bold] $CURRENT_COMMAND #[default]\
+#[fg=$YELLOW,bg=$BASE_5]#[fg=$BASE_0,bg=$BASE_5]  $PRETTY_PATH #[fg=$BASE_5,bg=$BASE_3]#[fg=$BASE_3,bg=$BASE_3]"
+  fi
+
   if [ -n "$GIT_STAT" ]; then
-    STAT_R="#[fg=$BASE_4,bg=$BASE_3]#[fg=$BASE_0,bg=$BASE_4] $BRANCH_ICON $GIT_STAT#[default]"
+    if [ $IS_ACTIVE -eq 0 ]; then
+      STAT_R="#[fg=$BASE_3,bg=$BASE_1]#[fg=$BASE_0,bg=$BASE_3] $BRANCH_ICON $GIT_STAT #[default]"
+    else 
+      STAT_R="#[fg=$BASE_4,bg=$BASE_3]#[fg=$BASE_0,bg=$BASE_4] $BRANCH_ICON $GIT_STAT #[default]"
+    fi
   else
     STAT_R=""
   fi

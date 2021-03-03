@@ -5,3 +5,5 @@
 .vim/bundle/*
 .vim/plugged
 .vim/autoload
+
+.tmux/resurrect
