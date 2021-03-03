@@ -86,7 +86,8 @@ Plug 'sheerun/vim-polyglot'             " Good base syntax package
 " Plug 'jxnblk/vim-mdx-js'                " MDX
 " Plug 'martinda/Jenkinsfile-vim-syntax'  " Jenkinsfile
 " Only one I'm using not in Polyglot
-Plug 'freitass/todo.txt-vim'            " todo.txt
+" Plug 'freitass/todo.txt-vim'            " todo.txt
+Plug 'dbeniamine/todo.txt-vim'
 
 " Language completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
