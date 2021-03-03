@@ -38,16 +38,17 @@ FORMULAS=(
   bash
 
   # Wget with iri
-  "wget --enable-iri"
+  wget
 
   # Git
   git
   tig
+  git-delta
 
   # Mah IDE
+  tmux
   # Uninstall first? Upgrade drops the override-system-vim
-  "macvim --with-override-system-vim"
-  "--HEAD universal-ctags/universal-ctags/universal-ctags"
+  macvim
 
   # Zsh
   zsh
@@ -77,10 +78,11 @@ FORMULAS=(
   ncdu # Nicer du
   tldr # Nicer man
   gnupg
+  less # Newer less
 
   # Languages
   node
-  python@2
+  # python@2
   python3
 
   # Ruby stuff
