@@ -5,7 +5,6 @@ filetype plugin indent on
 syntax on
 
 source ~/.vim/plugins.vim
-" runtime macros/matchit.vim
 
 set t_Co=256
 set t_8f=[38;2;%lu;%lu;%lum
@@ -45,7 +44,7 @@ set expandtab " Expand tabs to spaces
 set smarttab " At start of line, <Tab> inserts shiftwidth spaces, <Bs> deletes shiftwidth spaces.
 
 " Folding
-set nofoldenable
+set nofoldenable " Start not folded
 set foldcolumn=0 " Column to show folds
 set foldlevel=20
 set foldlevelstart=20 " Sets `foldlevel` when editing a new buffer
@@ -86,7 +85,7 @@ set history=1000 " Increase history from 20 default to 1000
 set hlsearch " Highlight searches
 set ignorecase " Ignore case of searches.
 set incsearch " Highlight dynamically as pattern is typed.
-set cmdheight=2 " Give a bit more height to cmd line
+set cmdheight=1 " Just enough
 set laststatus=2 " Always show status line
 set lispwords+=defroutes " Compojure
 set lispwords+=defpartial,defpage " Noir core
@@ -228,18 +227,6 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " Map Y to act like D and C, Yank til EOL
 noremap Y y$
 
-" New file under string
-" nnoremap <leader>v :call NewFileAt()<cr>
-" function! NewFileAt ()
-"   " lcd %:p:h
-"   let newFile = expand('<cfile>:p')
-"   let currentExtension = expand('%:e')
-
-"   let newFileName = newFile . "." . currentExtension
-"   execute "enew"
-"   execute "w " . newFileName
-" endfunction
-
 " Home motion toggle
 " http://ddrscott.github.io/blog/2016/vim-toggle-movement/
 function! ToggleMovement(firstOp, thenOp)
@@ -286,53 +273,12 @@ com! FormatHTML %!tidy -iq -xml -wrap 0
 " Plugin Configuration
 " ==============================================================================
 
-" ALE
-let g:ale_set_balloons = 1
-let g:ale_sign_error = "\uf00d"
-let g:ale_sign_warning = "\uf071"
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-
-let g:ale_error_format = '•%d'
-let g:ale_warning_format = '•%d'
-
-hi ALEErrorSign   guifg=#f92672
-hi ALEWarningSign guifg=#fd971f
-
-let g:ale_linters = {
-      \   'javascript': ['tsserver', 'stylelint', 'eslint'],
-      \   'cs': ['OmniSharp']
-      \}
-" let g:ale_linter_aliases = {'jsx': 'css', 'tsx': 'css'}
-
-let g:ale_fix_on_save = 1
-let g:ale_fixers = {
-      \   'css': ['stylelint', 'prettier'],
-      \   'javascript': ['eslint', 'prettier'],
-      \   'javascriptreact': ['eslint', 'prettier'],
-      \   'typescript': ['tslint', 'prettier'],
-      \   'typescriptreact': ['tslint', 'prettier'],
-      \   'json': ['prettier'],
-      \   'html': ['prettier']
-      \}
-
-nnoremap ]a :ALENextWrap<cr>
-nnoremap [a :ALEPreviousWrap<cr>
-" nnoremap <leader>af :ALEFix<cr>
-
 " Lightline
-source ~/.vim/xcodedark.vim
+source ~/.vim/lightline-xcodedark.vim
 
 let g:lightline = {
       \ "colorscheme": "xcodedark",
       \ "enable": { "tabline": 0 },
-      \ "tabline": {
-      \   "left": [ [ "tabs" ] ],
-      \   "right": [ [ "close" ] ],
-      \ },
-      \ "tab": {
-      \   "active": ["modified", "tabnum", "filename", "modified"],
-      \   "inactive": ["tabnum", "filename", "modified"],
-      \ },
       \ "active": {
       \   "left": [ [ "mode", "paste" ],
       \             [ ] ,
@@ -354,16 +300,8 @@ let g:lightline = {
       \   "fileformat": "LightlineFileFormat",
       \   "readonly": "LightlineReadonly",
       \ },
-      \ "tab_component": {
-      \   "close": "%999X \uf00d ",
-      \ },
-      \ "tab_component_function": {
-      \   "tabnum": "LightlineWebDevIcons",
-      \ },
       \ "separator": { "left": "", "right": "" },
       \ "subseparator": { "left": "", "right": "" },
-      \ "tabline_separator": { "left": "▎", "right": "" },
-      \ "tabline_subseparator": { "left": "▎", "right": "" },
       \ }
 
 let g:lightline#coc#indicator_warnings = " "
@@ -371,11 +309,6 @@ let g:lightline#coc#indicator_errors = " "
 let g:lightline#coc#indicator_ok = ""
 
 call lightline#coc#register()
-
-function! LightlineWebDevIcons(n)
-  let l:bufnr = tabpagebuflist(a:n)[tabpagewinnr(a:n) - 1]
-  return WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
-endfunction
 
 function! LightlineFileFormat()
   return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol()) : ''
@@ -385,84 +318,8 @@ function LightlineReadonly()
   return &ft !~? 'help\|vimfiler' && &readonly ? '' : ''
 endfunction
 
-function! LightlineModified()
-  let map = { 'V': 'n', "\<C-v>": 'n', 's': 'n', 'v': 'n', "\<C-s>": 'n', 'c': 'n', 'R': 'n'}
-  let mode = get(map, mode()[0], mode()[0])
-  let bgcolor = {'n': [240, '#585858'], 'i': [31, '#0087af']}
-  let color = get(bgcolor, mode, bgcolor.n)
-  exe printf('hi ModifiedColor ctermfg=196 ctermbg=%d guifg=#ff0000 guibg=%s term=bold cterm=bold',
-        \ color[0], color[1])
-  return &modified ? 'E' : &modifiable ? '' : '-'
-endfunction
-
-" Buffet
-let g:buffet_powerline_separators = 1
-
-
-" Airline
-" let g:airline_powerline_fonts = 1
-" let g:airline_left_sep = "\ue0b8"
-" let g:airline_left_alt_sep = "\ue0b9"
-" let g:airline_right_sep = "\ue0be"
-" let g:airline_right_alt_sep = "\ue0bf"
-
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#show_splits = 0
-" let g:airline#extensions#tabline#show_buffers = 0
-" let g:airline#extensions#tabline#show_tab_nr = 0
-" let g:airline#extensions#tabline#show_tab_type = 0
-" let g:airline#extensions#tabline#show_tab_count = 0
-" let g:airline#extensions#tabline#close_symbol = "\uf00d" " A nice fat X
-
-hi FileTypeSel_ guifg=#dfdfe0 guibg=#414453
-hi FileTypeSel_vim guifg=#84b360 guibg=#414453
-hi FileTypeSel_json guifg=#ffa14f guibg=#414453
-hi FileTypeSel_sh guifg=#4484d1 guibg=#414453
-hi FileTypeSel_typescript guifg=#4484d1 guibg=#414453
-hi FileTypeSel_typescriptreact guifg=#4484d1 guibg=#414453
-hi FileTypeSel_javascript guifg=#ffa14f guibg=#414453
-hi FileTypeSel_javascriptreact guifg=#4484d1 guibg=#414453
-
-hi TabLineBorder guifg=#414453 guibg=#393b44
-hi TabLineSelBorder guifg=#4484d1 guibg=#414453
-
-hi TabLineNull guibg=#2f3037
-
-function! MyTabLine()
-  let s = ''
-  for i in range(tabpagenr('$'))
-    let tabnr = i + 1 " range() starts at 0
-    let winnr = tabpagewinnr(tabnr)
-    let buflist = tabpagebuflist(tabnr)
-    let bufnr = buflist[winnr - 1]
-    let bufname = fnamemodify(bufname(bufnr), ':t')
-
-    let s .= '%' . tabnr . 'T'
-
-    let s .= (tabnr == tabpagenr() ? '%#TabLineSelBorder#' : '%#TabLineBorder#')
-    let s .= "▎ "
- 
-    let s .= (tabnr == tabpagenr() ? '%#FileTypeSel_' . &filetype .'#' : '%#TabLine#') 
-    let s .= WebDevIconsGetFileTypeSymbol(bufname(l:bufnr)) 
-
-    let s .= (tabnr == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
-    let s .= empty(bufname) ? ' [No Name] ' : ' ' . bufname . ' '
- 
-    let bufmodified = getbufvar(bufnr, "&mod")
-    let s .= (bufmodified ? '●' : ' ') . ' '
-
-  endfor
-
-  let s .= '%#TabLineFill#%T'
-
-  if tabpagenr('$') > 1
-    let s .= '%#TabLineNull#%=%#TabLine#%999X  '
-  endif
-
-  return s
-endfunction
-
-set tabline=%!MyTabLine()
+" FIXME: Why does it need to be here instead of up higher?
+source ~/.vim/tabline.vim
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<Tab>"
@@ -478,31 +335,25 @@ let g:bufExplorerShowRelativePath=1
 let g:bufExplorerSplitRight=0
 
 " Terminus
-let g:TerminusInsertCursorShape=2
-
-" TypeScript
-" let g:tsuquyomi_disable_default_mappings=1
-" let g:tsuquyomi_completion_detail = 1
-" let g:tsuquyomi_disable_quickfix = 1
-" let g:tsuquyomi_shortest_import_path = 1
+" let g:TerminusInsertCursorShape=2
 
 " Incsearch (Fuzzy)
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
 
-map z/  <Plug>(incsearch-fuzzy-/)
-map z?  <Plug>(incsearch-fuzzy-?)
-map z/ <Plug>(incsearch-fuzzy-stay)
+" map z/  <Plug>(incsearch-fuzzy-/)
+" map z?  <Plug>(incsearch-fuzzy-?)
+" map z/ <Plug>(incsearch-fuzzy-stay)
 
 " Incsearch - noh after motion
 let g:incsearch#auto_nohlsearch = 1
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
+" map *  <Plug>(incsearch-nohl-*)
+" map #  <Plug>(incsearch-nohl-#)
+" map g* <Plug>(incsearch-nohl-g*)
+" map g# <Plug>(incsearch-nohl-g#)
 
 " fzf
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -511,60 +362,11 @@ noremap <C-t> :Files<cr>
 noremap <C-p> :Ag<cr>
 " noremap <leader>t :Buffers<cr>
 
-" JSX
-" let g:jsx_ext_required = 0
-
-" augroup jsx_helpers
-"   autocmd!
-"   autocmd FileType javascript nnoremap <leader>ja :call JSXEncloseReturn()<CR>
-"   autocmd FileType javascript nnoremap <leader>ji :call JSXEachAttributeInLine()<CR>
-"   autocmd FileType javascript nnoremap <leader>ve :call JSXExtractPartialPrompt()<CR>
-"   autocmd FileType javascript nnoremap <leader>jc :call JSXChangeTagPrompt()<CR>
-"   autocmd FileType javascript nnoremap vat :call JSXSelectTag()<CR>
-" augroup END
-
 " CSS completion
 augroup css
   autocmd!
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
 augroup END
-
-" Goyo
-augroup goyo_commands
-  autocmd!
-  nnoremap <leader>go :Goyo<CR>
-
-  autocmd! User GoyoEnter nested call <SID>goyo_enter()
-  autocmd! User GoyoLeave nested call <SID>goyo_leave()
-augroup END
-
-function! s:goyo_enter()
-  silent !tmux set status off
-  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  set noshowmode
-  " set noshowcmd
-  set wrap
-  set linebreak
-  set scrolloff=999
-  Limelight
-  " ...
-endfunction
-
-function! s:goyo_leave()
-  silent !tmux set status on
-  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  set showmode
-  " set showcmd
-  set nowrap
-  set nolinebreak
-  set scrolloff=10
-  Limelight!
-  " ...
-endfunction
-
-" Arduino
-let g:vim_arduino_ino_cmd = 'ano'
-let g:vim_arduino_auto_open_serial = 1
 
 " Markdown
 augroup markdown
@@ -576,9 +378,6 @@ augroup markdown
   autocmd FileType markdown noremap k gk
   autocmd FileType markdown nnoremap $ g$
 augroup END
-
-" Xtract
-vnoremap <leader>x :Xtract
 
 " GitGutter
 let g:gitgutter_sign_added = "\uf457"
@@ -592,26 +391,10 @@ hi GitGutterChange        guifg=#fd971f
 hi GitGutterDelete        guifg=#f92672
 hi GitGutterChangeDelete  guifg=#fd971f
 
-" Quick Menu
-noremap <leader>m :call quickmenu#toggle(0)<cr>
-let g:quickmenu_options = "LH"
-source ~/.vim/quickmenu.vim
-
 " Coverage
 " let g:coverage_interval = 1000
 " let g:coverage_json_report_path = 'coverage/coverage-final.json'
 " let g:coverage_show_covered = 1
-
-" Flow
-" let g:flow#showquickfix = 0
-" let g:flow#enable = 1
-" augroup flow
-"   autocmd!
-"   autocmd FileType javascript setlocal omnifunc=flowcomplete#Complete
-" augroup END
-
-" Javascript Syntax
-" let g:javascript_plugin_flow = 1
 
 " vim-closetag
 let g:closetag_filenames = '*.html'
@@ -687,15 +470,6 @@ augroup omnisharp_commands
   autocmd FileType cs nmap <silent> <buffer> gd <Plug>(omnisharp_go_to_definition)
   autocmd FileType cs nmap <silent> <buffer> K <Plug>(omnisharp_documentation)
   autocmd FileType cs nmap <silent> <buffer> <space>s <Plug>(omnisharp_find_symbol)
-augroup END
-
-" todo.txt
-augroup todotxt_commands
-  autocmd!
-
-  " autocmd FileType todo setlocal omnifunc=todo#Complete
-  " autocmd FileType todo imap <buffer> + +<C-X><C-O>
-  " autocmd FileType todo imap <buffer> @ @<C-X><C-O>
 augroup END
 
 " vim-matchup
