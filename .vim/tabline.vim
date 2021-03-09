@@ -37,14 +37,14 @@ function! MyTabLine()
     let s .= empty(bufname) ? ' [No Name] ' : ' ' . bufname . ' '
  
     let bufmodified = getbufvar(bufnr, "&mod")
-    let s .= (bufmodified ? '●' : ' ') . ' '
+    let s .= (bufmodified ? '%999X●' : '%999X×') . '  '
 
   endfor
 
   let s .= '%#TabLineFill#%T'
 
   if tabpagenr('$') > 1
-    let s .= '%#TabLineNull#%=%#TabLine#%999X  '
+    let s .= '%#TabLineNull#'
   endif
 
   return s
