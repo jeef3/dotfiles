@@ -1,9 +1,0 @@
-#!/bin/sh
-track=$(tmux-spotify-info)
-
-if [ ${#track} -gt 35 ]
-then
-  track=$(echo $track | cut -c1-25)...
-fi
-
-echo ♫ $track
