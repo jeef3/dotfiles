@@ -7,3 +7,5 @@
 .vim/autoload
 
 .tmux/resurrect
+
+.todo
