@@ -35,19 +35,20 @@ else
 fi
 
 info "Adding italics"
+tic tmux-256color.terminfo
 tic xterm-256color-italic.terminfo
 
 info "Setting macos preferences"
-./setup/macos
+# ./setup/macos
 
 info "Installing global npm modules"
 ./setup/dev
 
 info "Installing Haskell (can't install with Homebrew)"
-curl -sSL https://get.haskellstack.org/ | sh
+# curl -sSL https://get.haskellstack.org/ | sh
 
 info "Installing rvm (can't install with Homebrew)"
-curl -sSL https://get.rvm.io | bash -s stable
+# curl -sSL https://get.rvm.io | bash -s stable
 
 info "Installing iTerm shell integration"
 curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
