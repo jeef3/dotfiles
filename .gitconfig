@@ -33,6 +33,8 @@
 	ts = "log --color --graph --pretty=format:'%C(#75715e)%C(bold)%h%C(reset)%C(bold magenta)%d%C(reset) %C(white)%s%C(reset)'"
 
 	br = branch --format='%(HEAD) %(color:bold magenta)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+[init]
+	defaultBranch = main
 [color]
 	ui = auto
 [credential]
