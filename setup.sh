@@ -57,10 +57,10 @@ curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
 info "Linking keys"
 # ln -s ~/Library/CloudStorage/iCloudDrive/Keys/.aws ~/
 # ln -s ~/Library/CloudStorage/iCloudDrive/Keys/.ssh ~/
-ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.ssh ~/
-ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.aws ~/
-chmod 600 ~/.ssh ~/.aws
-chmod 600 ~/.ssh/* ~/.aws/*
+# ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.ssh ~/
+# ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.aws ~/
+# chmod 600 ~/.ssh ~/.aws
+# chmod 600 ~/.ssh/* ~/.aws/*
 
 info "Installing Vim plug-ins"
 vim +PlugUpdate +qall

@@ -14,21 +14,22 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # My fonts
 # Symlinked fonts no longer being detected by Font Book?
 # ln -s ~/Library/CloudStorage/iCloudDrive/Fonts/* ~/Library/Fonts
-cp -r ~/Library/CloudStorage/iCloudDrive/Fonts/* ~/Library/Fonts
-success "Fonts copied"
+# cp -r ~/Library/CloudStorage/iCloudDrive/Fonts/* ~/Library/Fonts
+# success "Fonts copied"
 
 # Automator Services
 # If they're symlinked, they lose their color.
 # ln -s ~/Library/CloudStorage/iCloudDrive/Automator/* ~/Library/Services
-cp -r ~/Library/CloudStorage/iCloudDrive/Automator/* ~/Library/Services
-success "Automator services copied"
+# cp -r ~/Library/CloudStorage/iCloudDrive/Automator/* ~/Library/Services
+# success "Automator services copied"
 
 # Divvy prefs
+info "Try bring in Divvy preferences"
 if [ ! -f ./prefs/divvy.url ]; then
   info "Divvy preferences not found, skipping."
-else
-  open $(cat ./prefs/divvy.url)
-  success "Divvy preferences imported"
+# else
+  # open $(cat ./prefs/divvy.url)
+  # success "Divvy preferences imported"
 fi
 
 ###############################################################################
@@ -36,7 +37,7 @@ fi
 info "Setting macOS preferences"
 
 # Dark theme
-defaults write AppleInterfaceStyle Dark
+# defaults write AppleInterfaceStyle Dark
 
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
 defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
