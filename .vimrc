@@ -79,7 +79,7 @@ set formatoptions+=l " Don't break lines that are already long
 set formatoptions+=1 " Break before 1-letter words
 set formatoptions+=t " Auto-wrapping
 set completeopt-=preview
-set hidden " When a buffer is brought to foreground, remember undo history and marks.
+set hidden " Allow unsaved changes on hidden buffers
 set history=1000 " Increase history from 20 default to 1000
 set hlsearch " Highlight searches
 set ignorecase " Ignore case of searches.
@@ -292,9 +292,6 @@ let g:lightline = {
       \              [ ],
       \              [ "fileformat", "lineinfo" ] ],
       \ },
-      \ "component": {
-      \   "close": "%999X  ",
-      \ },
       \ "component_function": {
       \   "fileformat": "LightlineFileFormat",
       \   "readonly": "LightlineReadonly",
@@ -432,7 +429,6 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-" nmap <leader>qf <Plug>(coc-fix)
 nmap <silent> <leader>qf :CocFix<CR>
 nmap <silent><nowait> <space>s  :<C-u>CocList -A -I symbols<cr>
 
