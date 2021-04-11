@@ -15,6 +15,10 @@ hi FileTypeSel_typescriptreact guifg=#4484d1 guibg=#414453
 hi FileTypeSel_javascriptreact guifg=#4484d1 guibg=#414453
 hi FileTypeSel_javascript      guifg=#ffa14f guibg=#414453
 hi FileTypeSel_json            guifg=#ffa14f guibg=#414453
+hi FileTypeSel_yaml            guifg=#ffa14f guibg=#414453
+hi FileTypeSel_markdown        guifg=#ffa14f guibg=#414453
+hi FileTypeSel_gitconfig       guifg=#ffa14f guibg=#414453
+hi FileTypeSel_help            guifg=#ffa14f guibg=#414453
 
 function! MyTabLine()
   let s = ''
