@@ -1,7 +1,7 @@
 [alias]
 	c = commit
-	# cp = commit -p
 	co = checkout
+	cob = checkout -b
 	p = push
 	s = status -s
 	dt = difftool
@@ -70,6 +70,8 @@
 	log = true
 	defaultToUpstream = true
 	tool = vimdiff
+	conflictstyle = diff3
+	prompt = false
 [mergetool]
 	prompt = false
 	keepbackup = false
