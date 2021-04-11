@@ -24,11 +24,13 @@ Plug 'brooth/far.vim'                     " Find And Replace
 Plug 'jeef3/splitsizer.vim'               " Split resizing <c-a>, <c-s>
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                   " Fast file searching <c-t>
+Plug 'junegunn/vim-peekaboo'              " Registers insight
 Plug 'jiangmiao/auto-pairs'               " Auto-complete quotes, parends etc
 Plug 'machakann/vim-highlightedyank'      " Highlight yanked
 Plug 'Xvezda/vim-readonly'                " Lock a bunch of files like node_modules
 " Plug 'SirVer/ultisnips'                 " Code snippets
 Plug 'kshenoy/vim-signature'              " Show marks
+
 
 " Git
 " Plug 'tpope/vim-git'                    " Git syntax highlighting
