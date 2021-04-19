@@ -3,22 +3,39 @@ hi TabLineSelBorder            guifg=#4484d1 guibg=#414453
 
 hi TabLineNull                 guibg=#2f3037
 
-" File type colors
-hi FileTypeSel_                guifg=#dfdfe0 guibg=#414453
-hi FileTypeSel_netrw           guifg=#dfdfe0 guibg=#414453
-hi FileTypeSel_cs              guifg=#b281eb guibg=#414453
-hi FileTypeSel_vim             guifg=#84b360 guibg=#414453
-hi FileTypeSel_tmux            guifg=#84b360 guibg=#414453
-hi FileTypeSel_sh              guifg=#4484d1 guibg=#414453
-hi FileTypeSel_typescript      guifg=#4484d1 guibg=#414453
-hi FileTypeSel_typescriptreact guifg=#4484d1 guibg=#414453
-hi FileTypeSel_javascriptreact guifg=#4484d1 guibg=#414453
-hi FileTypeSel_javascript      guifg=#ffa14f guibg=#414453
-hi FileTypeSel_json            guifg=#ffa14f guibg=#414453
-hi FileTypeSel_yaml            guifg=#ffa14f guibg=#414453
-hi FileTypeSel_markdown        guifg=#ffa14f guibg=#414453
-hi FileTypeSel_gitconfig       guifg=#ffa14f guibg=#414453
-hi FileTypeSel_help            guifg=#ffa14f guibg=#414453
+" Glyph type colors
+hi GlyphPalette1               guifg=#dfdfe0 guibg=#414453
+hi GlyphPalette2               guifg=#84b360 guibg=#414453
+hi GlyphPalette3               guifg=#00ff00 guibg=#414453
+hi GlyphPalette4               guifg=#ff0000 guibg=#414453
+hi GlyphPalette5               guifg=#ffa14f guibg=#414453
+hi GlyphPalette6               guifg=#b281eb guibg=#414453
+hi GlyphPalette7               guifg=#4484d1 guibg=#414453
+hi GlyphPalette8               guifg=#0000ff guibg=#414453
+
+let g:palette = {
+      \ 'Palette1': ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+      \ 'Palette2': ['', '', '', '', '', '', '﵂', '', '', '', '', '', ''],
+      \ 'Palette3': ['λ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+      \ 'Palette4': ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+      \ 'Palette5': ['', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+      \ 'Palette6': ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''] ,
+      \ 'Palette7': ['', '', '', '', '', '', '', '', '', '', '', ''],
+      \ 'Palette8': ['', '', '', '', '', ''],
+      \ }
+
+function! GetColorForGlyph(glyph)
+  let palettes = keys(g:palette)
+
+  for pal in palettes
+    let index = index(g:palette[pal], a:glyph)
+    if index != -1
+      break
+    endif
+    
+  endfor
+  return index
+endfunction
 
 function! MyTabLine()
   let s = ''
@@ -33,9 +50,12 @@ function! MyTabLine()
 
     let s .= (tabnr == tabpagenr() ? '%#TabLineSelBorder#' : '%#TabLineBorder#')
     let s .= "▎ "
+
+    let glyph = WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
+    let glyphColorIndex = GetColorForGlyph(glyph)
  
-    let s .= (tabnr == tabpagenr() ? '%#FileTypeSel_' . &filetype .'#' : '%#TabLine#') 
-    let s .= WebDevIconsGetFileTypeSymbol(bufname(l:bufnr)) 
+    let s .= (tabnr == tabpagenr() ? '%#GlyphPalette' . glyphColorIndex .'#' : '%#TabLine#') 
+    let s .= glyph
 
     let s .= (tabnr == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
     let s .= empty(bufname) ? ' [No Name] ' : ' ' . bufname . ' '
