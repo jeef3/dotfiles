@@ -8,20 +8,20 @@ hi GlyphPalette1               guifg=#dfdfe0 guibg=#414453
 hi GlyphPalette2               guifg=#84b360 guibg=#414453
 hi GlyphPalette3               guifg=#00ff00 guibg=#414453
 hi GlyphPalette4               guifg=#ff0000 guibg=#414453
-hi GlyphPalette5               guifg=#ffa14f guibg=#414453
+hi GlyphPalette5               guifg=#0000ff guibg=#414453
 hi GlyphPalette6               guifg=#b281eb guibg=#414453
 hi GlyphPalette7               guifg=#4484d1 guibg=#414453
-hi GlyphPalette8               guifg=#0000ff guibg=#414453
+hi GlyphPalette8               guifg=#ffa14f guibg=#414453
 
 let g:palette = {
-      \ 'Palette1': ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
-      \ 'Palette2': ['', '', '', '', '', '', '﵂', '', '', '', '', '', ''],
-      \ 'Palette3': ['λ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
-      \ 'Palette4': ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
-      \ 'Palette5': ['', '', '', '', '', '', '', '', '', '', '', '', '', ''],
-      \ 'Palette6': ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''] ,
-      \ 'Palette7': ['', '', '', '', '', '', '', '', '', '', '', ''],
-      \ 'Palette8': ['', '', '', '', '', ''],
+      \ 'GlyphPalette1': ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+      \ 'GlyphPalette2': ['', '', '', '', '', '', '﵂', '', '', '', '', '', ''],
+      \ 'GlyphPalette3': ['λ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+      \ 'GlyphPalette4': ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+      \ 'GlyphPalette5': ['', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+      \ 'GlyphPalette6': ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''] ,
+      \ 'GlyphPalette7': ['', '', '', '', '', '', '', '', '', '', '', '', ''],
+      \ 'GlyphPalette8': ['', '', '', '', '', ''],
       \ }
 
 function! GetColorForGlyph(glyph)
@@ -34,7 +34,7 @@ function! GetColorForGlyph(glyph)
     endif
     
   endfor
-  return index
+  return pal
 endfunction
 
 function! MyTabLine()
@@ -54,7 +54,7 @@ function! MyTabLine()
     let glyph = WebDevIconsGetFileTypeSymbol(bufname(l:bufnr))
     let glyphColorIndex = GetColorForGlyph(glyph)
  
-    let s .= (tabnr == tabpagenr() ? '%#GlyphPalette' . glyphColorIndex .'#' : '%#TabLine#') 
+    let s .= (tabnr == tabpagenr() ? '%#' . glyphColorIndex .'#' : '%#TabLine#') 
     let s .= glyph
 
     let s .= (tabnr == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
