@@ -6,7 +6,7 @@
   "diagnostic.warningSign":"\uf071",
   "diagnostic.infoSign":"\uf071",
   "diagnostic.hintSign":"H",
-  "diagnostic.format":"%message",
+  "diagnostic.format":"[%source] %message",
 
   "suggest.enablePreview":false,
 

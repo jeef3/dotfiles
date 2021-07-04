@@ -23,6 +23,7 @@ highlight Comment cterm=italic
 
 " Set leaders
 let mapleader = ","
+
 let maplocalleader = "\\"
 
 " Local dirs
@@ -192,6 +193,12 @@ augroup applescript_au
   autocmd BufNewFile,BufRead *.applescript setf applescript
 augroup END
 
+" dot.env
+augroup dotenv
+  autocmd!
+  autocmd BufNewFile,BufReadPost .env.* setfiletype sh
+augroup END
+
 " Files specifically with tabs
 augroup files_with_tabs
   autocmd!
@@ -266,6 +273,9 @@ vnoremap c "_c
 " HTML/JSON Formatting
 com! FormatJSON %!python -m json.tool
 com! FormatHTML %!tidy -iq -xml -wrap 0
+
+" New file templates
+autocmd BufNewFile *.sh 0r ~/.vim/skeletons/bash.sh
 
 
 " ==============================================================================
@@ -358,6 +368,8 @@ noremap <C-t> :Files<cr>
 noremap <C-p> :Ag<cr>
 " noremap <leader>t :Buffers<cr>
 
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
 " CSS completion
 augroup css
   autocmd!
@@ -433,6 +445,7 @@ nmap <silent> <leader>qf :CocFix<CR>
 nmap <silent><nowait> <space>s  :<C-u>CocList -A -I symbols<cr>
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " COC lists using fzf
 " nnoremap <silent> <space>s       :<C-u>CocFzfList symbols<CR>
@@ -444,7 +457,6 @@ autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 " hi! link CocErrorSign ErrorMsg
 hi! CocErrorHighlight guifg=#f92672 gui=undercurl cterm=underline
 hi! CocErrorSign guifg=#f92672
-
 nmap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()

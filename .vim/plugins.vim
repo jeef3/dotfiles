@@ -30,6 +30,7 @@ Plug 'machakann/vim-highlightedyank'      " Highlight yanked
 Plug 'Xvezda/vim-readonly'                " Lock a bunch of files like node_modules
 " Plug 'SirVer/ultisnips'                 " Code snippets
 Plug 'kshenoy/vim-signature'              " Show marks
+Plug 'wesQ3/vim-windowswap'               " Window pane swapping
 
 
 " Git
@@ -58,7 +59,7 @@ Plug 'neoclide/coc-tsserver'
 Plug 'neoclide/coc-snippets'
 Plug 'neoclide/coc-json'
 Plug 'neoclide/coc-yaml'
-Plug 'neoclide/coc-eslint'
+" Plug 'neoclide/coc-eslint'
 Plug 'neoclide/coc-highlight'
 Plug 'neoclide/coc-emmet'
 Plug 'neoclide/coc-prettier'
@@ -72,8 +73,8 @@ Plug 'tjdevries/coc-zsh'
 
 " Color Themes
 Plug 'lifepillar/vim-colortemplate'
-Plug 'co1ncidence/monokai-pro.vim'
-Plug 'sainnhe/sonokai'
+" Plug 'co1ncidence/monokai-pro.vim'
+" Plug 'sainnhe/sonokai'
 Plug 'arzg/vim-colors-xcode'
 
 " Icons need to be run last
