@@ -98,6 +98,7 @@ set nojoinspaces " Only insert single space after a '.', '?' and '!' with a join
 set nostartofline " Don't reset cursor to start of line when moving around.
 set nowrap " Do not wrap lines.
 set nu " Enable line numbers.
+set rnu " Make em relative
 set ofu=syntaxcomplete#Complete " Set omni-completion method.
 set report=0 " Show all changes.
 set ruler " Show the cursor position
@@ -179,19 +180,8 @@ augroup open_quickfix_window
   autocmd QuickFixCmdPost * nested cwindow 5
 augroup END
 
-" Set relative line numbers
-set relativenumber " Use relative line numbers. Current line is still in status bar.
-augroup relative_line_numbers
-  autocmd!
-  autocmd BufReadPost,BufNewFile * set relativenumber
-augroup END
+" Set relative line numbers in netrw
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro rnu'
-
-" Applescript
-augroup applescript_au
-  autocmd!
-  autocmd BufNewFile,BufRead *.applescript setf applescript
-augroup END
 
 " dot.env
 augroup dotenv
