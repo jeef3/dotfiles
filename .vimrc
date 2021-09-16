@@ -378,16 +378,17 @@ augroup markdown
 augroup END
 
 " GitGutter
-let g:gitgutter_sign_added = "\uf457"
-let g:gitgutter_sign_modified = "\uf459"
+
+let g:gitgutter_sign_added = "┃"
+let g:gitgutter_sign_modified = "┃"
 let g:gitgutter_sign_removed = "\uf458"
 let g:gitgutter_sign_removed_first_line = "\uf458"
 let g:gitgutter_sign_modified_removed = "\uf459"
 
-hi GitGutterAdd           guifg=#a6e22e
-hi GitGutterChange        guifg=#fd971f
+hi GitGutterAdd           guifg=#a6e22e guibg=#2A3A08
+hi GitGutterChange        guifg=#fd971f guibg=#512C01
+hi GitGutterChangeDelete  guifg=#fd971f guibg=#512C01
 hi GitGutterDelete        guifg=#f92672
-hi GitGutterChangeDelete  guifg=#fd971f
 
 " Coverage
 " let g:coverage_interval = 1000
