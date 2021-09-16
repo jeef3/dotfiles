@@ -124,7 +124,6 @@ set wildmode=longest:full,full " Complete only until point of ambiguity.
 set winminheight=0 "Allow splits to be reduced to a single line.
 set wrapscan " Searches wrap around end of file
 set signcolumn=yes
-set fillchars+=vert:\│
 
 set clipboard=unnamed " Share clipboard
 
@@ -152,7 +151,6 @@ noremap <leader>, <C-^>
 set nolist
 set lcs=tab:›\ ,trail:-,nbsp:·,space:·,extends:…,precedes:…,eol:↵
 
-set fcs=fold:-
 nnoremap <silent> <leader>c :set nolist!<CR>
 
 " Strip trailing whitespace (,ss)
@@ -267,6 +265,9 @@ com! FormatHTML %!tidy -iq -xml -wrap 0
 " New file templates
 autocmd BufNewFile *.sh 0r ~/.vim/skeletons/bash.sh
 
+" Fill chars colors
+set fillchars+=vert:┃,fold:-
+hi VertSplit guifg=#393b44 guibg=#292a30
 
 " ==============================================================================
 " Plugin Configuration
@@ -379,8 +380,8 @@ augroup END
 
 " GitGutter
 
-let g:gitgutter_sign_added = "┃"
-let g:gitgutter_sign_modified = "┃"
+let g:gitgutter_sign_added = "▎"
+let g:gitgutter_sign_modified = "▎"
 let g:gitgutter_sign_removed = "\uf458"
 let g:gitgutter_sign_removed_first_line = "\uf458"
 let g:gitgutter_sign_modified_removed = "\uf459"
@@ -472,3 +473,4 @@ augroup END
 
 " vim-matchup
 let g:matchup_matchparen_offscreen = {'method': "popup"}
+
