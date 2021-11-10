@@ -28,4 +28,6 @@ awk 'BEGIN{
     printf "\n";
 }'
 
+printf '\e[4:3mUndercurl'
+
 echo -e "\n"
