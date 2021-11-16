@@ -81,6 +81,7 @@ FORMULAS=(
   tldr # Nicer man
   gnupg
   less # Newer less
+  ripgrep # Faster grepping
 
   # Languages
   node
