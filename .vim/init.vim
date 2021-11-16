@@ -6,9 +6,13 @@ telescope.setup({
   defaults = {
     mappings = {
       i = {
-        ["<esc>"] = actions.close
+        ["<esc>"] = actions.close,
+        ["<c-j>"] = actions.move_selection_next,
+        ["<c-k>"] = actions.move_selection_previous,
+        ["<c-m>"] = actions.toggle_selection,
       }
-    }
+    },
+    dynamic_preview_title = true
   }
 })
 

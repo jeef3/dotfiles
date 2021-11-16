@@ -220,9 +220,9 @@ let g:matchup_matchparen_offscreen = {'method': "popup"}
 
 " Telescope (nvim only)
 if has('nvim')
-  noremap <C-t> <cmd>Telescope git_files theme=dropdown find_command=rg,--files prompt_prefix=🔍<cr>
+  noremap <C-t> <cmd>Telescope git_files theme=dropdown find_command=rg,--files prompt_prefix=🔍\  prompt_title=Find\ files<cr>
+  noremap <C-p> <cmd>Telescope live_grep theme=dropdown prompt_prefix=🔍\  prompt_title=Find\ in\ files<cr>
   noremap <leader>qf <cmd>Telescope lsp_code_actions theme=cursor<cr>
-  noremap <C-p> <cmd>Telescope live_grep<cr>
   noremap <C-s> <cmd>Telescope lsp_dynamic_workspace_symbols<cr>
 endif
 
