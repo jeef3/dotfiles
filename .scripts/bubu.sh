@@ -7,8 +7,11 @@ cmd() { printf " $(tput setaf 8)›  $(tput setaf 14)↘️\t$(tput bold)$(tput 
 
 title "Bubu Time!"
 
+info "Resetting updates first"
+cmd "brew update-reset"
+brew update-reset
+
 info "Updating Homebrew"
-info "If this fails, run brew update-reset"
 cmd "brew update"
 brew update
 

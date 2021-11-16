@@ -1,18 +1,17 @@
 #!/bin/bash
 
-printf "\n\n     "
-for j in {0..8}; do
-  printf "${j}    "
-done
-
-for j in {0..5}; do
-  printf "\n\n ${j}   "
-  for i in {0..8}; do
-    echo -en "\033[38;${j};${i}mfoo\033[m  "
-  done
-done
-
-echo -e "\n"
+printf "\n"
+printf " · \e[1mbold\e[0m\n"
+printf " · \e[3mItalic\e[0m\n"
+printf " · \e[3m\e[1mbold italic\e[0m\n"
+printf "\n"
+printf " · \e[4munderline\e[0m\n"
+printf " · \e[21mdouble underline\e[0m\n"
+printf " · \e[4:3mundercurl\e[0m\n"
+printf " · \e[9mstrikethrough\e[0m\n"
+printf "\n"
+printf "\e[4:3m\e[58;2;240;143;104m\e[32mCombination of green text and orange undercurl\e[0m\n"
+printf "\n"
 
 awk 'BEGIN{
     s="               "; s=s s s s s s s s;
@@ -25,9 +24,5 @@ awk 'BEGIN{
         printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
         printf "%s\033[0m", substr(s,colnum+1,1);
     }
-    printf "\n";
+    printf "\n\n";
 }'
-
-printf '\e[4:3mUndercurl'
-
-echo -e "\n"
