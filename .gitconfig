@@ -40,6 +40,7 @@
 [credential]
 	helper = osxkeychain
 [core]
+	editor = nvim
 	excludesfile = ~/.gitignore-global
 	attributesfile = ~/.gitattributes
 	pager = delta
