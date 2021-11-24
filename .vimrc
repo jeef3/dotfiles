@@ -7,24 +7,21 @@ syntax on
 if !has('nvim')
   source ~/.vim/plugins.vim
 
-  " colorscheme princess
+  colorscheme xcodedark
   " colorscheme molokai
   " colorscheme monokai-pro
   " colorscheme sonokai
 else
   source ~/.vim/plugins-nvim.vim
-endif
 
-colorscheme xcodedark
+  colorscheme princess_theme
+endif
 
 set t_Co=256
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
 set termguicolors
 set background=dark
-
-" I just like my comments in italics
-highlight Comment cterm=italic
 
 " Set leaders
 let mapleader = ","
@@ -203,20 +200,6 @@ augroup END
 com! W w
 com! Q q
 
-" Mode-aware Cursor Highlighting (GUI Only)
-hi InsertCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=37  guibg=#2aa198
-hi VisualCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#d33682
-hi ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65  guibg=#dc322f
-hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
-
-set gcr=a:block
-set gcr+=o:hor50-Cursor
-set gcr+=n:Cursor
-set gcr+=i-ci-sm:InsertCursor-hor10
-set gcr+=r-cr:ReplaceCursor-hor20
-set gcr+=c:CommandCursor
-set gcr+=v-ve:VisualCursor
-set gcr+=a:blinkon0
 
 " Quickly edit me
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -271,12 +254,21 @@ autocmd BufNewFile *.sh 0r ~/.vim/skeletons/bash.sh
 
 " Fill chars colors
 set fillchars+=vert:┃,fold:-
-hi VertSplit guifg=#393b44 guibg=#292a30
-
-hi SpellBad gui=undercurl guisp=#f92672 term=undercurl cterm=undercurl
 
 source ~/.vim/plugins-config.vim
 
 if has('nvim')
   source ~/.vim/init.vim
 endif
+
+" Custom theme adjustments
+
+" Cursor styles
+set gcr=a:block
+set gcr+=o:hor50-Cursor
+set gcr+=n:Cursor
+set gcr+=i-ci-sm:InsertCursor-hor10
+set gcr+=r-cr:ReplaceCursor-hor20
+set gcr+=c:CommandCursor-hor10
+set gcr+=v-ve:VisualCursor
+set gcr+=a:blinkon0

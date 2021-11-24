@@ -9,7 +9,6 @@ telescope.setup({
         ["<esc>"] = actions.close,
         ["<c-j>"] = actions.move_selection_next,
         ["<c-k>"] = actions.move_selection_previous,
-        ["<c-m>"] = actions.toggle_selection,
       }
     },
     dynamic_preview_title = true
@@ -20,6 +19,7 @@ telescope.load_extension('fzf')
 
 
 local lspconfig = require("lspconfig")
+require "lsp_signature".setup()
 local coq = require("coq")
 
 local buf_map = function(bufnr, mode, lhs, rhs, opts)
@@ -44,10 +44,13 @@ local on_attach = function(client, bufnr)
 
   buf_map(bufnr, "n", "gd", ":LspDef<CR>")
   buf_map(bufnr, "n", "gr", ":LspRefs<CR>")
+  buf_map(bufnr, "n", "gr", ":LspRefs<CR>")
   buf_map(bufnr, "n", "K", ":LspHover<CR>")
   buf_map(bufnr, "n", "[g", ":LspDiagPrev<CR>")
   buf_map(bufnr, "n", "]g", ":LspDiagNext<CR>")
   buf_map(bufnr, "n", "<leader>rn", ":LspRename<CR>")
+  -- buf_map(bufnr, "n", "<leader>rn", ":Lspsaga rename<CR>")
+  buf_map(bufnr, "n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
 
   if client.resolved_capabilities.document_formatting then
     vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
@@ -101,8 +104,30 @@ lspconfig.omnisharp.setup({
   cmd = { "/Users/jeffknaggs/.local/share/nvim/lsp_servers/omnisharp/omnisharp/run", "--languageserver" , "--hostPID", tostring(pid) },
 })
 
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  indent = {
+    enable = true
+  },
+  highlight = {
+    enable = true,
+    disable = { "css" },
+    additional_vim_regex_highlighting = false,
+  }
+}
 
 require("null-ls").config({})
 lspconfig["null-ls"].setup({ on_attach = on_attach })
+
+require'colorizer'.setup()
+
+require("trouble").setup({})
+
+require('tabline').setup({
+  padding = 1,
+  always_show_tabs = true,
+  close_icon = '×',
+  separator = '▎'
+})
 
 EOF

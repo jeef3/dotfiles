@@ -28,25 +28,43 @@ Plug 'tpope/vim-fugitive'                 " Git wrapper, :Gstatus etc
 Plug 'airblade/vim-gitgutter'             " Git status in gutter
 
 Plug 'arzg/vim-colors-xcode'
-
-Plug 'ryanoasis/vim-devicons'             " Icon Fonts
-
+Plug 'norcalli/nvim-colorizer.lua'        " Colored colors
 
 " Neovim only
 Plug 'nvim-lua/plenary.nvim'              " Lua functions util
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
+Plug 'ray-x/lsp_signature.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+" Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {  'branch': 'master', 'do': ':TSUpdate' }
+Plug 'nvim-treesitter/playground'
+
+" Working tabline
+Plug 'seblj/nvim-tabline'
 
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'folke/trouble.nvim'
+
+Plug 'EdenEast/nightfox.nvim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'sainnhe/sonokai'
+Plug 'sainnhe/edge'
+Plug 'catppuccin/nvim'
+Plug 'ray-x/aurora' 
+Plug 'yonlu/omni.vim'
+
+Plug 'rktjmp/lush.nvim'
+
+Plug '~/projects/princess_theme'
 
 call plug#end()

@@ -37,7 +37,11 @@ let g:lightline = {
 " call lightline#coc#register()
 
 function! LightlineFileFormat()
-  return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol()) : ''
+  if !has('nvim')
+    return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol()) : ''
+  else
+    return ''
+  endif
 endfunction
 
 function LightlineReadonly()
@@ -45,7 +49,11 @@ function LightlineReadonly()
 endfunction
 
 " FIXME: Why does it need to be here instead of up higher?
-source ~/.vim/tabline.vim
+if !has('nvim')
+  source ~/.vim/tabline.vim
+else
+  " source ~/.vim/tabline-n.vim
+endif
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<Tab>"
@@ -116,11 +124,6 @@ let g:gitgutter_sign_modified = "▎"
 let g:gitgutter_sign_removed = "\uf458"
 let g:gitgutter_sign_removed_first_line = "\uf458"
 let g:gitgutter_sign_modified_removed = "\uf459"
-
-hi GitGutterAdd           guifg=#a6e22e guibg=#2A3A08
-hi GitGutterChange        guifg=#fd971f guibg=#512C01
-hi GitGutterChangeDelete  guifg=#fd971f guibg=#512C01
-hi GitGutterDelete        guifg=#f92672
 
 " Coverage
 " let g:coverage_interval = 1000
@@ -229,7 +232,7 @@ endif
 " Coq
 if has('nvim')
   let g:coq_settings = {
-        \ "auto_start": v:true,
+        \ "auto_start": "shut-up",
         \ "display.pum.fast_close": v:true,
         \ "keymap.recommended": v:false,
         \ "keymap.jump_to_mark": "",
@@ -238,5 +241,5 @@ if has('nvim')
 
   inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
   inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-  ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
+  inoremap <silent><expr> <CR> pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
 endif
