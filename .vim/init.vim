@@ -19,6 +19,40 @@ telescope.load_extension('fzf')
 
 
 local lspconfig = require("lspconfig")
+local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
+for type, icon in pairs(signs) do
+    local hl = "LspDiagnosticsSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+vim.o.updatetime = 250
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]]
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  virtual_text = {
+    prefix = ' ●',
+  }
+})
+
+-- vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]]
+-- vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+-- 
+-- local border = {
+--       {"🭽", "FloatBorder"},
+--       {"▔", "FloatBorder"},
+--       {"🭾", "FloatBorder"},
+--       {"▕", "FloatBorder"},
+--       {"🭿", "FloatBorder"},
+--       {"▁", "FloatBorder"},
+--       {"🭼", "FloatBorder"},
+--       {"▏", "FloatBorder"},
+-- }
+-- 
+-- local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+-- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+--   opts = opts or {}
+--   opts.border = opts.border or border
+--   return orig_util_open_floating_preview(contents, syntax, opts, ...)
+-- end
+
 require "lsp_signature".setup()
 local coq = require("coq")
 
@@ -128,6 +162,63 @@ require('tabline').setup({
   always_show_tabs = true,
   close_icon = '×',
   separator = '▎'
+})
+
+require'lualine'.setup({
+  options = {
+    theme = {
+      normal = {
+        a = "StatusLineNormalA",
+        b = "StatusLineNormalB",
+        c = "StatusLineNormalC",
+      },
+      insert = { a = "StatusLineInsert" },
+      replace = { a = "StatusLineReplace" },
+      command = { a = "StatusLineCommand" },
+    },
+    component_separators = '╲',
+    section_separators = { left = '', right = '' },
+  },
+  sections = {
+    lualine_a = { 'mode' },
+    lualine_b = { 'filename' },
+    lualine_c = {  },
+
+    lualine_x = { },
+    lualine_y = {
+      { 
+        'diagnostics', 
+        sources = {'nvim_lsp'},
+        symbols = { error = " ", warn = " ", hint = " ", info = " " },
+      },
+      {
+        'diff',
+        colored = true,
+        symbols = { added = '+', modified = '~', removed = '-' },
+      }
+    },
+    lualine_z = {'location'},
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {'filename'},
+    lualine_c = {},
+
+    lualine_x = {
+      { 
+        'diagnostics', 
+        sources = {'nvim_lsp'},
+        symbols = { error = " ", warn = " ", hint = " ", info = " " },
+      },
+      {
+        'diff',
+        colored = true,
+        symbols = { added = '+', modified = '~', removed = '-' },
+      }
+    },
+    lualine_y = { 'location' },
+    lualine_z = {},
+  }
 })
 
 EOF

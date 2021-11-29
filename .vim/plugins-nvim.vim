@@ -6,7 +6,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'wincent/terminus'                   " Better terminal integration, cursor shapes
 Plug 'tpope/vim-eunuch'                   " Better shell cmds, like :Rename
 
-Plug 'itchyny/lightline.vim'              " Lighter statusline
 Plug 'tpope/vim-vinegar'                  " Netrw enhancements
 Plug 'tpope/vim-repeat'                   " Get more use out of .
 Plug 'tpope/vim-sleuth'                   " Set shiftwidth and expandtab based on current file
@@ -19,6 +18,7 @@ Plug 'justinmk/vim-sneak'                 " Minimal EasyMotion se
 Plug 'brooth/far.vim'                     " Find And Replace
 Plug 'jeef3/splitsizer.vim'               " Split resizing <c-a>, <c-s>
 
+Plug 'andymass/vim-matchup'
 Plug 'jiangmiao/auto-pairs'               " Auto-complete quotes, parends etc
 Plug 'machakann/vim-highlightedyank'      " Highlight yanked
 Plug 'Xvezda/vim-readonly'                " Lock a bunch of files like node_modules
@@ -27,7 +27,6 @@ Plug 'kshenoy/vim-signature'              " Show marks
 Plug 'tpope/vim-fugitive'                 " Git wrapper, :Gstatus etc
 Plug 'airblade/vim-gitgutter'             " Git status in gutter
 
-Plug 'arzg/vim-colors-xcode'
 Plug 'norcalli/nvim-colorizer.lua'        " Colored colors
 
 " Neovim only
@@ -43,13 +42,14 @@ Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 " Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
+Plug 'nvim-lualine/lualine.nvim'
+
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 Plug 'nvim-treesitter/nvim-treesitter', {  'branch': 'master', 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/playground'
 
-" Working tabline
 Plug 'seblj/nvim-tabline'
 
 Plug 'kyazdani42/nvim-web-devicons'

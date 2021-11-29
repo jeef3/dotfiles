@@ -3,7 +3,7 @@
 " ==============================================================================
 
 " Lightline
-source ~/.vim/lightline-xcodedark.vim
+" source ~/.vim/lightline-xcodedark.vim
 
 let g:lightline = {
       \ "colorscheme": "xcodedark",
