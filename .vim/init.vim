@@ -91,7 +91,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-lspconfig.tsserver.setup({
+lspconfig.tsserver.setup(coq.lsp_ensure_capabilities{
   on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
@@ -115,7 +115,7 @@ lspconfig.tsserver.setup({
   end,
 })
 
-lspconfig.ccls.setup({
+lspconfig.ccls.setup(coq.lsp_ensure_capabilities{
   init_options = {
     compilationDatabaseDirectory = "build";
 
@@ -129,7 +129,7 @@ lspconfig.ccls.setup({
   }
 })
 
-lspconfig.pyright.setup({})
+lspconfig.pyright.setup(coq.lsp_ensure_capabilities{})
 
 lspconfig.omnisharp.setup({
   on_attach = function(_, bufnr)
