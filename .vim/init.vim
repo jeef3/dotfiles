@@ -19,13 +19,13 @@ telescope.load_extension('fzf')
 
 
 local lspconfig = require("lspconfig")
-local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
-for type, icon in pairs(signs) do
-    local hl = "LspDiagnosticsSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-vim.o.updatetime = 250
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]]
+-- local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
+-- for type, icon in pairs(signs) do
+--     local hl = "LspDiagnosticsSign" .. type
+--     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+-- end
+-- vim.o.updatetime = 250
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]]
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = {
     prefix = ' ●',
@@ -34,7 +34,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 
 -- vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]]
 -- vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
--- 
+--
 -- local border = {
 --       {"🭽", "FloatBorder"},
 --       {"▔", "FloatBorder"},
@@ -45,7 +45,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 --       {"🭼", "FloatBorder"},
 --       {"▏", "FloatBorder"},
 -- }
--- 
+--
 -- local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 -- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 --   opts = opts or {}
@@ -53,8 +53,32 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 --   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 -- end
 
+
 require "lsp_signature".setup()
 local coq = require("coq")
+
+local saga = require 'lspsaga'
+saga.init_lsp_saga{
+  error_sign = "",
+  warn_sign = "",
+  hint_sign = "",
+  infor_sign = "",
+  diagnostic_header_icon = "   ",
+
+  code_action_icon = " ",
+  code_action_prompt = {
+    enable = true,
+    sign = true,
+    sign_priority = 100,
+    virtual_text = true,
+  },
+  code_action_keys = {
+    quit = "<esc>",
+    exec = "<CR>",
+  },
+
+  rename_prompt_prefix = "➤",
+}
 
 local buf_map = function(bufnr, mode, lhs, rhs, opts)
   vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
@@ -62,7 +86,7 @@ local buf_map = function(bufnr, mode, lhs, rhs, opts)
   })
 end
 
-local on_attach = function(client, bufnr)
+local setup_bindings = function(client, bufnr)
   vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
   vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
   vim.cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
@@ -79,12 +103,15 @@ local on_attach = function(client, bufnr)
   buf_map(bufnr, "n", "gd", ":LspDef<CR>")
   buf_map(bufnr, "n", "gr", ":LspRefs<CR>")
   buf_map(bufnr, "n", "gr", ":LspRefs<CR>")
-  buf_map(bufnr, "n", "K", ":LspHover<CR>")
+  --buf_map(bufnr, "n", "K", ":LspHover<CR>")
+  buf_map(bufnr, "n", "K", ":Lspsaga hover_doc<CR>")
   buf_map(bufnr, "n", "[g", ":LspDiagPrev<CR>")
   buf_map(bufnr, "n", "]g", ":LspDiagNext<CR>")
-  buf_map(bufnr, "n", "<leader>rn", ":LspRename<CR>")
-  -- buf_map(bufnr, "n", "<leader>rn", ":Lspsaga rename<CR>")
-  buf_map(bufnr, "n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
+  --buf_map(bufnr, "n", "<leader>rn", ":LspRename<CR>")
+  buf_map(bufnr, "n", "<leader>rn", ":Lspsaga rename<CR>")
+  buf_map(bufnr, "n", "<leader>qf", ":Lspsaga code_action<CR>")
+  buf_map(bufnr, "n", "<space>e", ":Lspsaga show_line_diagnostics<CR>")
+  --buf_map(bufnr, "n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
 
   if client.resolved_capabilities.document_formatting then
     vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
@@ -93,6 +120,7 @@ end
 
 lspconfig.tsserver.setup(coq.lsp_ensure_capabilities{
   on_attach = function(client, bufnr)
+    -- null-ls will take care of formatting
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
 
@@ -111,7 +139,7 @@ lspconfig.tsserver.setup(coq.lsp_ensure_capabilities{
     buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
     buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
 
-    on_attach(client, bufnr)
+    setup_bindings(client, bufnr)
   end,
 })
 
@@ -138,6 +166,16 @@ lspconfig.omnisharp.setup({
   cmd = { "/Users/jeffknaggs/.local/share/nvim/lsp_servers/omnisharp/omnisharp/run", "--languageserver" , "--hostPID", tostring(pid) },
 })
 
+local null_ls = require("null-ls")
+null_ls.setup({
+  sources = {
+    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.code_actions.eslint_d,
+    null_ls.builtins.formatting.prettier
+  },
+  on_attach = setup_bindings
+})
+
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
   indent = {
@@ -149,9 +187,6 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   }
 }
-
-require("null-ls").config({})
-lspconfig["null-ls"].setup({ on_attach = on_attach })
 
 require'colorizer'.setup()
 
@@ -186,9 +221,9 @@ require'lualine'.setup({
 
     lualine_x = { },
     lualine_y = {
-      { 
-        'diagnostics', 
-        sources = {'nvim_lsp'},
+      {
+        'diagnostics',
+        sources = {'nvim_diagnostic'},
         symbols = { error = " ", warn = " ", hint = " ", info = " " },
       },
       {
@@ -205,9 +240,9 @@ require'lualine'.setup({
     lualine_c = {},
 
     lualine_x = {
-      { 
-        'diagnostics', 
-        sources = {'nvim_lsp'},
+      {
+        'diagnostics',
+        sources = {'nvim_diagnostic'},
         symbols = { error = " ", warn = " ", hint = " ", info = " " },
       },
       {
