@@ -38,8 +38,8 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
-" Gone stale :'(
 " Plug 'glepnir/lspsaga.nvim'
+" Maintained fork:
 Plug 'tami5/lspsaga.nvim'
 
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}

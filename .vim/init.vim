@@ -63,21 +63,19 @@ saga.init_lsp_saga{
   warn_sign = "",
   hint_sign = "",
   infor_sign = "",
-  diagnostic_header_icon = "   ",
+  diagnostic_header_icon = "  ",
 
   code_action_icon = " ",
-  code_action_prompt = {
-    enable = true,
-    sign = true,
-    sign_priority = 100,
-    virtual_text = true,
-  },
   code_action_keys = {
     quit = "<esc>",
-    exec = "<CR>",
   },
 
-  rename_prompt_prefix = "➤",
+  rename_prompt_prefix = " ",
+  rename_action_keys = {
+    quit = "<esc>",
+  },
+
+  definition_preview_icon = "  ",
 }
 
 local buf_map = function(bufnr, mode, lhs, rhs, opts)
@@ -95,13 +93,12 @@ local setup_bindings = function(client, bufnr)
   vim.cmd("command! LspRefs lua vim.lsp.buf.references()")
   vim.cmd("command! LspTypeDef lua vim.lsp.buf.type_definition()")
   vim.cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
-  vim.cmd("command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()")
-  vim.cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
+  vim.cmd("command! LspDiagPrev lua vim.diagnostic.goto_prev()")
+  vim.cmd("command! LspDiagNext lua vim.diagnostic.goto_next()")
   vim.cmd("command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
   vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
 
   buf_map(bufnr, "n", "gd", ":LspDef<CR>")
-  buf_map(bufnr, "n", "gr", ":LspRefs<CR>")
   buf_map(bufnr, "n", "gr", ":LspRefs<CR>")
   --buf_map(bufnr, "n", "K", ":LspHover<CR>")
   buf_map(bufnr, "n", "K", ":Lspsaga hover_doc<CR>")
@@ -110,8 +107,8 @@ local setup_bindings = function(client, bufnr)
   --buf_map(bufnr, "n", "<leader>rn", ":LspRename<CR>")
   buf_map(bufnr, "n", "<leader>rn", ":Lspsaga rename<CR>")
   buf_map(bufnr, "n", "<leader>qf", ":Lspsaga code_action<CR>")
-  buf_map(bufnr, "n", "<space>e", ":Lspsaga show_line_diagnostics<CR>")
   --buf_map(bufnr, "n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
+  buf_map(bufnr, "n", "<space>e", ":Lspsaga show_line_diagnostics<CR>")
 
   if client.resolved_capabilities.document_formatting then
     vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")

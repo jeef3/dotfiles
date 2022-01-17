@@ -67,21 +67,19 @@
 	changed = green
 	untracked = cyan
 
+[mergetool "nvim"]
+	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+	prompt = false
+	keepbackup = false
 [merge]
 	log = true
 	defaultToUpstream = true
-	tool = vimdiff
+	tool = nvim
 	conflictstyle = diff3
 	prompt = false
-[mergetool]
-	prompt = false
-	keepbackup = false
+
 [rebase]
 	autostash = true
-[diff]
-	tool = vimdiff
-[difftool]
-	prompt = false
 
 [help]
 	autocorrect = 1
@@ -89,15 +87,22 @@
 	default = tracking
 
 [delta]
+	navigate = true
 	line-numbers = true
-	diff-so-fancy = true
-	plus-color = "#012800"
-	minus-color = "#E0348B"
-	syntax-theme = Monokai Extended
+	side-by-side = true
+	plus-style = bold green
+	minus-style = bold red
 
 [interactive]
 	diffFilter = delta --color-only
 
+[diff]
+	colorMoved = default
+
 [diff "image"]
 	command = ~/git-imgdiff
+
+[user]
+	name = Jeff Knaggs
+	email = mail@jeef3.com
 
