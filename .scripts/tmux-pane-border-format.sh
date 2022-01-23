@@ -109,7 +109,7 @@ print_title() {
   GAP=`expr $COUNT - ${LEFT_WIDTH} - ${CENTER_WIDTH} - ${RIGHT_WIDTH}`
   GAP=`expr $GAP / 2`
 
-  PAD=$(printf "%.0s-" $(eval "echo {1..$GAP}"))
+  PAD=$(printf "%.0s═" $(eval "echo {1..$GAP}"))
   echo "${LEFT_CONTENT}\
 ${PAD}\
 ${CENTER_CONTENT}\
@@ -117,36 +117,28 @@ ${PAD}\
 ${RIGHT_CONTENT}"
 }
 
-if [ $WIDTH -lt 60 ]; then
+if [ $WIDTH -lt 90 ]; then
   if [ $IS_ACTIVE -eq 0 ]; then
-    C="#[fg=$BASE_3]  #[default]"
+    STAT="╡#[fg=$BASE_3,bold] $CURRENT_COMMAND #[default]╞"
   else
-    C="#[fg=$RED] #[fg=$YELLOW] #[fg=$GREEN]#[default]"
+    STAT="╡#[fg=$BASE_6,bold] $CURRENT_COMMAND #[default]╞"
   fi
-
-  STAT="#[fg=$BASE_6,bold] $CURRENT_COMMAND #[default]"
-
-  echo $(print_title -l "$C" -c "$STAT" -r "     ")
-elif [ $WIDTH -lt 90 ]; then
-  STAT="#[fg=$BASE_6,bold] $CURRENT_COMMAND #[default]"
 
   echo $(print_title -c "$STAT")
 else
   GIT_STAT=$(cd $CURRENT_PATH && git_branch)
 
   if [ $IS_ACTIVE -eq 0 ]; then
-    STAT_L="#[fg=$BASE_1,bg=$BASE_6]#[fg=$BASE_0,bg=$BASE_6,bold] $CURRENT_COMMAND #[default]\
-#[fg=$BASE_6,bg=$BASE_4]#[fg=$BASE_0,bg=$BASE_4]  $PRETTY_PATH #[fg=$BASE_4,bg=$BASE_1]#[default]"
+    STAT_L="╡#[fg=$BASE_3,bold] $CURRENT_COMMAND #[default,fg=$BASE_3]  $PRETTY_PATH #[default]╞"
   else
-    STAT_L="#[fg=$BASE_4,bg=$YELLOW]#[fg=$BASE_0,bg=$YELLOW,bold] $CURRENT_COMMAND #[default]\
-#[fg=$YELLOW,bg=$BASE_5]#[fg=$BASE_0,bg=$BASE_5]  $PRETTY_PATH #[fg=$BASE_5,bg=$BASE_3]#[fg=$BASE_3,bg=$BASE_3]"
+    STAT_L="╡#[fg=$BASE_6,bold] $CURRENT_COMMAND #[default,fg=$BASE_3]  $PRETTY_PATH #[default]╞"
   fi
 
   if [ -n "$GIT_STAT" ]; then
     if [ $IS_ACTIVE -eq 0 ]; then
-      STAT_R="#[fg=$BASE_3,bg=$BASE_1]#[fg=$BASE_0,bg=$BASE_3] $BRANCH_ICON $GIT_STAT #[default]"
+      STAT_R="#[fg=$BASE_3,bg=default] #[fg=$BASE_0,bg=$BASE_3] $BRANCH_ICON $GIT_STAT #[fg=$BASE_3,bg=default] #[default]"
     else 
-      STAT_R="#[fg=$BASE_4,bg=$BASE_3]#[fg=$BASE_0,bg=$BASE_4] $BRANCH_ICON $GIT_STAT #[default]"
+      STAT_R="#[fg=$BASE_4,bg=default] #[fg=$BASE_0,bg=$BASE_4] $BRANCH_ICON $GIT_STAT #[fg=$BASE_4,bg=default] #[default]"
     fi
   else
     STAT_R=""
