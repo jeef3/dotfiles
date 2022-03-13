@@ -32,6 +32,9 @@ Plug 'norcalli/nvim-colorizer.lua'        " Colored colors
 " Neovim only
 Plug 'nvim-lua/plenary.nvim'              " Lua functions util
 
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'nvim-treesitter/playground'
+
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'ray-x/lsp_signature.nvim'
@@ -42,17 +45,14 @@ Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 " Maintained fork:
 Plug 'tami5/lspsaga.nvim'
 
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'nvim-lualine/lualine.nvim'
+
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': ':COQdeps' }
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 " Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
-Plug 'nvim-lualine/lualine.nvim'
-
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-Plug 'nvim-treesitter/playground'
 
 Plug 'seblj/nvim-tabline'
 
@@ -62,4 +62,7 @@ Plug 'folke/trouble.nvim'
 Plug 'rktjmp/lush.nvim'
 Plug '~/projects/princess_theme'
 
+Plug 'RRethy/vim-illuminate'
+Plug 'petertriho/nvim-scrollbar'
+Plug 'folke/zen-mode.nvim'
 call plug#end()

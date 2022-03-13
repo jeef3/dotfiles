@@ -17,6 +17,20 @@ telescope.setup({
 
 telescope.load_extension('fzf')
 
+require 'illuminate'
+require("scrollbar").setup()
+require 'zen-mode'.setup({
+  window = {
+    width = 90
+  },
+  plugins = {
+    tmux = { enabled = true },
+    kitty = {
+      enabled = true,
+      font = "+4",
+    },
+  }
+})
 
 local lspconfig = require("lspconfig")
 -- local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
@@ -70,12 +84,14 @@ saga.init_lsp_saga{
     quit = "<esc>",
   },
 
-  rename_prompt_prefix = " ",
+  rename_prompt_prefix = " ",
   rename_action_keys = {
     quit = "<esc>",
   },
 
   definition_preview_icon = "  ",
+
+  border_style = "round",
 }
 
 local buf_map = function(bufnr, mode, lhs, rhs, opts)
@@ -115,8 +131,11 @@ local setup_bindings = function(client, bufnr)
   end
 end
 
+
 lspconfig.tsserver.setup(coq.lsp_ensure_capabilities{
   on_attach = function(client, bufnr)
+    require 'illuminate'.on_attach(client)
+
     -- null-ls will take care of formatting
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
@@ -132,11 +151,8 @@ lspconfig.tsserver.setup(coq.lsp_ensure_capabilities{
 
     ts_utils.setup_client(client)
 
-    buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
-    buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
-    buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
-
     setup_bindings(client, bufnr)
+
   end,
 })
 

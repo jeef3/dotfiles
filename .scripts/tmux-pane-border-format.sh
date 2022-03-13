@@ -129,16 +129,16 @@ else
   GIT_STAT=$(cd $CURRENT_PATH && git_branch)
 
   if [ $IS_ACTIVE -eq 0 ]; then
-    STAT_L="╡#[fg=$BASE_3,bold] $CURRENT_COMMAND #[default,fg=$BASE_3]  $PRETTY_PATH #[default]╞"
+    STAT_L="╡#[fg=$BASE_3,bold] $CURRENT_COMMAND #[default,fg=$BASE_2]  $PRETTY_PATH #[default]╞"
   else
-    STAT_L="╡#[fg=$BASE_6,bold] $CURRENT_COMMAND #[default,fg=$BASE_3]  $PRETTY_PATH #[default]╞"
+    STAT_L="╡#[fg=$BASE_6,bold] $CURRENT_COMMAND #[default,fg=$BASE_3]  $PRETTY_PATH #[default]╞"
   fi
 
   if [ -n "$GIT_STAT" ]; then
     if [ $IS_ACTIVE -eq 0 ]; then
-      STAT_R="#[fg=$BASE_3,bg=default] #[fg=$BASE_0,bg=$BASE_3] $BRANCH_ICON $GIT_STAT #[fg=$BASE_3,bg=default] #[default]"
+      STAT_R="#[fg=$BASE_3,bg=default]#[fg=$BASE_0,bg=$BASE_3] $BRANCH_ICON $GIT_STAT #[fg=$BASE_3,bg=default]#[default]"
     else 
-      STAT_R="#[fg=$BASE_4,bg=default] #[fg=$BASE_0,bg=$BASE_4] $BRANCH_ICON $GIT_STAT #[fg=$BASE_4,bg=default] #[default]"
+      STAT_R="#[fg=$BASE_4,bg=default]#[fg=$BASE_0,bg=$BASE_4] $BRANCH_ICON $GIT_STAT #[fg=$BASE_4,bg=default]#[default]"
     fi
   else
     STAT_R=""

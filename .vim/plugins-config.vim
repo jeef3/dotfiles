@@ -223,17 +223,21 @@ let g:matchup_matchparen_offscreen = {'method': "popup"}
 
 " Telescope (nvim only)
 if has('nvim')
-  noremap <C-t> <cmd>Telescope git_files theme=dropdown find_command=rg,--files prompt_prefix=🔍\  prompt_title=Find\ files<cr>
+  noremap <C-t> <cmd>Telescope git_files theme=dropdown find_command=rg,--files prompt_prefix=🔍\  prompt_title= previewer=false winblend=5<cr>
   noremap <C-p> <cmd>Telescope live_grep theme=dropdown prompt_prefix=🔍\  prompt_title=Find\ in\ files<cr>
-  noremap <leader>qf <cmd>Telescope lsp_code_actions theme=cursor<cr>
-  noremap <C-s> <cmd>Telescope lsp_dynamic_workspace_symbols<cr>
+  noremap <C-s> <cmd>Telescope lsp_dynamic_workspace_symbols prompt_prefix=ﬦ\  prompt_title=Symbols<cr>
 endif
 
 " Coq
 if has('nvim')
   let g:coq_settings = {
         \ "auto_start": "shut-up",
-        \ "display.pum.fast_close": v:true,
+        \ "limits.completion_manual_timeout": 0.5,
+        \ "clients.tree_sitter.enabled": v:false,
+        \ "clients.tmux.enabled": v:false,
+        \ "clients.buffers.enabled": v:false,
+        \ "clients.snippets.enabled": v:false,
+        \ "display.pum.fast_close": v:false,
         \ "keymap.recommended": v:false,
         \ "keymap.jump_to_mark": "",
         \ "keymap.bigger_preview": "",

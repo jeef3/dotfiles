@@ -83,6 +83,11 @@ FORMULAS=(
   less # Newer less
   ripgrep # Faster grepping
 
+  # Certificate tools
+  openssl
+  mkcert
+  nss
+
   # Languages
   node
   # python@2
