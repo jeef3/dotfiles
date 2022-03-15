@@ -24,6 +24,7 @@ symlinks=(
   .tmux
   .tmux.conf
   .config/ranger
+  .config/kitty
   .todo.cfg
 )
 
