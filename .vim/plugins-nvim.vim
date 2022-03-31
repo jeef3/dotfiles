@@ -65,4 +65,8 @@ Plug '~/projects/princess_theme'
 Plug 'RRethy/vim-illuminate'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'folke/zen-mode.nvim'
+Plug 'vim-test/vim-test'
+Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
+" Plug 'rcarriga/nvim-notify'
+
 call plug#end()

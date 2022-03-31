@@ -247,3 +247,12 @@ if has('nvim')
   inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
   inoremap <silent><expr> <CR> pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
 endif
+
+" vim-test and ultest
+nmap <silent> <leader>t :UltestNearest<CR>
+nmap <silent> <leader>T :Ultest<CR>
+nmap <silent> <leader>l :UltestLast<CR>
+nmap ]t <Plug>(ultest-next-fail)
+nmap [t <Plug>(ultest-prev-fail)
+let g:ultest_use_pty = 1
+let test#javascript#cypress#file_pattern = 'cypress\/integration\/.*\.spec\.ts$'
