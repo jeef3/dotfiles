@@ -104,7 +104,7 @@ FORMULAS=(
 )
 
 CASKS=(
-  iterm2
+  #iterm2
 
   # Gifify
   xquartz

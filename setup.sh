@@ -35,14 +35,14 @@ else
 fi
 
 info "Adding italics"
-tic tmux-256color.terminfo
-tic xterm-256color-italic.terminfo
+# tic tmux-256color.terminfo
+# tic xterm-256color-italic.terminfo
 
 info "Setting macos preferences"
 # ./setup/macos
 
 info "Installing global npm modules"
-./setup/dev
+# ./setup/dev
 
 info "Installing Haskell (can't install with Homebrew)"
 # curl -sSL https://get.haskellstack.org/ | sh
@@ -63,7 +63,7 @@ info "Linking keys"
 # chmod 600 ~/.ssh/* ~/.aws/*
 
 info "Installing Vim plug-ins"
-vim +PlugUpdate +qall
+nvim +PlugUpdate +qall
 success "Vim plug-ins installed"
 
 info "Update dotfiles remote for write access"
