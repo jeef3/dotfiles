@@ -256,3 +256,7 @@ nmap ]t <Plug>(ultest-next-fail)
 nmap [t <Plug>(ultest-prev-fail)
 let g:ultest_use_pty = 1
 let test#javascript#cypress#file_pattern = 'cypress\/integration\/.*\.spec\.ts$'
+
+" Neo tree
+nmap <silent> <leader>be :Neotree source=buffers action=show reveal<cr>
+nmap <silent> <leader>bt :Neotree source=filesystem action=show reveal<cr>

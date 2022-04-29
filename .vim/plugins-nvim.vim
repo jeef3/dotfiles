@@ -12,7 +12,7 @@ Plug 'tpope/vim-sleuth'                   " Set shiftwidth and expandtab based o
 Plug 'tpope/vim-commentary'               " gcc to comment line/paragraph
 Plug 'tpope/vim-surround'                 " Change surrounds, quotes etc
 Plug 'tpope/vim-obsession'                " Keep my session
-Plug 'jlanzarotta/bufexplorer'            " Enhanced buffer explorer <leader>be
+"Plug 'jlanzarotta/bufexplorer'            " Enhanced buffer explorer <leader>be
 Plug 'haya14busa/incsearch.vim'           " Enhanced / searching
 Plug 'justinmk/vim-sneak'                 " Minimal EasyMotion se
 Plug 'brooth/far.vim'                     " Find And Replace
@@ -25,7 +25,7 @@ Plug 'Xvezda/vim-readonly'                " Lock a bunch of files like node_modu
 Plug 'kshenoy/vim-signature'              " Show marks
 
 Plug 'tpope/vim-fugitive'                 " Git wrapper, :Gstatus etc
-Plug 'airblade/vim-gitgutter'             " Git status in gutter
+" Plug 'airblade/vim-gitgutter'             " Git status in gutter
 
 Plug 'norcalli/nvim-colorizer.lua'        " Colored colors
 
@@ -68,5 +68,8 @@ Plug 'folke/zen-mode.nvim'
 Plug 'vim-test/vim-test'
 Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 " Plug 'rcarriga/nvim-notify'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
 
 call plug#end()
