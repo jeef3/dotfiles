@@ -4,7 +4,7 @@ brew cask install \
   nginx \
   sabnzdb \
   sonarr \
-  couchpotato
+  radarr
 
 # TODO: Copy configs for nginx
 #
