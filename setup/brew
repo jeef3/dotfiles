@@ -135,6 +135,8 @@ CASKS=(
 )
 
 CASKS_SERVER=(
+  kitty
+
   nginx
   sabnzbd
   sonarr
