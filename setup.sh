@@ -35,7 +35,6 @@ if [ $(basename $SHELL) == 'zsh' ]; then
   success "Already using Zsh"
 else
   success "Not using Zsh, switching"
-  echo $(which zsh) >> /etc/shells
   chsh -s $(which zsh)
 fi
 
