@@ -50,7 +50,7 @@ info "Installing global npm modules"
 # ./setup/dev
 
 info "Installing Haskell (can't install with Homebrew)"
-# curl -sSL https://get.haskellstack.org/ | sh
+curl -sSL https://get.haskellstack.org/ | sh
 
 info "Installing rvm (can't install with Homebrew)"
 # curl -sSL https://get.rvm.io | bash -s stable
