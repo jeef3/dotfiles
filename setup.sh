@@ -2,6 +2,8 @@
 
 set -e
 
+SERVER=$1
+
 # Ask for the administrator password upfront
 sudo -v
 
@@ -25,7 +27,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 # Install Brew packages
 info "Installing brew packages"
-./setup/brew
+./setup/brew $SERVER
 
 # Switch to Brew zsh
 info "Switching to Zsh"

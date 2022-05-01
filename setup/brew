@@ -2,6 +2,8 @@
 
 set -e
 
+SERVER=$1
+
 tit() { printf "\n $(tput bold)$1$(tput sgr0)\n\n"; }
 success() { printf " $(tput setaf 8)›  $(tput setaf 10)✓\t$(tput sgr0)$1\n"; }
 info() { printf " $(tput setaf 8)›  $(tput setaf 12)…\t$(tput sgr0)$1\n"; }
@@ -133,6 +135,13 @@ CASKS=(
   calibre
 )
 
+CASKS_SERVER=(
+  nginx
+  sabnzdb
+  sonarr
+  radarr
+)
+
 # TODO: To Save
 # Fonts
 
@@ -166,13 +175,22 @@ do
   fi
 done
 
-for index in ${!CASKS[*]}
+if [ "$SERVER" == "server" ];
+then
+  info "Installing server casks"
+  CASK_LIST=CASKS_SERVER
+else
+  info "Installing casks"
+  CASK_LIST=CASKS
+fi
+
+for index in ${!CASK_LIST[*]}
 do
-  if ! cask_exists ${CASKS[$index]}; then
-    info "${CASKS[$index]} not installed, installing..."
-    brew install ${CASKS[$index]}
+  if ! cask_exists ${CASK_LIST[$index]}; then
+    info "${CASK_LIST[$index]} not installed, installing..."
+    brew install ${CASK_LIST[$index]}
   else
-    success "${CASKS[$index]} already installed, skipping"
+    success "${CASK_LIST[$index]} already installed, skipping"
   fi
 done
 
