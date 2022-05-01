@@ -12,7 +12,7 @@ unset file
 # Load scripts
 [[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # History
 export HISTFILE="$HOME/.zsh_history"
