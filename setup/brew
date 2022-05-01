@@ -137,7 +137,7 @@ CASKS=(
 
 CASKS_SERVER=(
   nginx
-  sabnzdb
+  sabnzbd
   sonarr
   radarr
 )
