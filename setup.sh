@@ -12,6 +12,9 @@ info "Installing Git submodules"
 git submodule init
 git submodule update --recursive
 
+# Needs to exist
+mkdir -p ~/.config
+
 # Link files
 ./link.sh
 
