@@ -178,10 +178,10 @@ done
 if [ "$SERVER" == "server" ];
 then
   info "Installing server casks"
-  CASK_LIST=$CASKS_SERVER
+  CASK_LIST=("${CASKS_SERVER[@]}")
 else
   info "Installing casks"
-  CASK_LIST=$CASKS
+  CASK_LIST=("${CASKS[@]}")
 fi
 
 for index in ${!CASK_LIST[*]}

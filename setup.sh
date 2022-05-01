@@ -6,6 +6,7 @@ SERVER=$1
 
 # Ask for the administrator password upfront
 sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 info() { printf "  [ \033[00;34m..\033[0m ] $1\n"; }
 success() { printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"; }
