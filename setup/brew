@@ -54,7 +54,6 @@ FORMULAS=(
   neovim
 
   # Zsh
-  zsh
   zsh-autosuggestions
   zsh-syntax-highlighting
 
