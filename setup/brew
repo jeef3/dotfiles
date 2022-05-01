@@ -148,7 +148,7 @@ formula_exists() {
 }
 
 cask_exists() {
-  if $(brew cask list | grep $1 > /dev/null); then
+  if $(brew list | grep $1 > /dev/null); then
     return 0
   fi
 
