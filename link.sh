@@ -23,8 +23,9 @@ symlinks=(
   .scripts
   .tmux
   .tmux.conf
-  .config/ranger
   .config/kitty
+  .config/nvim
+  .config/ranger
   .todo.cfg
 )
 
