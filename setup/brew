@@ -131,7 +131,6 @@ CASKS=(
   bricklink-studio
 
   dosbox
-  calibre
 )
 
 CASKS_SERVER=(
@@ -141,6 +140,8 @@ CASKS_SERVER=(
   sabnzbd
   sonarr
   radarr
+
+  virtualbox
 )
 
 # TODO: To Save
