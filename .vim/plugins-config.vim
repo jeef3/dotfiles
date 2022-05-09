@@ -223,9 +223,26 @@ let g:matchup_matchparen_offscreen = {'method': "popup"}
 
 " Telescope (nvim only)
 if has('nvim')
-  noremap <C-t> <cmd>Telescope git_files theme=dropdown find_command=rg,--files prompt_prefix=🔍\  prompt_title= previewer=false winblend=5<cr>
-  noremap <C-p> <cmd>Telescope live_grep theme=dropdown prompt_prefix=🔍\  prompt_title=Find\ in\ files<cr>
-  noremap <C-s> <cmd>Telescope lsp_dynamic_workspace_symbols prompt_prefix=ﬦ\  prompt_title=Symbols<cr>
+  noremap <C-t> <cmd>lua require"telescope.builtin".git_files(require"telescope.themes".get_dropdown{
+        \ find_command="rg --files",
+        \ prompt_prefix=" 🔍 ", 
+        \ selection_caret=" ",
+        \ prompt_title="", 
+        \ previewer=false,
+        \ winblend=5
+        \ })<cr>
+  noremap <C-p> <cmd>lua require"telescope.builtin".live_grep(require"telescope.themes".get_dropdown{
+        \ prompt_prefix=" 🔍 ", 
+        \ selection_caret=" ",
+        \ prompt_title="Find in files", 
+        \ winblend=5
+        \ })<cr>
+  noremap <C-s> <cmd>lua require"telescope.builtin".lsp_dynamic_workspace_symbols({
+        \ prompt_prefix=" ﬦ ", 
+        \ selection_caret=" ",
+        \ prompt_title="Symbols", 
+        \ winblend=5
+        \ })<cr>
 endif
 
 " Coq
