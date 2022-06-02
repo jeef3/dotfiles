@@ -161,9 +161,11 @@ lspconfig.ccls.setup(coq.lsp_ensure_capabilities{
 
 lspconfig.pyright.setup(coq.lsp_ensure_capabilities{})
 
-lspconfig.omnisharp.setup({
+lspconfig.omnisharp.setup(coq.lsp_ensure_capabilities{
   on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    setup_bindings(client, bufnr)
   end,
   cmd = { "/Users/jeffknaggs/.local/share/nvim/lsp_servers/omnisharp/omnisharp/run", "--languageserver" , "--hostPID", tostring(pid) },
 })
