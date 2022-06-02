@@ -243,7 +243,22 @@ if has('nvim')
         \ prompt_title="Symbols", 
         \ winblend=5
         \ })<cr>
+  noremap " <cmd>lua require"telescope.builtin".registers(require"telescope.themes".get_cursor{
+        \ prompt_prefix=" 📋 ", 
+        \ selection_caret=" ",
+        \ prompt_title="Paste from …", 
+        \ winblend=5,
+        \ layout_config={ height = 20 }
+        \ })<cr>
+  inoremap <C-r> <cmd>lua require"telescope.builtin".registers(require"telescope.themes".get_cursor{
+        \ prompt_prefix=" 📋 ", 
+        \ selection_caret=" ",
+        \ prompt_title="Paste from …", 
+        \ winblend=5,
+        \ layout_config={ height = 20 }
+        \ })<cr>
 endif
+
 
 " Coq
 if has('nvim')
