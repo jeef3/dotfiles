@@ -10,7 +10,7 @@ if [ $? -eq 0 ]; then
   success "Homebrew already installed"
 else
   info "Installing Homebrew"
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   success "Homebrew installed"
 fi
 
