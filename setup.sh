@@ -54,12 +54,20 @@ info "Installing rvm (can't install with Homebrew)"
 
 # Warning: Not good practice
 info "Linking keys"
-# ln -s ~/Library/CloudStorage/iCloudDrive/Keys/.aws ~/
-# ln -s ~/Library/CloudStorage/iCloudDrive/Keys/.ssh ~/
-# ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.ssh ~/
+if [ -e "$HOME/.ssh" ] && ! [ -h "$HOME/.ssh" ]; then
+  fail ".ssh exists. Please backup and/or remove this first"
+elif [ -h "$HOME/.ssh" ]; then
+  success "Re-linking .ssh"
+  rm -rf "$HOME/.ssh"
+  ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.ssh ~/
+else
+  success "Linking .ssh"
+  ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.ssh ~/
+fi
+
 # ln -s ~/Library/Mobile\ Documents/com~apple~CloudDocs/Keys/.aws ~/
-# chmod 600 ~/.ssh ~/.aws
-# chmod 600 ~/.ssh/* ~/.aws/*
+sudo chmod 600 ~/.ssh ~/.aws
+sudo chmod 600 ~/.ssh/* ~/.aws/*
 
 info "Installing Vim plug-ins"
 nvim +PlugUpdate +qall
