@@ -148,22 +148,16 @@ CASKS_SERVER=(
 # Not available or still figuring out:
 # Xcode
 
+INSTALLED=$(brew list)
+
 formula_exists() {
-  if $(brew list | grep $1 > /dev/null); then
+  if $(echo $INSTALLED | grep $1 > /dev/null); then
+  # if $(brew list | grep $1 > /dev/null); then
     return 0
   fi
 
   return 1
 }
-
-cask_exists() {
-  if $(brew list | grep $1 > /dev/null); then
-    return 0
-  fi
-
-  return 1
-}
-
 
 for index in ${!FORMULAS[*]}
 do
@@ -186,7 +180,7 @@ fi
 
 for index in ${!CASK_LIST[*]}
 do
-  if ! cask_exists ${CASK_LIST[$index]}; then
+  if ! formula_exists ${CASK_LIST[$index]}; then
     info "${CASK_LIST[$index]} not installed, installing..."
     brew install ${CASK_LIST[$index]}
   else
@@ -197,4 +191,5 @@ done
 # TODO: Needed?
 # open /usr/local/Cellar/x-quartz/2.7.4/XQuartz.pkg
 
+info "Brews installed, cleaning up."
 brew cleanup
