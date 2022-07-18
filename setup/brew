@@ -91,12 +91,11 @@ FORMULAS=(
 
   # Languages
   node
+  nvm
+  haskell-stack
   # python@2
-  python3
+  # python3
 
-  # Ruby stuff
-  # rbenv
-  # ruby-build
 
   # Gifiy
   ffmpeg
@@ -105,7 +104,6 @@ FORMULAS=(
 )
 
 CASKS=(
-  #iterm2
   kitty
 
   # Gifify

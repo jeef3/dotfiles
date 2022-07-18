@@ -49,14 +49,8 @@ info "Setting macos preferences"
 info "Installing global npm modules"
 # ./setup/dev
 
-info "Installing Haskell (can't install with Homebrew)"
-curl -sSL https://get.haskellstack.org/ | sh
-
 info "Installing rvm (can't install with Homebrew)"
 # curl -sSL https://get.rvm.io | bash -s stable
-
-# info "Installing iTerm shell integration"
-# curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
 
 # Warning: Not good practice
 info "Linking keys"
