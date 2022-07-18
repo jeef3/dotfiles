@@ -1,7 +1,8 @@
 #!/bin/sh
 
 npm install -g \
-  instant-markdown-d
+  instant-markdown-d \
+  typescript-language-server
 #   create-react-app \
 #   react-native-cli \
 #   import-js \
