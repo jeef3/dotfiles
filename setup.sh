@@ -47,7 +47,7 @@ info "Setting macos preferences"
 # ./setup/macos
 
 info "Installing global npm modules"
-# ./setup/dev
+./setup/dev
 
 info "Installing rvm (can't install with Homebrew)"
 # curl -sSL https://get.rvm.io | bash -s stable
