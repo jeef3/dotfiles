@@ -331,10 +331,3 @@ require("neo-tree").setup({
 })
 
 EOF
-
-augroup UltestRunner
-  au!
-  au BufWritePost * UltestNearest
-  nmap ]t <Plug>(ultest-next-fail)
-  nmap [t <Plug>(ultest-prev-fail)
-augroup END

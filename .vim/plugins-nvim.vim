@@ -60,14 +60,12 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
 
 Plug 'rktjmp/lush.nvim'
-Plug '~/projects/princess_theme'
+Plug '~/projects/princess.nvim'
 
 Plug 'RRethy/vim-illuminate'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'folke/zen-mode.nvim'
 Plug 'vim-test/vim-test'
-Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
-" Plug 'rcarriga/nvim-notify'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
