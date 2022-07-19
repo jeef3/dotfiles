@@ -1,8 +1,9 @@
 #!/bin/sh
 
 npm install -g \
-  instant-markdown-d \
-  typescript-language-server
+  typescript-language-server \
+  eslint_d \
+  @fsouza/prettierd
 #   create-react-app \
 #   react-native-cli \
 #   import-js \
