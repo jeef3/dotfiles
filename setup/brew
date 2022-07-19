@@ -25,69 +25,56 @@ brew tap osx-cross/avr
 brew tap sudar/arduino-mk
 
 FORMULAS=(
-  # GNU core utilities (those that come with OS X are outdated)
-  coreutils
-
-  # Compilers
-  make
-  cmake
-  mono
-
-  # GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
-  findutils
-
-  # Just, because
-  bash
-
-  # Wget with iri
-  wget
-
-  # Git
-  git
-  tig
-  git-delta
-
-  # Mah IDE
-  tmux
-  # Uninstall first? Upgrade drops the override-system-vim
-  macvim
-  neovim
-
-  # Zsh
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-
-  # Useful tools
-  trash
-  ack
-  the_silver_searcher
-  rename
-  todo-txt
-  httpie
-  fzf
-  z
-  diff-so-fancy
-  yarn
-  awscli
-  azure-cli
-  watchman
-  fswatch
-  ranger
-  imgcat
-  jq # JSON parser
-  fontforge # For custom font icon patching
-  mdv # CLI Markdown viewer
+  # Updated/nicer/faster tools
+  coreutils # GNU core utilities (those that come with OS X are outdated)
+  findutils # GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
+  wget # Wget with iri
   bat # Nicer cat
   ncdu # Nicer du
   tldr # Nicer man
   gnupg
   less # Newer less
+  ack
+  the_silver_searcher
+  fzf
   ripgrep # Faster grepping
+
+  # Useful tools
+  trash
+  rename
+  jq # JSON parser
+  fx # Interactive JSON explorer
+
+  # Terminal helpers and tools
+  bash # Just, because
+  z
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+
+  # Git
+  git
+  tig
+  git-delta
+  diff-so-fancy
+
+  # Mah IDE
+  tmux
+  macvim
+  neovim
+  ranger
+  todo-txt
+
+  # Other seldom used tools
+  fontforge # For custom font icon patching
+  mdv # CLI Markdown viewer
+  httpie
+  imgcat
 
   # Certificate tools
   openssl
   mkcert
   nss
+
 
   # Languages
   node
@@ -96,6 +83,21 @@ FORMULAS=(
   # python@2
   # python3
 
+  # Other language libs and bits
+  yarn
+  platformio
+
+  # Compilers
+  make
+  cmake
+  ccls
+  mono
+
+  # Dev helpers
+  watchman
+  fswatch
+  awscli
+  azure-cli
 
   # Gifiy
   ffmpeg
@@ -114,12 +116,11 @@ CASKS=(
   imageoptim
 
   # Other
-  dropbox
+  #dropbox
   appcleaner
 
   docker
 
-  # sip # Color select/organise
   sim-daltonism # Color blindness simulator
 
   slack
