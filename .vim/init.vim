@@ -135,7 +135,7 @@ lspconfig.tsserver.setup(coq.lsp_ensure_capabilities{
       eslint_enable_diagnostics = true,
       eslint_enable_code_actions = true,
       enable_formatting = true,
-      formatter = "prettier",
+      formatter = "prettierd",
     })
 
     ts_utils.setup_client(client)
@@ -185,7 +185,7 @@ null_ls.setup({
   sources = {
     null_ls.builtins.diagnostics.eslint_d,
     null_ls.builtins.code_actions.eslint_d,
-    null_ls.builtins.formatting.prettier
+    null_ls.builtins.formatting.prettierd
   },
   on_attach = setup_bindings
 })

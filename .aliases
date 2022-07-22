@@ -17,6 +17,7 @@ alias todo="todotxt-machine ./todo.txt"
 alias ts="tig status"
 
 alias vims="vim -S Session.vim"
+alias nvims="nvim -S Session.vim"
 
 alias urldecode='python -c "import sys, urllib as ul; \
                 [sys.stdout.write(ul.unquote_plus(l)) for l in sys.stdin]"'
