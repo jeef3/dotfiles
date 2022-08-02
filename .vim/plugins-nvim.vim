@@ -52,22 +52,30 @@ Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 " Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 
 Plug 'seblj/nvim-tabline'
 
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
 
-Plug 'rktjmp/lush.nvim'
+" Plug 'rktjmp/lush.nvim'
+Plug 'rktjmp/lush.nvim', { 'tag': '1.0.1' }
 Plug '~/projects/princess.nvim'
 
 Plug 'RRethy/vim-illuminate'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'folke/zen-mode.nvim'
-Plug 'vim-test/vim-test'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
+
+" Tests
+Plug 'antoinemadec/FixCursorHold.nvim' " Required for testing
+Plug 'nvim-neotest/neotest'
+Plug 'haydenmeade/neotest-jest'
+
+" Debug
+Plug 'mfussenegger/nvim-dap'
 
 call plug#end()

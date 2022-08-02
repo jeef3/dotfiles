@@ -332,4 +332,14 @@ require("neo-tree").setup({
   }
 })
 
+require("neotest").setup({
+  adapters = {
+    require('neotest-jest')({
+      env = { CI = true },
+    }),
+  }
+})
+vim.cmd("command! NeoTestNearest lua require('neotest').run.run()")
+vim.cmd("command! NeoTestFile lua require('neotest').run.run(vim.fn.expand('%'))")
+
 EOF
