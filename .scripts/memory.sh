@@ -30,7 +30,7 @@ elif [ $max -gt 1000 ]; then
 elif [ $max -gt 500 ]; then
   fg=$tier3
   symbol=""
-elif [ $max -gt 300]; then
+elif [ $max -gt 300 ]; then
   fg=$tier4
   symbol=""
 elif [ $max -gt 200 ]; then
