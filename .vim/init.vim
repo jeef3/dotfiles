@@ -68,8 +68,66 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 -- end
 
 
-require "lsp_signature".setup()
-local coq = require("coq")
+-- require "lsp_signature".setup()
+-- local coq = require("coq")
+local cmp = require('cmp')
+local lspkind = require('lspkind')
+local cmp_kinds = {
+  Text = ' ',
+  Method = ' ',
+  Function = ' ',
+  Constructor = ' ',
+  Field = ' ',
+  Variable = ' ',
+  Class = ' ',
+  Interface = ' ',
+  Module = ' ',
+  Property = ' ',
+  Unit = ' ',
+  Value = ' ',
+  Enum = ' ',
+  Keyword = ' ',
+  Snippet = ' ',
+  Color = ' ',
+  File = ' ',
+  Reference = ' ',
+  Folder = ' ',
+  EnumMember = ' ',
+  Constant = ' ',
+  Struct = ' ',
+  Event = ' ',
+  Operator = ' ',
+  TypeParameter = ' ',
+}
+
+cmp.setup({
+  window = {
+    completion = {
+      col_offset = -3,
+      side_padding = 0,
+    }
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-j>'] = cmp.mapping.select_next_item(),
+    ['<C-k>'] = cmp.mapping.select_prev_item(),
+    ['<CR>']  = cmp.mapping.complete()
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_signature_help' }
+  }),
+  formatting = {
+    fields = { "kind", "abbr" },
+    format = function(_, vim_item)
+      local str = cmp_kinds[vim_item.kind] or ""
+      vim_item.kind = " " .. cmp_kinds[vim_item.kind] or "" .. " "
+
+      return vim_item
+    end,
+  }
+})
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local saga = require 'lspsaga'
 saga.init_lsp_saga{
@@ -121,7 +179,8 @@ local setup_bindings = function(client, bufnr)
 end
 
 
-lspconfig.tsserver.setup(coq.lsp_ensure_capabilities{
+lspconfig.tsserver.setup({
+  capabilities = capabilities,
   on_attach = function(client, bufnr)
     require 'illuminate'.on_attach(client)
 
@@ -145,7 +204,7 @@ lspconfig.tsserver.setup(coq.lsp_ensure_capabilities{
   end,
 })
 
-lspconfig.ccls.setup(coq.lsp_ensure_capabilities{
+lspconfig.ccls.setup({
   init_options = {
     compilationDatabaseDirectory = "build";
 
@@ -159,9 +218,9 @@ lspconfig.ccls.setup(coq.lsp_ensure_capabilities{
   }
 })
 
-lspconfig.pyright.setup(coq.lsp_ensure_capabilities{})
+lspconfig.pyright.setup({})
 
-lspconfig.omnisharp.setup(coq.lsp_ensure_capabilities{
+lspconfig.omnisharp.setup({
   on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -170,7 +229,7 @@ lspconfig.omnisharp.setup(coq.lsp_ensure_capabilities{
   cmd = { "/Users/jeffknaggs/.local/share/nvim/lsp_servers/omnisharp/omnisharp/run", "--languageserver" , "--hostPID", tostring(pid) },
 })
 
-lspconfig.yamlls.setup(coq.lsp_ensure_capabilities{
+lspconfig.yamlls.setup({
   settings = {
     yaml = {
       schemas = {
@@ -334,12 +393,65 @@ require("neo-tree").setup({
 
 require("neotest").setup({
   adapters = {
-    require('neotest-jest')({
-      env = { CI = true },
-    }),
+    require('neotest-vitest'),
   }
 })
 vim.cmd("command! NeoTestNearest lua require('neotest').run.run()")
 vim.cmd("command! NeoTestFile lua require('neotest').run.run(vim.fn.expand('%'))")
+
+require("coverage").setup()
+
+local dap = require("dap")
+dap.adapters.node2 = {
+  type = 'executable',
+  command = 'node',
+  args = {os.getenv('HOME') .. '/.vim/vscode-node-debug2/out/src/nodeDebug.js'},
+}
+dap.configurations.javascript = {
+  {
+    name = 'Launch',
+    type = 'node2',
+    request = 'launch',
+    program = '${file}',
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = 'inspector',
+    console = 'integratedTerminal',
+  },
+  {
+    -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+    name = 'Attach to process',
+    type = 'node2',
+    request = 'attach',
+    processId = require'dap.utils'.pick_process,
+  },
+}
+
+dap.adapters.firefox = {
+  type = 'executable',
+  command = 'node',
+  args = {os.getenv('HOME') .. '/.vim/vscode-firefox-debug/dist/adapter.bundle.js'},
+}
+dap.configurations.typescript = {
+  name = 'Debug with Firefox',
+  type = 'firefox',
+  request = 'launch',
+  reAttach = true,
+  url = 'http://localhost:3000',
+  webRoot = '${workspaceFolder}',
+  firefoxExecutable = '/usr/bin/firefox'
+}
+
+local dapui = require("dapui")
+dapui.setup()
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+  dapui.close()
+end
 
 EOF

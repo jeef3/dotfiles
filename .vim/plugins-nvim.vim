@@ -37,7 +37,7 @@ Plug 'nvim-treesitter/playground'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
-Plug 'ray-x/lsp_signature.nvim'
+" Plug 'ray-x/lsp_signature.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
@@ -47,9 +47,17 @@ Plug 'tami5/lspsaga.nvim'
 
 Plug 'nvim-lualine/lualine.nvim'
 
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': ':COQdeps' }
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+" Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': ':COQdeps' }
+" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 " Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
+
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'onsails/lspkind.nvim'
 
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
@@ -62,7 +70,7 @@ Plug 'folke/trouble.nvim'
 " Plug 'rktjmp/lush.nvim'
 Plug 'rktjmp/lush.nvim', { 'tag': '1.0.1' }
 Plug '~/projects/princess.nvim'
-
+Plug 'fladson/vim-kitty'
 Plug 'RRethy/vim-illuminate'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'folke/zen-mode.nvim'
@@ -74,8 +82,11 @@ Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'antoinemadec/FixCursorHold.nvim' " Required for testing
 Plug 'nvim-neotest/neotest'
 Plug 'haydenmeade/neotest-jest'
+Plug 'KaiSpencer/neotest-vitest'
+Plug 'andythigpen/nvim-coverage'
 
 " Debug
 Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
 
 call plug#end()

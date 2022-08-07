@@ -147,13 +147,17 @@ if !has('nvim')
   let g:coc_snippet_next = '<tab>'
 
   inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ?
-      \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+        \ coc#pum#visible() ? coc#pum#next(1):
+        \ CheckBackspace() ? "\<Tab>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-  function! s:check_back_space() abort
+  " Make <CR> to accept selected completion item or notify coc.nvim to format
+  " <C-g>u breaks current undo, please make your own choice.
+  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+  function! CheckBackspace() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
   endfunction
@@ -260,35 +264,38 @@ if has('nvim')
 endif
 
 
-" Coq
 if has('nvim')
-  let g:coq_settings = {
-        \ "auto_start": "shut-up",
-        \ "limits.completion_manual_timeout": 0.5,
-        \ "clients.tree_sitter.enabled": v:false,
-        \ "clients.tmux.enabled": v:false,
-        \ "clients.buffers.enabled": v:false,
-        \ "clients.snippets.enabled": v:false,
-        \ "display.pum.fast_close": v:false,
-        \ "keymap.recommended": v:false,
-        \ "keymap.jump_to_mark": "",
-        \ "keymap.bigger_preview": "",
-        \}
+  " Coq
+  " let g:coq_settings = {
+  "       \ "auto_start": "shut-up",
+  "       \ "limits.completion_manual_timeout": 0.5,
+  "       \ "clients.tree_sitter.enabled": v:false,
+  "       \ "clients.tmux.enabled": v:false,
+  "       \ "clients.buffers.enabled": v:false,
+  "       \ "clients.snippets.enabled": v:false,
+  "       \ "display.pum.fast_close": v:false,
+  "       \ "display.preview.positions": { "north": 2, "south": 4, "east": 1, "west": 3 },
+  "       \ "keymap.recommended": v:false,
+  "       \ "keymap.jump_to_mark": "",
+  "       \ "keymap.bigger_preview": "",
+  "       \}
 
-  inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-  inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-  inoremap <silent><expr> <CR> pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
+  " inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+  " inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+  " inoremap <silent><expr> <CR> pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
+
+  " Neo tree
+  nmap <silent> <leader>be :Neotree source=buffers action=show reveal<cr>
+  nmap <silent> <leader>bt :Neotree source=filesystem action=show reveal<cr>
+
+  " DAP
+  nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
+  nnoremap <silent> <F10> <Cmd>lua require'dap'.step_over()<CR>
+  nnoremap <silent> <F11> <Cmd>lua require'dap'.step_into()<CR>
+  nnoremap <silent> <F12> <Cmd>lua require'dap'.step_out()<CR>
+  nnoremap <silent> <Leader>b <Cmd>lua require'dap'.toggle_breakpoint()<CR>
+  nnoremap <silent> <Leader>B <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+  nnoremap <silent> <Leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+  nnoremap <silent> <Leader>dr <Cmd>lua require'dap'.repl.open()<CR>
+  nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
 endif
-
-" vim-test and ultest
-nmap <silent> <leader>t :UltestNearest<CR>
-nmap <silent> <leader>T :Ultest<CR>
-nmap <silent> <leader>l :UltestLast<CR>
-nmap ]t <Plug>(ultest-next-fail)
-nmap [t <Plug>(ultest-prev-fail)
-let g:ultest_use_pty = 1
-let test#javascript#cypress#file_pattern = 'cypress\/integration\/.*\.spec\.ts$'
-
-" Neo tree
-nmap <silent> <leader>be :Neotree source=buffers action=show reveal<cr>
-nmap <silent> <leader>bt :Neotree source=filesystem action=show reveal<cr>
