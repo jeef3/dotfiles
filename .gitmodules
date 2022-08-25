@@ -19,3 +19,12 @@
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule ".vim/vscode-node-debug2"]
+	path = .vim/vscode-node-debug2
+	url = https://github.com/microsoft/vscode-node-debug2.git
+[submodule ".vim/vscode-firefox-debug"]
+	path = .vim/vscode-firefox-debug
+	url = https://github.com/firefox-devtools/vscode-firefox-debug.git
+[submodule "kitty-icon"]
+	path = kitty-icon
+	url = https://github.com/DinkDonk/kitty-icon.git
