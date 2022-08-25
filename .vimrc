@@ -14,6 +14,7 @@ if !has('nvim')
 else
   source ~/.vim/plugins-nvim.vim
 
+  " colorscheme xcodedark
   colorscheme princess_theme
 endif
 
@@ -81,7 +82,7 @@ set formatoptions+=2 " Use indent from 2nd line of a paragraph
 set formatoptions+=l " Don't break lines that are already long
 set formatoptions+=1 " Break before 1-letter words
 set formatoptions+=t " Auto-wrapping
-set completeopt-=preview
+set completeopt=menu,menuone,noselect
 set hidden " Allow unsaved changes on hidden buffers
 set history=1000 " Increase history from 20 default to 1000
 set hlsearch " Highlight searches
@@ -200,6 +201,8 @@ augroup END
 com! W w
 com! Q q
 
+" Tidy up them buffesr
+com! Bd :up | %bd | e#
 
 " Quickly edit me
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -246,7 +249,7 @@ nnoremap c "_c
 vnoremap c "_c
 
 " HTML/JSON Formatting
-com! FormatJSON %!python -m json.tool
+com! FormatJSON %!python3 -m json.tool
 com! FormatHTML %!tidy -iq -xml -wrap 0
 
 " New file templates

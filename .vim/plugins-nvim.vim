@@ -57,6 +57,8 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 Plug 'onsails/lspkind.nvim'
 
 Plug 'nvim-telescope/telescope.nvim'
@@ -71,8 +73,10 @@ Plug 'folke/trouble.nvim'
 Plug 'rktjmp/lush.nvim', { 'tag': '1.0.1' }
 Plug '~/projects/princess.nvim'
 Plug 'fladson/vim-kitty'
-Plug 'RRethy/vim-illuminate'
-Plug 'petertriho/nvim-scrollbar'
+" Plug 'RRethy/vim-illuminate'
+Plug 'petertriho/nvim-scrollbar' " Scroll bar, including diagnostic indicators
+"Plug 'Xuyuanp/scrollbar.nvim'
+Plug 'declancm/cinnamon.nvim' " Smooth scrolling
 Plug 'folke/zen-mode.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'MunifTanjim/nui.nvim'

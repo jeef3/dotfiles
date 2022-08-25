@@ -17,8 +17,9 @@ telescope.setup({
 
 telescope.load_extension('fzf')
 
-require 'illuminate'
+--require 'illuminate'
 require("scrollbar").setup()
+
 require 'zen-mode'.setup({
   window = {
     width = 90
@@ -105,16 +106,24 @@ cmp.setup({
     completion = {
       col_offset = -3,
       side_padding = 0,
-    }
+    },
+    documentation = cmp.config.window.bordered()
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-j>'] = cmp.mapping.select_next_item(),
     ['<C-k>'] = cmp.mapping.select_prev_item(),
-    ['<CR>']  = cmp.mapping.complete()
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>']  = cmp.mapping.confirm({ select = true })
   }),
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'nvim_lsp_signature_help' }
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'vsnip' },
   }),
   formatting = {
     fields = { "kind", "abbr" },
@@ -124,6 +133,9 @@ cmp.setup({
 
       return vim_item
     end,
+  },
+  experimental = {
+    ghost_text = true
   }
 })
 
@@ -165,6 +177,7 @@ local setup_bindings = function(client, bufnr)
   vim.cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
 
   buf_map(bufnr, "n", "gd", ":LspDef<CR>")
+  buf_map(bufnr, "n", "gD", ":LspTypeDef<CR>")
   buf_map(bufnr, "n", "gr", ":LspRefs<CR>")
   buf_map(bufnr, "n", "K", ":Lspsaga hover_doc<CR>")
   buf_map(bufnr, "n", "[g", ":Lspsaga diagnostic_jump_prev<CR>")
@@ -182,7 +195,7 @@ end
 lspconfig.tsserver.setup({
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    require 'illuminate'.on_attach(client)
+    -- require 'illuminate'.on_attach(client)
 
     -- null-ls will take care of formatting
     client.resolved_capabilities.document_formatting = false
@@ -454,4 +467,7 @@ dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
 
+require('cinnamon').setup({
+  default_delay = 4,
+})
 EOF
