@@ -6,7 +6,7 @@
 	<string>org.virtualbox.launch.home-assitant</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/Applications/VirtualBox.app/Contents/MacOS/VBoxManage</string>
+		<string>VBoxManage</string>
 		<string>startvm</string>
 		<string>Home Assistant</string>
 		<string>--type</string>

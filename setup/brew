@@ -75,7 +75,6 @@ FORMULAS=(
   mkcert
   nss
 
-
   # Languages
   node
   nvm
