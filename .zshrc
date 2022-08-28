@@ -40,10 +40,6 @@ source ~/.zsh/prompt.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /Users/jeffknaggs/projects/new-player/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/jeffknaggs/projects/new-player/node_modules/tabtab/.completions/slss.zsh
-
 # Add Homebrew's sbin to PATH
 export PATH="/usr/local/sbin:$PATH"
 
