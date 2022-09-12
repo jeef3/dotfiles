@@ -141,27 +141,31 @@ cmp.setup({
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+local keymap = vim.keymap.set
 local saga = require 'lspsaga'
 saga.init_lsp_saga{
-  error_sign = "",
-  warn_sign = "",
-  hint_sign = "",
-  infor_sign = "",
-  diagnostic_header_icon = "  ",
+  -- error_sign = "",
+  -- warn_sign = "",
+  -- hint_sign = "",
+  -- infor_sign = "",
+  -- diagnostic_header_icon = "  ",
 
-  code_action_icon = " ",
-  code_action_keys = {
-    quit = "<esc>",
-  },
+  -- code_action_icon = " ",
+  -- code_action_keys = {
+  --   quit = "<esc>",
+  -- },
 
-  rename_prompt_prefix = " ",
-  rename_action_keys = {
-    quit = "<esc>",
-  },
+  -- rename_prompt_prefix = " ",
+  -- rename_action_keys = {
+  --   quit = "<esc>",
+  -- },
 
-  definition_preview_icon = "  ",
+  -- definition_preview_icon = "  ",
+  border_style = "rounded",
+  saga_winblend = 5,
 
-  border_style = "round",
+  diagnostic_header = { " ", " ", " ", " ﴞ" },
+  show_diagnostic_source = false,
 }
 
 local buf_map = function(bufnr, mode, lhs, rhs, opts)

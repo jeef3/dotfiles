@@ -298,4 +298,7 @@ if has('nvim')
   nnoremap <silent> <Leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
   nnoremap <silent> <Leader>dr <Cmd>lua require'dap'.repl.open()<CR>
   nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
+
+  " Instant Markdown
+  let g:instant_markdown_autostart = 0
 endif

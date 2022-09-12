@@ -29,6 +29,9 @@ Plug 'tpope/vim-fugitive'                 " Git wrapper, :Gstatus etc
 
 Plug 'norcalli/nvim-colorizer.lua'        " Colored colors
 
+" Languages
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
+
 " Neovim only
 Plug 'nvim-lua/plenary.nvim'              " Lua functions util
 
@@ -41,9 +44,9 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
-" Plug 'glepnir/lspsaga.nvim'
+Plug 'glepnir/lspsaga.nvim'
 " Maintained fork:
-Plug 'tami5/lspsaga.nvim'
+" Plug 'tami5/lspsaga.nvim'
 
 Plug 'nvim-lualine/lualine.nvim'
 
@@ -78,6 +81,11 @@ Plug 'petertriho/nvim-scrollbar' " Scroll bar, including diagnostic indicators
 "Plug 'Xuyuanp/scrollbar.nvim'
 Plug 'declancm/cinnamon.nvim' " Smooth scrolling
 Plug 'folke/zen-mode.nvim'
+Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'vim-test/vim-test'
+Plug 'nvim-neotest/neotest'
+Plug 'nvim-neotest/neotest-vim-test'
+"Plug 'rcarriga/nvim-notify'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-neo-tree/neo-tree.nvim'
