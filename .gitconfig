@@ -86,23 +86,56 @@
 [push]
 	default = tracking
 
+[delta "woolly-mammoth"]
+    # author: https://github.com/Kr1ss-XD
+    commit-decoration-style = 232 130 box
+    commit-style = 232 bold italic 130
+    dark = true
+    file-decoration-style = "#ffcc66" overline
+    file-added-label = [+]
+    file-copied-label = [==]
+    file-modified-label = [*]
+    file-removed-label = [-]
+    file-renamed-label = [->]
+    file-style = "#cc66ff" bold
+    hunk-header-decoration-style = none
+    hunk-header-style = syntax bold italic 237
+    line-numbers = true
+    line-numbers-left-format = " {nm:>1} ┊"
+    line-numbers-left-style = red
+    line-numbers-minus-style = red italic black
+    line-numbers-plus-style = green italic black
+    line-numbers-right-format = " {np:>1} │"
+    line-numbers-right-style = green
+    line-numbers-zero-style = "#545474" italic
+    minus-emph-style = syntax bold "#ff3399"
+    minus-style = syntax "#400000"
+    plus-emph-style = syntax bold "#00d364"
+    plus-style = syntax "#004000"
+    syntax-theme = woolly-mammoth
+    whitespace-error-style = "#280050" reverse
+    zero-style = syntax
+    blame-format = "{author:<18} ({commit:>7}) ┊{timestamp:^16}┊ "
+    blame-palette = "#101010 #200020 #002800 #000028 #202000 #280000 #002020 #002800 #202020"
+
 [delta]
-	navigate = true
-	line-numbers = true
-	side-by-side = true
-	plus-style = bold green
-	minus-style = bold red
+  navigate = true
+  line-numbers = true
+  plus-style = bold green
+  minus-style = bold red
+  wrap-max-lines = 0
+  features = woolly-mammoth
 
 [interactive]
-	diffFilter = delta --color-only
+  diffFilter = delta --color-only --wrap-max-lines 0
 
 [diff]
-	colorMoved = default
+  colorMoved = default
 
 [diff "image"]
-	command = ~/git-imgdiff
+  command = ~/git-imgdiff
 
 [user]
-	name = Jeff Knaggs
-	email = mail@jeef3.com
+  name = Jeff Knaggs
+  email = mail@jeef3.com
 
