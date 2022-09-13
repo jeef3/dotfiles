@@ -256,7 +256,7 @@ com! FormatHTML %!tidy -iq -xml -wrap 0
 autocmd BufNewFile *.sh 0r ~/.vim/skeletons/bash.sh
 
 " Fill chars colors
-set fillchars+=vert:┃,fold:-
+set fillchars+=vert:┃,fold:-,diff:╱,foldclose:,foldopen:
 
 source ~/.vim/plugins-config.vim
 
