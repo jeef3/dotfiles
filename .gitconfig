@@ -112,7 +112,7 @@
     minus-style = syntax "#400000"
     plus-emph-style = syntax bold "#00d364"
     plus-style = syntax "#004000"
-    syntax-theme = woolly-mammoth
+    syntax-theme = Dracula
     whitespace-error-style = "#280050" reverse
     zero-style = syntax
     blame-format = "{author:<18} ({commit:>7}) ┊{timestamp:^16}┊ "
