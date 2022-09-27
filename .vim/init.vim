@@ -347,6 +347,12 @@ require'lualine'.setup({
 })
 
 require'gitsigns'.setup({
+  signs = {
+    add       = { text = "▎" },
+    change    = { text = "▎" },
+    delete    = { text = "▎" },
+  },
+
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
@@ -387,26 +393,26 @@ require'gitsigns'.setup({
   end
 })
 
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-require("neo-tree").setup({
-  window = {
-    width = 30
-  },
-  buffers = {
-    show_unloaded = true
-  },
-  filesystem = {
-    filtered_items = {
-      visible = true,
-      never_show = {
-        ".DS_Store",
-        "Session.vim"
-      },
-    },
-    hijack_netrw_behavior = "disabled",
-    follow_current_file = true
-  }
-})
+-- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+-- require("neo-tree").setup({
+--   window = {
+--     width = 30
+--   },
+--   buffers = {
+--     show_unloaded = true
+--   },
+--   filesystem = {
+--     filtered_items = {
+--       visible = true,
+--       never_show = {
+--         ".DS_Store",
+--         "Session.vim"
+--       },
+--     },
+--     hijack_netrw_behavior = "disabled",
+--     follow_current_file = true
+--   }
+-- })
 
 require("neotest").setup({
   adapters = {
@@ -473,5 +479,22 @@ end
 
 require('cinnamon').setup({
   default_delay = 4,
+})
+
+require("diffview").setup({
+  enhanced_diff_hl = true,
+  signs = {
+    fold_closed = "",
+    fold_open = "",
+    done = "✓",
+  },
+  hooks = {
+    view_enter = function(view)
+      vim.cmd [[:Gitsigns toggle_numhl true]]
+    end,
+    view_leave = function(view)
+      vim.cmd [[:Gitsigns toggle_numhl false]]
+    end,
+  },
 })
 EOF

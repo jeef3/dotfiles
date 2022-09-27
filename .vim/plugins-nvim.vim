@@ -50,6 +50,8 @@ Plug 'glepnir/lspsaga.nvim'
 
 Plug 'nvim-lualine/lualine.nvim'
 
+Plug 'sindrets/diffview.nvim'
+
 " Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': ':COQdeps' }
 " Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 " Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
