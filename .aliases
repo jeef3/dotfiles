@@ -4,8 +4,6 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 alias hd="hidedesktop; hide.applescript"
 alias sd="showdesktop; show.applescript"
 
-alias rake="noglob rake"
-
 alias bubu="bubu.sh"
 
 alias so="source"
@@ -27,10 +25,6 @@ alias urldecode='python -c "import sys, urllib as ul; \
 
 alias urlencode='python -c "import sys, urllib as ul; \
                 print ul.quote_plus(sys.argv[1])"'
-
-alias bs="build-status"
-
-alias altool="/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Support/altool"
 
 alias la="ls -la"
 
