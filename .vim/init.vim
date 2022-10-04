@@ -34,43 +34,48 @@ require 'zen-mode'.setup({
 })
 
 local lspconfig = require("lspconfig")
--- local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
--- for type, icon in pairs(signs) do
---     local hl = "LspDiagnosticsSign" .. type
---     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
--- end
--- vim.o.updatetime = 250
--- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false})]]
+
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = {
     prefix = ' ●',
   }
 })
 
+vim.cmd [[
+  sign define DiagnosticSignError texthl=DiagnosticSignError numhl=DiagnosticLineNrError
+  sign define DiagnosticSignWarn  texthl=DiagnosticSignWarn  numhl=DiagnosticLineNrWarn
+  sign define DiagnosticSignInfo  texthl=DiagnosticSignInfo  numhl=DiagnosticLineNrInfo
+  sign define DiagnosticSignHint  texthl=DiagnosticSignHint  numhl=DiagnosticLineNrHint
+]]
+
 -- vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]]
 -- vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
---
--- local border = {
---       {"🭽", "FloatBorder"},
---       {"▔", "FloatBorder"},
---       {"🭾", "FloatBorder"},
---       {"▕", "FloatBorder"},
---       {"🭿", "FloatBorder"},
---       {"▁", "FloatBorder"},
---       {"🭼", "FloatBorder"},
---       {"▏", "FloatBorder"},
--- }
---
--- local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
--- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
---   opts = opts or {}
---   opts.border = opts.border or border
---   return orig_util_open_floating_preview(contents, syntax, opts, ...)
--- end
 
+local border = {
+  {"🭽", "FloatBorder"},
+  {"▔", "FloatBorder"},
+  {"🭾", "FloatBorder"},
+  {"▕", "FloatBorder"},
+  {"🭿", "FloatBorder"},
+  {"▁", "FloatBorder"},
+  {"🭼", "FloatBorder"},
+  {"▏", "FloatBorder"},
+}
+
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
 
 -- require "lsp_signature".setup()
--- local coq = require("coq")
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 local cmp_kinds = {
@@ -112,8 +117,8 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ['<C-j>'] = cmp.mapping.select_next_item(),
     ['<C-k>'] = cmp.mapping.select_prev_item(),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>']  = cmp.mapping.confirm({ select = true })
+    -- ['<space>'] = cmp.mapping.complete(),
+    -- ['<CR>']  = cmp.mapping.confirm({ select = true })
   }),
   snippet = {
     expand = function(args)
@@ -124,6 +129,10 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'vsnip' },
+    -- { name = 'path' },
+    -- { name = 'cmdline' },
+    -- { name = 'buffer' },
+    -- { name = 'nvim_lua' },
   }),
   formatting = {
     fields = { "kind", "abbr" },
@@ -139,33 +148,18 @@ cmp.setup({
   }
 })
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local keymap = vim.keymap.set
 local saga = require 'lspsaga'
 saga.init_lsp_saga{
-  -- error_sign = "",
-  -- warn_sign = "",
-  -- hint_sign = "",
-  -- infor_sign = "",
-  -- diagnostic_header_icon = "  ",
+  code_action_keys = {
+    quit = "<esc>",
+  },
 
-  -- code_action_icon = " ",
-  -- code_action_keys = {
-  --   quit = "<esc>",
-  -- },
-
-  -- rename_prompt_prefix = " ",
-  -- rename_action_keys = {
-  --   quit = "<esc>",
-  -- },
-
-  -- definition_preview_icon = "  ",
-  border_style = "rounded",
   saga_winblend = 5,
-
   diagnostic_header = { " ", " ", " ", " ﴞ" },
-  show_diagnostic_source = false,
 }
 
 local buf_map = function(bufnr, mode, lhs, rhs, opts)
@@ -174,52 +168,61 @@ local buf_map = function(bufnr, mode, lhs, rhs, opts)
   })
 end
 
-local setup_bindings = function(client, bufnr)
-  vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
-  vim.cmd("command! LspRefs lua vim.lsp.buf.references()")
-  vim.cmd("command! LspTypeDef lua vim.lsp.buf.type_definition()")
-  vim.cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
+local lsp_formatting = function(bufnr)
+  vim.lsp.buf.format({
+    filter = function(client)
+      return client.name == "null-ls"
+    end,
+    bufnr = bufnr
+  })
+end
 
-  buf_map(bufnr, "n", "gd", ":LspDef<CR>")
-  buf_map(bufnr, "n", "gD", ":LspTypeDef<CR>")
-  buf_map(bufnr, "n", "gr", ":LspRefs<CR>")
-  buf_map(bufnr, "n", "K", ":Lspsaga hover_doc<CR>")
-  buf_map(bufnr, "n", "[g", ":Lspsaga diagnostic_jump_prev<CR>")
-  buf_map(bufnr, "n", "]g", ":Lspsaga diagnostic_jump_next<CR>")
-  buf_map(bufnr, "n", "<leader>rn", ":Lspsaga rename<CR>")
-  buf_map(bufnr, "n", "<leader>qf", ":Lspsaga code_action<CR>")
-  buf_map(bufnr, "n", "<space>e", ":Lspsaga show_line_diagnostics<CR>")
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+local on_attach = function(client, bufnr)
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+  -- vim.keymap.set('n', 'K',  vim.lsp.buf.hover, bufopts)
+
+  -- Lspsaga overrides
+  vim.keymap.set("n", "K",  "<cmd>Lspsaga hover_doc<CR>", bufopts)
+  vim.keymap.set("n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
+  vim.keymap.set("n", "]g", "<cmd>Lspsaga diagnostic_jump_next<CR>", bufopts)
+  vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", bufopts)
+  vim.keymap.set("n", "<leader>qf", "<cmd>Lspsaga code_action<CR>", bufopts)
+  vim.keymap.set("n", "<space>e", "<cmd>Lspsaga show_line_diagnostics<CR>", bufopts)
+
+  if client.supports_method("textDocument/formatting") then
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        lsp_formatting(bufnr)
+      end,
+    })
   end
 end
 
 
 lspconfig.tsserver.setup({
   capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    -- require 'illuminate'.on_attach(client)
-
-    -- null-ls will take care of formatting
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-
-    local ts_utils = require("nvim-lsp-ts-utils")
-    ts_utils.setup({
-      eslint_bin = "eslint_d",
-      eslint_enable_diagnostics = true,
-      eslint_enable_code_actions = true,
-      enable_formatting = true,
-      formatter = "prettierd",
-    })
-
-    ts_utils.setup_client(client)
-
-    setup_bindings(client, bufnr)
-
-  end,
+  on_attach = on_attach,
 })
+
+-- Not sure if this offers me anything yet
+-- require("typescript").setup({
+--   capabilities = capabilities,
+--   server = {
+--     on_attach = on_attach,
+--   }
+-- })
+
 
 lspconfig.ccls.setup({
   init_options = {
@@ -232,18 +235,24 @@ lspconfig.ccls.setup({
     clang = {
       excludeArgs = { "-frounding-math"} ;
     };
-  }
+  },
+  capabilities = capabilities,
+  on_attach = on_attach
 })
 
-lspconfig.pyright.setup({})
+lspconfig.pyright.setup({
+  capabilities = capabilities,
+  on_attach = on_attach
+})
+lspconfig.sourcekit.setup({
+  capabilities = capabilities,
+  on_attach = on_attach
+})
 
 lspconfig.omnisharp.setup({
-  on_attach = function(_, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    setup_bindings(client, bufnr)
-  end,
   cmd = { "/Users/jeffknaggs/.local/share/nvim/lsp_servers/omnisharp/omnisharp/run", "--languageserver" , "--hostPID", tostring(pid) },
+  capabilities = capabilities,
+  on_attach = on_attach,
 })
 
 lspconfig.yamlls.setup({
@@ -253,17 +262,22 @@ lspconfig.yamlls.setup({
         ["https://bitbucket.org/atlassianlabs/atlascode/raw/main/resources/schemas/pipelines-schema.json"] = "./bitbucket-pipelines.yml"
       }
     }
-  }
+  },
+  capabilities = capabilities,
+  on_attach = on_attach,
 })
 
-local null_ls = require("null-ls")
-null_ls.setup({
+lspconfig.luau_lsp.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
+require("null-ls").setup({
   sources = {
-    null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.code_actions.eslint_d,
-    null_ls.builtins.formatting.prettierd
+    require("null-ls").builtins.diagnostics.eslint_d,
+    require("null-ls").builtins.code_actions.eslint_d,
+    require("null-ls").builtins.formatting.prettierd
   },
-  on_attach = setup_bindings
 })
 
 require'nvim-treesitter.configs'.setup {
@@ -497,4 +511,7 @@ require("diffview").setup({
     end,
   },
 })
+
+require("nvim-autopairs").setup()
+require('nvim-ts-autotag').setup()
 EOF

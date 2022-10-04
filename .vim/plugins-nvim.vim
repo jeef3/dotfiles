@@ -19,7 +19,8 @@ Plug 'brooth/far.vim'                     " Find And Replace
 Plug 'jeef3/splitsizer.vim'               " Split resizing <c-a>, <c-s>
 
 Plug 'andymass/vim-matchup'
-Plug 'jiangmiao/auto-pairs'               " Auto-complete quotes, parends etc
+Plug 'windwp/nvim-autopairs'              " Newer auto-pairs
+Plug 'windwp/nvim-ts-autotag'             " Auto-close HTML tags 
 Plug 'machakann/vim-highlightedyank'      " Highlight yanked
 Plug 'Xvezda/vim-readonly'                " Lock a bunch of files like node_modules
 Plug 'kshenoy/vim-signature'              " Show marks
@@ -40,27 +41,22 @@ Plug 'nvim-treesitter/playground'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
-" Plug 'ray-x/lsp_signature.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
-Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+" Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+Plug 'jose-elias-alvarez/typescript.nvim'
 
 Plug 'glepnir/lspsaga.nvim'
-" Maintained fork:
-" Plug 'tami5/lspsaga.nvim'
 
 Plug 'nvim-lualine/lualine.nvim'
 
 Plug 'sindrets/diffview.nvim'
-
-" Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': ':COQdeps' }
-" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-" Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
 
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
@@ -83,18 +79,16 @@ Plug 'petertriho/nvim-scrollbar' " Scroll bar, including diagnostic indicators
 "Plug 'Xuyuanp/scrollbar.nvim'
 Plug 'declancm/cinnamon.nvim' " Smooth scrolling
 Plug 'folke/zen-mode.nvim'
-Plug 'antoinemadec/FixCursorHold.nvim'
-Plug 'vim-test/vim-test'
-Plug 'nvim-neotest/neotest'
-Plug 'nvim-neotest/neotest-vim-test'
 "Plug 'rcarriga/nvim-notify'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'MunifTanjim/nui.nvim'
-Plug 'nvim-neo-tree/neo-tree.nvim'
+" Plug 'nvim-neo-tree/neo-tree.nvim'
 
 " Tests
 Plug 'antoinemadec/FixCursorHold.nvim' " Required for testing
+Plug 'vim-test/vim-test'
 Plug 'nvim-neotest/neotest'
+Plug 'nvim-neotest/neotest-vim-test'
 Plug 'haydenmeade/neotest-jest'
 Plug 'KaiSpencer/neotest-vitest'
 Plug 'andythigpen/nvim-coverage'
