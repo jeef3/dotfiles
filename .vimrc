@@ -71,6 +71,8 @@ set cursorline " Highlight current line
 set diffopt=filler " Add vertical spaces to keep right and left aligned
 set diffopt+=iwhite " Ignore whitespace changes (focus on code changes)
 set diffopt+=vertical " Vertical splits for diff
+set diffopt+=closeoff
+set diffopt+=algorithm:histogram
 set encoding=utf-8 nobomb " BOM often causes trouble
 set formatoptions=
 set formatoptions+=c " Format comments
@@ -106,7 +108,7 @@ set ofu=syntaxcomplete#Complete " Set omni-completion method.
 set report=0 " Show all changes.
 set ruler " Show the cursor position
 set scrolloff=10 " Start scrolling ten lines before horizontal border of window.
-set shortmess=atIcO " Don't show the intro message when starting vim.
+set shortmess=atIcOT " Don't show the intro message when starting vim.
 set noshowmode " Don't show the current mode, it's in our statusline.
 set showcmd " A little useful
 set showtabline=2 " Always show tab bar.
@@ -119,6 +121,7 @@ set title " Show the filename in the window titlebar.
 set ttyfast " Send more characters at a given time.
 set undofile " Persistent Undo.
 set updatetime=250 " For faster response to file cursor changes
+set virtualedit=block
 set visualbell " Use visual bell instead of audible bell (annnnnoying)
 set wildchar=<TAB> " Character for CLI expansion (TAB-completion).
 set wildignore+=*.jpg,*.jpeg,*.gif,*.png,*.gif,*.psd,*.o,*.obj,*.min.js,.DS_Store
@@ -127,6 +130,8 @@ set wildmode=longest:full,full " Complete only until point of ambiguity.
 set winminheight=0 "Allow splits to be reduced to a single line.
 set wrapscan " Searches wrap around end of file
 set signcolumn=yes
+set colorcolumn=81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120
+let &showbreak='↪ '
 
 set clipboard=unnamed " Share clipboard
 
@@ -152,7 +157,7 @@ noremap <leader>, <C-^>
 
 " Toggle show tabs and trailing spaces (,c)
 set nolist
-set lcs=tab:›\ ,trail:-,nbsp:·,space:·,extends:…,precedes:…,eol:↵
+set lcs=tab:›\ ,trail:•,nbsp:␣,space:·,extends:…,precedes:…,eol:↵
 
 nnoremap <silent> <leader>c :set nolist!<CR>
 
@@ -256,7 +261,7 @@ com! FormatHTML %!tidy -iq -xml -wrap 0
 autocmd BufNewFile *.sh 0r ~/.vim/skeletons/bash.sh
 
 " Fill chars colors
-set fillchars+=vert:┃,fold:-,diff:╱,foldclose:,foldopen:
+set fillchars+=vert:┃,fold:⎯,foldopen:⎯,foldclose:⎯,diff:╱,foldclose:,foldopen:
 
 source ~/.vim/plugins-config.vim
 
