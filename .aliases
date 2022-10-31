@@ -38,3 +38,5 @@ alias -- -='cd -'
 alias f="fzf --preview 'bat --color always {}'"
 alias du="ncdu --color dark -rr --exclude .git --exclude node_modules"
 alias help="tldr"
+
+alias ssh="TERM=xterm ssh"
