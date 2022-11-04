@@ -70,8 +70,7 @@ Plug 'seblj/nvim-tabline'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
 
-" Plug 'rktjmp/lush.nvim'
-Plug 'rktjmp/lush.nvim', { 'tag': '1.0.1' }
+Plug 'rktjmp/lush.nvim'
 Plug '~/projects/princess.nvim'
 Plug 'fladson/vim-kitty'
 " Plug 'RRethy/vim-illuminate'
