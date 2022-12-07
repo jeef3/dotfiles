@@ -18,7 +18,7 @@ telescope.setup({
 telescope.load_extension('fzf')
 
 --require 'illuminate'
-require("scrollbar").setup()
+--require("scrollbar").setup()
 
 require 'zen-mode'.setup({
   window = {
@@ -118,7 +118,7 @@ cmp.setup({
     ['<C-j>'] = cmp.mapping.select_next_item(),
     ['<C-k>'] = cmp.mapping.select_prev_item(),
     -- ['<space>'] = cmp.mapping.complete(),
-    -- ['<CR>']  = cmp.mapping.confirm({ select = true })
+    ['<C-Space>']  = cmp.mapping.confirm({ select = true })
   }),
   snippet = {
     expand = function(args)
@@ -259,7 +259,8 @@ lspconfig.yamlls.setup({
   settings = {
     yaml = {
       schemas = {
-        ["https://bitbucket.org/atlassianlabs/atlascode/raw/main/resources/schemas/pipelines-schema.json"] = "./bitbucket-pipelines.yml"
+        ["https://bitbucket.org/atlassianlabs/atlascode/raw/main/resources/schemas/pipelines-schema.json"] = "./bitbucket-pipelines.yml",
+        ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.yaml"] = "./schema.yml"
       }
     }
   },
@@ -287,7 +288,7 @@ require'nvim-treesitter.configs'.setup {
   },
   highlight = {
     enable = true,
-    disable = { "css" },
+    --disable = { "css" },
     additional_vim_regex_highlighting = false,
   }
 }
@@ -436,7 +437,7 @@ require("neotest").setup({
 vim.cmd("command! NeoTestNearest lua require('neotest').run.run()")
 vim.cmd("command! NeoTestFile lua require('neotest').run.run(vim.fn.expand('%'))")
 
-require("coverage").setup()
+-- require("coverage").setup()
 
 local dap = require("dap")
 dap.adapters.node2 = {

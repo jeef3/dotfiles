@@ -247,13 +247,13 @@ if has('nvim')
         \ prompt_title="Symbols", 
         \ winblend=5
         \ })<cr>
-  noremap " <cmd>lua require"telescope.builtin".registers(require"telescope.themes".get_cursor{
-        \ prompt_prefix=" 📋 ", 
-        \ selection_caret=" ",
-        \ prompt_title="Paste from …", 
-        \ winblend=5,
-        \ layout_config={ height = 20 }
-        \ })<cr>
+  " noremap " <cmd>lua require"telescope.builtin".registers(require"telescope.themes".get_cursor{
+  "       \ prompt_prefix=" 📋 ", 
+  "       \ selection_caret=" ",
+  "       \ prompt_title="Paste from …", 
+  "       \ winblend=5,
+  "       \ layout_config={ height = 20 }
+  "       \ })<cr>
   inoremap <C-r> <cmd>lua require"telescope.builtin".registers(require"telescope.themes".get_cursor{
         \ prompt_prefix=" 📋 ", 
         \ selection_caret=" ",
@@ -285,8 +285,8 @@ if has('nvim')
   " inoremap <silent><expr> <CR> pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
 
   " Neo tree
-  nmap <silent> <leader>be :Neotree source=buffers action=show reveal<cr>
-  nmap <silent> <leader>bt :Neotree source=filesystem action=show reveal<cr>
+  " nmap <silent> <leader>be :Neotree source=buffers action=show reveal<cr>
+  " nmap <silent> <leader>bt :Neotree source=filesystem action=show reveal<cr>
 
   " DAP
   nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>

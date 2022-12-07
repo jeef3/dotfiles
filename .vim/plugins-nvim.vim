@@ -90,7 +90,7 @@ Plug 'nvim-neotest/neotest'
 Plug 'nvim-neotest/neotest-vim-test'
 Plug 'haydenmeade/neotest-jest'
 Plug 'KaiSpencer/neotest-vitest'
-Plug 'andythigpen/nvim-coverage'
+" Plug 'andythigpen/nvim-coverage'
 
 " Debug
 Plug 'mfussenegger/nvim-dap'
