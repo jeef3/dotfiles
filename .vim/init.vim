@@ -34,6 +34,7 @@ require 'zen-mode'.setup({
 })
 
 local lspconfig = require("lspconfig")
+require("mason").setup()
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
