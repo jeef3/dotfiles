@@ -3,8 +3,8 @@ filetype off
 call plug#begin('~/.vim/plugged')
 
 " Common
-Plug 'wincent/terminus'                   " Better terminal integration, cursor shapes
-Plug 'tpope/vim-eunuch'                   " Better shell cmds, like :Rename
+" Plug 'wincent/terminus'                   " Better terminal integration, cursor shapes
+" Plug 'tpope/vim-eunuch'                   " Better shell cmds, like :Rename
 
 Plug 'tpope/vim-vinegar'                  " Netrw enhancements
 Plug 'tpope/vim-repeat'                   " Get more use out of .
@@ -36,8 +36,6 @@ Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn in
 " Neovim only
 Plug 'nvim-lua/plenary.nvim'              " Lua functions util
 
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-Plug 'nvim-treesitter/playground'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
@@ -45,51 +43,26 @@ Plug 'jose-elias-alvarez/null-ls.nvim'
 " Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'jose-elias-alvarez/typescript.nvim'
 
-Plug 'glepnir/lspsaga.nvim'
-
-Plug 'nvim-lualine/lualine.nvim'
-
 Plug 'sindrets/diffview.nvim'
 
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/cmp-nvim-lua'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'onsails/lspkind.nvim'
-
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-
-Plug 'seblj/nvim-tabline'
-
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'folke/trouble.nvim'
-
-Plug 'rktjmp/lush.nvim'
-Plug '~/projects/princess.nvim'
-Plug 'fladson/vim-kitty'
+" Plug '~/projects/princess.nvim'
+" Plug 'git@github.com:jeef3/princess.nvim.git'
+Plug 'fladson/vim-kitty' " Kitty config syntax
 " Plug 'RRethy/vim-illuminate'
 Plug 'petertriho/nvim-scrollbar' " Scroll bar, including diagnostic indicators
 "Plug 'Xuyuanp/scrollbar.nvim'
 Plug 'declancm/cinnamon.nvim' " Smooth scrolling
 Plug 'folke/zen-mode.nvim'
 "Plug 'rcarriga/nvim-notify'
-Plug 'lewis6991/gitsigns.nvim'
-Plug 'MunifTanjim/nui.nvim'
-" Plug 'nvim-neo-tree/neo-tree.nvim'
 
 " Tests
-Plug 'antoinemadec/FixCursorHold.nvim' " Required for testing
-Plug 'vim-test/vim-test'
-Plug 'nvim-neotest/neotest'
-Plug 'nvim-neotest/neotest-vim-test'
-Plug 'haydenmeade/neotest-jest'
-Plug 'KaiSpencer/neotest-vitest'
+" Plug 'antoinemadec/FixCursorHold.nvim' " Required for testing
+" Plug 'vim-test/vim-test'
+" Plug 'nvim-neotest/neotest'
+" Plug 'nvim-neotest/neotest-vim-test'
+" Plug 'haydenmeade/neotest-jest'
+" Plug 'KaiSpencer/neotest-vitest'
+" Plug 'nvim-neotest/neotest-plenary'
 " Plug 'andythigpen/nvim-coverage'
 
 " Debug

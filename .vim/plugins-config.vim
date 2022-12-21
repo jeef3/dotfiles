@@ -225,45 +225,6 @@ augroup END
 " vim-matchup
 let g:matchup_matchparen_offscreen = {'method': "popup"}
 
-" Telescope (nvim only)
-if has('nvim')
-  noremap <C-t> <cmd>lua require"telescope.builtin".git_files(require"telescope.themes".get_dropdown{
-        \ find_command="rg --files",
-        \ prompt_prefix=" 🔍 ", 
-        \ selection_caret=" ",
-        \ prompt_title="", 
-        \ previewer=false,
-        \ winblend=5
-        \ })<cr>
-  noremap <C-p> <cmd>lua require"telescope.builtin".live_grep(require"telescope.themes".get_dropdown{
-        \ prompt_prefix=" 🔍 ", 
-        \ selection_caret=" ",
-        \ prompt_title="Find in files", 
-        \ winblend=5
-        \ })<cr>
-  noremap <C-s> <cmd>lua require"telescope.builtin".lsp_dynamic_workspace_symbols({
-        \ prompt_prefix=" ﬦ ", 
-        \ selection_caret=" ",
-        \ prompt_title="Symbols", 
-        \ winblend=5
-        \ })<cr>
-  " noremap " <cmd>lua require"telescope.builtin".registers(require"telescope.themes".get_cursor{
-  "       \ prompt_prefix=" 📋 ", 
-  "       \ selection_caret=" ",
-  "       \ prompt_title="Paste from …", 
-  "       \ winblend=5,
-  "       \ layout_config={ height = 20 }
-  "       \ })<cr>
-  inoremap <C-r> <cmd>lua require"telescope.builtin".registers(require"telescope.themes".get_cursor{
-        \ prompt_prefix=" 📋 ", 
-        \ selection_caret=" ",
-        \ prompt_title="Paste from …", 
-        \ winblend=5,
-        \ layout_config={ height = 20 }
-        \ })<cr>
-endif
-
-
 if has('nvim')
   " Coq
   " let g:coq_settings = {

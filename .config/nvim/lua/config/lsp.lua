@@ -35,8 +35,8 @@ null_ls.setup({
   },
 })
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities(
-  vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp')
+  .default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -97,6 +97,7 @@ lspconfig.pyright.setup({
   capabilities = capabilities,
   on_attach = on_attach
 })
+
 lspconfig.sourcekit.setup({
   capabilities = capabilities,
   on_attach = on_attach
