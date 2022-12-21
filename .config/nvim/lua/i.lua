@@ -1,3 +1,15 @@
+----------------
+-- Leader keys
+--
+
+vim.g.mapleader = ','
+vim.g.maplocalleader = '\\'
+
+----------------
+-- Filetype
+--
+-- Essential for file type detection and plugins
+
 vim.opt.filetype = 'on'
 vim.opt.filetype.indent = 'on'
 vim.opt.filetype.plugin = 'on'
@@ -5,51 +17,21 @@ vim.opt.filetype.plugin = 'on'
 require('plugins')
 
 ----------------
--- Indentation
---
--- Vim Sleuth handles this nicely for us.
-
--- vim.opt.smartindent = true  -- Use whatever the file is using
--- vim.opt.expandtab = true    -- Pressing <Tab> inserts spaces instead of tabs.
--- vim.opt.shiftround = true   -- Pressing <Tab> will round to the nearest tab.
--- vim.opt.shiftwidth = 2      -- Pressing <Tab> inserts 2 spaces.
--- vim.opt.softtabstop = 2     -- How many spaces to insert when pressing <Tab>
--- vim.opt.tabstop = 2         -- Visual appearance of tabs
-
-----------------
--- Folding
---
--- I prefer to not use folds.
-
-vim.opt.foldenable = false
-vim.opt.foldlevel = 20
-vim.opt.foldlevelstart = 20
-vim.opt.foldmethod = 'syntax' -- If folding is used, use the syntax to do it.
-vim.opt.foldminlines = 0
-vim.opt.foldnestmax = 3
-
-----------------
--- Leader keys
-
-vim.g.mapleader = ','
-vim.g.maplocalleader = '\\'
-
-----------------
 -- Diff formatting
 --
 
 vim.opt.diffopt = {
-  'filler',
-  'iwhite',
-  'vertical',
-  'closeoff',
+  'filler',             -- Show filler lines
+  'iwhite',             -- Ignore whitespace changes
+  'vertical',           -- Start in vertical split mode
+  'closeoff',           -- Stop the diff when we close
   'algorithm:histogram'
 }
 
 ----------------
 -- Theme
 --
--- And other visual preferences and interactive behaviors.
+-- Visual preferences and interactive behaviors.
 
 vim.keymap.set('n', '<Leader>c', ':set list!<cr>')
 vim.opt.listchars = {
@@ -70,15 +52,31 @@ vim.opt.fillchars = {
 }
 vim.opt.showbreak = '↪ '        -- Displays when a line wraps.
 
+vim.opt.report = 0  -- Always show number of lines changed
 vim.opt.shortmess:append({
   a = true, -- Uses filmnrwx (see :h shortmess)
   I = true, -- Hide the intro messages
   c = true, -- Don't show completion messages, e.g.: "-- XXX completion (YYY)"
 })
 
-vim.opt.wrap = false            -- Don't wrap by default
+vim.opt.wrap = false  -- Don't wrap by default
 
-vim.opt.ignorecase = true
+vim.opt.ignorecase = true -- When searching, ignore case
+
+-- Backspace behaviour in insert mode. This makes <Backspace|Delete> "work".
+vim.opt.backspace = {
+  "indent",
+  "eol",
+  "start",
+}
+
+-- Folding (prefer no folds)
+vim.opt.foldenable = false
+vim.opt.foldlevel = 20
+vim.opt.foldlevelstart = 20
+vim.opt.foldmethod = 'syntax'   -- If folding is used, let the syntax to do it.
+vim.opt.foldminlines = 0
+vim.opt.foldnestmax = 3
 
 -- Tab and status lines
 vim.opt.showtabline = 2         -- Always display the tab bar.
@@ -103,10 +101,7 @@ vim.opt.guicursor = {           -- Styles for the cursor indicator
   n = 'Cursor',
 }
 vim.opt.mouse = 'a'
--- vim.opt.mousescroll = {
---   vert = 1,
---   hor = 1,
--- }
+vim.opt.mousescroll = "ver:1,hor:1"
 
 -- set t_Co=256
 -- set t_8f=[38;2;%lu;%lu;%lum

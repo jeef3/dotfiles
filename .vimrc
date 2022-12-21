@@ -66,7 +66,7 @@ augroup END
 noremap <leader>qq :cclose<CR>
 
 " Set some junk
-set backspace=indent,eol,start
+" set backspace=indent,eol,start
 " set cursorline " Highlight current line
 " set diffopt=filler " Add vertical spaces to keep right and left aligned
 " set diffopt+=iwhite " Ignore whitespace changes (focus on code changes)
@@ -99,14 +99,14 @@ set history=1000 " Increase history from 20 default to 1000
 " set lispwords+=describe,it " Speclj TDD/BDD
 " set magic " Enable extended regexes.
 " set mouse=a " Enable mouse in all modes.
-set mousescroll=ver:1,hor:1
+" set mousescroll=ver:1,hor:1
 " set noerrorbells " Disable error bells.
 " set nojoinspaces " Only insert single space after a '.', '?' and '!' with a join command.
 " set nostartofline " Don't reset cursor to start of line when moving around.
 " set nowrap " Do not wrap lines.
 " set nu " Enable line numbers.
 " set rnu " Make em relative
-set report=0 " Show all changes.
+" set report=0 " Show all changes.
 " set ruler " Show the cursor position
 " set scrolloff=10 " Start scrolling ten lines before horizontal border of window.
 " set shortmess=atIcOT " Don't show the intro message when starting vim.
@@ -134,7 +134,7 @@ set wildmode=longest:full,full " Complete only until point of ambiguity.
 set colorcolumn=81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120
 " let &showbreak='↪ '
 
-set clipboard=unnamed " Share clipboard
+" set clipboard=unnamed " Share clipboard
 
 " ==============================================================================
 " Custom scripts and shit
