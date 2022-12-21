@@ -65,9 +65,9 @@ vim.opt.ignorecase = true -- When searching, ignore case
 
 -- Backspace behaviour in insert mode. This makes <Backspace|Delete> "work".
 vim.opt.backspace = {
-  "indent",
-  "eol",
-  "start",
+  'indent',
+  'eol',
+  'start',
 }
 
 -- Folding (prefer no folds)
@@ -89,7 +89,7 @@ vim.opt.splitright = true
 -- Gutter
 vim.opt.number = true           -- Display line numbers
 vim.opt.relativenumber = true   -- Set line numbers to realtive numbers
-vim.opt.signcolumn = "yes"      -- Always show the full gutter, even if empty.
+vim.opt.signcolumn = 'yes'      -- Always show the full gutter, even if empty.
 
 -- Cursor and mouse
 vim.opt.scrolloff = 10          -- Scroll when within 10 rows of top/bottom
@@ -101,7 +101,10 @@ vim.opt.guicursor = {           -- Styles for the cursor indicator
   n = 'Cursor',
 }
 vim.opt.mouse = 'a'
-vim.opt.mousescroll = "ver:1,hor:1"
+vim.opt.mousescroll = 'ver:1,hor:1'
+
+-- Clipboard
+vim.opt.clipboard = 'unnamed'
 
 -- set t_Co=256
 -- set t_8f=[38;2;%lu;%lu;%lum

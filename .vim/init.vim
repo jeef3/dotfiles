@@ -1,22 +1,4 @@
 lua << EOF
-local telescope = require('telescope')
-local actions = require('telescope.actions')
-
-telescope.setup({
-  defaults = {
-    mappings = {
-      i = {
-        ["<esc>"] = actions.close,
-        ["<c-j>"] = actions.move_selection_next,
-        ["<c-k>"] = actions.move_selection_previous,
-      }
-    },
-    dynamic_preview_title = true
-  }
-})
-
-telescope.load_extension('fzf')
-
 --require 'illuminate'
 --require("scrollbar").setup()
 
@@ -33,7 +15,6 @@ require 'zen-mode'.setup({
   }
 })
 
-local lspconfig = require("lspconfig")
 require("mason").setup()
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
@@ -149,150 +130,7 @@ cmp.setup({
   }
 })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-local keymap = vim.keymap.set
-local saga = require 'lspsaga'
-saga.init_lsp_saga{
-  code_action_keys = {
-    quit = "<esc>",
-  },
-
-  saga_winblend = 5,
-  diagnostic_header = { " ", " ", " ", " ﴞ" },
-}
-
-local buf_map = function(bufnr, mode, lhs, rhs, opts)
-  vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
-    silent = true,
-  })
-end
-
-local lsp_formatting = function(bufnr)
-  vim.lsp.buf.format({
-    filter = function(client)
-      return client.name == "null-ls"
-    end,
-    bufnr = bufnr
-  })
-end
-
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-local on_attach = function(client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-  -- vim.keymap.set('n', 'K',  vim.lsp.buf.hover, bufopts)
-
-  -- Lspsaga overrides
-  vim.keymap.set("n", "K",  "<cmd>Lspsaga hover_doc<CR>", bufopts)
-  vim.keymap.set("n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
-  vim.keymap.set("n", "]g", "<cmd>Lspsaga diagnostic_jump_next<CR>", bufopts)
-  vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", bufopts)
-  vim.keymap.set("n", "<leader>qf", "<cmd>Lspsaga code_action<CR>", bufopts)
-  vim.keymap.set("n", "<space>e", "<cmd>Lspsaga show_line_diagnostics<CR>", bufopts)
-
-  if client.supports_method("textDocument/formatting") then
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = augroup,
-      buffer = bufnr,
-      callback = function()
-        lsp_formatting(bufnr)
-      end,
-    })
-  end
-end
-
-
-lspconfig.tsserver.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
--- Not sure if this offers me anything yet
--- require("typescript").setup({
---   capabilities = capabilities,
---   server = {
---     on_attach = on_attach,
---   }
--- })
-
-
-lspconfig.ccls.setup({
-  init_options = {
-    compilationDatabaseDirectory = "build";
-
-    index = {
-      threads = 0;
-    };
-
-    clang = {
-      excludeArgs = { "-frounding-math"} ;
-    };
-  },
-  capabilities = capabilities,
-  on_attach = on_attach
-})
-
-lspconfig.pyright.setup({
-  capabilities = capabilities,
-  on_attach = on_attach
-})
-lspconfig.sourcekit.setup({
-  capabilities = capabilities,
-  on_attach = on_attach
-})
-
-lspconfig.omnisharp.setup({
-  cmd = { "/Users/jeffknaggs/.local/share/nvim/lsp_servers/omnisharp/omnisharp/run", "--languageserver" , "--hostPID", tostring(pid) },
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lspconfig.yamlls.setup({
-  settings = {
-    yaml = {
-      schemas = {
-        ["https://bitbucket.org/atlassianlabs/atlascode/raw/main/resources/schemas/pipelines-schema.json"] = "./bitbucket-pipelines.yml",
-        ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.yaml"] = "./schema.yml"
-      }
-    }
-  },
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lspconfig.luau_lsp.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-require("null-ls").setup({
-  sources = {
-    require("null-ls").builtins.diagnostics.eslint_d,
-    require("null-ls").builtins.code_actions.eslint_d,
-    require("null-ls").builtins.formatting.prettierd
-  },
-})
-
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
-  indent = {
-    enable = true
-  },
-  highlight = {
-    enable = true,
-    --disable = { "css" },
-    additional_vim_regex_highlighting = false,
-  }
-}
 
 require'colorizer'.setup()
 
@@ -430,13 +268,14 @@ require'gitsigns'.setup({
 --   }
 -- })
 
-require("neotest").setup({
-  adapters = {
-    require('neotest-vitest'),
-  }
-})
-vim.cmd("command! NeoTestNearest lua require('neotest').run.run()")
-vim.cmd("command! NeoTestFile lua require('neotest').run.run(vim.fn.expand('%'))")
+-- require("neotest").setup({
+--   adapters = {
+--     require('neotest-vitest'),
+--     --require("neotest-vim-test"),
+--   }
+-- })
+-- vim.cmd("command! NeoTestNearest lua require('neotest').run.run()")
+-- vim.cmd("command! NeoTestFile lua require('neotest').run.run(vim.fn.expand('%'))")
 
 -- require("coverage").setup()
 
@@ -516,4 +355,6 @@ require("diffview").setup({
 
 require("nvim-autopairs").setup()
 require('nvim-ts-autotag').setup()
+
+require("i")
 EOF
