@@ -5,9 +5,11 @@
 ----------------
 
 local lspconfig = require('lspconfig')
+local lspsaga = require('lspsaga')
 local null_ls = require('null-ls')
+local cmp = require('cmp_nvim_lsp')
 
-require('lspsaga').init_lsp_saga{
+lspsaga.init_lsp_saga{
   code_action_keys = {
     quit = "<esc>",
   },
@@ -15,17 +17,6 @@ require('lspsaga').init_lsp_saga{
   saga_winblend = 5,
   diagnostic_header = { " ", " ", " ", " ﴞ" },
 }
-
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-local lsp_formatting = function(bufnr)
-  vim.lsp.buf.format({
-    filter = function(client)
-      return client.name == "null-ls"
-    end,
-    bufnr = bufnr
-  })
-end
 
 null_ls.setup({
   sources = {
@@ -35,8 +26,51 @@ null_ls.setup({
   },
 })
 
-local capabilities = require('cmp_nvim_lsp')
-  .default_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- Configure and set up highlight groups for custom LSP signs
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+vim.cmd [[
+  sign define DiagnosticSignError texthl=DiagnosticSignError numhl=DiagnosticLineNrError
+  sign define DiagnosticSignWarn  texthl=DiagnosticSignWarn  numhl=DiagnosticLineNrWarn
+  sign define DiagnosticSignInfo  texthl=DiagnosticSignInfo  numhl=DiagnosticLineNrInfo
+  sign define DiagnosticSignHint  texthl=DiagnosticSignHint  numhl=DiagnosticLineNrHint
+]]
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = {
+      prefix = ' ●',
+    }
+  })
+
+-- Custom border styles
+local border = {
+  {"🭽", "FloatBorder"},
+  {"▔", "FloatBorder"},
+  {"🭾", "FloatBorder"},
+  {"▕", "FloatBorder"},
+  {"🭿", "FloatBorder"},
+  {"▁", "FloatBorder"},
+  {"🭼", "FloatBorder"},
+  {"▏", "FloatBorder"},
+}
+
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
+local capabilities =cmp.default_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
 
 local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -62,7 +96,12 @@ local on_attach = function(client, bufnr)
       group = augroup,
       buffer = bufnr,
       callback = function()
-        lsp_formatting(bufnr)
+        vim.lsp.buf.format({
+          filter = function(client)
+            return client.name == "null-ls"
+          end,
+          bufnr = bufnr
+        })
       end,
     })
   end

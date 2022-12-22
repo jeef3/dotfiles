@@ -19,40 +19,23 @@ Plug 'brooth/far.vim'                     " Find And Replace
 Plug 'jeef3/splitsizer.vim'               " Split resizing <c-a>, <c-s>
 
 Plug 'andymass/vim-matchup'
-Plug 'windwp/nvim-autopairs'              " Newer auto-pairs
-Plug 'windwp/nvim-ts-autotag'             " Auto-close HTML tags 
 Plug 'machakann/vim-highlightedyank'      " Highlight yanked
 Plug 'Xvezda/vim-readonly'                " Lock a bunch of files like node_modules
 Plug 'kshenoy/vim-signature'              " Show marks
 
 Plug 'tpope/vim-fugitive'                 " Git wrapper, :Gstatus etc
-" Plug 'airblade/vim-gitgutter'             " Git status in gutter
-
-Plug 'norcalli/nvim-colorizer.lua'        " Colored colors
 
 " Languages
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 
-" Neovim only
-Plug 'nvim-lua/plenary.nvim'              " Lua functions util
 
-
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/mason.nvim'
-Plug 'jose-elias-alvarez/null-ls.nvim'
-" Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
-Plug 'jose-elias-alvarez/typescript.nvim'
-
-Plug 'sindrets/diffview.nvim'
+" Plug 'jose-elias-alvarez/typescript.nvim'
 
 " Plug '~/projects/princess.nvim'
 " Plug 'git@github.com:jeef3/princess.nvim.git'
-Plug 'fladson/vim-kitty' " Kitty config syntax
 " Plug 'RRethy/vim-illuminate'
-Plug 'petertriho/nvim-scrollbar' " Scroll bar, including diagnostic indicators
+" Plug 'petertriho/nvim-scrollbar' " Scroll bar, including diagnostic indicators
 "Plug 'Xuyuanp/scrollbar.nvim'
-Plug 'declancm/cinnamon.nvim' " Smooth scrolling
-Plug 'folke/zen-mode.nvim'
 "Plug 'rcarriga/nvim-notify'
 
 " Tests
@@ -64,9 +47,5 @@ Plug 'folke/zen-mode.nvim'
 " Plug 'KaiSpencer/neotest-vitest'
 " Plug 'nvim-neotest/neotest-plenary'
 " Plug 'andythigpen/nvim-coverage'
-
-" Debug
-Plug 'mfussenegger/nvim-dap'
-Plug 'rcarriga/nvim-dap-ui'
 
 call plug#end()

@@ -8,8 +8,34 @@ vim.cmd([[
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  use 'wincent/terminus'  -- Better terminal integration, cursor shapes
-  use 'tpope/vim-eunuch'  -- Better shell cmds, like :Rename
+  use 'wincent/terminus'        -- Better terminal integration, cursor shapes
+  use 'tpope/vim-eunuch'        -- Better shell cmds, like :Rename
+
+  use 'fladson/vim-kitty' -- Kitty config syntax
+
+  -- Newer auto-pairs
+  use {
+    'windwp/nvim-autopairs',
+    config = function()
+      require('nvim-autopairs').setup()
+    end
+  }
+
+  -- Auto-close HTML tags 
+  use {
+    'windwp/nvim-ts-autotag',
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end
+  }  
+  
+  -- Colored colors
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup()
+    end
+  }
 
   -- Highlighting
   use {
@@ -39,12 +65,20 @@ return require('packer').startup(function(use)
      'jose-elias-alvarez/null-ls.nvim',
     config = [[require('config.lsp')]],
     {
+      -- Useful quick fix list
       'folke/trouble.nvim',
       requires = 'kyazdani42/nvim-web-devicons',
       config = function()
         require('trouble').setup()
       end
-    }
+    },
+    {
+      -- LSP and external tooling installer
+      'williamboman/mason.nvim',
+      config = function()
+        require('mason').setup()
+      end
+    },
   }
 
   -- Code Completion
@@ -63,6 +97,16 @@ return require('packer').startup(function(use)
     config = [[require('config.cmp')]]
   }
 
+  -- Debugging
+  use {
+    'mfussenegger/nvim-dap',
+    requires = {
+      'rcarriga/nvim-dap-ui'
+    },
+    config = [[require('config.dap')]]
+  }
+
+  -- Theme
   use {
      '~/projects/princess.nvim',
      -- 'git@github.com:jeef3/princess.nvim.git',
@@ -88,8 +132,43 @@ return require('packer').startup(function(use)
     config = [[require('config.lualine')]]
   }
 
+  -- Git and diff
   use {
     'lewis6991/gitsigns.nvim',
     config = [[require('config.gitsigns')]]
+  }
+
+  use {
+    'sindrets/diffview.nvim',
+    config = [[require('config.diffview')]]
+  }
+
+  -- Zen editing mode
+  use {
+    'folke/zen-mode.nvim',
+    config = function()
+      require('zen-mode').setup({
+        window = {
+          width = 90
+        },
+        plugins = {
+          tmux = { enabled = true },
+          kitty = {
+            enabled = true,
+            font = "+4",
+          },
+        }
+      })
+    end
+  }
+
+  -- Smooth scrolling
+  use {
+    'declancm/cinnamon.nvim' ,
+    config = function()
+      require('cinnamon').setup({
+        default_delay = 4,
+      })
+    end
   }
 end)
