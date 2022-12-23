@@ -9,14 +9,14 @@ local lspsaga = require('lspsaga')
 local null_ls = require('null-ls')
 local cmp = require('cmp_nvim_lsp')
 
-lspsaga.init_lsp_saga{
+lspsaga.init_lsp_saga({
   code_action_keys = {
-    quit = "<esc>",
+    quit = '<esc>',
   },
 
   saga_winblend = 5,
-  diagnostic_header = { " ", " ", " ", " ﴞ" },
-}
+  diagnostic_header = { ' ', ' ', ' ', ' ﴞ' },
+})
 
 null_ls.setup({
   sources = {
@@ -27,11 +27,11 @@ null_ls.setup({
 })
 
 -- Configure and set up highlight groups for custom LSP signs
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
 for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
+  local hl = 'DiagnosticSign' .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
@@ -42,7 +42,7 @@ vim.cmd [[
   sign define DiagnosticSignHint  texthl=DiagnosticSignHint  numhl=DiagnosticLineNrHint
 ]]
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = {
       prefix = ' ●',
@@ -51,14 +51,14 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 -- Custom border styles
 local border = {
-  {"🭽", "FloatBorder"},
-  {"▔", "FloatBorder"},
-  {"🭾", "FloatBorder"},
-  {"▕", "FloatBorder"},
-  {"🭿", "FloatBorder"},
-  {"▁", "FloatBorder"},
-  {"🭼", "FloatBorder"},
-  {"▏", "FloatBorder"},
+  {'🭽', 'FloatBorder'},
+  {'▔', 'FloatBorder'},
+  {'🭾', 'FloatBorder'},
+  {'▕', 'FloatBorder'},
+  {'🭿', 'FloatBorder'},
+  {'▁', 'FloatBorder'},
+  {'🭼', 'FloatBorder'},
+  {'▏', 'FloatBorder'},
 }
 
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
@@ -98,7 +98,7 @@ local on_attach = function(client, bufnr)
       callback = function()
         vim.lsp.buf.format({
           filter = function(client)
-            return client.name == "null-ls"
+            return client.name == 'null-ls'
           end,
           bufnr = bufnr
         })
@@ -118,14 +118,14 @@ lspconfig.tsserver.setup({
 
 lspconfig.ccls.setup({
   init_options = {
-    compilationDatabaseDirectory = "build";
+    compilationDatabaseDirectory = 'build';
 
     index = {
       threads = 0;
     };
 
     clang = {
-      excludeArgs = { "-frounding-math"} ;
+      excludeArgs = { '-frounding-math'} ;
     };
   },
   capabilities = capabilities,
@@ -143,7 +143,7 @@ lspconfig.sourcekit.setup({
 })
 
 lspconfig.omnisharp.setup({
-  cmd = { "/Users/jeffknaggs/.local/share/nvim/lsp_servers/omnisharp/omnisharp/run", "--languageserver" , "--hostPID", tostring(pid) },
+  cmd = { '/Users/jeffknaggs/.local/share/nvim/lsp_servers/omnisharp/omnisharp/run', '--languageserver' , '--hostPID', tostring(pid) },
   capabilities = capabilities,
   on_attach = on_attach,
 })
@@ -152,8 +152,8 @@ lspconfig.yamlls.setup({
   settings = {
     yaml = {
       schemas = {
-        ["https://bitbucket.org/atlassianlabs/atlascode/raw/main/resources/schemas/pipelines-schema.json"] = "./bitbucket-pipelines.yml",
-        ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.yaml"] = "./schema.yml"
+        ['https://bitbucket.org/atlassianlabs/atlascode/raw/main/resources/schemas/pipelines-schema.json'] = './bitbucket-pipelines.yml',
+        ['https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.yaml'] = './schema.yml'
       }
     }
   },
@@ -174,7 +174,7 @@ lspconfig.sumneko_lua.setup({
         globals = {'vim'},
       },
       workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
+        library = vim.api.nvim_get_runtime_file('', true),
       },
       telemetry = {
         enable = false,

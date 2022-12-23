@@ -8,10 +8,23 @@ vim.cmd([[
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
-  use 'wincent/terminus'        -- Better terminal integration, cursor shapes
   use 'tpope/vim-eunuch'        -- Better shell cmds, like :Rename
 
-  use 'fladson/vim-kitty' -- Kitty config syntax
+  use 'tpope/vim-vinegar'       -- Netrw enhancements
+  use 'tpope/vim-repeat'        -- Get more use out of "."
+  use 'tpope/vim-sleuth'        -- Set shiftwidth and expandtab based on current file
+  use 'tpope/vim-commentary'    -- gcc to comment line/paragraph
+  use 'tpope/vim-surround'      -- Change surrounds, quotes etc
+  use 'tpope/vim-obsession'     -- Keep my session
+  use 'tpope/vim-fugitive'      -- Git wrapper, :Gstatus etc
+
+  use 'Xvezda/vim-readonly'     -- Lock a bunch of files like node_modules
+  use 'fladson/vim-kitty'       -- Kitty config syntax
+  use 'machakann/vim-highlightedyank' -- Highlight yanked
+
+  use 'justinmk/vim-sneak'      -- Minimal EasyMotion s
+
+  use 'jeef3/splitsizer.vim'    -- Split resizing <c-a>, <c-s>
 
   -- Newer auto-pairs
   use {
@@ -20,6 +33,7 @@ return require('packer').startup(function(use)
       require('nvim-autopairs').setup()
     end
   }
+	
 
   -- Auto-close HTML tags 
   use {
@@ -166,9 +180,17 @@ return require('packer').startup(function(use)
   use {
     'declancm/cinnamon.nvim' ,
     config = function()
-      require('cinnamon').setup({
+      require('cinnamon').setup({   
         default_delay = 4,
       })
+    end
+  }
+
+  -- Strip whitespace
+  use {
+    'lewis6991/spaceless.nvim',   
+    config = function()
+      require('spaceless').setup()
     end
   }
 end)

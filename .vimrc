@@ -21,7 +21,6 @@ endif
 " set t_Co=256
 " set t_8f=[38;2;%lu;%lu;%lum
 " set t_8b=[48;2;%lu;%lu;%lum
-set termguicolors
 " set background=dark
 
 " Set leaders
@@ -84,8 +83,6 @@ noremap <leader>qq :cclose<CR>
 " set formatoptions+=l " Don't break lines that are already long
 " set formatoptions+=1 " Break before 1-letter words
 " set formatoptions+=t " Auto-wrapping
-set completeopt=menu,menuone,noselect
-set ofu=syntaxcomplete#Complete " Set omni-completion method.
 " set hidden " Allow unsaved changes on hidden buffers
 set history=1000 " Increase history from 20 default to 1000
 " set hlsearch " Highlight searches
@@ -147,30 +144,7 @@ augroup auto_read
   autocmd FocusGained,BufEnter * :silent! !
 augroup END
 
-" Easier split switching (Ctrl-j, Ctrl-k, Ctrl-h, Ctrl-l)
-noremap <C-j> <C-W>j
-noremap <C-k> <C-W>k
-noremap <C-h> <C-W>h
-noremap <C-l> <C-W>l
 
-" Quick alternate buffer switching (,,)
-" noremap <leader>, <C-^>
-
-" Toggle show tabs and trailing spaces (,c)
-" set nolist
-" set lcs=tab:›\ ,trail:•,nbsp:␣,space:·,extends:…,precedes:…,eol:↵
-
-" nnoremap <silent> <leader>c :set nolist!<CR>
-
-" Strip trailing whitespace (,ss)
-function! StripWhitespace ()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    :%s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
-endfunction
-noremap <silent> <leader>ss :call StripWhitespace ()<CR>
 
 " Restore cursor position
 augroup cursor_restore
@@ -273,14 +247,6 @@ endif
 " Custom theme adjustments
 
 " Cursor styles
-set gcr=a:block
-set gcr+=o:hor50-Cursor
-set gcr+=n:Cursor
-set gcr+=i-ci-sm:InsertCursor-hor10
-set gcr+=r-cr:ReplaceCursor-hor20
-set gcr+=c:CommandCursor-hor10
-set gcr+=v-ve:VisualCursor
-set gcr+=a:blinkon0
 
 " vim-test
 let g:test#runner_commands = ['Vitest', 'Playwright']

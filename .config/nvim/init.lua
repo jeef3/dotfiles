@@ -27,13 +27,35 @@ vim.opt.diffopt = {
   'closeoff',           -- Stop the diff when we close
   'algorithm:histogram'
 }
+--
+----------------
+-- Other settings
+--
+vim.opt.omnifunc = 'syntaxcomplete#Complete'
+vim.opt.completeopt = {
+  'menu',
+  'menuone',
+  'noselect',
+}
+
+----------------
+-- Key mappings
+--
+
+-- Easier split switching (Ctrl-j, Ctrl-k, Ctrl-h, Ctrl-l)
+vim.keymap.set('n', '<C-j>', '<C-W>j')
+vim.keymap.set('n', '<C-k>', '<C-W>k')
+vim.keymap.set('n', '<C-h>', '<C-W>h')
+vim.keymap.set('n', '<C-l>', '<C-W>l')
+
+-- Toggle display of listchars
+vim.keymap.set('n', '<Leader>c', ':set list!<cr>')
 
 ----------------
 -- Theme
 --
 -- Visual preferences and interactive behaviors.
 
-vim.keymap.set('n', '<Leader>c', ':set list!<cr>')
 vim.opt.listchars = {
   tab = '› ',
   trail = '•',
@@ -43,6 +65,7 @@ vim.opt.listchars = {
   precedes = '…',
   eol='↵',
 }
+
 vim.opt.fillchars = {
   vert = '┃',
   diff = '╱',
@@ -50,6 +73,7 @@ vim.opt.fillchars = {
   foldclose = '',
   foldopen = '',
 }
+
 vim.opt.showbreak = '↪ '        -- Displays when a line wraps.
 
 vim.opt.report = 0  -- Always show number of lines changed
@@ -105,6 +129,24 @@ vim.opt.mousescroll = 'ver:1,hor:1'
 
 -- Clipboard
 vim.opt.clipboard = 'unnamed'
+
+-- Cursor
+vim.opt.guicursor = {
+  "a:block",
+  "a:blinkon0",
+
+  "n:Cursor",
+
+  "i-ci-sm:InsertCursor-hor10",
+
+  'v-ve:VisualCursor',
+
+  'r-cr:ReplaceCursor-hor10',
+
+  'c:CommandCursor-hor10',
+
+  'o:hor50-Cursor',
+}
 
 -- set t_Co=256
 -- set t_8f=[38;2;%lu;%lu;%lum

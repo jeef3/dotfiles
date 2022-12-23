@@ -117,22 +117,11 @@ augroup markdown
   autocmd FileType markdown nnoremap $ g$
 augroup END
 
-" GitGutter
-
-let g:gitgutter_sign_added = "▎"
-let g:gitgutter_sign_modified = "▎"
-let g:gitgutter_sign_removed = "\uf458"
-let g:gitgutter_sign_removed_first_line = "\uf458"
-let g:gitgutter_sign_modified_removed = "\uf459"
 
 " Coverage
 " let g:coverage_interval = 1000
 " let g:coverage_json_report_path = 'coverage/coverage-final.json'
 " let g:coverage_show_covered = 1
-
-" vim-closetag
-let g:closetag_filenames = '*.html'
-let g:closetag_xhtml_filenames = '*.html'
 
 " CSS3 Syntax
 augroup VimCSS3Syntax
@@ -198,20 +187,6 @@ if !has('nvim')
   endfunction
 endif
 
-" ALE
-" let g:ale_fix_on_save = 1
-" let g:ale_lint_on_save = 1
-" let g:ale_lint_on_text_changed = 'never'
-" let g:ale_lint_on_insert_leave = 0
-" let g:ale_lint_on_enter = 0
-
-" let g:ale_fixers = {
-"       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-"       \ 'typescriptreact': ['prettier', 'eslint'],
-"       \}
-
-" Dart LSC
-let g:lsc_auto_map = v:true
 
 " OmniSharp
 augroup omnisharp_commands
