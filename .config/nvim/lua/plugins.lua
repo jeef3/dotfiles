@@ -5,165 +5,169 @@ vim.cmd([[
   augroup end
 ]])
 
-return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
+return require("packer").startup(function(use)
+  use("wbthomason/packer.nvim")
 
-  use 'tpope/vim-eunuch'        -- Better shell cmds, like :Rename
+  use("tpope/vim-eunuch") -- Better shell cmds, like :Rename
 
-  use 'tpope/vim-vinegar'       -- Netrw enhancements
-  use 'tpope/vim-repeat'        -- Get more use out of "."
-  use 'tpope/vim-sleuth'        -- Set shiftwidth and expandtab based on current file
-  use 'tpope/vim-commentary'    -- gcc to comment line/paragraph
-  use 'tpope/vim-surround'      -- Change surrounds, quotes etc
-  use 'tpope/vim-obsession'     -- Keep my session
-  use 'tpope/vim-fugitive'      -- Git wrapper, :Gstatus etc
+  use("tpope/vim-vinegar") -- Netrw enhancements
+  use("tpope/vim-repeat") -- Get more use out of "."
+  use("tpope/vim-sleuth") -- Set shiftwidth and expandtab based on current file
+  use("tpope/vim-commentary") -- gcc to comment line/paragraph
+  use("tpope/vim-surround") -- Change surrounds, quotes etc
+  use("tpope/vim-obsession") -- Keep my session
+  use("tpope/vim-fugitive") -- Git wrapper, :Gstatus etc
 
-  use 'Xvezda/vim-readonly'     -- Lock a bunch of files like node_modules
-  use 'fladson/vim-kitty'       -- Kitty config syntax
-  use 'machakann/vim-highlightedyank' -- Highlight yanked
+  use("Xvezda/vim-readonly") -- Lock a bunch of files like node_modules
+  use("fladson/vim-kitty") -- Kitty config syntax
+  use("machakann/vim-highlightedyank") -- Highlight yanked
 
-  use 'justinmk/vim-sneak'      -- Minimal EasyMotion s
+  use("justinmk/vim-sneak") -- Minimal EasyMotion s
 
-  use 'jeef3/splitsizer.vim'    -- Split resizing <c-a>, <c-s>
+  use("jeef3/splitsizer.vim") -- Split resizing <c-a>, <c-s>
 
   -- Newer auto-pairs
-  use {
-    'windwp/nvim-autopairs',
+  use({
+    "windwp/nvim-autopairs",
     config = function()
-      require('nvim-autopairs').setup()
-    end
-  }
-	
+      require("nvim-autopairs").setup()
+    end,
+  })
 
-  -- Auto-close HTML tags 
-  use {
-    'windwp/nvim-ts-autotag',
+  -- Auto-close HTML tags
+  use({
+    "windwp/nvim-ts-autotag",
     config = function()
-      require('nvim-ts-autotag').setup()
-    end
-  }  
-  
+      require("nvim-ts-autotag").setup()
+    end,
+  })
+
   -- Colored colors
-  use {
-    'norcalli/nvim-colorizer.lua',
+  use({
+    "norcalli/nvim-colorizer.lua",
     config = function()
-      require('colorizer').setup()
-    end
-  }
+      require("colorizer").setup()
+    end,
+  })
 
   -- Highlighting
-  use {
-    'nvim-treesitter/nvim-treesitter',
+  use({
+    "nvim-treesitter/nvim-treesitter",
     config = [[require('config.treesitter')]],
-    run = ':TSUpdate'
-  }
-  use 'nvim-treesitter/playground'
+    run = ":TSUpdate",
+  })
+  use("nvim-treesitter/playground")
 
   -- Searching
-  use {
+  use({
     {
-      'nvim-telescope/telescope.nvim',
+      "nvim-telescope/telescope.nvim",
       requires = {
-        'nvim-lua/plenary.nvim',
-        'telescope-fzf-native.nvim',
+        "nvim-lua/plenary.nvim",
+        "telescope-fzf-native.nvim",
       },
       config = [[require('config.telescope')]],
     },
-    { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-  }
+    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+  })
 
   -- LSP
-  use {
-    'neovim/nvim-lspconfig',
-    'glepnir/lspsaga.nvim',
-     'jose-elias-alvarez/null-ls.nvim',
-    config = [[require('config.lsp')]],
+  use({
+    {
+      "neovim/nvim-lspconfig",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "glepnir/lspsaga.nvim",
+        "jose-elias-alvarez/null-ls.nvim",
+      },
+      config = [[require('config.lspconfig')]],
+    },
     {
       -- Useful quick fix list
-      'folke/trouble.nvim',
-      requires = 'kyazdani42/nvim-web-devicons',
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
       config = function()
-        require('trouble').setup()
-      end
+        require("trouble").setup()
+      end,
     },
     {
       -- LSP and external tooling installer
-      'williamboman/mason.nvim',
+      "williamboman/mason.nvim",
       config = function()
-        require('mason').setup()
-      end
+        require("mason").setup()
+      end,
     },
-  }
+  })
 
   -- Code Completion
-  use {
-    'hrsh7th/nvim-cmp',
+  use({
+    "hrsh7th/nvim-cmp",
     requires = {
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'onsails/lspkind.nvim' },
-      { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' },
-      { 'hrsh7th/cmp-vsnip', after = 'nvim-cmp' },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "onsails/lspkind.nvim" },
+      { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
+      { "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
       -- { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
       -- { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
       -- { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
       -- { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
     },
-    config = [[require('config.cmp')]]
-  }
+    config = [[require('config.cmp')]],
+  })
 
   -- Debugging
-  use {
-    'mfussenegger/nvim-dap',
+  use({
+    "mfussenegger/nvim-dap",
     requires = {
-      'rcarriga/nvim-dap-ui'
+      "rcarriga/nvim-dap-ui",
     },
-    config = [[require('config.dap')]]
-  }
+    config = [[require('config.dap')]],
+  })
 
   -- Theme
-  use {
-     '~/projects/princess.nvim',
-     -- 'git@github.com:jeef3/princess.nvim.git',
-    requires = { 'rktjmp/lush.nvim' }
-  }
+  use({
+    "~/projects/princess.nvim",
+    -- 'git@github.com:jeef3/princess.nvim.git',
+    requires = { "rktjmp/lush.nvim" },
+  })
 
   -- Tab bar
-  use {
-    'seblj/nvim-tabline',
+  use({
+    "seblj/nvim-tabline",
     config = function()
-      require('tabline').setup({
+      require("tabline").setup({
         padding = 1,
         always_show_tabs = true,
-        close_icon = '×',
-        separator = '▎'
+        close_icon = "×",
+        separator = "▎",
       })
-    end
-  }
+    end,
+  })
 
   -- Status line
-  use {
-    'nvim-lualine/lualine.nvim',
-    config = [[require('config.lualine')]]
-  }
+  use({
+    "nvim-lualine/lualine.nvim",
+    config = [[require('config.lualine')]],
+  })
 
   -- Git and diff
-  use {
-    'lewis6991/gitsigns.nvim',
-    config = [[require('config.gitsigns')]]
-  }
+  use({
+    "lewis6991/gitsigns.nvim",
+    config = [[require('config.gitsigns')]],
+  })
 
-  use {
-    'sindrets/diffview.nvim',
-    config = [[require('config.diffview')]]
-  }
+  use({
+    "sindrets/diffview.nvim",
+    config = [[require('config.diffview')]],
+  })
 
   -- Zen editing mode
-  use {
-    'folke/zen-mode.nvim',
+  use({
+    "folke/zen-mode.nvim",
     config = function()
-      require('zen-mode').setup({
+      require("zen-mode").setup({
         window = {
-          width = 90
+          width = 90,
         },
         plugins = {
           tmux = { enabled = true },
@@ -171,26 +175,26 @@ return require('packer').startup(function(use)
             enabled = true,
             font = "+4",
           },
-        }
+        },
       })
-    end
-  }
+    end,
+  })
 
   -- Smooth scrolling
-  use {
-    'declancm/cinnamon.nvim' ,
+  use({
+    "declancm/cinnamon.nvim",
     config = function()
-      require('cinnamon').setup({   
+      require("cinnamon").setup({
         default_delay = 4,
       })
-    end
-  }
+    end,
+  })
 
   -- Strip whitespace
-  use {
-    'lewis6991/spaceless.nvim',   
+  use({
+    "lewis6991/spaceless.nvim",
     config = function()
-      require('spaceless').setup()
-    end
-  }
+      require("spaceless").setup()
+    end,
+  })
 end)
