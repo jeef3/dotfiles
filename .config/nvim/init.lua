@@ -39,6 +39,11 @@ vim.opt.completeopt = {
 }
 
 ----------------
+-- Netrw
+--
+vim.g.netrw_bufsettings = 'noma nomod nun nobl nowrap ro rnu'
+
+----------------
 -- Key mappings
 --
 
