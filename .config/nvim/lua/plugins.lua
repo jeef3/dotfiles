@@ -26,6 +26,14 @@ return require("packer").startup(function(use)
 
   use("jeef3/splitsizer.vim") -- Split resizing <c-a>, <c-s>
 
+  -- Restore cursor position
+  use({
+    "ethanholz/nvim-lastplace",
+    config = function()
+      require("nvim-lastplace").setup()
+    end,
+  })
+
   -- Newer auto-pairs
   use({
     "windwp/nvim-autopairs",
@@ -62,10 +70,7 @@ return require("packer").startup(function(use)
   use({
     {
       "nvim-telescope/telescope.nvim",
-      requires = {
-        "nvim-lua/plenary.nvim",
-        "telescope-fzf-native.nvim",
-      },
+      requires = { "nvim-lua/plenary.nvim", "telescope-fzf-native.nvim" },
       config = [[require('config.telescope')]],
     },
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
@@ -93,8 +98,10 @@ return require("packer").startup(function(use)
     {
       -- LSP and external tooling installer
       "williamboman/mason.nvim",
+      requires = { "williamboman/mason-lspconfig.nvim" },
       config = function()
         require("mason").setup()
+        require("mason-lspconfig").setup()
       end,
     },
   })
@@ -118,9 +125,7 @@ return require("packer").startup(function(use)
   -- Debugging
   use({
     "mfussenegger/nvim-dap",
-    requires = {
-      "rcarriga/nvim-dap-ui",
-    },
+    requires = { "rcarriga/nvim-dap-ui" },
     config = [[require('config.dap')]],
   })
 
@@ -145,36 +150,22 @@ return require("packer").startup(function(use)
   })
 
   -- Status line
-  use({
-    "nvim-lualine/lualine.nvim",
-    config = [[require('config.lualine')]],
-  })
+  use({ "nvim-lualine/lualine.nvim", config = [[require('config.lualine')]] })
 
   -- Git and diff
-  use({
-    "lewis6991/gitsigns.nvim",
-    config = [[require('config.gitsigns')]],
-  })
+  use({ "lewis6991/gitsigns.nvim", config = [[require('config.gitsigns')]] })
 
-  use({
-    "sindrets/diffview.nvim",
-    config = [[require('config.diffview')]],
-  })
+  use({ "sindrets/diffview.nvim", config = [[require('config.diffview')]] })
 
   -- Zen editing mode
   use({
     "folke/zen-mode.nvim",
     config = function()
       require("zen-mode").setup({
-        window = {
-          width = 90,
-        },
+        window = { width = 90 },
         plugins = {
           tmux = { enabled = true },
-          kitty = {
-            enabled = true,
-            font = "+4",
-          },
+          kitty = { enabled = true, font = "+4" },
         },
       })
     end,
@@ -184,9 +175,7 @@ return require("packer").startup(function(use)
   use({
     "declancm/cinnamon.nvim",
     config = function()
-      require("cinnamon").setup({
-        default_delay = 4,
-      })
+      require("cinnamon").setup({ default_delay = 4 })
     end,
   })
 

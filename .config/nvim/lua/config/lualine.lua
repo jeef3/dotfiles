@@ -4,60 +4,69 @@
 -- https://github.com/nvim-lualine/lualine.nvim
 ----------------
 
-require('lualine').setup({
+require("lualine").setup({
   options = {
     theme = {
       normal = {
-        a = 'StatusLineNormalA',
-        b = 'StatusLineNormalB',
-        c = 'StatusLineNormalC',
+        a = "StatusLineNormalA",
+        b = "StatusLineNormalB",
+        c = "StatusLineNormalC",
       },
-      insert = { a = 'StatusLineInsert' },
-      replace = { a = 'StatusLineReplace' },
-      command = { a = 'StatusLineCommand' },
+      insert = { a = "StatusLineInsert" },
+      replace = { a = "StatusLineReplace" },
+      command = { a = "StatusLineCommand" },
     },
-    component_separators = '╲',
-    section_separators = { left = '', right = '' },
+    component_separators = "╲",
+    section_separators = { left = "", right = "" },
   },
   sections = {
-    lualine_a = { 'mode' },
-    lualine_b = { 'filename' },
-    lualine_c = {  },
+    lualine_a = { "mode" },
+    lualine_b = { "filename" },
+    lualine_c = {},
 
-    lualine_x = { },
+    lualine_x = {},
     lualine_y = {
       {
-        'diagnostics',
-        sources = {'nvim_diagnostic'},
-        symbols = { error = ' ', warn = ' ', hint = ' ', info = ' ' },
+        "diagnostics",
+        sources = { "nvim_diagnostic" },
+        symbols = {
+          error = " ",
+          warn = " ",
+          hint = " ",
+          info = " ",
+        },
       },
       {
-        'diff',
+        "diff",
         colored = true,
-        symbols = { added = '+', modified = '~', removed = '-' },
-      }
+        symbols = { added = "+", modified = "~", removed = "-" },
+      },
     },
-    lualine_z = {'location'},
+    lualine_z = { "location" },
   },
   inactive_sections = {
     lualine_a = {},
-    lualine_b = {'filename'},
+    lualine_b = { "filename" },
     lualine_c = {},
 
     lualine_x = {
       {
-        'diagnostics',
-        sources = {'nvim_diagnostic'},
-        symbols = { error = ' ', warn = ' ', hint = ' ', info = ' ' },
+        "diagnostics",
+        sources = { "nvim_diagnostic" },
+        symbols = {
+          error = " ",
+          warn = " ",
+          hint = " ",
+          info = " ",
+        },
       },
       {
-        'diff',
+        "diff",
         colored = true,
-        symbols = { added = '+', modified = '~', removed = '-' },
-      }
+        symbols = { added = "+", modified = "~", removed = "-" },
+      },
     },
-    lualine_y = { 'location' },
+    lualine_y = { "location" },
     lualine_z = {},
-  }
+  },
 })
-
