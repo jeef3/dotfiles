@@ -9,22 +9,23 @@ local null_ls = require("null-ls")
 local cmp = require("cmp_nvim_lsp")
 
 lspsaga.setup({
-  code_action_keys = { quit = "<esc>" },
+  code_action = {},
+  lightbulb = { enable = false },
+  finder = {
+    max_height = 0.8,
+    force_max_height = false,
+  },
   ui = {
     title = true,
-    -- theme = "round",
     border = "rounded",
     winblend = 5,
     expand = "",
     collapse = "",
     preview = " ",
     code_action = "💡",
-    -- diagnostic = { " ", " ", " ", " ﴞ" },
-    incoming = " ",
-    outgoing = " ",
     hover = " ",
   },
-  symbol_in_winbar = { enable = false, separator = "  " },
+  symbol_in_winbar = { enable = true, separator = "  " },
 })
 
 local lsp_formatting = function(bufnr)
@@ -83,27 +84,23 @@ local capabilities =
 local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
+  local keymap = vim.keymap.set
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-  -- vim.keymap.set('n', 'K',  vim.lsp.buf.hover, bufopts)
+  keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>", bufopts)
+  keymap("n", "gr", "<cmd>Lspsaga lsp_finder<CR>")
+  keymap("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>")
 
-  -- Lspsaga overrides
-  vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", bufopts)
-  vim.keymap.set("n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
-  vim.keymap.set("n", "]g", "<cmd>Lspsaga diagnostic_jump_next<CR>", bufopts)
-  vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", bufopts)
-  vim.keymap.set("n", "<leader>qf", "<cmd>Lspsaga code_action<CR>", bufopts)
-  vim.keymap.set(
-    "n",
-    "<space>e",
-    "<cmd>Lspsaga show_line_diagnostics<CR>",
-    bufopts
-  )
+  keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", bufopts)
 
-  vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>", bufopts)
+  keymap("n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
+  keymap("n", "]g", "<cmd>Lspsaga diagnostic_jump_next<CR>", bufopts)
+
+  keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", bufopts)
+  keymap("n", "<leader>qf", "<cmd>Lspsaga code_action<CR>", bufopts)
+  keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>", bufopts)
+
+  keymap("n", "<space>e", "<cmd>Lspsaga show_line_diagnostics<CR>", bufopts)
 
   if client.supports_method("textDocument/formatting") then
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
@@ -129,7 +126,7 @@ null_ls.setup({
     null_ls.builtins.formatting.astyle,
 
     -- Lua
-    null_ls.builtins.diagnostics.luacheck,
+    --null_ls.builtins.diagnostics.luacheck,
     null_ls.builtins.formatting.stylua,
   },
   on_attach = on_attach,
