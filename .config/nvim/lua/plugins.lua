@@ -65,6 +65,15 @@ return require("packer").startup(function(use)
     run = ":TSUpdate",
   })
   use("nvim-treesitter/playground")
+  use({
+    "RRethy/vim-illuminate",
+    config = function()
+      require("illuminate").configure({
+        providers = { "lsp" },
+        under_cursor = false,
+      })
+    end,
+  })
 
   -- Searching
   use({
@@ -112,7 +121,8 @@ return require("packer").startup(function(use)
     requires = {
       { "hrsh7th/cmp-nvim-lsp" },
       { "onsails/lspkind.nvim" },
-      { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
+      { "ray-x/lsp_signature.nvim" },
+      -- { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
       { "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
       -- { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
       -- { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
@@ -154,7 +164,6 @@ return require("packer").startup(function(use)
 
   -- Git and diff
   use({ "lewis6991/gitsigns.nvim", config = [[require('config.gitsigns')]] })
-
   use({ "sindrets/diffview.nvim", config = [[require('config.diffview')]] })
 
   -- Zen editing mode

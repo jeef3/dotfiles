@@ -22,9 +22,9 @@ mkdir -p ~/.config
 ./link.sh
 
 # Install Vim Plug
-info "Installing/updating Vim Plug"
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# info "Installing/updating Vim Plug"
+# curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+#     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install Brew packages
 info "Installing brew packages"

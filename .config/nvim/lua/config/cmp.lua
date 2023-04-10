@@ -5,7 +5,31 @@
 ------------------
 
 local cmp = require("cmp")
-local lspkind = require("lspkind")
+
+require("lsp_signature").setup({
+  bind = true,
+  handler_opts = {
+    border = "rounded",
+    -- border = {
+    --   "🭽",
+    --   "▔",
+    --   "🭾",
+    --   "▕",
+    --   "🭿",
+    --   "▁",
+    --   "🭼",
+    --   "▏",
+    -- },
+  },
+  toggle_key = "<M-x>",
+
+  max_width = 200,
+  hint_enable = false,
+
+  padding = " ",
+})
+
+require("lspkind")
 local cmp_kinds = {
   Text = " ",
   Method = " ",
@@ -46,7 +70,7 @@ cmp.setup({
     ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-k>"] = cmp.mapping.select_prev_item(),
     -- ['<space>'] = cmp.mapping.complete(),
-    ["<cr>"] = cmp.mapping.confirm({ select = false }),
+    ["<cr>"] = cmp.mapping.confirm({ select = true }),
   }),
   snippet = {
     expand = function(args)
@@ -55,7 +79,7 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    { name = "nvim_lsp_signature_help" },
+    -- { name = "nvim_lsp_signature_help" },
     { name = "vsnip" },
     -- { name = 'path' },
     -- { name = 'cmdline' },

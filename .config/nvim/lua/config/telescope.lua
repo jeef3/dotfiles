@@ -26,10 +26,10 @@ telescope.load_extension("fzf")
 
 -- <C-t> Find files
 vim.keymap.set({ "n", "v" }, "<C-t>", function()
-  builtin.git_files(themes.get_dropdown({
-    find_command = "rg --files",
-    prompt_prefix = " 🔍 ",
-    selection_caret = " ",
+  builtin.find_files(themes.get_dropdown({
+    find_command = { "fd", "--type", "f", "--hidden", "--strip-cwd-prefix" },
+    prompt_prefix = "   ",
+    selection_caret = "  ",
     prompt_title = "",
     previewer = false,
     winblend = 5,
@@ -39,8 +39,8 @@ end)
 -- <C-p> Find in file
 vim.keymap.set({ "n", "v" }, "<C-p>", function()
   builtin.live_grep(themes.get_dropdown({
-    prompt_prefix = " 🔍 ",
-    selection_caret = " ",
+    prompt_prefix = "   ",
+    selection_caret = "  ",
     prompt_title = "Find in files",
     winblend = 5,
   }))
@@ -49,9 +49,25 @@ end)
 -- <C-s> Find symbols
 vim.keymap.set({ "n", "v" }, "<C-s>", function()
   builtin.lsp_dynamic_workspace_symbols({
-    prompt_prefix = " ﬦ ",
-    selection_caret = " ",
+    prompt_prefix = " ",
+    selection_caret = "  ",
     prompt_title = "Symbols",
     winblend = 5,
+    file_ignore_patterns = { "node_modules" },
   })
+end)
+
+-- <C-S> Find symbols
+vim.keymap.set({ "n", "v" }, "<C-e>", function()
+  builtin.lsp_document_symbols(themes.get_dropdown({
+    prompt_prefix = " ",
+    selection_caret = "  ",
+    prompt_title = "Symbols",
+    winblend = 5,
+  }))
+end)
+
+-- <C-y> Jump list
+vim.keymap.set({ "n", "v" }, "<C-y>", function()
+  builtin.jumplist({})
 end)

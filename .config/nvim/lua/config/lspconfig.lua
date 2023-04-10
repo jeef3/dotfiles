@@ -18,6 +18,17 @@ lspsaga.setup({
   ui = {
     title = true,
     border = "rounded",
+    -- border = { "-", "-", "-", ":", ":", ":", ":", "p" },
+    -- border = {
+    --   "🭽",
+    --   "▔",
+    --   "🭾",
+    --   "▕",
+    --   "🭿",
+    --   "▁",
+    --   "🭼",
+    --   "▏",
+    -- },
     winblend = 5,
     expand = "",
     collapse = "",
@@ -89,7 +100,7 @@ local on_attach = function(client, bufnr)
 
   keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>", bufopts)
   keymap("n", "gr", "<cmd>Lspsaga lsp_finder<CR>")
-  keymap("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>")
+  keymap("n", "gK", "<cmd>Lspsaga peek_type_definition<CR>")
 
   keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", bufopts)
 
@@ -196,8 +207,8 @@ null_ls.setup({
   debug = true,
   sources = {
     -- JavaScript
-    null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.code_actions.eslint_d,
+    -- null_ls.builtins.diagnostics.eslint_d,
+    -- null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.formatting.prettierd,
 
     -- C, C++ (Arduino),
@@ -281,4 +292,9 @@ lspconfig.lua_ls.setup({
       telemetry = { enable = false },
     },
   },
+})
+
+lspconfig.eslint.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
 })
