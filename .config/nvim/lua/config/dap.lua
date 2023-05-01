@@ -5,6 +5,8 @@
 ----------------
 
 local dap = require("dap")
+local dapui = require("dapui")
+dapui.setup()
 require("nvim-dap-virtual-text").setup()
 
 dap.adapters.node2 = {
@@ -88,9 +90,6 @@ dap.configurations.typescript = {
     firefoxExecutable = "/usr/bin/firefox",
   },
 }
-
-local dapui = require("dapui")
-dapui.setup()
 
 -- Auto-open/close the debug UI
 dap.listeners.after.event_initialized["dapui_config"] = function()
