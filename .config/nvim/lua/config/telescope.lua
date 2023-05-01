@@ -58,7 +58,7 @@ vim.keymap.set({ "n", "v" }, "<C-s>", function()
 end)
 
 -- <C-S> Find symbols
-vim.keymap.set({ "n", "v" }, "<C-e>", function()
+vim.keymap.set({ "n", "v" }, "gs", function()
   builtin.lsp_document_symbols(themes.get_dropdown({
     prompt_prefix = " ",
     selection_caret = "  ",
