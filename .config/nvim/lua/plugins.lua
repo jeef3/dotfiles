@@ -198,4 +198,13 @@ return require("packer").startup(function(use)
       require("spaceless").setup()
     end,
   })
+
+  -- Markdown preview
+  use({
+    "toppair/peek.nvim",
+    run = "deno task --quiet build:fast",
+    config = function()
+      require("peek").setup()
+    end,
+  })
 end)

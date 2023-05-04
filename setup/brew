@@ -74,6 +74,7 @@ FORMULAS=(
   openssl
   mkcert
   nss
+  gpg
 
   # Languages
   node

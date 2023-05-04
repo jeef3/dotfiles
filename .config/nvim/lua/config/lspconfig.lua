@@ -92,6 +92,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 local capabilities =
   cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -212,7 +214,12 @@ null_ls.setup({
     null_ls.builtins.formatting.prettierd,
 
     -- C, C++ (Arduino),
-    null_ls.builtins.formatting.astyle,
+    -- null_ls.builtins.formatting.astyle,
+
+    -- YAML
+    null_ls.builtins.diagnostics.yamllint,
+    -- null_ls.builtins.formatting.yamlfix,
+    -- null_ls.builtins.formatting.yamlfmt,
 
     -- Lua
     --null_ls.builtins.diagnostics.luacheck,
@@ -225,31 +232,39 @@ null_ls.setup({
 -- Languages
 ----------------
 
+-- JavaScript/TypeScript
 lspconfig.tsserver.setup({
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
-lspconfig.ccls.setup({
-  init_options = {
-    compilationDatabaseDirectory = "build",
-
-    index = { threads = 0 },
-    clang = { excludeArgs = { "-frounding-math" } },
-  },
+lspconfig.cssls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
+-- C/C++
+lspconfig.ccls.setup({
+  -- init_options = {
+  --   compilationDatabaseDirectory = "build",
+
+  --   index = { threads = 0 },
+  --   clang = { excludeArgs = { "-frounding-math" } },
+  -- },
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
+-- Python
 lspconfig.pyright.setup({
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
-lspconfig.sourcekit.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
+-- lspconfig.sourcekit.setup({
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+-- })
 
 local omnisharp_bin = "/Users/jeffknaggs/.local/share/nvim/mason/bin/omnisharp"
 
