@@ -26,6 +26,15 @@ return require("packer").startup(function(use)
 
   use("jeef3/splitsizer.vim") -- Split resizing <c-a>, <c-s>
 
+  use({
+    "folke/neodev.nvim",
+    config = function()
+      require("neodev").setup({
+        library = { plugins = { "neotest" }, types = true },
+      })
+    end,
+  })
+
   -- Restore cursor position
   use({
     "ethanholz/nvim-lastplace",
@@ -140,6 +149,19 @@ return require("packer").startup(function(use)
       { "theHamsta/nvim-dap-virtual-text" },
     },
     config = [[require('config.dap')]],
+  })
+
+  -- Testing
+  use({
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "marilari88/neotest-vitest",
+      "thenbe/neotest-playwright",
+    },
+    config = [[require('config.neotest')]],
   })
 
   -- Theme

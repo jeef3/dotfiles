@@ -15,6 +15,17 @@ dap.adapters.node2 = {
     .. "/.local/share/nvim/mason/bin/node-debug2-adapter",
 }
 
+dap.adapters["pwa-node"] = {
+  type = "server",
+  host = "localhost",
+  port = "${port}",
+  executable = {
+    command = os.getenv("HOME")
+      .. "/.local/share/nvim/mason/bin/js-debug-adapter",
+    args = { "${port}" },
+  },
+}
+
 dap.adapters.chrome = {
   type = "executable",
   command = os.getenv("HOME")
