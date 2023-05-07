@@ -119,7 +119,7 @@ return require("packer").startup(function(use)
       requires = { "williamboman/mason-lspconfig.nvim" },
       config = function()
         require("mason").setup()
-        require("mason-lspconfig").setup()
+        require("mason-lspconfig").setup({ automatic_installation = true })
       end,
     },
   })
@@ -227,6 +227,20 @@ return require("packer").startup(function(use)
     run = "deno task --quiet build:fast",
     config = function()
       require("peek").setup()
+    end,
+  })
+
+  -- Task runner
+  use({
+    "stevearc/overseer.nvim",
+    requires = {
+      "rcarriga/nvim-notify",
+      "stevearc/dressing.nvim",
+    },
+    config = function()
+      require("dressing").setup()
+      require("notify").setup()
+      require("overseer").setup()
     end,
   })
 end)
