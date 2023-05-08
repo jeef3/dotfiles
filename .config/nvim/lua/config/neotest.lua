@@ -25,22 +25,13 @@ neotest.setup({
       "⠇",
       "⠏",
     },
-    -- running_animated = { "/", "|", "\\", "-", "/", "|", "\\", "-" },
-    -- running_animated = {
-    --   "⣾",
-    --   "⣽",
-    --   "⣻",
-    --   "⢿",
-    --   "⡿",
-    --   "⣟",
-    --   "⣯",
-    --   "⣷",
-    -- },
   },
+  quickfix = { enabled = false },
 })
 
-vim.keymap.set("n", "<leader>ts", neotest.summary.open)
-vim.keymap.set("n", "<leader>tNn", neotest.run.run)
-vim.keymap.set("n", "<leader>tNN", function()
+vim.keymap.set("n", "<leader>ts", neotest.summary.toggle)
+
+vim.keymap.set("n", "<leader>tn", neotest.run.run)
+vim.keymap.set("n", "<leader>tN", function()
   neotest.run.run({ strategy = "dap" })
 end)

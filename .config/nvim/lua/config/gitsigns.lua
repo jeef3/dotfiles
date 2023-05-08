@@ -1,7 +1,7 @@
 ----------------
--- LSP Config
+-- Git Signs
 --
--- https://github.com/neovim/nvim-lspconfig
+-- https://github.com/lewis6991/gitsigns.nvim
 ----------------
 
 require("gitsigns").setup({

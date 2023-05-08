@@ -88,7 +88,11 @@ return require("packer").startup(function(use)
   use({
     {
       "nvim-telescope/telescope.nvim",
-      requires = { "nvim-lua/plenary.nvim", "telescope-fzf-native.nvim" },
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope-fzf-native.nvim",
+        "rcarriga/nvim-notify",
+      },
       config = [[require('config.telescope')]],
     },
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
@@ -238,8 +242,8 @@ return require("packer").startup(function(use)
       "stevearc/dressing.nvim",
     },
     config = function()
+      vim.notify = require("notify")
       require("dressing").setup()
-      require("notify").setup()
       require("overseer").setup()
     end,
   })

@@ -23,6 +23,7 @@ telescope.setup({
 })
 
 telescope.load_extension("fzf")
+telescope.load_extension("notify")
 
 -- <C-t> Find files
 vim.keymap.set({ "n", "v" }, "<C-t>", function()

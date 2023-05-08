@@ -24,7 +24,7 @@ require("lualine").setup({
     lualine_b = { "filename" },
     lualine_c = {},
 
-    lualine_x = {},
+    lualine_x = { "overseer" },
     lualine_y = {
       {
         "diagnostics",
