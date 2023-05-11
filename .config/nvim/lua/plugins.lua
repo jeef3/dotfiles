@@ -70,7 +70,7 @@ return require("packer").startup(function(use)
   -- Highlighting
   use({
     "nvim-treesitter/nvim-treesitter",
-    config = [[require('config.treesitter')]],
+    config = [[require("config.treesitter")]],
     run = ":TSUpdate",
   })
   use("nvim-treesitter/playground")
@@ -84,6 +84,14 @@ return require("packer").startup(function(use)
     end,
   })
 
+  -- Fancy notifications
+  use({
+    "rcarriga/nvim-notify",
+    config = function()
+      vim.notify = require("notify")
+    end,
+  })
+
   -- Searching
   use({
     {
@@ -93,7 +101,7 @@ return require("packer").startup(function(use)
         "nvim-telescope/telescope-fzf-native.nvim",
         "rcarriga/nvim-notify",
       },
-      config = [[require('config.telescope')]],
+      config = [[require("config.telescope")]],
     },
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
   })
@@ -107,7 +115,7 @@ return require("packer").startup(function(use)
         "glepnir/lspsaga.nvim",
         "jose-elias-alvarez/null-ls.nvim",
       },
-      config = [[require('config.lspconfig')]],
+      config = [[require("config.lspconfig")]],
     },
     {
       -- Useful quick fix list
@@ -142,7 +150,7 @@ return require("packer").startup(function(use)
       -- { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
       -- { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
     },
-    config = [[require('config.cmp')]],
+    config = [[require("config.cmp")]],
   })
 
   -- Debugging
@@ -152,7 +160,7 @@ return require("packer").startup(function(use)
       { "rcarriga/nvim-dap-ui" },
       { "theHamsta/nvim-dap-virtual-text" },
     },
-    config = [[require('config.dap')]],
+    config = [[require("config.dap")]],
   })
 
   -- Testing
@@ -165,7 +173,7 @@ return require("packer").startup(function(use)
       "marilari88/neotest-vitest",
       "thenbe/neotest-playwright",
     },
-    config = [[require('config.neotest')]],
+    config = [[require("config.neotest")]],
   })
 
   -- Theme
@@ -189,11 +197,11 @@ return require("packer").startup(function(use)
   })
 
   -- Status line
-  use({ "nvim-lualine/lualine.nvim", config = [[require('config.lualine')]] })
+  use({ "nvim-lualine/lualine.nvim", config = [[require("config.lualine")]] })
 
   -- Git and diff
-  use({ "lewis6991/gitsigns.nvim", config = [[require('config.gitsigns')]] })
-  use({ "sindrets/diffview.nvim", config = [[require('config.diffview')]] })
+  use({ "lewis6991/gitsigns.nvim", config = [[require("config.gitsigns")]] })
+  use({ "sindrets/diffview.nvim", config = [[require("config.diffview")]] })
 
   -- Zen editing mode
   use({
@@ -241,10 +249,6 @@ return require("packer").startup(function(use)
       "rcarriga/nvim-notify",
       "stevearc/dressing.nvim",
     },
-    config = function()
-      vim.notify = require("notify")
-      require("dressing").setup()
-      require("overseer").setup()
-    end,
+    config = [[require("config.overseer")]],
   })
 end)
