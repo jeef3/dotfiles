@@ -193,36 +193,36 @@ augroup END
 
 " Home motion toggle
 " http://ddrscott.github.io/blog/2016/vim-toggle-movement/
-function! ToggleMovement(firstOp, thenOp)
-  let pos = getpos('.')
-  execute "normal! " . a:firstOp
-  if pos == getpos('.')
-    execute "normal! " . a:thenOp
-  endif
-endfunction
-nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
+" function! ToggleMovement(firstOp, thenOp)
+"   let pos = getpos('.')
+"   execute "normal! " . a:firstOp
+"   if pos == getpos('.')
+"     execute "normal! " . a:thenOp
+"   endif
+" endfunction
+" nnoremap <silent> 0 :call ToggleMovement('^', '0')<CR>
 
 " Center the view if n/N moves out of view
-function! s:nice_next(cmd)
-  let view = winsaveview()
-  execute "normal! " . a:cmd
-  if view.topline != winsaveview().topline
-    normal! zz
-  endif
-endfunction
+" function! s:nice_next(cmd)
+"   let view = winsaveview()
+"   execute "normal! " . a:cmd
+"   if view.topline != winsaveview().topline
+"     normal! zz
+"   endif
+" endfunction
 
-nnoremap <silent> n :call <SID>nice_next('n')<cr>
-nnoremap <silent> N :call <SID>nice_next('N')<cr>
+" nnoremap <silent> n :call <SID>nice_next('n')<cr>
+" nnoremap <silent> N :call <SID>nice_next('N')<cr>
 
 " recalculate when idle, and after saving
-augroup statline_trail
-  autocmd!
-  autocmd cursorhold,bufwritepost * unlet! b:statline_trailing_space_warning
-augroup END
+" augroup statline_trail
+"   autocmd!
+"   autocmd cursorhold,bufwritepost * unlet! b:statline_trailing_space_warning
+" augroup END
 
 " Move selected block up/down
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+" vnoremap J :m '>+1<CR>gv=gv
+" vnoremap K :m '<-2<CR>gv=gv
 
 " When changing, don't put in clipboard
 nnoremap c "_c
