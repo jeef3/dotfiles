@@ -251,4 +251,41 @@ return require("packer").startup(function(use)
     },
     config = [[require("config.overseer")]],
   })
+
+  use({
+    "gelguy/wilder.nvim",
+    config = function()
+      local wilder = require("wilder")
+      wilder.setup({
+        modes = { ":" },
+        next_key = "<C-k>",
+        previous_key = "<C-j>",
+        accept_key = "<Tab>",
+        -- enable_cmdline_enter = 0,
+      })
+
+      wilder.set_option(
+        "pipeline",
+        wilder.branch(wilder.cmdline_pipeline({
+          fuzzy = 1,
+        }))
+      )
+
+      wilder.set_option(
+        "renderer",
+        wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
+          highlights = {
+            border = "Normal",
+          },
+          border = "rounded",
+          pumblend = 20,
+          -- highlighter applies highlighting to the candidates
+          highlighter = wilder.basic_highlighter(),
+          reverse = 1,
+          left = { " ", wilder.popupmenu_devicons() },
+          right = { " ", wilder.popupmenu_scrollbar() },
+        }))
+      )
+    end,
+  })
 end)
