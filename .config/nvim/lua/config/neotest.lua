@@ -29,7 +29,8 @@ neotest.setup({
   quickfix = { enabled = false },
 })
 
-vim.keymap.set("n", "<leader>ts", neotest.summary.toggle)
+vim.keymap.set("n", "<leader>to", neotest.summary.toggle)
+vim.keymap.set("n", "<leader>tc", neotest.output_panel.toggle)
 
 vim.keymap.set("n", "<leader>tn", neotest.run.run)
 vim.keymap.set("n", "<leader>tN", function()

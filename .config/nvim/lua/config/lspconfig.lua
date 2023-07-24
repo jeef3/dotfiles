@@ -13,7 +13,8 @@ lspsaga.setup({
   lightbulb = { enable = false },
   finder = {
     max_height = 0.8,
-    force_max_height = false,
+    force_max_height = true,
+    layout = "float",
   },
   ui = {
     title = true,
@@ -36,7 +37,7 @@ lspsaga.setup({
     code_action = "💡",
     hover = " ",
   },
-  symbol_in_winbar = { enable = false, separator = "  " },
+  symbol_in_winbar = { enable = true, separator = "  " },
 })
 
 local lsp_formatting = function(bufnr)
@@ -101,7 +102,7 @@ local on_attach = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
   keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>", bufopts)
-  keymap("n", "gr", "<cmd>Lspsaga lsp_finder<CR>")
+  keymap("n", "gr", "<cmd>Lspsaga finder<CR>")
   keymap("n", "gK", "<cmd>Lspsaga peek_type_definition<CR>")
 
   keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", bufopts)
@@ -313,6 +314,19 @@ lspconfig.lua_ls.setup({
 })
 
 lspconfig.eslint.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
+lspconfig.cucumber_language_server.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
+local java_bin = "/Users/jeffknaggs/.local/share/nvim/mason/bin/jdtls"
+
+lspconfig.jdtls.setup({
+  cmd = { java_bin },
   capabilities = capabilities,
   on_attach = on_attach,
 })

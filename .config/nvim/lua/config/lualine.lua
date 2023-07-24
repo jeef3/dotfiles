@@ -12,6 +12,11 @@ require("lualine").setup({
         b = "StatusLineNormalB",
         c = "StatusLineNormalC",
       },
+      inactive = {
+        a = "StatusLineInactiveA",
+        b = "StatusLineInactiveB",
+        c = "StatusLineInactiveC",
+      },
       insert = { a = "StatusLineInsert" },
       replace = { a = "StatusLineReplace" },
       command = { a = "StatusLineCommand" },
@@ -22,7 +27,9 @@ require("lualine").setup({
   sections = {
     lualine_a = { "mode" },
     lualine_b = { "filename" },
-    lualine_c = {},
+    lualine_c = {
+      -- require("auto-session.lib").current_session_name,
+    },
 
     lualine_x = { "overseer" },
     lualine_y = {

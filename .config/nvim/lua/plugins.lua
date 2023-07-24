@@ -15,7 +15,7 @@ return require("packer").startup(function(use)
   use("tpope/vim-sleuth") -- Set shiftwidth and expandtab based on current file
   use("tpope/vim-commentary") -- gcc to comment line/paragraph
   use("tpope/vim-surround") -- Change surrounds, quotes etc
-  use("tpope/vim-obsession") -- Keep my session
+  -- use("tpope/vim-obsession") -- Keep my session
   use("tpope/vim-fugitive") -- Git wrapper, :Gstatus etc
 
   use("Xvezda/vim-readonly") -- Lock a bunch of files like node_modules
@@ -25,6 +25,7 @@ return require("packer").startup(function(use)
   use("justinmk/vim-sneak") -- Minimal EasyMotion s
 
   use("jeef3/splitsizer.vim") -- Split resizing <c-a>, <c-s>
+  use("voldikss/vim-floaterm")
 
   use({
     "folke/neodev.nvim",
@@ -163,6 +164,19 @@ return require("packer").startup(function(use)
     config = [[require("config.dap")]],
   })
 
+  -- use({
+  --   "mxsdev/nvim-dap-vscode-js",
+  --   requires = { "mfussenegger/nvim-dap" },
+  --   config = function()
+  --     require("dap-vscode-js").setup({
+  --       adapters = {
+  --         "pwa-node",
+  --         "pwa-chrome",
+  --       },
+  --     })
+  --   end,
+  -- })
+
   -- Testing
   use({
     "nvim-neotest/neotest",
@@ -176,6 +190,15 @@ return require("packer").startup(function(use)
     config = [[require("config.neotest")]],
   })
 
+  -- Code Coverage
+  use({
+    "andythigpen/nvim-coverage",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("coverage").setup()
+    end,
+  })
+
   -- Theme
   use({
     "~/projects/princess.nvim",
@@ -186,6 +209,7 @@ return require("packer").startup(function(use)
   -- Tab bar
   use({
     "seblj/nvim-tabline",
+    requires = "kyazdani42/nvim-web-devicons",
     config = function()
       require("tabline").setup({
         padding = 1,
@@ -195,6 +219,18 @@ return require("packer").startup(function(use)
       })
     end,
   })
+  -- use({
+  --   "romgrk/barbar.nvim",
+  --   requires = {
+  --     "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+  --     "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
+  --   },
+  --   config = function()
+  --     require("barbar").setup({
+
+  --     })
+  --   end,
+  -- })
 
   -- Status line
   use({ "nvim-lualine/lualine.nvim", config = [[require("config.lualine")]] })
@@ -239,6 +275,9 @@ return require("packer").startup(function(use)
     run = "deno task --quiet build:fast",
     config = function()
       require("peek").setup()
+
+      vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+      vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
     end,
   })
 
@@ -288,4 +327,36 @@ return require("packer").startup(function(use)
       )
     end,
   })
+
+  -- Session management
+  -- use({
+  --   "rmagatti/auto-session",
+  --   requires = { "rmagatti/session-lens", "nvim-telescope/telescope.nvim" },
+  --   config = function()
+  --     require("session-lens").setup()
+  --     vim.g.auto_sesion_use_git_branch = true
+  --     require("auto-session").setup({})
+  --   end,
+  -- })
+  use({
+    "olimorris/persisted.nvim",
+    config = function()
+      require("persisted").setup({
+        autoload = true,
+        use_git_branch = true,
+      })
+    end,
+  })
+  -- use({
+  --   "stevearc/resession.nvim",
+  --   config = function()
+  --     require("resession").setup({
+  --       autosave = {
+  --         enabled = true,
+  --         interval = 60,
+  --         notify = false,
+  --       },
+  --     })
+  --   end,
+  -- })
 end)

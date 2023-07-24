@@ -38,69 +38,104 @@ dap.adapters.firefox = {
     .. "/.local/share/nvim/mason/bin/firefox-debug-adapter",
 }
 
-dap.configurations.javascript = {
-  {
-    name = "Launch",
-    type = "node2",
-    request = "launch",
-    program = "${file}",
-    cwd = vim.fn.getcwd(),
-    sourceMaps = true,
-    protocol = "inspector",
-    console = "integratedTerminal",
-  },
-  {
-    -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-    name = "Attach to process",
-    type = "node2",
-    request = "attach",
-    processId = require("dap.utils").pick_process,
-  },
-  {
-    name = "Open in Chrome",
-    type = "chrome",
-    request = "attach",
-    program = "${file}",
-    cwd = vim.fn.getcwd(),
-    sourceMaps = true,
-    protocol = "inspector",
-    port = 9222,
-    webRoot = "${workspaceFolder}",
-  },
+local debugWithFirefox = {
+  name = "Debug with Firefox",
+  type = "firefox",
+  request = "launch",
+  reAttach = true,
+  url = "http://localhost:3000/",
+  webRoot = "${workspaceFolder}",
+  firefoxExecutable = "/Applications/Firefox\\ Developer\\ Edition.app/Contents/MacOS/firefox -start-debugger-server",
 }
 
-dap.configurations.typescript = {
-  {
-    name = "Launch",
-    type = "node2",
-    request = "launch",
-    program = "${file}",
-    cwd = "${workspaceFolder}",
-    env = {
-      -- Use remote debugging port.
-      PLAYWRIGHT_CHROMIUM_DEBUG_PORT = 9222,
-      -- Run Playwright in debug mode.
-      PWDEBUG = true,
-    },
-  },
-  {
-    name = "Attach to Playwright",
-    type = "chrome",
-    request = "attach",
-    -- port = 9222,
-    -- webRoot = "${workspaceFolder}",
-    processId = require("dap.utils").pick_process,
-  },
-  {
-    name = "Open in Firefox",
-    type = "firefox",
-    request = "launch",
-    reAttach = true,
-    url = "http://localhost:9222",
-    webRoot = "${workspaceFolder}",
-    firefoxExecutable = "/usr/bin/firefox",
-  },
+local attachToFirefox = {
+  name = "Attach to Firefox",
+  type = "firefox",
+  request = "attach",
+  url = "https://localdev.cleverfirstaid.com:5173/",
+  webRoot = "${workspaceFolder}",
 }
+
+for _, language in ipairs({
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact",
+}) do
+  dap.configurations[language] = {
+    {
+      -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+      name = "Attach to process",
+      type = "pwa-node",
+      request = "attach",
+      processId = require("dap.utils").pick_process,
+    },
+    {
+      name = "Open in Chrome",
+      type = "chrome",
+      request = "launch",
+      url = "https://localdev.cleverfirstaid.com:5173",
+      webRoot = "${workspaceFolder}",
+    },
+    {
+      name = "Attach to Chrome",
+      type = "chrome",
+      request = "attach",
+      program = "${file}",
+      cwd = vim.fn.getcwd(),
+      sourceMaps = true,
+      protocol = "inspector",
+      port = 9222,
+      webRoot = "${workspaceFolder}",
+    },
+  }
+end
+
+-- dap.configurations.javascript = {
+--   {
+--     name = "Launch",
+--     type = "node2",
+--     request = "launch",
+--     program = "${file}",
+--     cwd = vim.fn.getcwd(),
+--     sourceMaps = true,
+--     protocol = "inspector",
+--     console = "integratedTerminal",
+--   },
+-- }
+
+-- dap.configurations.typescript = {
+--   {
+--     name = "Launch",
+--     type = "node2",
+--     request = "launch",
+--     program = "${file}",
+--     cwd = "${workspaceFolder}",
+--     env = {
+--       -- Use remote debugging port.
+--       PLAYWRIGHT_CHROMIUM_DEBUG_PORT = 9222,
+--       -- Run Playwright in debug mode.
+--       PWDEBUG = true,
+--     },
+--   },
+--   {
+--     name = "Attach to Playwright",
+--     type = "chrome",
+--     request = "attach",
+--     -- port = 9222,
+--     -- webRoot = "${workspaceFolder}",
+--     processId = require("dap.utils").pick_process,
+--   },
+--   debugWithChrome,
+--   debugWithFirefox,
+--   attachToFirefox,
+-- }
+
+-- dap.configurations.typescriptreact = {
+--   debugWithChrome,
+--   debugWithFirefox,
+--   attachToFirefox,
+-- }
 
 -- Auto-open/close the debug UI
 dap.listeners.after.event_initialized["dapui_config"] = function()
