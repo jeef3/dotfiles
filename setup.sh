@@ -25,6 +25,7 @@ mkdir -p ~/.config
 # info "Installing/updating Vim Plug"
 # curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 #     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # Install Brew packages
 info "Installing brew packages"
