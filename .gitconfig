@@ -29,6 +29,7 @@
 	# Commit graph
 	tree = log --color --graph --pretty=format:'%C(bold red)%d%C(reset)%n %C(bold black)%h%C(reset) %C(white)%s%C(reset)%n				 %C(bold white)%aN (%aE)%C(reset)%n					%C(yellow)%ar%C(reset)' --decorate=short
 	t = "log --color --graph --pretty=format:'%C(#75715e)%C(bold)%h%C(reset)%C(bold red)%d%C(reset) %C(white)%s%C(reset)' --all"
+	tv = "log --color --graph --pretty=format:'%C(#75715e)%C(bold)%h%C(reset) %G?%C(bold red)%d%C(reset) %C(white)%s%C(reset)' --all"
 	tp = "!git --no-pager log --color --graph --pretty=format:'%C(#75715e)%C(bold)%h%C(reset)%C(bold red)%d%C(reset) %C(white)%s%C(reset)' --all -n 20"
 	ts = "log --color --graph --pretty=format:'%C(#75715e)%C(bold)%h%C(reset)%C(bold red)%d%C(reset) %C(white)%s%C(reset)'"
 
@@ -128,10 +129,10 @@
 
 [pager]
   diff = LESS='LRc --mouse' delta
-  show = LESS='LRc --mouse' delta
-  stash = LESS='LRc --mouse' delta
-  log = LESS='LRc --mouse' delta
-  reflog = LESS='LRc --mouse' delta
+  ; show = LESS='LRc --mouse' delta
+  ; stash = LESS='LRc --mouse' delta
+  ; log = LESS='--mouse' delta
+  ; reflog = LESS='LRc --mouse' delta
 
 [interactive]
   diffFilter = delta --color-only --wrap-max-lines 0

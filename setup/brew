@@ -78,6 +78,7 @@ FORMULAS=(
 
   # Languages
   node
+  corepack
   nvm
   haskell-stack
   # python@2
