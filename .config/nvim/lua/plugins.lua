@@ -136,7 +136,7 @@ return require("packer").startup({
         requires = {
           "nvim-lua/plenary.nvim",
           "glepnir/lspsaga.nvim",
-          "jose-elias-alvarez/null-ls.nvim",
+          "nvimtools/none-ls.nvim",
         },
         config = [[require("config.lspconfig")]],
       },
