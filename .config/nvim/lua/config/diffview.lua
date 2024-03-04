@@ -12,10 +12,10 @@ require("diffview").setup({
     done = "✓",
   },
   hooks = {
-    view_enter = function(view)
+    view_enter = function()
       vim.cmd([[:Gitsigns toggle_numhl true]])
     end,
-    view_leave = function(view)
+    view_leave = function()
       vim.cmd([[:Gitsigns toggle_numhl false]])
     end,
   },

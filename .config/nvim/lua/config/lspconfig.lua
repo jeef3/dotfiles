@@ -3,6 +3,7 @@
 --
 -- https://github.com/neovim/nvim-lspconfig
 ----------------
+
 local lspconfig = require("lspconfig")
 local lspsaga = require("lspsaga")
 local null_ls = require("null-ls")
@@ -19,17 +20,6 @@ lspsaga.setup({
   ui = {
     title = true,
     border = "rounded",
-    -- border = { "-", "-", "-", ":", ":", ":", ":", "p" },
-    -- border = {
-    --   "🭽",
-    --   "▔",
-    --   "🭾",
-    --   "▕",
-    --   "🭿",
-    --   "▁",
-    --   "🭼",
-    --   "▏",
-    -- },
     winblend = 5,
     expand = "",
     collapse = "",
@@ -40,13 +30,13 @@ lspsaga.setup({
   symbol_in_winbar = { enable = true, separator = "  " },
 })
 
-local lsp_formatting = function(bufnr)
+local lsp_formatting = function()
   vim.lsp.buf.format({
     filter = function(client)
       -- apply whatever logic you want (in this example, we'll only use null-ls)
       return client.name == "null-ls"
     end,
-    bufnr = bufnr,
+    -- bufnr = bufnr,
   })
 end
 
@@ -68,150 +58,115 @@ vim.cmd([[
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
-  { virtual_text = { prefix = " ●" } }
+  { virtual_text = { prefix = "⏹" } }
 )
 
--- Custom border styles
--- local border = {
---   {'🭽', 'FloatBorder'},
---   {'▔', 'FloatBorder'},
---   {'🭾', 'FloatBorder'},
---   {'▕', 'FloatBorder'},
---   {'🭿', 'FloatBorder'},
---   {'▁', 'FloatBorder'},
---   {'🭼', 'FloatBorder'},
---   {'▏', 'FloatBorder'},
--- }
-
--- local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
--- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
---   opts = opts or {}
---   opts.border = opts.border or border
---   return orig_util_open_floating_preview(contents, syntax, opts, ...)
--- end
-
-local capabilities =
-  cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = cmp.default_capabilities()
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local on_attach = function(client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+vim.api.nvim_create_autocmd("LspAttach", {
+  desc = "LSP Attach",
+  callback = function()
+    local bufmap = function(mode, lhs, rhs)
+      vim.keymap.set(mode, lhs, rhs, { buffer = true })
+    end
 
-  local keymap = vim.keymap.set
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+    bufmap("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
+    bufmap("n", "gi", "<cmd>Lspsaga goto_type_definition<CR>")
+    bufmap("n", "gK", "<cmd>Lspsaga peek_type_definition<CR>")
+    bufmap("n", "gr", "<cmd>Lspsaga finder<CR>")
 
-  keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>", bufopts)
-  keymap("n", "gr", "<cmd>Lspsaga finder<CR>")
-  keymap("n", "gK", "<cmd>Lspsaga peek_type_definition<CR>")
+    bufmap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
 
-  keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", bufopts)
+    bufmap("n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+    bufmap("n", "]g", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 
-  keymap("n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<CR>", bufopts)
-  keymap("n", "]g", "<cmd>Lspsaga diagnostic_jump_next<CR>", bufopts)
+    bufmap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>")
+    bufmap("n", "<leader>qf", "<cmd>Lspsaga code_action<CR>")
+    bufmap("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
 
-  keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", bufopts)
-  keymap("n", "<leader>qf", "<cmd>Lspsaga code_action<CR>", bufopts)
-  keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>", bufopts)
+    bufmap("n", "<space>e", "<cmd>Lspsaga show_line_diagnostics<CR>")
 
-  keymap("n", "<space>e", "<cmd>Lspsaga show_line_diagnostics<CR>", bufopts)
-
-  if client.supports_method("textDocument/formatting") then
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    -- if client.supports_method("textDocument/formatting") then
+    vim.api.nvim_clear_autocmds({ group = augroup })
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = augroup,
-      buffer = bufnr,
       callback = function()
-        lsp_formatting(bufnr)
+        lsp_formatting()
       end,
     })
-  end
+    -- end
+  end,
+})
 
-  -- Workaround for broken OmniSharp
-  if client.name == "omnisharp" then
-    client.server_capabilities.semanticTokensProvider = {
-      full = vim.empty_dict(),
-      legend = {
-        tokenModifiers = { "static_symbol" },
-        tokenTypes = {
-          "comment",
-          "excluded_code",
-          "identifier",
-          "keyword",
-          "keyword_control",
-          "number",
-          "operator",
-          "operator_overloaded",
-          "preprocessor_keyword",
-          "string",
-          "whitespace",
-          "text",
-          "static_symbol",
-          "preprocessor_text",
-          "punctuation",
-          "string_verbatim",
-          "string_escape_character",
-          "class_name",
-          "delegate_name",
-          "enum_name",
-          "interface_name",
-          "module_name",
-          "struct_name",
-          "type_parameter_name",
-          "field_name",
-          "enum_member_name",
-          "constant_name",
-          "local_name",
-          "parameter_name",
-          "method_name",
-          "extension_method_name",
-          "property_name",
-          "event_name",
-          "namespace_name",
-          "label_name",
-          "xml_doc_comment_attribute_name",
-          "xml_doc_comment_attribute_quotes",
-          "xml_doc_comment_attribute_value",
-          "xml_doc_comment_cdata_section",
-          "xml_doc_comment_comment",
-          "xml_doc_comment_delimiter",
-          "xml_doc_comment_entity_reference",
-          "xml_doc_comment_name",
-          "xml_doc_comment_processing_instruction",
-          "xml_doc_comment_text",
-          "xml_literal_attribute_name",
-          "xml_literal_attribute_quotes",
-          "xml_literal_attribute_value",
-          "xml_literal_cdata_section",
-          "xml_literal_comment",
-          "xml_literal_delimiter",
-          "xml_literal_embedded_expression",
-          "xml_literal_entity_reference",
-          "xml_literal_name",
-          "xml_literal_processing_instruction",
-          "xml_literal_text",
-          "regex_comment",
-          "regex_character_class",
-          "regex_anchor",
-          "regex_quantifier",
-          "regex_grouping",
-          "regex_alternation",
-          "regex_text",
-          "regex_self_escaped_character",
-          "regex_other_escape",
+require("mason").setup()
+require("mason-lspconfig").setup()
+
+local omnisharp_bin = "/Users/jeffknaggs/.local/share/nvim/mason/bin/omnisharp"
+local java_bin = "/Users/jeffknaggs/.local/share/nvim/mason/bin/jdtls"
+
+require("mason-lspconfig").setup_handlers({
+  function(server_name)
+    lspconfig[server_name].setup({
+      capabilities = capabilities,
+    })
+  end,
+
+  ["lua_ls"] = function()
+    lspconfig.lua_ls.setup({
+      capabilities = capabilities,
+      -- on_attach = on_attach,
+      settings = {
+        Lua = {
+          runtime = { version = "LuaJIT" },
+          diagnostics = { globals = { "vim" } },
+          workspace = {
+            library = vim.api.nvim_get_runtime_file("", true),
+            checkThirdParty = false,
+          },
+          telemetry = { enable = false },
+          completion = {
+            callSnippet = "Replace",
+          },
         },
       },
-      range = true,
-    }
-  end
-end
+    })
+  end,
+
+  ["jdtls"] = function()
+    lspconfig.jdtls.setup({
+      cmd = { java_bin },
+      capabilities = capabilities,
+    })
+  end,
+
+  ["omnisharp"] = function()
+    lspconfig.omnisharp.setup({
+      cmd = { omnisharp_bin },
+      capabilities = capabilities,
+    })
+  end,
+
+  ["yamlls"] = function()
+    lspconfig.yamlls.setup({
+      settings = {
+        yaml = {
+          schemas = {
+            ["https://bitbucket.org/atlassianlabs/atlascode/raw/main/resources/schemas/pipelines-schema.json"] = "./bitbucket-pipelines.yml",
+            ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.yaml"] = "./schema.yml",
+          },
+        },
+      },
+      capabilities = capabilities,
+    })
+  end,
+})
 
 null_ls.setup({
   debug = true,
   sources = {
     -- JavaScript
-    -- null_ls.builtins.diagnostics.eslint_d,
-    -- null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.formatting.prettierd,
 
     -- C, C++ (Arduino),
@@ -226,107 +181,5 @@ null_ls.setup({
     --null_ls.builtins.diagnostics.luacheck,
     null_ls.builtins.formatting.stylua,
   },
-  on_attach = on_attach,
-})
-
-----------------
--- Languages
-----------------
-
--- JavaScript/TypeScript
-lspconfig.tsserver.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lspconfig.cssls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
--- C/C++
-lspconfig.ccls.setup({
-  -- init_options = {
-  --   compilationDatabaseDirectory = "build",
-
-  --   index = { threads = 0 },
-  --   clang = { excludeArgs = { "-frounding-math" } },
-  -- },
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
--- Python
-lspconfig.pyright.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
--- lspconfig.sourcekit.setup({
---   capabilities = capabilities,
---   on_attach = on_attach,
--- })
-
-local omnisharp_bin = "/Users/jeffknaggs/.local/share/nvim/mason/bin/omnisharp"
-
-lspconfig.omnisharp.setup({
-  cmd = { omnisharp_bin },
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
--- lspconfig.csharp_ls.setup({
---   cmd = { "/Users/jeffknaggs/.local/share/nvim/mason/bin/csharp-ls" },
---   capabilities = capabilities,
---   on_attach = on_attach,
--- })
-
-lspconfig.yamlls.setup({
-  settings = {
-    yaml = {
-      schemas = {
-        ["https://bitbucket.org/atlassianlabs/atlascode/raw/main/resources/schemas/pipelines-schema.json"] = "./bitbucket-pipelines.yml",
-        ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.yaml"] = "./schema.yml",
-      },
-    },
-  },
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lspconfig.lua_ls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    Lua = {
-      runtime = { version = "LuaJIT" },
-      diagnostics = { globals = { "vim" } },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
-        checkThirdParty = false,
-      },
-      telemetry = { enable = false },
-      completion = {
-        callSnippet = "Replace",
-      },
-    },
-  },
-})
-
-lspconfig.eslint.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-lspconfig.cucumber_language_server.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
-local java_bin = "/Users/jeffknaggs/.local/share/nvim/mason/bin/jdtls"
-
-lspconfig.jdtls.setup({
-  cmd = { java_bin },
-  capabilities = capabilities,
-  on_attach = on_attach,
+  -- on_attach = on_attach,
 })

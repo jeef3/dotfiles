@@ -45,9 +45,7 @@ return require("packer").startup({
     use("machakann/vim-highlightedyank") -- Highlight yanked
 
     use("justinmk/vim-sneak") -- Minimal EasyMotion s
-
     use("jeef3/splitsizer.vim") -- Split resizing <c-a>, <c-s>
-    use("voldikss/vim-floaterm")
 
     use({
       "folke/neodev.nvim",
@@ -69,6 +67,7 @@ return require("packer").startup({
     -- Newer auto-pairs
     use({
       "windwp/nvim-autopairs",
+      -- commit = "00def0123a1a728c313a7dd448727eac71392c57",
       config = function()
         require("nvim-autopairs").setup()
       end,
@@ -90,13 +89,17 @@ return require("packer").startup({
       end,
     })
 
-    -- Highlighting
+    -- Syntax Highlighting
     use({
       "nvim-treesitter/nvim-treesitter",
+      requires = {
+        "nvim-treesitter/playground",
+      },
       config = [[require("config.treesitter")]],
       run = ":TSUpdate",
     })
-    use("nvim-treesitter/playground")
+
+    -- Highlight other uses of a word
     use({
       "RRethy/vim-illuminate",
       config = function()
@@ -131,32 +134,26 @@ return require("packer").startup({
 
     -- LSP
     use({
-      {
-        "neovim/nvim-lspconfig",
-        requires = {
-          "nvim-lua/plenary.nvim",
-          "glepnir/lspsaga.nvim",
-          "nvimtools/none-ls.nvim",
-        },
-        config = [[require("config.lspconfig")]],
-      },
-      {
-        -- Useful quick fix list
-        "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
-        config = function()
-          require("trouble").setup()
-        end,
-      },
-      {
-        -- LSP and external tooling installer
+      "neovim/nvim-lspconfig",
+      requires = {
+        "hrsh7th/cmp-nvim-lsp",
+        "nvim-lua/plenary.nvim",
+        "nvimdev/lspsaga.nvim",
+        "nvimtools/none-ls.nvim",
+        "nvim-tree/nvim-web-devicons",
         "williamboman/mason.nvim",
-        requires = { "williamboman/mason-lspconfig.nvim" },
-        config = function()
-          require("mason").setup()
-          require("mason-lspconfig").setup({ automatic_installation = true })
-        end,
+        "williamboman/mason-lspconfig.nvim",
       },
+      config = [[require("config.lspconfig")]],
+    })
+
+    -- Useful quick fix list
+    use({
+      "folke/trouble.nvim",
+      requires = "nvim-tree/nvim-web-devicons",
+      config = function()
+        require("trouble").setup()
+      end,
     })
 
     -- Code Completion
@@ -166,7 +163,7 @@ return require("packer").startup({
         { "hrsh7th/cmp-nvim-lsp" },
         { "onsails/lspkind.nvim" },
         { "ray-x/lsp_signature.nvim" },
-        -- { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
+        { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
         { "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
         -- { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
         -- { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
@@ -185,19 +182,6 @@ return require("packer").startup({
       },
       config = [[require("config.dap")]],
     })
-
-    -- use({
-    --   "mxsdev/nvim-dap-vscode-js",
-    --   requires = { "mfussenegger/nvim-dap" },
-    --   config = function()
-    --     require("dap-vscode-js").setup({
-    --       adapters = {
-    --         "pwa-node",
-    --         "pwa-chrome",
-    --       },
-    --     })
-    --   end,
-    -- })
 
     -- Testing
     use({
@@ -241,18 +225,6 @@ return require("packer").startup({
         })
       end,
     })
-    -- use({
-    --   "romgrk/barbar.nvim",
-    --   requires = {
-    --     "lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
-    --     "nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
-    --   },
-    --   config = function()
-    --     require("barbar").setup({
-
-    --     })
-    --   end,
-    -- })
 
     -- Status line
     use({ "nvim-lualine/lualine.nvim", config = [[require("config.lualine")]] })
@@ -280,6 +252,7 @@ return require("packer").startup({
       "declancm/cinnamon.nvim",
       config = function()
         require("cinnamon").setup({ default_delay = 4 })
+        vim.keymap.set({ "n", "x" }, "gg", "<Cmd>lua Scroll('gg')<CR>")
       end,
     })
 
@@ -366,31 +339,6 @@ return require("packer").startup({
         require("persisted").setup({
           autoload = true,
           use_git_branch = true,
-        })
-      end,
-    })
-    -- use({
-    --   "stevearc/resession.nvim",
-    --   config = function()
-    --     require("resession").setup({
-    --       autosave = {
-    --         enabled = true,
-    --         interval = 60,
-    --         notify = false,
-    --       },
-    --     })
-    --   end,
-    -- })
-    --
-    use({
-      "folke/which-key.nvim",
-      config = function()
-        vim.o.timeout = true
-        vim.o.timeoutlen = 300
-        require("which-key").setup({
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
         })
       end,
     })

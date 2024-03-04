@@ -10,23 +10,13 @@ require("lsp_signature").setup({
   bind = true,
   handler_opts = {
     border = "rounded",
-    -- border = {
-    --   "🭽",
-    --   "▔",
-    --   "🭾",
-    --   "▕",
-    --   "🭿",
-    --   "▁",
-    --   "🭼",
-    --   "▏",
-    -- },
   },
   toggle_key = "<M-x>",
 
-  max_width = 200,
   hint_enable = false,
 
   padding = " ",
+  doc_lines = 0,
 })
 
 require("lspkind")
@@ -79,12 +69,7 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    -- { name = "nvim_lsp_signature_help" },
     { name = "vsnip" },
-    -- { name = 'path' },
-    -- { name = 'cmdline' },
-    -- { name = 'buffer' },
-    -- { name = 'nvim_lua' },
   }),
   formatting = {
     fields = { "kind", "abbr" },

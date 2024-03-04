@@ -3,6 +3,7 @@ source ~/.zsh/plugged/zsh-async/async.zsh
 noop() {}
 
 load() {
+  autoload bashcompinit; bashcompinit
   autoload -Uz compinit; compinit
 
   load_async_plugins
