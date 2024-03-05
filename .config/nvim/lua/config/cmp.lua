@@ -56,21 +56,15 @@ cmp.setup({
     },
     documentation = cmp.config.window.bordered(),
   },
-  mapping = cmp.mapping.preset.insert({
-    ["<C-j>"] = cmp.mapping.select_next_item(),
-    ["<C-k>"] = cmp.mapping.select_prev_item(),
-    -- ['<space>'] = cmp.mapping.complete(),
-    ["<cr>"] = cmp.mapping.confirm({ select = true }),
-  }),
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)
     end,
   },
-  sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { name = "vsnip" },
-  }),
+  -- sources = cmp.config.sources({
+  --   { name = "nvim_lsp" },
+  --   { name = "vsnip" },
+  -- }),
   formatting = {
     fields = { "kind", "abbr" },
     format = function(_, vim_item)

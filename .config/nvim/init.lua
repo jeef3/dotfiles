@@ -13,7 +13,26 @@ vim.opt.filetype = "on"
 vim.opt.filetype.indent = "on"
 vim.opt.filetype.plugin = "on"
 
-require("plugins")
+----------------
+-- Lazy
+--
+-- Plug in management
+
+vim.opt.termguicolors = true
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+require("lazy").setup("plugins")
 
 ----------------
 -- Diff formatting
@@ -26,7 +45,7 @@ vim.opt.diffopt = {
   "closeoff", -- Stop the diff when we close
   "algorithm:histogram",
 }
---
+
 ----------------
 -- Other settings
 --
@@ -159,9 +178,9 @@ vim.opt.guicursor = {
 -- set t_8f=[38;2;%lu;%lu;%lum
 -- set t_8b=[48;2;%lu;%lu;%lum
 
-vim.opt.termguicolors = true
-vim.opt.background = "dark"
-vim.cmd.colorscheme("princess_theme")
+-- vim.opt.termguicolors = true
+-- vim.opt.background = "dark"
+-- vim.cmd.colorscheme("princess_theme")
 
 -- Hide all semantic highlights
 for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
