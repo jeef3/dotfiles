@@ -164,6 +164,7 @@ return require("packer").startup({
         { "onsails/lspkind.nvim" },
         { "ray-x/lsp_signature.nvim" },
         { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
+        { "hrsh7th/vim-vsnip" },
         { "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
         -- { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
         -- { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
