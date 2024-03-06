@@ -1,6 +1,4 @@
 return {
-  "wbthomason/packer.nvim",
-
   "tpope/vim-eunuch", -- Better shell cmds, like :Rename
 
   "tpope/vim-vinegar", -- Netrw enhancements
@@ -72,12 +70,12 @@ return {
   },
 
   -- Fancy notifications
-  {
-    "rcarriga/nvim-notify",
-    config = function()
-      vim.notify = require("notify")
-    end,
-  },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   config = function()
+  --     vim.notify = require("notify")
+  --   end,
+  -- },
 
   -- Searching
   {
@@ -136,14 +134,14 @@ return {
   },
 
   -- Debugging
-  {
-    "mfussenegger/nvim-dap",
-    dependencies = {
-      { "rcarriga/nvim-dap-ui" },
-      { "theHamsta/nvim-dap-virtual-text" },
-    },
-    config = [[require("config.dap")]],
-  },
+  -- {
+  --   "mfussenegger/nvim-dap",
+  --   dependencies = {
+  --     { "rcarriga/nvim-dap-ui" },
+  --     { "theHamsta/nvim-dap-virtual-text" },
+  --   },
+  --   config = [[require("config.dap")]],
+  -- },
 
   -- Testing
   {
@@ -239,11 +237,10 @@ return {
     config = function()
       local wilder = require("wilder")
       wilder.setup({
-        modes = { ":" },
+        modes = { ":", "/" },
         next_key = "<C-k>",
         previous_key = "<C-j>",
         accept_key = "<Tab>",
-        -- enable_cmdline_enter = 0,
       })
 
       wilder.set_option(

@@ -1,7 +1,6 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = "LazyFile",
     dependencies = {
       "nvim-lua/plenary.nvim",
 
@@ -18,22 +17,19 @@ return {
       },
 
       "mason.nvim",
-      "mason-lspconfig.nvim",
+      "williamboman/mason-lspconfig.nvim",
     },
-
-    opts = {
-      underline = true,
-    }
   },
   {
     "williamboman/mason.nvim",
-    cmd = "Mason",
-    build = ":MasonUpdate",
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
     config = function()
+      require("mason").setup()
       local lspconfig = require("lspconfig")
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      local omnisharp_bin = "/Users/jeffknaggs/.local/share/nvim/mason/bin/omnisharp"
+      local java_bin = "/Users/jeffknaggs/.local/share/nvim/mason/bin/jdtls"
+
       require("mason-lspconfig").setup_handlers({
         function(server_name)
           lspconfig[server_name].setup({
@@ -44,7 +40,6 @@ return {
         ["lua_ls"] = function()
           lspconfig.lua_ls.setup({
             capabilities = capabilities,
-            -- on_attach = on_attach,
             settings = {
               Lua = {
                 runtime = { version = "LuaJIT" },

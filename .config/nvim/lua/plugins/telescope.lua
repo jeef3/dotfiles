@@ -9,21 +9,24 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "rcarriga/nvim-notify",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
         enabled = vim.fn.executable("make") == 1,
-        after = function()
+        config = function()
           require("telescope").load_extension("fzf")
         end
       },
-      "rcarriga/nvim-notify",
     },
 
-    opts = function()
+    config = function()
+      local telescope = require("telescope")
+      local builtin = require("telescope.builtin")
+      local themes = require("telescope.themes")
       local actions = require("telescope.actions")
 
-      return {
+      telescope.setup({
         defaults = {
           mappings = {
             i = {
@@ -34,13 +37,7 @@ return {
           },
           dynamic_preview_title = true,
         },
-      }
-    end,
-
-    config = function()
-      local telescope = require("telescope")
-      local builtin = require("telescope.builtin")
-      local themes = require("telescope.themes")
+      })
 
       telescope.load_extension("notify")
 
@@ -52,6 +49,16 @@ return {
           selection_caret = "  ",
           prompt_title = "",
           previewer = false,
+          winblend = 5,
+        }))
+      end)
+
+      -- <C-p> Find in file
+      vim.keymap.set({ "n", "v" }, "<C-p>", function()
+        builtin.live_grep(themes.get_dropdown({
+          prompt_prefix = "   ",
+          selection_caret = "  ",
+          prompt_title = "Find in files",
           winblend = 5,
         }))
       end)

@@ -1,6 +1,6 @@
 return {
   "seblj/nvim-tabline",
-  dependencies = "kyazdani42/nvim-web-devicons",
+  dependencies = "nvim-tree/nvim-web-devicons",
 
   opts = {
     padding = 1,
