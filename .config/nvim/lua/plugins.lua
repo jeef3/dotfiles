@@ -6,7 +6,6 @@ return {
   "tpope/vim-sleuth", -- Set shiftwidth and expandtab based on current file
   "tpope/vim-commentary", -- gcc to comment line/paragraph
   "tpope/vim-surround", -- Change surrounds, quotes etc
-  -- "tpope/vim-obsession",-- Keep my session
   "tpope/vim-fugitive", -- Git wrapper, :Gstatus etc
 
   "Xvezda/vim-readonly", -- Lock a bunch of files like node_modules
@@ -36,7 +35,6 @@ return {
   -- Newer auto-pairs
   {
     "windwp/nvim-autopairs",
-    -- commit = "00def0123a1a728c313a7dd448727eac71392c57",
     config = function()
       require("nvim-autopairs").setup()
     end,
@@ -70,41 +68,12 @@ return {
   },
 
   -- Fancy notifications
-  -- {
-  --   "rcarriga/nvim-notify",
-  --   config = function()
-  --     vim.notify = require("notify")
-  --   end,
-  -- },
-
-  -- Searching
   {
-    {
-      "nvim-telescope/telescope.nvim",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope-fzf-native.nvim",
-        "rcarriga/nvim-notify",
-      },
-      config = [[require("config.telescope")]],
-    },
-    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    "rcarriga/nvim-notify",
+    config = function()
+      vim.notify = require("notify")
+    end,
   },
-
-  -- LSP
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   dependencies = {
-  --     "hrsh7th/cmp-nvim-lsp",
-  --     "nvim-lua/plenary.nvim",
-  --     "nvimdev/lspsaga.nvim",
-  --     "nvimtools/none-ls.nvim",
-  --     "nvim-tree/nvim-web-devicons",
-  --     "williamboman/mason.nvim",
-  --     "williamboman/mason-lspconfig.nvim",
-  --   },
-  --   config = [[require("config.lspconfig")]],
-  -- },
 
   -- Useful quick fix list
   {
@@ -115,33 +84,15 @@ return {
     end,
   },
 
-  -- Code Completion
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "onsails/lspkind.nvim" },
-      { "ray-x/lsp_signature.nvim" },
-      { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
-      { "hrsh7th/vim-vsnip" },
-      { "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
-      -- { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-      -- { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-      -- { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
-      -- { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
-    },
-    config = [[require("config.cmp")]],
-  },
-
   -- Debugging
-  -- {
-  --   "mfussenegger/nvim-dap",
-  --   dependencies = {
-  --     { "rcarriga/nvim-dap-ui" },
-  --     { "theHamsta/nvim-dap-virtual-text" },
-  --   },
-  --   config = [[require("config.dap")]],
-  -- },
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      { "rcarriga/nvim-dap-ui" },
+      { "theHamsta/nvim-dap-virtual-text" },
+    },
+    config = [[require("config.dap")]],
+  },
 
   -- Testing
   {
@@ -168,11 +119,11 @@ return {
   -- Theme
   {
     -- "~/projects/princess.nvim",
-    'git@github.com:jeef3/princess.nvim.git',
+    "git@github.com:jeef3/princess.nvim.git",
     dependencies = { "rktjmp/lush.nvim" },
     config = function()
       vim.cmd.colorscheme("princess_theme")
-    end
+    end,
   },
 
   -- Git and diff
@@ -197,9 +148,8 @@ return {
   {
     "declancm/cinnamon.nvim",
     opts = {
-       default_delay = 4
-     },
-      vim.keymap.set({ "n", "x" }, "gg", "<Cmd>lua Scroll('gg')<CR>")
+      default_delay = 4,
+    },
   },
 
   -- Strip whitespace
@@ -213,7 +163,7 @@ return {
   -- Markdown preview
   {
     "toppair/peek.nvim",
-    run = "deno task --quiet build:fast",
+    build = "deno task --quiet build:fast",
     config = function()
       require("peek").setup()
 
@@ -268,16 +218,6 @@ return {
     end,
   },
 
-  -- Session management
-  -- {
-  --   "rmagatti/auto-session",
-  --   dependencies = { "rmagatti/session-lens", "nvim-telescope/telescope.nvim" },
-  --   config = function()
-  --     require("session-lens").setup()
-  --     vim.g.auto_sesion_use_git_branch = true
-  --     require("auto-session").setup({})
-  --   end,
-  -- },
   {
     "olimorris/persisted.nvim",
     config = function()

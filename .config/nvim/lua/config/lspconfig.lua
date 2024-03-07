@@ -6,7 +6,6 @@
 
 local lspconfig = require("lspconfig")
 local lspsaga = require("lspsaga")
-local null_ls = require("null-ls")
 local cmp = require("cmp_nvim_lsp")
 
 lspsaga.setup({
@@ -100,23 +99,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-null_ls.setup({
-  debug = true,
-  sources = {
-    -- JavaScript
-    null_ls.builtins.formatting.prettierd,
-
-    -- C, C++ (Arduino),
-    -- null_ls.builtins.formatting.astyle,
-
-    -- YAML
-    null_ls.builtins.diagnostics.yamllint,
-    -- null_ls.builtins.formatting.yamlfix,
-    -- null_ls.builtins.formatting.yamlfmt,
-
-    -- Lua
-    --null_ls.builtins.diagnostics.luacheck,
-    null_ls.builtins.formatting.stylua,
-  },
-  -- on_attach = on_attach,
-})

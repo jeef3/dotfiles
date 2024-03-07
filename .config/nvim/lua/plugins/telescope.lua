@@ -62,6 +62,32 @@ return {
           winblend = 5,
         }))
       end)
+
+      -- <C-s> Find symbols
+      vim.keymap.set({ "n", "v" }, "<C-s>", function()
+        builtin.lsp_dynamic_workspace_symbols({
+          prompt_prefix = " ",
+          selection_caret = "  ",
+          prompt_title = "Symbols",
+          winblend = 5,
+          file_ignore_patterns = { "node_modules" },
+        })
+      end)
+
+      -- <C-S> Find symbols
+      vim.keymap.set({ "n", "v" }, "gs", function()
+        builtin.lsp_document_symbols(themes.get_dropdown({
+          prompt_prefix = " ",
+          selection_caret = "  ",
+          prompt_title = "Symbols",
+          winblend = 5,
+        }))
+      end)
+
+      -- <C-y> Jump list
+      vim.keymap.set({ "n", "v" }, "<C-y>", function()
+        builtin.jumplist({})
+      end)
     end
   },
 }

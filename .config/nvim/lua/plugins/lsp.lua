@@ -1,11 +1,18 @@
+----------------
+-- LSP Config
+--
+-- https://github.com/neovim/nvim-lspconfig
+----------------
+
 return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
       "nvim-lua/plenary.nvim",
 
+      "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
-      -- "nvimdev/lspsaga.nvim",
+      "nvimdev/lspsaga.nvim",
       "nvimtools/none-ls.nvim",
       "nvim-tree/nvim-web-devicons",
 
@@ -21,14 +28,34 @@ return {
     },
   },
   {
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua" },
+        yaml = { "yamlfmt" },
+        javascript = { { "prettierd", "prettier" } },
+        javascriptreact = { { "prettierd", "prettier" } },
+        typescript = { { "prettierd", "prettier" } },
+        typescriptreact = { { "prettierd", "prettier" } },
+      },
+      format_on_save = {
+        timeout_ms = 500,
+        lps_fallback = true,
+      },
+    },
+  },
+  {
     "williamboman/mason.nvim",
     config = function()
       require("mason").setup()
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      local omnisharp_bin = "/Users/jeffknaggs/.local/share/nvim/mason/bin/omnisharp"
-      local java_bin = "/Users/jeffknaggs/.local/share/nvim/mason/bin/jdtls"
+      local omnisharp_bin = os.getenv("HOME")
+        .. "/.local/share/nvim/mason/bin/omnisharp"
+      local java_bin = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/jdtls"
 
       require("mason-lspconfig").setup_handlers({
         function(server_name)
@@ -85,6 +112,6 @@ return {
           })
         end,
       })
-    end
-  }
+    end,
+  },
 }
