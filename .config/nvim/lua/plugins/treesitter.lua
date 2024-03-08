@@ -19,33 +19,53 @@ return {
   end,
 
   config = function()
-    vim.opt.foldlevel = 20
-    vim.opt.foldmethod = "expr"
-    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-
     require("nvim-treesitter.configs").setup({
       ensure_installed = {
+        "arduino",
         "bash",
         "c",
+        "c_sharp",
+        "cmake",
+        "css",
+        "csv",
         "diff",
+        "dockerfile",
+        "git_config",
+        "git_rebase",
+        "gitattributes",
+        "gitcommit",
+        "gitignore",
+        "go",
+        "haskell",
         "html",
+        "java",
         "javascript",
+        "jq",
         "jsdoc",
         "json",
+        "json5",
         "jsonc",
         "lua",
         "luadoc",
         "luap",
+        "make",
         "markdown",
         "markdown_inline",
         "python",
         "query",
         "regex",
+        "ruby",
+        "rust",
+        "scss",
+        "swift",
+        "tmux",
+        "todotxt",
         "toml",
         "tsx",
         "typescript",
         "vim",
         "vimdoc",
+        "xml",
         "yaml",
       },
       indent = {
@@ -56,5 +76,9 @@ return {
         additional_vim_regex_highlighting = false,
       },
     })
+
+    vim.opt.foldlevel = 20
+    vim.opt.foldmethod = "expr"
+    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
   end,
 }

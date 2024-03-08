@@ -53,7 +53,7 @@ return {
       snippet = {
         expand = function(args)
           vim.fn["vsnip#anonymous"](args.body)
-        end
+        end,
       },
       completion = {
         completeopt = "menu,menuone,noinsert",
@@ -61,17 +61,21 @@ return {
       sources = cmp.config.sources({
         { name = "vsnip" },
         { name = "nvim_lsp" },
-        { name = 'nvim_lsp_signature_help' }
+        { name = "nvim_lsp_signature_help" },
       }),
       mapping = cmp.mapping.preset.insert({
-        ["<C-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-        ["<C-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-j>"] = cmp.mapping.select_next_item({
+          behavior = cmp.SelectBehavior.Insert,
+        }),
+        ["<C-k>"] = cmp.mapping.select_prev_item({
+          behavior = cmp.SelectBehavior.Insert,
+        }),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<cr>"] = cmp.mapping.confirm({ select = true }),
       }),
       window = {
         completion = {
-          col_offset = -3,
+          col_offset = -2,
           side_padding = 0,
         },
         documentation = cmp.config.window.bordered(),

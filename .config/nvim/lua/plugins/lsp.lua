@@ -9,12 +9,13 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+
+      "nvimdev/lspsaga.nvim",
+      "nvimtools/none-ls.nvim",
 
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
-      "nvimdev/lspsaga.nvim",
-      "nvimtools/none-ls.nvim",
-      "nvim-tree/nvim-web-devicons",
 
       {
         "folke/neodev.nvim",
@@ -25,6 +26,77 @@ return {
 
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+    },
+    config = function()
+      vim.cmd([[
+        sign define DiagnosticSignError texthl=DiagnosticSignError numhl=DiagnosticLineNrError
+        sign define DiagnosticSignWarn  texthl=DiagnosticSignWarn  numhl=DiagnosticLineNrWarn
+        sign define DiagnosticSignInfo  texthl=DiagnosticSignInfo  numhl=DiagnosticLineNrInfo
+        sign define DiagnosticSignHint  texthl=DiagnosticSignHint  numhl=DiagnosticLineNrHint
+      ]])
+
+      for type, icon in pairs({
+        Error = " ",
+        Warn = " ",
+        Hint = " ",
+        Info = " ",
+      }) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
+
+      vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+        vim.lsp.diagnostic.on_publish_diagnostics,
+        { virtual_text = { prefix = "⏹" } }
+      )
+
+      vim.api.nvim_create_autocmd("LspAttach", {
+        desc = "LSP Attach",
+        callback = function()
+          local bufmap = function(mode, lhs, rhs)
+            vim.keymap.set(mode, lhs, rhs, { buffer = true })
+          end
+
+          bufmap("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
+          bufmap("n", "gi", "<cmd>Lspsaga goto_type_definition<CR>")
+          bufmap("n", "gK", "<cmd>Lspsaga peek_type_definition<CR>")
+          bufmap("n", "gr", "<cmd>Lspsaga finder<CR>")
+
+          bufmap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+
+          bufmap("n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+          bufmap("n", "]g", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+
+          bufmap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>")
+          bufmap("n", "<leader>qf", "<cmd>Lspsaga code_action<CR>")
+          bufmap("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
+
+          bufmap("n", "<space>e", "<cmd>Lspsaga show_line_diagnostics<CR>")
+        end,
+      })
+    end,
+  },
+  {
+    "nvimdev/lspsaga.nvim",
+    opts = {
+      code_action = {},
+      lightbulb = { enable = false },
+      finder = {
+        max_height = 0.8,
+        force_max_height = true,
+        layout = "float",
+      },
+      ui = {
+        title = true,
+        border = "rounded",
+        winblend = 5,
+        expand = "",
+        collapse = "",
+        preview = " ",
+        code_action = "💡",
+        hover = " ",
+      },
+      symbol_in_winbar = { enable = true, separator = "  " },
     },
   },
   {

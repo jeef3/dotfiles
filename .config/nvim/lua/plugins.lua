@@ -51,6 +51,8 @@ return {
   -- Colored colors
   {
     "norcalli/nvim-colorizer.lua",
+    -- main = "colorizer",
+    -- config = true,
     config = function()
       require("colorizer").setup()
     end,
@@ -85,14 +87,14 @@ return {
   },
 
   -- Debugging
-  {
-    "mfussenegger/nvim-dap",
-    dependencies = {
-      { "rcarriga/nvim-dap-ui" },
-      { "theHamsta/nvim-dap-virtual-text" },
-    },
-    config = [[require("config.dap")]],
-  },
+  -- {
+  --   "mfussenegger/nvim-dap",
+  --   dependencies = {
+  --     { "rcarriga/nvim-dap-ui" },
+  --     { "theHamsta/nvim-dap-virtual-text" },
+  --   },
+  --   config = [[require("config.dap")]],
+  -- },
 
   -- Testing
   {
@@ -118,8 +120,9 @@ return {
 
   -- Theme
   {
-    -- "~/projects/princess.nvim",
-    "git@github.com:jeef3/princess.nvim.git",
+    -- "jeef3/princess.nvim",
+    dir = "~/projects/princess.nvim",
+    -- dev = true,
     dependencies = { "rktjmp/lush.nvim" },
     config = function()
       vim.cmd.colorscheme("princess_theme")
