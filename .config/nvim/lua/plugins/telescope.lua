@@ -16,7 +16,7 @@ return {
         enabled = vim.fn.executable("make") == 1,
         config = function()
           require("telescope").load_extension("fzf")
-        end
+        end,
       },
     },
 
@@ -35,7 +35,30 @@ return {
               ["<c-k>"] = actions.move_selection_previous,
             },
           },
+          preview = {
+            filesize_limit = 0.5,
+          },
           dynamic_preview_title = true,
+          file_ignore_patterns = { "node_modules", ".git" },
+          winblend = 20,
+          selection_caret = "  ",
+          vimgrep_arguments = {
+            "rg",
+            "--hidden",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+          },
+          find_command = {
+            "fd",
+            "--type",
+            "f",
+            "--hidden",
+            "--strip-cwd-prefix",
+          },
         },
       })
 
@@ -44,12 +67,9 @@ return {
       -- <C-t> Find files
       vim.keymap.set({ "n", "v" }, "<C-t>", function()
         builtin.find_files(themes.get_dropdown({
-          find_command = { "fd", "--type", "f", "--hidden", "--strip-cwd-prefix" },
           prompt_prefix = "   ",
-          selection_caret = "  ",
           prompt_title = "",
           previewer = false,
-          winblend = 5,
         }))
       end)
 
@@ -57,9 +77,7 @@ return {
       vim.keymap.set({ "n", "v" }, "<C-p>", function()
         builtin.live_grep(themes.get_dropdown({
           prompt_prefix = "   ",
-          selection_caret = "  ",
           prompt_title = "Find in files",
-          winblend = 5,
         }))
       end)
 
@@ -67,10 +85,7 @@ return {
       vim.keymap.set({ "n", "v" }, "<C-s>", function()
         builtin.lsp_dynamic_workspace_symbols({
           prompt_prefix = " ",
-          selection_caret = "  ",
           prompt_title = "Symbols",
-          winblend = 5,
-          file_ignore_patterns = { "node_modules" },
         })
       end)
 
@@ -78,16 +93,16 @@ return {
       vim.keymap.set({ "n", "v" }, "gs", function()
         builtin.lsp_document_symbols(themes.get_dropdown({
           prompt_prefix = " ",
-          selection_caret = "  ",
           prompt_title = "Symbols",
-          winblend = 5,
         }))
       end)
 
       -- <C-y> Jump list
       vim.keymap.set({ "n", "v" }, "<C-y>", function()
-        builtin.jumplist({})
+        builtin.jumplist({
+          prompt_prefix = "󰆷 ",
+        })
       end)
-    end
+    end,
   },
 }
