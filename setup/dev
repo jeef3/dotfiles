@@ -1,9 +1,6 @@
 #!/bin/sh
 
-npm install -g \
-  typescript-language-server \
-  eslint_d \
-  @fsouza/prettierd
+# npm install -g \
 #   create-react-app \
 #   react-native-cli \
 #   import-js \
