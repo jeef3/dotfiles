@@ -27,14 +27,37 @@ return {
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
     },
-    config = function()
-      vim.cmd([[
-        sign define DiagnosticSignError texthl=DiagnosticSignError numhl=DiagnosticLineNrError
-        sign define DiagnosticSignWarn  texthl=DiagnosticSignWarn  numhl=DiagnosticLineNrWarn
-        sign define DiagnosticSignInfo  texthl=DiagnosticSignInfo  numhl=DiagnosticLineNrInfo
-        sign define DiagnosticSignHint  texthl=DiagnosticSignHint  numhl=DiagnosticLineNrHint
-      ]])
-
+    opts = {
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        virtual_text = {
+          spacing = 4,
+          source = "if_many",
+          prefix = "●",
+        },
+        severity_sort = true,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = " ",
+            [vim.diagnostic.severity.HINT] = " ",
+            [vim.diagnostic.severity.INFO] = " ",
+          },
+        },
+      },
+      inlay_hints = {
+        enabled = false,
+      },
+      codelens = {
+        enabled = false,
+      },
+      format = {
+        formatting_options = nil,
+        timeout_ms = nil,
+      },
+    },
+    config = function(_, opts)
       for type, icon in pairs({
         Error = " ",
         Warn = " ",
@@ -44,7 +67,6 @@ return {
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
       end
-
       vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics,
         { virtual_text = { prefix = "⏹" } }
@@ -63,6 +85,7 @@ return {
           bufmap("n", "gr", "<cmd>Lspsaga finder<CR>")
 
           bufmap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+          -- bufmap("n", "K", vim.lsp.buf.hover)
 
           bufmap("n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
           bufmap("n", "]g", "<cmd>Lspsaga diagnostic_jump_next<CR>")
