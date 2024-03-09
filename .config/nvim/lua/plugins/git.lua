@@ -1,10 +1,9 @@
-----------------
--- Git Signs
---
--- https://github.com/lewis6991/gitsigns.nvim
-----------------
-
 return {
+  ----------------
+  -- Git Signs
+  --
+  -- https://github.com/lewis6991/gitsigns.nvim
+  ----------------
   "lewis6991/gitsigns.nvim",
   opts = {
     signs = {
@@ -63,5 +62,48 @@ return {
       -- Text object
       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
     end,
+  },
+  {
+    ----------------
+    -- Diff View
+    --
+    -- https://github.com/sindrets/diffview.nvim
+    ----------------
+    "sindrets/diffview.nvim",
+    opts = {
+      enhanced_diff_hl = true,
+      signs = {
+        fold_closed = "",
+        fold_open = "",
+        done = "✓",
+      },
+      hooks = {
+        view_enter = function()
+          vim.cmd([[:Gitsigns toggle_numhl true]])
+        end,
+        view_leave = function()
+          vim.cmd([[:Gitsigns toggle_numhl false]])
+        end,
+      },
+    },
+  },
+
+  ----------------
+  -- Lazygit
+  --
+  -- https://github.com/kdheepak/lazygit.nvim
+  ----------------
+  {
+    "kdheepak/lazygit.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
   },
 }
