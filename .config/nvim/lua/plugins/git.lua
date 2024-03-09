@@ -113,4 +113,18 @@ return {
       vim.g.lazygit_floating_window_use_plenary = 0
     end,
   },
+
+  ----------------
+  -- Flog
+  --
+  -- https://github.com/rbong/vim-flog
+  ----------------
+  {
+    "rbong/vim-flog",
+    lazy = true,
+    cmd = { "Flog", "Flogsplit", "Floggit" },
+    dependencies = {
+      "tpope/vim-fugitive",
+    },
+  },
 }
