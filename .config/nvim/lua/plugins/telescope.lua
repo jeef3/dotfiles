@@ -52,13 +52,6 @@ return {
             "--column",
             "--smart-case",
           },
-          find_command = {
-            "fd",
-            "--type",
-            "f",
-            "--hidden",
-            "--strip-cwd-prefix",
-          },
         },
       })
 
@@ -67,6 +60,13 @@ return {
       -- <C-t> Find files
       vim.keymap.set({ "n", "v" }, "<C-t>", function()
         builtin.find_files(themes.get_dropdown({
+          find_command = {
+            "fd",
+            "--type",
+            "f",
+            "--hidden",
+            "--strip-cwd-prefix",
+          },
           prompt_prefix = "   ",
           prompt_title = "",
           previewer = false,
