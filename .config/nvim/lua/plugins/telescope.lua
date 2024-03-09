@@ -39,7 +39,7 @@ return {
             filesize_limit = 0.5,
           },
           dynamic_preview_title = true,
-          file_ignore_patterns = { "node_modules", ".git" },
+          file_ignore_patterns = { "node_modules" },
           winblend = 20,
           selection_caret = "  ",
           vimgrep_arguments = {

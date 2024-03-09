@@ -129,10 +129,6 @@ return {
     end,
   },
 
-  -- Git and diff
-  { "lewis6991/gitsigns.nvim", config = [[require("config.gitsigns")]] },
-  { "sindrets/diffview.nvim", config = [[require("config.diffview")]] },
-
   -- Zen editing mode
   {
     "folke/zen-mode.nvim",
@@ -185,41 +181,41 @@ return {
     config = [[require("config.overseer")]],
   },
 
-  {
-    "gelguy/wilder.nvim",
-    config = function()
-      local wilder = require("wilder")
-      wilder.setup({
-        modes = { ":", "/" },
-        next_key = "<C-k>",
-        previous_key = "<C-j>",
-        accept_key = "<Tab>",
-      })
+  -- {
+  --   "gelguy/wilder.nvim",
+  --   config = function()
+  --     local wilder = require("wilder")
+  --     wilder.setup({
+  --       modes = { ":", "/" },
+  --       next_key = "<C-k>",
+  --       previous_key = "<C-j>",
+  --       accept_key = "<Tab>",
+  --     })
 
-      wilder.set_option(
-        "pipeline",
-        wilder.branch(wilder.cmdline_pipeline({
-          fuzzy = 1,
-        }))
-      )
+  --     wilder.set_option(
+  --       "pipeline",
+  --       wilder.branch(wilder.cmdline_pipeline({
+  --         fuzzy = 1,
+  --       }))
+  --     )
 
-      wilder.set_option(
-        "renderer",
-        wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
-          highlights = {
-            border = "Normal",
-          },
-          border = "rounded",
-          pumblend = 20,
-          -- highlighter applies highlighting to the candidates
-          highlighter = wilder.basic_highlighter(),
-          reverse = 1,
-          left = { " ", wilder.popupmenu_devicons() },
-          right = { " ", wilder.popupmenu_scrollbar() },
-        }))
-      )
-    end,
-  },
+  --     wilder.set_option(
+  --       "renderer",
+  --       wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
+  --         highlights = {
+  --           border = "Normal",
+  --         },
+  --         border = "rounded",
+  --         pumblend = 20,
+  --         -- highlighter applies highlighting to the candidates
+  --         highlighter = wilder.basic_highlighter(),
+  --         reverse = 1,
+  --         left = { " ", wilder.popupmenu_devicons() },
+  --         right = { " ", wilder.popupmenu_scrollbar() },
+  --       }))
+  --     )
+  --   end,
+  -- },
 
   {
     "olimorris/persisted.nvim",
@@ -229,5 +225,77 @@ return {
         use_git_branch = true,
       })
     end,
+  },
+
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    opts = {
+      -- add any options here
+      cmdline = {
+        format = {
+          cmdline = {
+            title = "",
+            pattern = "^:",
+            icon = " ",
+            lang = "vim",
+          },
+        },
+      },
+      popupmenu = {
+        backend = "nui",
+      },
+      messages = {
+        enabled = false,
+      },
+      presets = {
+        bottom_search = false,
+        command_palette = true,
+        lsp_doc_border = true,
+      },
+      lsp = {
+        signature = {
+          auto_open = {
+            enabled = false,
+          },
+        },
+      },
+    },
+  },
+
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+
+      "nvim-tree/nvim-web-devicons",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    },
+    opts = {
+      filesystem = {
+        hijack_netrw_behavior = "open_current",
+        filtered_items = {
+          hide_hidden = false,
+        },
+      },
+      window = {
+        mappings = {
+          ["-"] = "navigate_up",
+          ["/"] = "fuzzy_finder",
+        },
+        fuzzy_finder_mappings = {
+          ["<down>"] = "move_cursor_down",
+          ["<C-j>"] = "move_cursor_down",
+          ["<up>"] = "move_cursor_up",
+          ["<C-k>"] = "move_cursor_up",
+        },
+      },
+    },
   },
 }
