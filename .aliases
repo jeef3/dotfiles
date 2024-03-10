@@ -13,6 +13,7 @@ alias t="todo.sh"
 alias todo="todotxt-machine ./todo.txt"
 
 alias ts="tig status"
+alias lg="lazygit"
 
 alias vims="vim -S Session.vim"
 alias nvims="nvim -S Session.vim"

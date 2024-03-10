@@ -1,7 +1,10 @@
 BREW_HOME=$(brew --prefix)
 
 # Good ol z
-. $BREW_HOME/etc/profile.d/z.sh
+eval "$(zoxide init zsh)"
+
+# Shell history
+eval "$(atuin init zsh)"
 
 # ~/.extra can be used for settings you don’t want to commit
 for file in ~/.{extra,exports,aliases,functions}; do
