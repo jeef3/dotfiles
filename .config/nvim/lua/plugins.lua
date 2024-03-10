@@ -227,6 +227,14 @@ return {
     end,
   },
 
+  ----------------
+  -- Noice
+  --
+  -- 💥Highly experimental plugin that completely replaces the UI for messages,
+  -- cmdline and the popupmenu.
+  --
+  -- https://github.com/folke/noice.nvim
+  ----------------
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -260,6 +268,12 @@ return {
           border = { 1, 1 },
           win_options = { winblend = 20 },
         },
+        mini = {
+          position = {
+            row = -2,
+            col = "100%",
+          },
+        },
       },
       cmdline = {
         win_options = {
@@ -286,6 +300,10 @@ return {
         lsp_doc_border = true,
       },
       lsp = {
+        progress = {
+          enabled = true,
+          format = "lsp_progress_done",
+        },
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
