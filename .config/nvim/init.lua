@@ -51,7 +51,6 @@ vim.opt.diffopt = {
 -- Other settings
 --
 vim.opt.omnifunc = "syntaxcomplete#Complete"
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 vim.opt.writebackup = false
 vim.opt.swapfile = false

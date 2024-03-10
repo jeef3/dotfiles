@@ -33,64 +33,81 @@ local icons = {
 }
 
 return {
-  "hrsh7th/nvim-cmp",
-  event = "InsertEnter",
-  dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-vsnip",
-    "hrsh7th/vim-vsnip",
+  {
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-vsnip",
+      "hrsh7th/vim-vsnip",
 
-    "onsails/lspkind.nvim",
+      "onsails/lspkind.nvim",
 
-    -- "ray-x/lsp_signature.nvim",
-    "hrsh7th/cmp-nvim-lsp-signature-help",
+      -- "ray-x/lsp_signature.nvim",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      "windwp/nvim-autopairs",
+    },
+
+    opts = function()
+      local cmp = require("cmp")
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+      return {
+        snippet = {
+          expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+          end,
+        },
+        completion = {
+          completeopt = "menu,menuone,noinsert",
+        },
+        sources = cmp.config.sources({
+          { name = "vsnip" },
+          { name = "nvim_lsp" },
+          { name = "nvim_lsp_signature_help" },
+        }),
+        mapping = cmp.mapping.preset.insert({
+          ["<C-j>"] = cmp.mapping.select_next_item({
+            behavior = cmp.SelectBehavior.Insert,
+          }),
+          ["<C-k>"] = cmp.mapping.select_prev_item({
+            behavior = cmp.SelectBehavior.Insert,
+          }),
+          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<cr>"] = cmp.mapping.confirm({ select = true }),
+        }),
+        window = {
+          completion = {
+            col_offset = -2,
+            side_padding = 0,
+          },
+          documentation = cmp.config.window.bordered(),
+        },
+        formatting = {
+          fields = { "kind", "abbr" },
+          format = function(_, item)
+            item.kind = " " .. icons[item.kind] or "" .. " "
+
+            return item
+          end,
+        },
+        experimental = {
+          ghost_text = true,
+        },
+      }
+    end,
   },
 
-  opts = function()
-    local cmp = require("cmp")
-
-    return {
-      snippet = {
-        expand = function(args)
-          vim.fn["vsnip#anonymous"](args.body)
-        end,
-      },
-      completion = {
-        completeopt = "menu,menuone,noinsert",
-      },
-      sources = cmp.config.sources({
-        { name = "vsnip" },
-        { name = "nvim_lsp" },
-        { name = "nvim_lsp_signature_help" },
-      }),
-      mapping = cmp.mapping.preset.insert({
-        ["<C-j>"] = cmp.mapping.select_next_item({
-          behavior = cmp.SelectBehavior.Insert,
-        }),
-        ["<C-k>"] = cmp.mapping.select_prev_item({
-          behavior = cmp.SelectBehavior.Insert,
-        }),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<cr>"] = cmp.mapping.confirm({ select = true }),
-      }),
-      window = {
-        completion = {
-          col_offset = -2,
-          side_padding = 0,
-        },
-        documentation = cmp.config.window.bordered(),
-      },
-      formatting = {
-        fields = { "kind", "abbr" },
-        format = function(_, item)
-          item.kind = " " .. icons[item.kind] or "" .. " "
-
-          return item
-        end,
-      },
-      experimental = {
-        ghost_text = true,
-      },
-    }
-  end,
+  -- Newer auto-pairs
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {
+      check_ts = true,
+      enable_check_bracket_line = true,
+    },
+    config = true,
+  },
 }
