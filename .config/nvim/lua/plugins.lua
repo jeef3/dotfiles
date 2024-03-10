@@ -36,16 +36,6 @@ return {
     end,
   },
 
-  -- Debugging
-  -- {
-  --   "mfussenegger/nvim-dap",
-  --   dependencies = {
-  --     { "rcarriga/nvim-dap-ui" },
-  --     { "theHamsta/nvim-dap-virtual-text" },
-  --   },
-  --   config = [[require("config.dap")]],
-  -- },
-
   -- Markdown preview
   {
     "toppair/peek.nvim",
@@ -56,16 +46,6 @@ return {
       vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
       vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
     end,
-  },
-
-  -- Task runner
-  {
-    "stevearc/overseer.nvim",
-    dependencies = {
-      "rcarriga/nvim-notify",
-      "stevearc/dressing.nvim",
-    },
-    config = [[require("config.overseer")]],
   },
 
   -- {
