@@ -1,9 +1,3 @@
-----------------
--- CMP
---
---https://github.com/hrsh7th/nvim-cmp
-------------------
-
 local icons = {
   Text = " ",
   Method = " ",
@@ -33,6 +27,13 @@ local icons = {
 }
 
 return {
+  ----------------
+  -- CMP
+  --
+  -- A completion plugin for neovim coded in Lua.
+  --
+  -- https://github.com/hrsh7th/nvim-cmp
+  ------------------
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -100,7 +101,13 @@ return {
     end,
   },
 
-  -- Newer auto-pairs
+  ------------------
+  -- Autopairs
+  --
+  -- Autopairs for neovim written in lua
+  --
+  -- https://github.com/windwp/nvim-autopairs
+  ------------------
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
@@ -109,5 +116,23 @@ return {
       enable_check_bracket_line = true,
     },
     config = true,
+  },
+
+  ------------------
+  -- Highlight other uses of a word
+  --
+  -- (Neo)Vim plugin for automatically highlighting other uses of the word under
+  -- the cursor using either LSP, Tree-sitter, or regex matching.
+  --
+  -- https://github.com/RRethy/vim-illuminate
+  ------------------
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("illuminate").configure({
+        providers = { "lsp" },
+        under_cursor = false,
+      })
+    end,
   },
 }

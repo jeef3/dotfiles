@@ -10,6 +10,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "rcarriga/nvim-notify",
+      "olimorris/persisted.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
@@ -68,6 +69,7 @@ return {
       })
 
       telescope.load_extension("notify")
+      telescope.load_extension("persisted")
 
       -- <C-t> Find files
       vim.keymap.set({ "n", "v" }, "<C-t>", function()

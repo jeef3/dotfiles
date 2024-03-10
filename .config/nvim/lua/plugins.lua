@@ -15,57 +15,15 @@ return {
   "justinmk/vim-sneak", -- Minimal EasyMotion s
   "jeef3/splitsizer.vim", -- Split resizing <c-a>, <c-s>
 
-  -- {
-  --   "folke/neodev.nvim",
-  --   config = function()
-  --     require("neodev").setup({
-  --       library = { plugins = { "neotest" }, types = true },
-  --     })
-  --   end,
-  -- },
+  "ethanholz/nvim-lastplace", -- Restore cursor position
 
-  -- Restore cursor position
-  {
-    "ethanholz/nvim-lastplace",
-    config = function()
-      require("nvim-lastplace").setup()
-    end,
-  },
-
-  -- Auto-close HTML tags
-  {
-    "windwp/nvim-ts-autotag",
-    config = function()
-      require("nvim-ts-autotag").setup()
-    end,
-  },
+  { "windwp/nvim-ts-autotag", config = true }, -- Auto-close HTML tags
 
   -- Colored colors
   {
     "norcalli/nvim-colorizer.lua",
-    -- main = "colorizer",
-    -- config = true,
     config = function()
       require("colorizer").setup()
-    end,
-  },
-
-  -- Highlight other uses of a word
-  {
-    "RRethy/vim-illuminate",
-    config = function()
-      require("illuminate").configure({
-        providers = { "lsp" },
-        under_cursor = false,
-      })
-    end,
-  },
-
-  -- Fancy notifications
-  {
-    "rcarriga/nvim-notify",
-    config = function()
-      vim.notify = require("notify")
     end,
   },
 
@@ -87,69 +45,6 @@ return {
   --   },
   --   config = [[require("config.dap")]],
   -- },
-
-  -- Testing
-  {
-    "nvim-neotest/neotest",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
-      "marilari88/neotest-vitest",
-      "thenbe/neotest-playwright",
-    },
-    config = [[require("config.neotest")]],
-  },
-
-  -- Code Coverage
-  {
-    "andythigpen/nvim-coverage",
-    dependencies = "nvim-lua/plenary.nvim",
-    config = function()
-      require("coverage").setup()
-    end,
-  },
-
-  -- Theme
-  {
-    -- "jeef3/princess.nvim",
-    dir = "~/projects/princess.nvim",
-    -- dev = true,
-    dependencies = { "rktjmp/lush.nvim" },
-    config = function()
-      vim.cmd.colorscheme("princess_theme")
-    end,
-  },
-
-  -- Zen editing mode
-  {
-    "folke/zen-mode.nvim",
-    config = function()
-      require("zen-mode").setup({
-        window = { width = 90 },
-        plugins = {
-          tmux = { enabled = true },
-          kitty = { enabled = true, font = "+4" },
-        },
-      })
-    end,
-  },
-
-  -- Smooth scrolling
-  {
-    "declancm/cinnamon.nvim",
-    opts = {
-      default_delay = 4,
-    },
-  },
-
-  -- Strip whitespace
-  {
-    "lewis6991/spaceless.nvim",
-    config = function()
-      require("spaceless").setup()
-    end,
-  },
 
   -- Markdown preview
   {
@@ -209,45 +104,20 @@ return {
   --   end,
   -- },
 
+  ------------------
+  -- Persisted
+  --
+  -- 💾 Simple session management for Neovim with git branching, autoloading and
+  -- Telescope support
+  --
+  -- https://github.com/olimorris/persisted.nvim
+  ------------------
   {
     "olimorris/persisted.nvim",
-    config = function()
-      require("persisted").setup({
-        autoload = true,
-        use_git_branch = true,
-      })
-    end,
-  },
-
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-
-      "nvim-tree/nvim-web-devicons",
-      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-    },
     opts = {
-      filesystem = {
-        hijack_netrw_behavior = "open_current",
-        filtered_items = {
-          hide_hidden = false,
-        },
-      },
-      window = {
-        mappings = {
-          ["-"] = "navigate_up",
-          ["/"] = "fuzzy_finder",
-        },
-        fuzzy_finder_mappings = {
-          ["<down>"] = "move_cursor_down",
-          ["<C-j>"] = "move_cursor_down",
-          ["<up>"] = "move_cursor_up",
-          ["<C-k>"] = "move_cursor_up",
-        },
-      },
+      autoload = true,
+      use_git_branch = true,
     },
+    config = true,
   },
 }

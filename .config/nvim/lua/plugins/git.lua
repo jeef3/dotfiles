@@ -2,6 +2,8 @@ return {
   ----------------
   -- Git Signs
   --
+  -- Git integration for buffers
+  --
   -- https://github.com/lewis6991/gitsigns.nvim
   ----------------
   {
@@ -69,6 +71,9 @@ return {
   ----------------
   -- Diff View
   --
+  -- Single tabpage interface for easily cycling through diffs for all modified
+  -- files for any git rev.
+  --
   -- https://github.com/sindrets/diffview.nvim
   ----------------
   {
@@ -94,6 +99,8 @@ return {
   ----------------
   -- Lazygit
   --
+  -- Plugin for calling lazygit from within neovim.
+  --
   -- https://github.com/kdheepak/lazygit.nvim
   ----------------
   {
@@ -116,6 +123,8 @@ return {
 
   ----------------
   -- Flog
+  --
+  -- A fast, beautiful, and powerful git branch viewer for vim.
   --
   -- https://github.com/rbong/vim-flog
   ----------------
