@@ -42,6 +42,13 @@ return {
           file_ignore_patterns = { "node_modules" },
           winblend = 20,
           selection_caret = "  ",
+          find_command = {
+            "fd",
+            "--type",
+            "f",
+            "--hidden",
+            "--strip-cwd-prefix",
+          },
           vimgrep_arguments = {
             "rg",
             "--hidden",
@@ -51,6 +58,11 @@ return {
             "--line-number",
             "--column",
             "--smart-case",
+          },
+          layout_strategy = "vertical",
+          layout_config = {
+            prompt_position = "top",
+            width = 64,
           },
         },
       })

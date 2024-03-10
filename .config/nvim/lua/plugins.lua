@@ -235,8 +235,36 @@ return {
       "rcarriga/nvim-notify",
     },
     opts = {
-      -- add any options here
+      views = {
+        cmdline_popup = {
+          position = {
+            row = 3,
+            col = "50%",
+          },
+          size = {
+            width = 60,
+            height = "auto",
+          },
+          win_options = { winblend = 20 },
+        },
+        popupmenu = {
+          relative = "editor",
+          position = {
+            row = 5,
+            col = "50%",
+          },
+          size = {
+            size = 60,
+            height = 10,
+          },
+          border = { 1, 1 },
+          win_options = { winblend = 20 },
+        },
+      },
       cmdline = {
+        win_options = {
+          winblend = 10,
+        },
         format = {
           cmdline = {
             title = "",
@@ -258,10 +286,13 @@ return {
         lsp_doc_border = true,
       },
       lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
         signature = {
-          auto_open = {
-            enabled = false,
-          },
+          auto_open = { enabled = false },
         },
       },
     },
