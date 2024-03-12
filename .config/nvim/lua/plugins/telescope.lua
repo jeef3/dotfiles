@@ -43,13 +43,6 @@ return {
           file_ignore_patterns = { "node_modules" },
           winblend = 20,
           selection_caret = "  ",
-          find_command = {
-            "fd",
-            "--type",
-            "f",
-            "--hidden",
-            "--strip-cwd-prefix",
-          },
           vimgrep_arguments = {
             "rg",
             "--hidden",

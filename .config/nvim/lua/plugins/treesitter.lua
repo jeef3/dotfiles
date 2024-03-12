@@ -25,6 +25,7 @@ return {
       "csv",
       "diff",
       "dockerfile",
+      "embedded_template",
       "git_config",
       "git_rebase",
       "gitattributes",

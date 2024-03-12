@@ -1,3 +1,5 @@
+local mason = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/bin/")
+
 return {
   ----------------
   -- DAP
@@ -16,34 +18,34 @@ return {
       local dap = require("dap")
       local dapui = require("dapui")
 
-      dap.adapters.node2 = {
-        type = "executable",
-        command = os.getenv("HOME")
-          .. "/.local/share/nvim/mason/bin/node-debug2-adapter",
-      }
+      dapui.setup()
 
       dap.adapters["pwa-node"] = {
         type = "server",
         host = "localhost",
         port = "${port}",
         executable = {
-          command = os.getenv("HOME")
-            .. "/.local/share/nvim/mason/bin/js-debug-adapter",
+          command = mason .. "js-debug-adapter",
           args = { "${port}" },
         },
       }
 
-      dap.adapters.chrome = {
+      dap.adapters["node2"] = {
         type = "executable",
-        command = os.getenv("HOME")
-          .. "/.local/share/nvim/mason/bin/chrome-debug-adapter",
+        command = mason .. "node-debug2-adapter",
       }
 
-      dap.adapters.firefox = {
-        type = "executable",
-        command = os.getenv("HOME")
-          .. "/.local/share/nvim/mason/bin/firefox-debug-adapter",
-      }
+      -- dap.adapters.chrome = {
+      --   type = "executable",
+      --   command = os.getenv("HOME")
+      --     .. "/.local/share/nvim/mason/bin/chrome-debug-adapter",
+      -- }
+
+      -- dap.adapters.firefox = {
+      --   type = "executable",
+      --   command = os.getenv("HOME")
+      --     .. "/.local/share/nvim/mason/bin/firefox-debug-adapter",
+      -- }
 
       for _, language in ipairs({
         "javascript",
@@ -53,42 +55,63 @@ return {
       }) do
         dap.configurations[language] = {
           {
-            -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-            name = "Attach to process",
+            name = "Launch",
+            type = "pwa-node",
+            request = "launch",
+            program = "${file}",
+          },
+          {
+            name = "Attach",
             type = "pwa-node",
             request = "attach",
             processId = require("dap.utils").pick_process,
           },
           {
-            name = "Open in Chrome",
-            type = "chrome",
-            request = "launch",
-            url = "https://localdev.cleverfirstaid.com:5173",
-            webRoot = "${workspaceFolder}",
-          },
-          {
-            name = "Attach to Chrome",
-            type = "chrome",
+            name = "Attach 2",
+            type = "node2",
             request = "attach",
-            program = "${file}",
-            cwd = vim.fn.getcwd(),
-            sourceMaps = true,
-            protocol = "inspector",
-            port = 9222,
-            webRoot = "${workspaceFolder}",
+            processId = require("dap.utils").pick_process,
           },
+          -- {
+          --   -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+          --   name = "Attach to process",
+          --   type = "pwa-node",
+          --   request = "attach",
+          --   processId = require("dap.utils").pick_process,
+          -- },
+          -- {
+          --   name = "Open in Chrome",
+          --   type = "chrome",
+          --   request = "launch",
+          --   url = "https://localdev.cleverfirstaid.com:5173",
+          --   webRoot = "${workspaceFolder}",
+          -- },
+          -- {
+          --   name = "Attach to Chrome",
+          --   type = "chrome",
+          --   request = "attach",
+          --   program = "${file}",
+          --   cwd = vim.fn.getcwd(),
+          --   sourceMaps = true,
+          --   protocol = "inspector",
+          --   port = 9222,
+          --   webRoot = "${workspaceFolder}",
+          -- },
         }
       end
 
       -- Auto-open/close the debug UI
-      dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open({})
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
       end
-      dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close({})
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
       end
-      dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close({})
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
       end
 
       vim.fn.sign_define("DapBreakpoint", {

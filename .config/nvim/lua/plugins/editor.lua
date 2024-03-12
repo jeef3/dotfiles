@@ -18,8 +18,10 @@ return {
     },
     opts = {
       filesystem = {
+        bind_to_cwd = false, -- I like to keep my cwd unchanged
         hijack_netrw_behavior = "open_current",
         filtered_items = {
+          visible = true,
           hide_hidden = false,
         },
       },
