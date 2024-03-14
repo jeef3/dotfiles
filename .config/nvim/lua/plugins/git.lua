@@ -1,3 +1,15 @@
+diffview_toggle = function()
+  local lib = require("diffview.lib")
+  local view = lib.get_current_view()
+  if view then
+    -- Current tabpage is a Diffview; close it
+    vim.cmd.DiffviewClose()
+  else
+    -- No open Diffview exists: open a new one
+    vim.cmd.DiffviewOpen()
+  end
+end
+
 return {
   ----------------
   -- Git Signs
@@ -103,6 +115,16 @@ return {
   ----------------
   {
     "sindrets/diffview.nvim",
+    keys = {
+      {
+        "<leader>dv",
+        "<cmd>lua diffview_toggle()<CR>",
+        desc = "Toggle Diff View",
+      },
+    },
+    cmd = {
+      "DiffviewToggle",
+    },
     opts = {
       enhanced_diff_hl = true,
       signs = {
@@ -133,6 +155,9 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+    keys = {
+      { "<leader>lg", "<cmd>LazyGit<CR>", desc = "Open LazyGit" },
+    },
     cmd = {
       "LazyGit",
       "LazyGitConfig",
@@ -143,10 +168,6 @@ return {
     config = function()
       vim.g.lazygit_floating_window_winblend = 10
       vim.g.lazygit_floating_window_use_plenary = 0
-
-      vim.keymap.set("n", "<leader>lg", ":LazyGit<CR>", {
-        desc = "Open LazyGit",
-      })
     end,
   },
 
