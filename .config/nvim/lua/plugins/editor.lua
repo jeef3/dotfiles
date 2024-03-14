@@ -15,6 +15,15 @@ return {
 
       "nvim-tree/nvim-web-devicons",
       -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+      {
+        "s1n7ax/nvim-window-picker",
+        name = "window-picker",
+        event = "VeryLazy",
+        version = "2.*",
+        opts = {
+          hint = "floating-big-letter",
+        },
+      },
     },
     opts = {
       filesystem = {
@@ -23,6 +32,22 @@ return {
         filtered_items = {
           visible = true,
           hide_hidden = false,
+        },
+      },
+      event_handlers = {
+        {
+          event = "neo_tree_buffer_enter",
+          handler = function()
+            -- This effectively hides the cursor
+            vim.cmd("highlight! Cursor blend=100")
+            vim.opt_local.relativenumber = true
+          end,
+        },
+        {
+          event = "neo_tree_buffer_leave",
+          handler = function()
+            vim.cmd("highlight! Cursor blend=0")
+          end,
         },
       },
       window = {
