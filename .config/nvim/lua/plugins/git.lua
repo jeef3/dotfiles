@@ -117,9 +117,9 @@ return {
     "sindrets/diffview.nvim",
     keys = {
       {
-        "<leader>dv",
+        "<leader>gd",
         "<cmd>lua diffview_toggle()<CR>",
-        desc = "Toggle Diff View",
+        desc = "Toggle Git diff view",
       },
     },
     cmd = {
@@ -181,6 +181,9 @@ return {
   {
     "rbong/vim-flog",
     lazy = true,
+    keys = {
+      { "<leader>gb", "<cmd>Flog<CR>", desc = "Open Git branch view" },
+    },
     cmd = { "Flog", "Flogsplit", "Floggit" },
     dependencies = {
       "tpope/vim-fugitive",

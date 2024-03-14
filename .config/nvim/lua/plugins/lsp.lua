@@ -1,10 +1,11 @@
-----------------
--- LSP Config
---
--- https://github.com/neovim/nvim-lspconfig
-----------------
+local mason = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/bin/")
 
 return {
+  ----------------
+  -- LSP Config
+  --
+  -- https://github.com/neovim/nvim-lspconfig
+  ----------------
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -12,7 +13,6 @@ return {
       "nvim-tree/nvim-web-devicons",
 
       "nvimdev/lspsaga.nvim",
-      "nvimtools/none-ls.nvim",
 
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
@@ -39,7 +39,7 @@ return {
         severity_sort = true,
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.ERROR] = " ",
             [vim.diagnostic.severity.WARN] = " ",
             [vim.diagnostic.severity.HINT] = " ",
             [vim.diagnostic.severity.INFO] = " ",
@@ -99,6 +99,14 @@ return {
       })
     end,
   },
+
+  ----------------
+  -- LSP Saga
+  --
+  -- Improve neovim lsp experience
+  --
+  -- https://github.com/nvimdev/lspsaga.nvim
+  ----------------
   {
     "nvimdev/lspsaga.nvim",
     opts = {
@@ -122,11 +130,23 @@ return {
       symbol_in_winbar = { enable = true, separator = "  " },
     },
   },
+
+  ----------------
+  -- Conform
+  --
+  -- Lightweight yet powerful formatter plugin for Neovim
+  --
+  -- https://github.com/stevearc/conform.nvim
+  ----------------
   {
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
     opts = {
+      formatters = {
+        prettier = { command = mason .. "prettier" },
+        prettierd = { command = mason .. "prettierd" },
+      },
       formatters_by_ft = {
         lua = { "stylua" },
         -- yaml = { "yamlfmt" },
@@ -141,6 +161,15 @@ return {
       },
     },
   },
+
+  ----------------
+  -- Mason
+  --
+  -- Portable package manager for Neovim that runs everywhere Neovim runs.
+  -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
+  --
+  -- https://github.com/williamboman/mason.nvim
+  ----------------
   {
     "williamboman/mason.nvim",
     config = function()
