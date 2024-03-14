@@ -140,11 +140,16 @@ return {
         linehl = "DapBreakpointRejectedLine",
       })
 
-      vim.keymap.set("n", "<F5>", dap.continue)
-      vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
+      vim.keymap.set("n", "<F5>", dap.continue, { desc = "Start debugger" })
+      vim.keymap.set(
+        "n",
+        "<leader>b",
+        dap.toggle_breakpoint,
+        { desc = "Set breakpoint" }
+      )
       vim.keymap.set("n", "<Leader>lp", function()
         dap.set_breakpoint(nil, nil, vim.fn.input("Message: "))
-      end)
+      end, { desc = "Set breakpoint with message" })
     end,
   },
 }
