@@ -1,16 +1,22 @@
 return {
+  ------------------
+  -- Tim Pope
+  --
+  -- Some of his more useful plugins.
+  --
+  -- https://github.com/tpope
+  ------------------
   "tpope/vim-eunuch", -- Better shell cmds, like :Rename
-
   "tpope/vim-vinegar", -- Netrw enhancements
   "tpope/vim-repeat", -- Get more use out of "."
   "tpope/vim-sleuth", -- Set shiftwidth and expandtab based on current file
   "tpope/vim-commentary", -- gcc to comment line/paragraph
   "tpope/vim-surround", -- Change surrounds, quotes etc
-  "tpope/vim-fugitive", -- Git wrapper, :Gstatus etc
+  -- "tpope/vim-fugitive", -- Git wrapper, :Gstatus etc
 
   "Xvezda/vim-readonly", -- Lock a bunch of files like node_modules
-  "fladson/vim-kitty", -- Kitty config syntax
   "machakann/vim-highlightedyank", -- Highlight yanked
+  "fladson/vim-kitty", -- Kitty config syntax
 
   "justinmk/vim-sneak", -- Minimal EasyMotion s
   "jeef3/splitsizer.vim", -- Split resizing <c-a>, <c-s>
@@ -20,10 +26,18 @@ return {
   { "windwp/nvim-ts-autotag", config = true }, -- Auto-close HTML tags
 
   -- Colored colors
+  -- {
+  --   "norcalli/nvim-colorizer.lua",
+  --   config = function()
+  --     require("colorizer").setup()
+  --   end,
+  -- },
   {
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
+    "rrethy/vim-hexokinase",
+    lazy = false,
+    build = "make hexokinase",
+    init = function()
+      -- vim.g.Hexokinase_highlighters = "sign_column"
     end,
   },
 
@@ -31,15 +45,14 @@ return {
   {
     "folke/trouble.nvim",
     dependencies = "nvim-tree/nvim-web-devicons",
-    config = function()
-      require("trouble").setup()
-    end,
+    cmd = { "Trouble", "TroubleToggle" },
   },
 
   -- Markdown preview
   {
     "toppair/peek.nvim",
     build = "deno task --quiet build:fast",
+    ft = "md",
     config = function()
       require("peek").setup()
 
@@ -48,41 +61,49 @@ return {
     end,
   },
 
-  -- {
-  --   "gelguy/wilder.nvim",
-  --   config = function()
-  --     local wilder = require("wilder")
-  --     wilder.setup({
-  --       modes = { ":", "/" },
-  --       next_key = "<C-k>",
-  --       previous_key = "<C-j>",
-  --       accept_key = "<Tab>",
-  --     })
+  ------------------
+  -- Wilder
+  --
+  -- A more adventurous wildmenu
+  --
+  -- https://github.com/gelguy/wilder.nvim
+  ------------------
+  {
+    "gelguy/wilder.nvim",
+    enabled = false, -- Doesn't play well with noice
+    config = function()
+      local wilder = require("wilder")
+      wilder.setup({
+        modes = { ":", "/" },
+        next_key = "<C-k>",
+        previous_key = "<C-j>",
+        accept_key = "<Tab>",
+      })
 
-  --     wilder.set_option(
-  --       "pipeline",
-  --       wilder.branch(wilder.cmdline_pipeline({
-  --         fuzzy = 1,
-  --       }))
-  --     )
+      wilder.set_option(
+        "pipeline",
+        wilder.branch(wilder.cmdline_pipeline({
+          fuzzy = 1,
+        }))
+      )
 
-  --     wilder.set_option(
-  --       "renderer",
-  --       wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
-  --         highlights = {
-  --           border = "Normal",
-  --         },
-  --         border = "rounded",
-  --         pumblend = 20,
-  --         -- highlighter applies highlighting to the candidates
-  --         highlighter = wilder.basic_highlighter(),
-  --         reverse = 1,
-  --         left = { " ", wilder.popupmenu_devicons() },
-  --         right = { " ", wilder.popupmenu_scrollbar() },
-  --       }))
-  --     )
-  --   end,
-  -- },
+      wilder.set_option(
+        "renderer",
+        wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
+          highlights = {
+            border = "Normal",
+          },
+          border = "rounded",
+          pumblend = 20,
+          -- highlighter applies highlighting to the candidates
+          highlighter = wilder.basic_highlighter(),
+          reverse = 1,
+          left = { " ", wilder.popupmenu_devicons() },
+          right = { " ", wilder.popupmenu_scrollbar() },
+        }))
+      )
+    end,
+  },
 
   ------------------
   -- Persisted

@@ -10,7 +10,8 @@
 return {
   -- "jeef3/princess.nvim",
   dir = "~/projects/princess.nvim",
-  -- dev = true,
+  lazy = false,
+  priority = 1000,
   dependencies = { "rktjmp/lush.nvim" },
   config = function()
     vim.cmd.colorscheme("princess_theme")
