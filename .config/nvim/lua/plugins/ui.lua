@@ -91,7 +91,14 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      plugins = {
+        presets = {
+          operators = false,
+          motions = false,
+        },
+      },
+    },
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300

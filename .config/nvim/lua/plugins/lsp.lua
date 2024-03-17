@@ -1,5 +1,3 @@
-local mason = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/bin/")
-
 return {
   ----------------
   -- LSP Config
@@ -143,10 +141,6 @@ return {
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
     opts = {
-      formatters = {
-        prettier = { command = mason .. "prettier" },
-        prettierd = { command = mason .. "prettierd" },
-      },
       formatters_by_ft = {
         lua = { "stylua" },
         -- yaml = { "yamlfmt" },
