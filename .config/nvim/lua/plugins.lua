@@ -26,18 +26,10 @@ return {
   { "windwp/nvim-ts-autotag", config = true }, -- Auto-close HTML tags
 
   -- Colored colors
-  -- {
-  --   "norcalli/nvim-colorizer.lua",
-  --   config = function()
-  --     require("colorizer").setup()
-  --   end,
-  -- },
   {
-    "rrethy/vim-hexokinase",
-    lazy = false,
-    build = "make hexokinase",
-    init = function()
-      -- vim.g.Hexokinase_highlighters = "sign_column"
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
     end,
   },
 
