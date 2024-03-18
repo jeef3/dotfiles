@@ -127,4 +127,38 @@ return {
       vim.notify = require("notify")
     end,
   },
+
+  ------------------
+  -- Edgy
+  --
+  -- Easily create and manage predefined window layouts, bringing a new edge to
+  -- your workflow
+  --
+  -- https://github.com/folke/edgy.nvim
+  ------------------
+  {
+    "folke/edgy.nvim",
+    enabled = false,
+    event = "VeryLazy",
+    init = function()
+      vim.opt.laststatus = 3
+      vim.opt.splitkeep = "screen"
+    end,
+
+    opts = {
+      bottom = {
+        "Trouble",
+        { ft = "qf", title = "QuickFix" },
+        {
+          ft = "help",
+          size = { height = 20 },
+          -- only show help buffers
+          filter = function(buf)
+            return vim.bo[buf].buftype == "help"
+          end,
+        },
+      },
+      left = {},
+    },
+  },
 }

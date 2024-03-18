@@ -1,5 +1,20 @@
 return {
   ----------------
+  -- Splitsizer
+  --
+  -- Controlled split resizing
+  --
+  -- https://github.com/jeef3/splitsizer.vim
+  ----------------
+  {
+    "jeef3/splitsizer.vim",
+    keys = {
+      { "<leader>a", desc = "Start SplitSizer" },
+      { "<leader>s", desc = "Stop SplitSizer" },
+    },
+  },
+
+  ----------------
   -- Noice
   --
   -- 💥Highly experimental plugin that completely replaces the UI for messages,
@@ -88,6 +103,15 @@ return {
     },
   },
 
+  ----------------
+  -- Which Key
+  --
+  -- 💥 Create key bindings that stick. WhichKey is a lua plugin for Neovim 0.5
+  -- that displays a popup with possible keybindings of the command you started
+  -- typing.
+  --
+  -- https://github.com/folke/which-key.nvim
+  ----------------
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -96,7 +120,14 @@ return {
         presets = {
           operators = false,
           motions = false,
+          windows = false,
         },
+      },
+      icons = {
+        group = "",
+      },
+      window = {
+        winblend = 10,
       },
     },
     init = function()

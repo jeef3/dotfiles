@@ -178,7 +178,22 @@ vim.opt.guicursor = {
   "o:hor50-Cursor",
 }
 
--- Hide all semantic highlights
--- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
---   vim.api.nvim_set_hl(0, group, {})
--- end
+-- Mappings
+require("which-key").register({
+  ["<leader>"] = {
+    g = {
+      name = " Git Tools…",
+      l = { "<cmd>LazyGit<CR>", "Open LazyGit" },
+    },
+    h = {
+      name = " Git Changes…",
+      b = { ":Gitsigns blame_line<CR>", "Blame" },
+      d = { ":Gitsigns diffthis<CR>", "Show diff for whole file" },
+      p = { ":Gitsigns preview_hunk<CR>", "Preview hunk changes" },
+      r = { ":Gitsigns reset_hunk<CR>", "Reset hunk changes" },
+      s = { ":Gitsigns stage_hunk<CR>", "Stage hunk" },
+      t = { ":Gitsigns toggle_deleted<CR>", "Toggle show deleted" },
+      u = { ":Gitsigns unstage_hunk<CR>", "Unstage hunk" },
+    },
+  },
+})

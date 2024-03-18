@@ -16,14 +16,12 @@ return {
 
   "Xvezda/vim-readonly", -- Lock a bunch of files like node_modules
   "machakann/vim-highlightedyank", -- Highlight yanked
+
   "fladson/vim-kitty", -- Kitty config syntax
 
   "justinmk/vim-sneak", -- Minimal EasyMotion s
-  "jeef3/splitsizer.vim", -- Split resizing <c-a>, <c-s>
 
   "ethanholz/nvim-lastplace", -- Restore cursor position
-
-  { "windwp/nvim-ts-autotag", config = true }, -- Auto-close HTML tags
 
   -- Colored colors
   {
@@ -40,11 +38,19 @@ return {
     cmd = { "Trouble", "TroubleToggle" },
   },
 
-  -- Markdown preview
+  ------------------
+  -- Peek
+  --
+  -- Markdown preview plugin for Neovim
+  --
+  -- https://github.com/toppair/peek.nvim
+  ------------------
   {
     "toppair/peek.nvim",
     build = "deno task --quiet build:fast",
-    ft = "md",
+    event = { "VeryLazy" },
+    ft = { "md", "markdown" },
+    cmd = { "PeekOpen", "PeekClose" },
     config = function()
       require("peek").setup()
 
@@ -111,40 +117,6 @@ return {
     opts = {
       autoload = true,
       use_git_branch = true,
-    },
-  },
-
-  ------------------
-  -- Edgy
-  --
-  -- Easily create and manage predefined window layouts, bringing a new edge to
-  -- your workflow
-  --
-  -- https://github.com/folke/edgy.nvim
-  ------------------
-  {
-    "folke/edgy.nvim",
-    enabled = false,
-    event = "VeryLazy",
-    init = function()
-      vim.opt.laststatus = 3
-      vim.opt.splitkeep = "screen"
-    end,
-
-    opts = {
-      bottom = {
-        "Trouble",
-        { ft = "qf", title = "QuickFix" },
-        {
-          ft = "help",
-          size = { height = 20 },
-          -- only show help buffers
-          filter = function(buf)
-            return vim.bo[buf].buftype == "help"
-          end,
-        },
-      },
-      left = {},
     },
   },
 }

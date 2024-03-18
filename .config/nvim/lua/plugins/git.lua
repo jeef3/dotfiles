@@ -45,7 +45,7 @@ return {
             gs.next_hunk()
           end)
           return "<Ignore>"
-        end, { expr = true })
+        end, { expr = true, desc = "Next hunk" })
 
         map("n", "[c", function()
           if vim.wo.diff then
@@ -55,49 +55,7 @@ return {
             gs.prev_hunk()
           end)
           return "<Ignore>"
-        end, { expr = true })
-
-        -- Actions
-        map(
-          { "n", "v" },
-          "<Leader>hs",
-          ":Gitsigns stage_hunk<CR>",
-          { desc = "Git stage hunk" }
-        )
-        map(
-          { "n", "v" },
-          "<Leader>hr",
-          ":Gitsigns reset_hunk<CR>",
-          { desc = "Git reset hunk" }
-        )
-        map(
-          "n",
-          "<Leader>hu",
-          gs.undo_stage_hunk,
-          { desc = "Git unstage hunk" }
-        )
-        map(
-          "n",
-          "<Leader>hp",
-          gs.preview_hunk,
-          { desc = "Git preview changes " }
-        )
-        map("n", "<Leader>hb", function()
-          gs.blame_line({ full = true })
-        end, { desc = "Git blame" })
-        map(
-          "n",
-          "<Leader>tb",
-          gs.toggle_current_line_blame,
-          { desc = "Git current line blame" }
-        )
-        map("n", "<Leader>hd", gs.diffthis, { desc = "Git show diff for file" })
-        map(
-          "n",
-          "<Leader>td",
-          gs.toggle_deleted,
-          { desc = "Git toggle show deleted" }
-        )
+        end, { expr = true, desc = "Previous hunk" })
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
@@ -154,9 +112,6 @@ return {
     "kdheepak/lazygit.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-    },
-    keys = {
-      { "<leader>gl", "<cmd>LazyGit<CR>", desc = "Open LazyGit" },
     },
     cmd = {
       "LazyGit",
