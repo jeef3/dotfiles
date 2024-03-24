@@ -12,22 +12,46 @@ return {
   "tpope/vim-sleuth", -- Set shiftwidth and expandtab based on current file
   "tpope/vim-commentary", -- gcc to comment line/paragraph
   "tpope/vim-surround", -- Change surrounds, quotes etc
-  -- "tpope/vim-fugitive", -- Git wrapper, :Gstatus etc
+  "tpope/vim-fugitive", -- Git wrapper, :Gstatus etc
 
   "Xvezda/vim-readonly", -- Lock a bunch of files like node_modules
   "machakann/vim-highlightedyank", -- Highlight yanked
 
   "fladson/vim-kitty", -- Kitty config syntax
 
-  "justinmk/vim-sneak", -- Minimal EasyMotion s
+  -- "justinmk/vim-sneak", -- Minimal EasyMotion s
+  {
+    "ggandor/leap.nvim",
+    lazy = false,
+    config = function()
+      -- require("leap").create_default_mappings()
+      vim.keymap.set("n", "s", "<Plug>(leap)")
+      vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
+
+      require("leap").opts.highlight_unlabeled_phase_one_targets = true
+    end,
+  },
 
   "ethanholz/nvim-lastplace", -- Restore cursor position
 
+  -- Fancy recorder display
+  {
+    "chrisgrieser/nvim-recorder",
+    dependencies = "rcarriga/nvim-notify",
+    opts = {},
+  },
+
   -- Colored colors
   {
-    "norcalli/nvim-colorizer.lua",
+    "NvChad/nvim-colorizer.lua",
     config = function()
-      require("colorizer").setup()
+      require("colorizer").setup({
+        user_default_options = {
+          names = false,
+          mode = "virtualtext",
+          virtualtext = "⏹",
+        },
+      })
     end,
   },
 

@@ -14,85 +14,105 @@ return {
 
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
-
+      "b0o/schemastore.nvim",
+      "soulis-1256/eagle.nvim", -- mouse hover doc
+      {
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim", -- Fancy virtual text for errors
+        enabled = false,
+        config = true,
+      },
       {
         "folke/neodev.nvim",
         opts = {
           library = { plugins = { "neotest" }, types = true },
         },
       },
-
-      "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
     },
-    opts = {
-      diagnostics = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = {
-          spacing = 4,
-          source = "if_many",
-          prefix = "●",
-        },
-        severity_sort = true,
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = " ",
-            [vim.diagnostic.severity.WARN] = " ",
-            [vim.diagnostic.severity.HINT] = " ",
-            [vim.diagnostic.severity.INFO] = " ",
-          },
-        },
-      },
-      inlay_hints = {
-        enabled = false,
-      },
-      codelens = {
-        enabled = false,
-      },
-      format = {
-        formatting_options = nil,
-        timeout_ms = nil,
-      },
-    },
-    config = function(_, opts)
+    config = function()
       for type, icon in pairs({
-        Error = " ",
-        Warn = " ",
-        Hint = " ",
-        Info = " ",
+        Error = " ",
+        Warn = " ",
+        Hint = " ",
+        Info = " ",
       }) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
       end
-      vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-        vim.lsp.diagnostic.on_publish_diagnostics,
-        { virtual_text = { prefix = "⏹" } }
-      )
+
+      vim.diagnostic.config({
+        update_in_insert = false,
+        virtual_lines = {
+          only_current_line = true,
+        },
+        virtual_text = {
+          source = false,
+          prefix = "⏹",
+        },
+        inlay_hints = {
+          enabled = true,
+        },
+        float = { border = false },
+      })
 
       vim.api.nvim_create_autocmd("LspAttach", {
         desc = "LSP Attach",
-        callback = function()
-          local bufmap = function(mode, lhs, rhs)
-            vim.keymap.set(mode, lhs, rhs, { buffer = true })
+        callback = function(ev)
+          local bufmap = function(mode, lhs, rhs, desc)
+            vim.keymap.set(mode, lhs, rhs, { buffer = ev.buf, desc = desc })
           end
 
-          bufmap("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
-          bufmap("n", "gi", "<cmd>Lspsaga goto_type_definition<CR>")
-          bufmap("n", "gK", "<cmd>Lspsaga peek_type_definition<CR>")
-          bufmap("n", "gr", "<cmd>Lspsaga finder<CR>")
+          bufmap(
+            "n",
+            "gd",
+            "<cmd>Lspsaga goto_definition<CR>",
+            "Go to definition"
+          )
+          bufmap(
+            "n",
+            "gi",
+            "<cmd>Lspsaga goto_type_definition<CR>",
+            "Go to type definition"
+          )
+          bufmap(
+            "n",
+            "gK",
+            "<cmd>Lspsaga peek_type_definition<CR>",
+            "Peek type definition"
+          )
+          bufmap("n", "gr", "<cmd>Lspsaga finder<CR>", "Show references")
 
-          bufmap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
-          -- bufmap("n", "K", vim.lsp.buf.hover)
+          -- bufmap("n", "K", "<cmd>Lspsaga hover_doc<CR>", "Show docs")
+          bufmap("n", "K", vim.lsp.buf.hover)
 
-          bufmap("n", "[g", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
-          bufmap("n", "]g", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+          bufmap(
+            "n",
+            "[g",
+            "<cmd>Lspsaga diagnostic_jump_prev<CR>",
+            "Next diagnostic"
+          )
+          bufmap(
+            "n",
+            "]g",
+            "<cmd>Lspsaga diagnostic_jump_next<CR>",
+            "Previous diagnostic"
+          )
 
-          bufmap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>")
-          bufmap("n", "<leader>qf", "<cmd>Lspsaga code_action<CR>")
-          bufmap("n", "<leader>o", "<cmd>Lspsaga outline<CR>")
+          bufmap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", "Rename")
+          bufmap(
+            "n",
+            "<leader>qf",
+            "<cmd>Lspsaga code_action<CR>",
+            "Code action"
+          )
+          bufmap("n", "<leader>o", "<cmd>Lspsaga outline<CR>", "Toggle outline")
 
-          bufmap("n", "<space>e", "<cmd>Lspsaga show_line_diagnostics<CR>")
+          -- bufmap("n", "<space>e", vim.diagnostic.open_float, "Show line errors")
+          bufmap(
+            "n",
+            "<space>e",
+            "<cmd>Lspsaga show_line_diagnostics<CR>",
+            "Show line errors"
+          )
         end,
       })
     end,
@@ -150,7 +170,7 @@ return {
         typescriptreact = { { "prettierd", "prettier" } },
       },
       format_on_save = {
-        timeout_ms = 500,
+        timeout_ms = 1000,
         lps_fallback = true,
       },
     },
@@ -166,21 +186,33 @@ return {
   ----------------
   {
     "williamboman/mason.nvim",
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      "b0o/schemastore.nvim",
+    },
     config = function()
       require("mason").setup()
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      local omnisharp_bin = os.getenv("HOME")
-        .. "/.local/share/nvim/mason/bin/omnisharp"
-      local java_bin = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/jdtls"
+      local mason = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/"
 
       require("mason-lspconfig").setup_handlers({
         function(server_name)
           lspconfig[server_name].setup({
             capabilities = capabilities,
+            on_attach = function(client, bufnr)
+              require("workspace-diagnostics").populate_workspace_diagnostics(
+                client,
+                bufnr
+              )
+            end,
           })
         end,
+
+        -- ["ccls"] = function()
+        --   lspconfig.ccls.setup()
+        -- end,
 
         ["lua_ls"] = function()
           lspconfig.lua_ls.setup({
@@ -202,16 +234,28 @@ return {
           })
         end,
 
+        ["jsonls"] = function()
+          lspconfig.jsonls.setup({
+            capabilities = capabilities,
+            settings = {
+              json = {
+                schemas = require("schemastore").json.schemas(),
+                validate = { enable = true },
+              },
+            },
+          })
+        end,
+
         ["jdtls"] = function()
           lspconfig.jdtls.setup({
-            cmd = { java_bin },
+            cmd = { mason .. "jdtls" },
             capabilities = capabilities,
           })
         end,
 
         ["omnisharp"] = function()
           lspconfig.omnisharp.setup({
-            cmd = { omnisharp_bin },
+            cmd = { mason .. "omnisharp" },
             capabilities = capabilities,
           })
         end,
@@ -220,10 +264,11 @@ return {
           lspconfig.yamlls.setup({
             settings = {
               yaml = {
-                schemas = {
-                  ["https://bitbucket.org/atlassianlabs/atlascode/raw/main/resources/schemas/pipelines-schema.json"] = "./bitbucket-pipelines.yml",
-                  ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.yaml"] = "./schema.yml",
+                schemaStore = {
+                  enable = false,
+                  url = "",
                 },
+                schemas = require("schemastore").yaml.schemas(),
               },
             },
             capabilities = capabilities,

@@ -136,9 +136,6 @@ return {
   {
     "rbong/vim-flog",
     lazy = true,
-    keys = {
-      { "<leader>gb", "<cmd>Flog<CR>", desc = "Open Git branch view" },
-    },
     cmd = { "Flog", "Flogsplit", "Floggit" },
     dependencies = {
       "tpope/vim-fugitive",

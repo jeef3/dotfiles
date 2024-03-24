@@ -1,24 +1,31 @@
-----------------
--- Telescope
---
--- https://github.com/nvim-telescope/telescope.nvim
-----------------
-
 return {
+  ----------------
+  -- Telescope
+  --
+  -- https://github.com/nvim-telescope/telescope.nvim
+  ----------------
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "rcarriga/nvim-notify",
       "olimorris/persisted.nvim",
+      -- "jonarrien/telescope-cmdline.nvim", -- Like Noice
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
         enabled = vim.fn.executable("make") == 1,
-        config = function()
-          require("telescope").load_extension("fzf")
-        end,
+        -- config = function()
+        --   require("telescope").load_extension("fzf")
+        -- end,
       },
+    },
+    keys = {
+      { "<c-t>" },
+      { "<c-p>" },
+      { "<c-s>" },
+      { "gs" },
+      -- { ":", "<cmd>Telescope cmdline<cr>", desc = "Cmdline" },
     },
 
     config = function()
@@ -28,6 +35,16 @@ return {
       local actions = require("telescope.actions")
 
       telescope.setup({
+        extensions = {
+          cmdline = {
+            picker = {
+              layout_config = {
+                width = 64,
+                height = 10,
+              },
+            },
+          },
+        },
         defaults = {
           mappings = {
             i = {
@@ -41,7 +58,7 @@ return {
           },
           dynamic_preview_title = true,
           file_ignore_patterns = { "node_modules" },
-          winblend = 20,
+          winblend = 10,
           selection_caret = "  ",
           vimgrep_arguments = {
             "rg",
@@ -63,6 +80,8 @@ return {
 
       telescope.load_extension("notify")
       telescope.load_extension("persisted")
+      telescope.load_extension("fzf")
+      -- telescope.load_extension("cmdline")
 
       -- <C-t> Find files
       vim.keymap.set({ "n", "v" }, "<C-t>", function()
@@ -74,9 +93,11 @@ return {
             "--hidden",
             "--strip-cwd-prefix",
           },
-          prompt_prefix = "   ",
+          prompt_prefix = "  󰱼 ",
           prompt_title = "",
           previewer = false,
+          border = true,
+          borderchars = { "" },
         }))
       end)
 
@@ -85,6 +106,8 @@ return {
         builtin.live_grep(themes.get_dropdown({
           prompt_prefix = "   ",
           prompt_title = "Find in files",
+          border = true,
+          borderchars = { "" },
         }))
       end)
 
@@ -96,7 +119,7 @@ return {
         })
       end)
 
-      -- <C-S> Find symbols
+      -- gs Find symbols
       vim.keymap.set({ "n", "v" }, "gs", function()
         builtin.lsp_document_symbols(themes.get_dropdown({
           prompt_prefix = " ",

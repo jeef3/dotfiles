@@ -77,7 +77,10 @@ return {
             behavior = cmp.SelectBehavior.Insert,
           }),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<cr>"] = cmp.mapping.confirm({ select = true }),
+          ["<cr>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+          }),
         }),
         window = {
           completion = {
@@ -115,7 +118,6 @@ return {
       check_ts = true,
       enable_check_bracket_line = true,
     },
-    config = true,
   },
 
   ------------------
@@ -139,7 +141,7 @@ return {
     "RRethy/vim-illuminate",
     config = function()
       require("illuminate").configure({
-        providers = { "lsp" },
+        providers = { "lsp", "treesitter" },
         under_cursor = false,
       })
     end,

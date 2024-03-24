@@ -50,6 +50,7 @@ vim.opt.diffopt = {
 ----------------
 -- Other settings
 --
+vim.opt.cmdheight = 0
 vim.opt.omnifunc = "syntaxcomplete#Complete"
 
 vim.opt.writebackup = false
@@ -183,6 +184,7 @@ require("which-key").register({
   ["<leader>"] = {
     g = {
       name = " Git Tools…",
+      b = { "<cmd>Flog<CR>", "Open Git branch view" },
       l = { "<cmd>LazyGit<CR>", "Open LazyGit" },
     },
     h = {
@@ -195,5 +197,9 @@ require("which-key").register({
       t = { ":Gitsigns toggle_deleted<CR>", "Toggle show deleted" },
       u = { ":Gitsigns unstage_hunk<CR>", "Unstage hunk" },
     },
+  },
+  g = {
+    -- LSP
+    -- d = { "<cd>Lspsaga goto_definition<CR>", "Go to definition" },
   },
 })

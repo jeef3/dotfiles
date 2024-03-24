@@ -6,6 +6,9 @@
 
 return {
   "nvim-lualine/lualine.nvim",
+  dependencies = {
+    "chrisgrieser/nvim-recorder",
+  },
 
   opts = {
     options = {
@@ -28,7 +31,7 @@ return {
       section_separators = { left = "", right = "" },
     },
     sections = {
-      lualine_a = { "mode" },
+      lualine_a = { require("recorder").recordingStatus, "mode" },
       lualine_b = { "filename" },
       lualine_c = {
         -- require("auto-session.lib").current_session_name,
@@ -52,7 +55,9 @@ return {
           symbols = { added = "+", modified = "~", removed = "-" },
         },
       },
-      lualine_z = { "location" },
+      lualine_z = {
+        "location",
+      },
     },
     inactive_sections = {
       lualine_a = {},
