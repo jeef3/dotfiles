@@ -81,6 +81,13 @@ return {
     end,
   },
 
+  ----------------
+  -- Rainbow delimiters
+  --
+  -- Rainbow delimiters for Neovim with Tree-sitter
+  --
+  -- https://github.com/hiphish/rainbow-delimiters.nvim
+  ----------------
   {
     "HiPhish/rainbow-delimiters.nvim",
     dependencies = {

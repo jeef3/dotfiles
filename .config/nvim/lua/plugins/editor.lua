@@ -33,6 +33,9 @@ return {
           visible = true,
           hide_hidden = false,
         },
+        follow_current_file = {
+          enabled = true,
+        },
       },
       event_handlers = {
         {
@@ -123,7 +126,10 @@ return {
   ------------------
   {
     "rcarriga/nvim-notify",
-    config = function()
+    opts = {
+      render = "wrapped-compact",
+    },
+    init = function()
       vim.notify = require("notify")
     end,
   },
@@ -160,5 +166,17 @@ return {
       },
       left = {},
     },
+  },
+
+  ------------------
+  -- Tint
+  --
+  -- Dim inactive windows in Neovim using window-local highlight namespaces.
+  --
+  -- https://github.com/levouh/tint.nvim
+  ------------------
+  {
+    "levouh/tint.nvim",
+    opts = {},
   },
 }

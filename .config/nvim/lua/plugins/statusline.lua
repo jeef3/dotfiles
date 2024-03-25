@@ -37,16 +37,16 @@ return {
         -- require("auto-session.lib").current_session_name,
       },
 
-      lualine_x = { "overseer" },
+      lualine_x = {},
       lualine_y = {
         {
           "diagnostics",
           sources = { "nvim_diagnostic" },
           symbols = {
-            error = " ",
+            error = " ",
             warn = " ",
-            hint = " ",
-            info = " ",
+            hint = " ",
+            info = " ",
           },
         },
         {

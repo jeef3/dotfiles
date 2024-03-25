@@ -201,12 +201,6 @@ return {
         function(server_name)
           lspconfig[server_name].setup({
             capabilities = capabilities,
-            on_attach = function(client, bufnr)
-              require("workspace-diagnostics").populate_workspace_diagnostics(
-                client,
-                bufnr
-              )
-            end,
           })
         end,
 
