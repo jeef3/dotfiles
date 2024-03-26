@@ -14,10 +14,7 @@ return {
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
-        enabled = vim.fn.executable("make") == 1,
-        -- config = function()
-        --   require("telescope").load_extension("fzf")
-        -- end,
+        -- enabled = vim.fn.executable("make") == 1,
       },
     },
     keys = {
@@ -93,7 +90,8 @@ return {
             "--hidden",
             "--strip-cwd-prefix",
           },
-          prompt_prefix = "  󰱼 ",
+          layout_strategy = "vertical",
+          prompt_prefix = "   ",
           prompt_title = "",
           previewer = false,
           border = true,
@@ -103,19 +101,23 @@ return {
 
       -- <C-p> Find in file
       vim.keymap.set({ "n", "v" }, "<C-p>", function()
-        builtin.live_grep(themes.get_dropdown({
+        builtin.live_grep({
+          layout_strategy = "vertical",
           prompt_prefix = "   ",
-          prompt_title = "Find in files",
+          prompt_title = "",
+          preview_title = "",
           border = true,
           borderchars = { "" },
-        }))
+        })
       end)
 
       -- <C-s> Find symbols
       vim.keymap.set({ "n", "v" }, "<C-s>", function()
         builtin.lsp_dynamic_workspace_symbols({
           prompt_prefix = " ",
-          prompt_title = "Symbols",
+          prompt_title = "",
+          border = true,
+          borderchars = { "" },
         })
       end)
 
@@ -123,7 +125,9 @@ return {
       vim.keymap.set({ "n", "v" }, "gs", function()
         builtin.lsp_document_symbols(themes.get_dropdown({
           prompt_prefix = " ",
-          prompt_title = "Symbols",
+          prompt_title = "",
+          border = true,
+          borderchars = { "" },
         }))
       end)
 
@@ -131,6 +135,9 @@ return {
       vim.keymap.set({ "n", "v" }, "<C-y>", function()
         builtin.jumplist({
           prompt_prefix = "󰆷 ",
+          prompt_title = "",
+          border = true,
+          borderchars = { "" },
         })
       end)
     end,
