@@ -5,15 +5,6 @@ vim.g.mapleader = ","
 vim.g.maplocalleader = "\\"
 
 ----------------
--- Filetype
---
--- Essential for file type detection and plugins
-
-vim.opt.filetype = "on"
-vim.opt.filetype.indent = "on"
-vim.opt.filetype.plugin = "on"
-
-----------------
 -- Lazy
 --
 -- Plug in management
