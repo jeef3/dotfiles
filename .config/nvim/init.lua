@@ -44,6 +44,7 @@ vim.opt.diffopt = {
 vim.opt.cmdheight = 0
 vim.opt.omnifunc = "syntaxcomplete#Complete"
 
+vim.opt.undofile = true
 vim.opt.writebackup = false
 vim.opt.swapfile = false
 
