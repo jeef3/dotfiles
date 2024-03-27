@@ -197,6 +197,9 @@ require("which-key").register({
       t = { ":Gitsigns toggle_deleted<CR>", "Toggle show deleted" },
       u = { ":Gitsigns unstage_hunk<CR>", "Unstage hunk" },
     },
+    t = {
+      name = "󰙨 Test…",
+    },
   },
   g = {
     -- LSP
