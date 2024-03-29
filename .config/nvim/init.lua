@@ -178,6 +178,7 @@ require("which-key").register({
       name = " Git Tools…",
       b = { "<cmd>Flog<CR>", "Open Git branch view" },
       l = { "<cmd>LazyGit<CR>", "Open LazyGit" },
+      s = { "<cmd>Telescope git_branches<CR>", "Switch branch" },
     },
     h = {
       name = " Git Changes…",

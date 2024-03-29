@@ -23,6 +23,7 @@ return {
   -- https://github.com/folke/noice.nvim
   ----------------
   {
+    enabled = false,
     "folke/noice.nvim",
     event = "VeryLazy",
     dependencies = {
@@ -37,10 +38,9 @@ return {
             col = "50%",
           },
           size = {
-            width = 60,
+            width = 64,
             height = "auto",
           },
-          win_options = { winblend = 20 },
         },
         popupmenu = {
           relative = "editor",
@@ -49,11 +49,9 @@ return {
             col = "50%",
           },
           size = {
-            size = 60,
+            size = 64,
             height = 10,
           },
-          border = { 1, 1 },
-          win_options = { winblend = 20 },
         },
         mini = {
           position = {
@@ -63,15 +61,15 @@ return {
         },
       },
       cmdline = {
-        win_options = {
-          winblend = 10,
-        },
         format = {
           cmdline = {
             title = "",
             pattern = "^:",
-            icon = " ",
+            icon = " ",
             lang = "vim",
+          },
+          search_down = {
+            title = "",
           },
         },
       },
