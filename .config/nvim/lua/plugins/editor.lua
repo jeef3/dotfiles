@@ -135,40 +135,6 @@ return {
   },
 
   ------------------
-  -- Edgy
-  --
-  -- Easily create and manage predefined window layouts, bringing a new edge to
-  -- your workflow
-  --
-  -- https://github.com/folke/edgy.nvim
-  ------------------
-  {
-    "folke/edgy.nvim",
-    enabled = false,
-    event = "VeryLazy",
-    init = function()
-      vim.opt.laststatus = 3
-      vim.opt.splitkeep = "screen"
-    end,
-
-    opts = {
-      bottom = {
-        "Trouble",
-        { ft = "qf", title = "QuickFix" },
-        {
-          ft = "help",
-          size = { height = 20 },
-          -- only show help buffers
-          filter = function(buf)
-            return vim.bo[buf].buftype == "help"
-          end,
-        },
-      },
-      left = {},
-    },
-  },
-
-  ------------------
   -- Tint
   --
   -- Dim inactive windows in Neovim using window-local highlight namespaces.
@@ -177,6 +143,43 @@ return {
   ------------------
   {
     "levouh/tint.nvim",
-    opts = {},
+    -- enabled = false,
+    opts = {
+      tint_background_colors = false,
+      window_ignore_function = function(winid)
+        local bufid = vim.api.nvim_win_get_buf(winid)
+        local buftype = vim.api.nvim_buf_get_option(bufid, "buftype")
+        local floating = vim.api.nvim_win_get_config(winid).relative ~= ""
+
+        -- Do not tint `terminal` or floating windows, tint everything else
+        return buftype == "terminal" or floating
+      end,
+    },
+  },
+
+  ------------------
+  -- Satellite (nvim >= 0.10)
+  --
+  -- Decorate scrollbar for Neovim
+  --
+  -- https://github.com/lewis6991/satellite.nvim
+  ------------------
+  {
+    "lewis6991/satellite.nvim",
+    enabled = false,
+    config = function()
+      require("satellite").setup()
+    end,
+  },
+
+  ------------------
+  -- Scrollview (nvim >= 0.6)
+  --
+  -- A Neovim plugin that displays interactive vertical scrollbars and signs.
+  --
+  -- https://github.com/dstein64/nvim-scrollview
+  ------------------
+  {
+    "dstein64/nvim-scrollview",
   },
 }
