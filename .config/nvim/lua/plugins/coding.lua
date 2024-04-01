@@ -191,6 +191,7 @@ return {
       "rcarriga/nvim-notify",
       "stevearc/dressing.nvim",
     },
+    config = true,
     init = function()
       local overseer = require("overseer")
 

@@ -181,11 +181,23 @@ return {
     init = function()
       local group = vim.api.nvim_create_augroup("PersistedHooks", {})
 
+      local function get_cwd_as_name()
+        local dir = vim.fn.getcwd(0)
+        return dir:gsub("[^A-Za-z0-9]", "_")
+      end
+
       vim.api.nvim_create_autocmd({ "User" }, {
-        pattern = "PersistedSavePost",
+        pattern = "PersistedSavePre",
         group = group,
         callback = function(a)
           vim.notify("Save session" .. a.data)
+
+          local overseer = require("overseer")
+          overseer.save_task_bundle(
+            get_cwd_as_name(),
+            nil,
+            { on_conflict = "overwrite" }
+          )
         end,
       })
 
@@ -194,6 +206,12 @@ return {
         group = group,
         callback = function(session)
           vim.notify("Loaded session " .. session.data.branch)
+
+          local overseer = require("overseer")
+          overseer.load_task_bundle(
+            get_cwd_as_name(),
+            { ignore_missing = true }
+          )
         end,
       })
     end,
