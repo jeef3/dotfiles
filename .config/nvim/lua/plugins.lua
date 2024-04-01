@@ -32,7 +32,23 @@ return {
     end,
   },
 
-  "ethanholz/nvim-lastplace", -- Restore cursor position
+  {
+    "christoomey/vim-tmux-navigator",
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+      "TmuxNavigatePrevious",
+    },
+    keys = {
+      { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+      { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+      { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+      { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+    },
+  },
 
   {
     "kevinhwang91/nvim-hlslens",
@@ -162,5 +178,24 @@ return {
       autoload = true,
       use_git_branch = true,
     },
+    init = function()
+      local group = vim.api.nvim_create_augroup("PersistedHooks", {})
+
+      vim.api.nvim_create_autocmd({ "User" }, {
+        pattern = "PersistedSavePost",
+        group = group,
+        callback = function(a)
+          vim.notify("Save session" .. a.data)
+        end,
+      })
+
+      vim.api.nvim_create_autocmd({ "User" }, {
+        pattern = "PersistedLoadPost",
+        group = group,
+        callback = function(session)
+          vim.notify("Loaded session " .. session.data.branch)
+        end,
+      })
+    end,
   },
 }

@@ -68,6 +68,8 @@ return {
     },
   },
 
+  "ethanholz/nvim-lastplace", -- Restore cursor position
+
   ------------------
   -- Spaceless
   --
@@ -77,9 +79,6 @@ return {
   ------------------
   {
     "lewis6991/spaceless.nvim",
-    config = function()
-      require("spaceless").setup()
-    end,
   },
 
   ------------------
@@ -106,15 +105,14 @@ return {
   ------------------
   {
     "folke/zen-mode.nvim",
-    config = function()
-      require("zen-mode").setup({
-        window = { width = 90 },
-        plugins = {
-          tmux = { enabled = true },
-          kitty = { enabled = true, font = "+4" },
-        },
-      })
-    end,
+    cmd = { "ZenMode" },
+    opts = {
+      window = { width = 90 },
+      plugins = {
+        tmux = { enabled = true },
+        kitty = { enabled = true, font = "+4" },
+      },
+    },
   },
 
   ------------------
@@ -128,6 +126,9 @@ return {
     "rcarriga/nvim-notify",
     opts = {
       render = "wrapped-compact",
+      on_open = function(win)
+        vim.api.nvim_win_set_config(win, { focusable = false })
+      end,
     },
     init = function()
       vim.notify = require("notify")
@@ -143,18 +144,52 @@ return {
   ------------------
   {
     "levouh/tint.nvim",
-    -- enabled = false,
     opts = {
-      tint_background_colors = false,
+      tint_background_colors = true,
       window_ignore_function = function(winid)
+        -- We only enable tint when Telescope opens, but still need to tell tint
+        -- to not tint the floating windows
         local bufid = vim.api.nvim_win_get_buf(winid)
         local buftype = vim.api.nvim_buf_get_option(bufid, "buftype")
         local floating = vim.api.nvim_win_get_config(winid).relative ~= ""
 
-        -- Do not tint `terminal` or floating windows, tint everything else
         return buftype == "terminal" or floating
       end,
     },
+    init = function()
+      local tint = require("tint")
+      tint.disable()
+
+      local group = vim.api.nvim_create_augroup("TintHooks", {})
+
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "TelescopeFindPre",
+        group = group,
+        callback = function()
+          tint.enable()
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("BufLeave", {
+        pattern = "*",
+        group = group,
+        callback = function(event)
+          local ft = vim.api.nvim_buf_get_option(event.buf, "filetype")
+          if ft == "TelescopePrompt" then
+            tint.disable()
+          end
+
+          -- FIXME: For some reason we exit Telescope in insert mode?
+          if ft == "TelescopePrompt" and vim.fn.mode() == "i" then
+            vim.api.nvim_feedkeys(
+              vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
+              "i",
+              false
+            )
+          end
+        end,
+      })
+    end,
   },
 
   ------------------

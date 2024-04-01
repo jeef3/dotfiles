@@ -9,12 +9,16 @@ return {
     build = ":TSUpdate",
     event = { "VeryLazy" },
     dependencies = {
+      "RRethy/nvim-treesitter-endwise",
       "nvim-treesitter/playground",
     },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     opts = {
       indent = { enable = true },
       highlight = { enable = true },
+      endwise = {
+        enable = true,
+      },
       ensure_installed = {
         "arduino",
         "bash",

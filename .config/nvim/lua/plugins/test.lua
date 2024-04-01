@@ -39,10 +39,12 @@ return {
       },
     },
     opts = {
-      adapters = {
-        require("neotest-vitest"),
-        require("neotest-playwright").adapter(),
-      },
+      adapters = function()
+        return {
+          require("neotest-vitest"),
+          require("neotest-playwright").adapter(),
+        }
+      end,
       icons = {
         failed = "󰅚",
         passed = "󰗡",

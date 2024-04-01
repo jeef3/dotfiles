@@ -130,6 +130,36 @@ return {
   { "windwp/nvim-ts-autotag", config = true },
 
   ------------------
+  -- Mini.Indentscope
+  --
+  -- Neovim Lua plugin to visualize and operate on indent scope. Part of
+  -- 'mini.nvim' library.
+  --
+  -- https://github.com/echasnovski/mini.indentscope
+  ------------------
+  {
+    "echasnovski/mini.indentscope",
+    version = false,
+    opts = {
+      symbol = "┊",
+      draw = {
+        delay = 0,
+        animation = function(s, n)
+          return 0
+        end,
+        -- animation = function(s, n)
+        --   return require("mini.indentscope").gen_animation.none(s, n)
+        -- end,
+      },
+    },
+    -- config = function(_, opts)
+    --   local indentscope = require("mini.indentscope")
+
+    --   indentscope.setup(opts)
+    -- end
+  },
+
+  ------------------
   -- Highlight other uses of a word
   --
   -- (Neo)Vim plugin for automatically highlighting other uses of the word under
@@ -139,11 +169,12 @@ return {
   ------------------
   {
     "RRethy/vim-illuminate",
-    config = function()
-      require("illuminate").configure({
-        providers = { "lsp", "treesitter" },
-        under_cursor = false,
-      })
+    opts = {
+      providers = { "lsp", "treesitter" },
+      under_cursor = false,
+    },
+    config = function(_, opts)
+      require("illuminate").configure(opts)
     end,
   },
 
@@ -160,8 +191,8 @@ return {
       "rcarriga/nvim-notify",
       "stevearc/dressing.nvim",
     },
-    config = function()
-      local overseer = require("overseer").setup()
+    init = function()
+      local overseer = require("overseer")
 
       vim.api.nvim_create_user_command("OverseerRestartLast", function()
         local tasks = overseer.list_tasks({ recent_first = true })
