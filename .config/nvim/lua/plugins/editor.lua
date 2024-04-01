@@ -193,6 +193,22 @@ return {
   },
 
   ------------------
+  ------------------
+  {
+    "anuvyklack/windows.nvim",
+    dependencies = {
+      "anuvyklack/middleclass",
+      "anuvyklack/animation.nvim",
+    },
+    config = true,
+    init = function()
+      vim.o.winwidth = 10
+      vim.o.winminwidth = 10
+      vim.o.equalalways = false
+    end,
+  },
+
+  ------------------
   -- Satellite (nvim >= 0.10)
   --
   -- Decorate scrollbar for Neovim
