@@ -1,4 +1,11 @@
-local icons = {
+--------------------------------
+-- Coding
+--
+-- Plugins that alter the coding environment in a more general way. LSP config
+-- stored separately.
+--------------------------------
+
+local kind_icons = {
   Text = " ",
   Method = " ",
   Function = " ",
@@ -92,7 +99,7 @@ return {
         formatting = {
           fields = { "kind", "abbr" },
           format = function(_, item)
-            item.kind = " " .. icons[item.kind] or "" .. " "
+            item.kind = " " .. kind_icons[item.kind] or "" .. " "
 
             return item
           end,
@@ -144,19 +151,11 @@ return {
       symbol = "┊",
       draw = {
         delay = 0,
-        animation = function(s, n)
+        animation = function(_, _)
           return 0
         end,
-        -- animation = function(s, n)
-        --   return require("mini.indentscope").gen_animation.none(s, n)
-        -- end,
       },
     },
-    -- config = function(_, opts)
-    --   local indentscope = require("mini.indentscope")
-
-    --   indentscope.setup(opts)
-    -- end
   },
 
   ------------------

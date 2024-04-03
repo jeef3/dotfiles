@@ -20,7 +20,6 @@ return {
   ----------------
   {
     "lewis6991/gitsigns.nvim",
-    cmd = { "Gitsigns" },
     opts = {
       signs = {
         add = { text = "▎" },

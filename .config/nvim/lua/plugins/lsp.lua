@@ -1,3 +1,10 @@
+--------------------------------
+-- LSP
+--
+-- LSP specific bits via LSP, with tools installed via Mason. Also indluces code
+-- linting/formatting.
+--------------------------------
+
 return {
   ----------------
   -- LSP Config
