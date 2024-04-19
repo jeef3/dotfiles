@@ -52,7 +52,12 @@ return {
         {
           "diff",
           colored = true,
-          symbols = { added = "+", modified = "~", removed = "-" },
+          symbols = {
+            added = "",
+            modified = "",
+            removed = "",
+            staged = "",
+          },
         },
       },
       lualine_z = {
@@ -69,16 +74,21 @@ return {
           "diagnostics",
           sources = { "nvim_diagnostic" },
           symbols = {
-            error = " ",
+            error = " ",
             warn = " ",
-            hint = " ",
-            info = " ",
+            hint = " ",
+            info = " ",
           },
         },
         {
           "diff",
           colored = true,
-          symbols = { added = "+", modified = "~", removed = "-" },
+          symbols = {
+            added = "",
+            modified = "",
+            removed = "",
+            staged = "",
+          },
         },
       },
       lualine_y = { "location" },
