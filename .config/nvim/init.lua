@@ -41,7 +41,7 @@ vim.opt.diffopt = {
 ----------------
 -- Other settings
 --
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 vim.opt.omnifunc = "syntaxcomplete#Complete"
 
 vim.opt.undofile = true
@@ -64,10 +64,10 @@ vim.g.netrw_bufsettings = "noma nomod nun nobl nowrap ro rnu"
 --
 
 -- Easier split switching (Ctrl-j, Ctrl-k, Ctrl-h, Ctrl-l)
--- vim.keymap.set("n", "<C-j>", "<C-W>j")
--- vim.keymap.set("n", "<C-k>", "<C-W>k")
--- vim.keymap.set("n", "<C-h>", "<C-W>h")
--- vim.keymap.set("n", "<C-l>", "<C-W>l")
+vim.keymap.set("n", "<C-j>", "<C-W>j")
+vim.keymap.set("n", "<C-k>", "<C-W>k")
+vim.keymap.set("n", "<C-h>", "<C-W>h")
+vim.keymap.set("n", "<C-l>", "<C-W>l")
 
 -- Toggle display of listchars
 vim.keymap.set("n", "<Leader>c", ":set list!<cr>")
