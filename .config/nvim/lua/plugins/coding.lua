@@ -58,11 +58,19 @@ return {
 
     opts = function()
       local cmp = require("cmp")
-      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-
-      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
       return {
+        -- Don't show completion while editing comments
+        enabled = function()
+          local context = require("cmp.config.context")
+
+          if vim.api.nvim_get_mode().mode == "c" then
+            return true
+          else
+            return not context.in_treesitter_capture("comment")
+              and not context.in_syntax_group("Comment")
+          end
+        end,
         snippet = {
           expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
@@ -83,7 +91,7 @@ return {
           ["<C-k>"] = cmp.mapping.select_prev_item({
             behavior = cmp.SelectBehavior.Insert,
           }),
-          ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-x><C-o>"] = cmp.mapping.complete(),
           ["<cr>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,

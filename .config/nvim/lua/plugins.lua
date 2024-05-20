@@ -110,7 +110,7 @@ return {
   ------------------
   {
     "gelguy/wilder.nvim",
-    enabled = false, -- Doesn't play well with noice
+    -- enabled = false, -- Doesn't play well with noice
     config = function()
       local wilder = require("wilder")
       wilder.setup({
@@ -168,20 +168,20 @@ return {
         return dir:gsub("[^A-Za-z0-9]", "_")
       end
 
-      vim.api.nvim_create_autocmd({ "User" }, {
-        pattern = "PersistedSavePre",
-        group = group,
-        callback = function(a)
-          vim.notify("Save session" .. a.data)
+      -- vim.api.nvim_create_autocmd({ "User" }, {
+      --   pattern = "PersistedSavePre",
+      --   group = group,
+      --   callback = function(a)
+      --     vim.notify("Save session" .. a.data)
 
-          local overseer = require("overseer")
-          overseer.save_task_bundle(
-            get_cwd_as_name(),
-            nil,
-            { on_conflict = "overwrite" }
-          )
-        end,
-      })
+      --     local overseer = require("overseer")
+      --     overseer.save_task_bundle(
+      --       get_cwd_as_name(),
+      --       nil,
+      --       { on_conflict = "overwrite" }
+      --     )
+      --   end,
+      -- })
 
       vim.api.nvim_create_autocmd({ "User" }, {
         pattern = "PersistedLoadPost",

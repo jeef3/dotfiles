@@ -44,19 +44,28 @@ return {
             col = "50%",
           },
           size = {
-            width = 64,
+            width = 60,
             height = "auto",
           },
+          border = {
+            style = "none",
+            padding = { 1, 3 },
+          },
+          win_options = {},
         },
         popupmenu = {
           relative = "editor",
           position = {
-            row = 5,
+            row = 7,
             col = "50%",
           },
           size = {
             size = 64,
             height = 10,
+          },
+          border = {
+            style = "none",
+            padding = { 3, 6 },
           },
         },
         mini = {
@@ -84,6 +93,7 @@ return {
       },
       messages = {
         enabled = false,
+        view_search = false,
       },
       presets = {
         bottom_search = false,
@@ -104,6 +114,33 @@ return {
           auto_open = { enabled = false },
         },
       },
+      routes = {
+        -- Avoid written messages
+        {
+          filter = {
+            event = "msg_show",
+            kind = "",
+            find = "written",
+          },
+          opts = { skip = true },
+        },
+        -- Avoid search messages
+        {
+          filter = {
+            event = "msg_show",
+            kind = "search_count",
+          },
+          opts = { skip = true },
+        },
+        -- -- Avoid all messages of ""
+        {
+          filter = {
+            event = "msg_show",
+            kind = "",
+          },
+          opts = { skip = true },
+        },
+      },
     },
   },
 
@@ -116,6 +153,7 @@ return {
   ------------------
   {
     "levouh/tint.nvim",
+    enabled = false, -- Some highlight changes have messed this up
     opts = {
       tint_background_colors = true,
       window_ignore_function = function(winid)
@@ -129,38 +167,38 @@ return {
       end,
     },
     init = function()
-      local tint = require("tint")
-      tint.disable()
+      -- local tint = require("tint")
+      -- tint.disable()
 
-      local group = vim.api.nvim_create_augroup("TintHooks", {})
+      -- local group = vim.api.nvim_create_augroup("TintHooks", {})
 
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "TelescopeFindPre",
-        group = group,
-        callback = function()
-          tint.enable()
-        end,
-      })
+      -- vim.api.nvim_create_autocmd("User", {
+      --   pattern = "TelescopeFindPre",
+      --   group = group,
+      --   callback = function()
+      --     tint.enable()
+      --   end,
+      -- })
 
-      vim.api.nvim_create_autocmd("BufLeave", {
-        pattern = "*",
-        group = group,
-        callback = function(event)
-          local ft = vim.api.nvim_buf_get_option(event.buf, "filetype")
-          if ft == "TelescopePrompt" then
-            tint.disable()
-          end
+      -- vim.api.nvim_create_autocmd("BufLeave", {
+      --   pattern = "*",
+      --   group = group,
+      --   callback = function(event)
+      --     local ft = vim.api.nvim_buf_get_option(event.buf, "filetype")
+      --     if ft == "TelescopePrompt" then
+      --       tint.disable()
+      --     end
 
-          -- FIXME: For some reason we exit Telescope in insert mode?
-          if ft == "TelescopePrompt" and vim.fn.mode() == "i" then
-            vim.api.nvim_feedkeys(
-              vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
-              "i",
-              false
-            )
-          end
-        end,
-      })
+      --     -- FIXME: For some reason we exit Telescope in insert mode?
+      --     if ft == "TelescopePrompt" and vim.fn.mode() == "i" then
+      --       vim.api.nvim_feedkeys(
+      --         vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
+      --         "i",
+      --         false
+      --       )
+      --     end
+      --   end,
+      -- })
     end,
   },
 
@@ -178,7 +216,11 @@ return {
       "anuvyklack/middleclass",
       "anuvyklack/animation.nvim",
     },
-    config = true,
+    config = {
+      autowidth = {
+        winwidth = 7, -- 6 characer gutter and 1 character pad
+      },
+    },
     init = function()
       vim.o.winwidth = 10
       vim.o.winminwidth = 10
