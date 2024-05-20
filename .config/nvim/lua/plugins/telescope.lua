@@ -32,7 +32,7 @@ return {
       { "<c-p>" },
       { "<c-s>" },
       { "gs", desc = "Find symbols in document" },
-      { ":", "<cmd>Telescope cmdline<cr>" },
+      -- { ":", "<cmd>Telescope cmdline<cr>" },
       { "gp", "<cmd>Telescope persisted<cr>", desc = "Switch session" },
     },
     config = function()
@@ -100,8 +100,9 @@ return {
           mappings = {
             i = {
               ["<esc>"] = actions.close,
-              ["<c-j>"] = actions.move_selection_next,
-              ["<c-k>"] = actions.move_selection_previous,
+              ["<C-j>"] = actions.move_selection_next,
+              ["<C-k>"] = actions.move_selection_previous,
+              ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
               ["<ScrollWheelDown>"] = actions.move_selection_next,
               ["<ScrollWheelUp>"] = actions.move_selection_previous,
               ["<ScrollWheelLeft>"] = noop,
@@ -134,6 +135,8 @@ return {
             "--type",
             "f",
             "--hidden",
+            "-E",
+            ".git",
             "--strip-cwd-prefix",
           },
           prompt_prefix = "    ",
