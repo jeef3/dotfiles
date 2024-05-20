@@ -83,6 +83,7 @@ FORMULAS=(
   haskell-stack
   # python@2
   # python3
+  rustup
 
   # Other language libs and bits
   yarn
