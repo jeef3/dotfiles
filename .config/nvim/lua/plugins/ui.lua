@@ -14,6 +14,7 @@ return {
   ----------------
   {
     "jeef3/splitsizer.vim",
+    enabled = false,
     keys = {
       { "<leader>a", desc = "Start SplitSizer" },
       { "<leader>s", desc = "Stop SplitSizer" },
@@ -153,9 +154,10 @@ return {
   ------------------
   {
     "levouh/tint.nvim",
-    enabled = false, -- Some highlight changes have messed this up
+    -- enabled = false, -- Some highlight changes have messed this up
     opts = {
       tint_background_colors = true,
+      saturation = 0.5,
       window_ignore_function = function(winid)
         -- We only enable tint when Telescope opens, but still need to tell tint
         -- to not tint the floating windows
@@ -220,6 +222,10 @@ return {
       autowidth = {
         winwidth = 7, -- 6 characer gutter and 1 character pad
       },
+      ignore = {
+        buftype = { "nofile" },
+        filetype = { "netrw", "neotest-summary" },
+      },
     },
     init = function()
       vim.o.winwidth = 10
@@ -237,22 +243,15 @@ return {
   ------------------
   {
     "lewis6991/satellite.nvim",
-    enabled = false,
+    enabled = true,
     config = function()
-      require("satellite").setup()
+      require("satellite").setup({
+        current_only = true,
+        handlers = {
+          gitsigns = { enable = false },
+        },
+      })
     end,
-  },
-
-  ------------------
-  -- Scrollview (nvim >= 0.6)
-  --
-  -- A Neovim plugin that displays interactive vertical scrollbars and signs.
-  --
-  -- https://github.com/dstein64/nvim-scrollview
-  ------------------
-  {
-    "dstein64/nvim-scrollview",
-    enabled = false,
   },
 
   ------------------
@@ -273,5 +272,17 @@ return {
     init = function()
       vim.notify = require("notify")
     end,
+  },
+
+  ------------------
+  -- Netrw
+  --
+  -- It's not because we use netrw that we cannot have nice things!
+  --
+  -- https://github.com/prichrd/netrw.nvim
+  ------------------
+  {
+    "prichrd/netrw.nvim",
+    config = true,
   },
 }

@@ -142,6 +142,10 @@ return {
         force_max_height = true,
         layout = "float",
       },
+      outline = {
+        win_width = 5,
+        auto_preview = false,
+      },
       ui = {
         title = true,
         border = "rounded",
@@ -167,22 +171,29 @@ return {
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
-    opts = {
-      formatters_by_ft = {
-        lua = { "stylua" },
-        -- yaml = { "yamlfix" },
-        javascript = { { "prettierd", "prettier" } },
-        javascriptreact = { { "prettierd", "prettier" } },
-        typescript = { { "prettierd", "prettier" } },
-        typescriptreact = { { "prettierd", "prettier" } },
-        json = { { "prettierd", "prettier" } },
-        rust = { "rustfmt" },
-      },
-      format_on_save = {
-        timeout_ms = 1000,
-        lps_fallback = true,
-      },
-    },
+    opts = function()
+      -- local formatters = { "prettierd", "prettier" }
+      -- local formatters = { "prettier", "prettierd" }
+      local formatters = { "prettier" }
+      -- local formatters = { "prettierd" }
+
+      return {
+        formatters_by_ft = {
+          lua = { "stylua" },
+          -- yaml = { "yamlfix" },
+          javascript = { formatters },
+          javascriptreact = { formatters },
+          typescript = { formatters },
+          typescriptreact = { formatters },
+          json = { formatters },
+          rust = { "rustfmt" },
+        },
+        format_on_save = {
+          timeout_ms = 1000,
+          lps_fallback = true,
+        },
+      }
+    end,
   },
 
   ----------------
@@ -260,6 +271,17 @@ return {
           lspconfig.omnisharp.setup({
             cmd = { mason .. "omnisharp" },
             capabilities = capabilities,
+          })
+        end,
+
+        ["stylelint_lsp"] = function()
+          lspconfig.stylelint_lsp.setup({
+            settings = {
+              stylelintplus = {
+                autoFixOnFormat = true,
+                autoFixOnSave = true,
+              },
+            },
           })
         end,
 

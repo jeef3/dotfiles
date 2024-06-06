@@ -38,36 +38,48 @@ return {
         desc = "Toggle output panel",
       },
     },
-    opts = {
-      adapters = function()
-        return {
+    config = function()
+      require("neotest").setup({
+        adapters = {
           require("neotest-vitest"),
-          require("neotest-playwright").adapter(),
-        }
-      end,
-      icons = {
-        failed = "󰅚",
-        passed = "󰗡",
-        running_animated = {
-          "⠋",
-          "⠙",
-          "⠹",
-          "⠸",
-          "⠼",
-          "⠴",
-          "⠦",
-          "⠧",
-          "⠇",
-          "⠏",
+          require("neotest-playwright").adapter({
+            options = {
+              enable_dynamic_test_discovery = true,
+            },
+          }),
         },
-      },
-      quickfix = { enabled = false },
-    },
+        icons = {
+          failed = "󰅚",
+          passed = "󰗡",
+          running_animated = {
+            "⠋",
+            "⠙",
+            "⠹",
+            "⠸",
+            "⠼",
+            "⠴",
+            "⠦",
+            "⠧",
+            "⠇",
+            "⠏",
+          },
+        },
+        quickfix = { enabled = false },
+      })
+    end,
   },
 
+  ----------------
   -- Code Coverage
+  --
+  -- Displays test coverage data in the sign column
+  --
+  -- https://github.com/andythigpen/nvim-coverage
+  ----------------
   {
     "andythigpen/nvim-coverage",
     dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = { "Coverage" },
+    config = true,
   },
 }

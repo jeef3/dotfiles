@@ -1,17 +1,14 @@
---------------------------------
---
+----------------
 -- Telescope
 --
---------------------------------
+-- Find, Filter, Preview, Pick. All lua, all the time.
+--
+-- https://github.com/nvim-telescope/telescope.nvim
+----------------
 
 local noop = function() end
 
 return {
-  ----------------
-  -- Telescope
-  --
-  -- https://github.com/nvim-telescope/telescope.nvim
-  ----------------
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
