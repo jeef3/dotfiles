@@ -21,6 +21,21 @@ return {
 
       dapui.setup()
 
+      dap.adapters["coreclr"] = {
+        type = "executable",
+        command = mason .. "netcoredbg",
+        args = { "--interpreter=vscode" },
+      }
+
+      dap.configurations.cs = {
+        {
+          type = "coreclr",
+          name = "launch - netcoredbg",
+          request = "attach",
+          processId = require("dap.utils").pick_process,
+        },
+      }
+
       dap.adapters["pwa-node"] = {
         type = "server",
         host = "localhost",

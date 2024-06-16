@@ -179,14 +179,15 @@ return {
 
       return {
         formatters_by_ft = {
-          lua = { "stylua" },
-          -- yaml = { "yamlfix" },
+          cs = { "csharpier" },
           javascript = { formatters },
           javascriptreact = { formatters },
+          json = { formatters },
+          lua = { "stylua" },
+          rust = { "rustfmt" },
           typescript = { formatters },
           typescriptreact = { formatters },
-          json = { formatters },
-          rust = { "rustfmt" },
+          -- yaml = { "yamlfix" },
         },
         format_on_save = {
           timeout_ms = 1000,
