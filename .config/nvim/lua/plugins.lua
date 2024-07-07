@@ -52,13 +52,6 @@ return {
     },
   },
 
-  -- Fancy recorder display
-  {
-    "chrisgrieser/nvim-recorder",
-    dependencies = "rcarriga/nvim-notify",
-    opts = {},
-  },
-
   -- Colored colors
   {
     "NvChad/nvim-colorizer.lua",

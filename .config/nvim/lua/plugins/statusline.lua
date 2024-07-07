@@ -4,11 +4,18 @@
 -- https://github.com/nvim-lualine/lualine.nvim
 ----------------
 
+local function show_macro_recording()
+  local reg = vim.fn.reg_recording()
+  if reg == "" then
+    return ""
+  end
+
+  return "  [" .. reg .. "]"
+end
+
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = {
-    "chrisgrieser/nvim-recorder",
-  },
+  dependencies = {},
 
   opts = {
     options = {
@@ -31,7 +38,7 @@ return {
       section_separators = { left = "", right = "" },
     },
     sections = {
-      lualine_a = { require("recorder").recordingStatus, "mode" },
+      lualine_a = { { "macro-recording", fmt = show_macro_recording }, "mode" },
       lualine_b = { "filename" },
       lualine_c = {
         -- require("auto-session.lib").current_session_name,
@@ -94,5 +101,55 @@ return {
       lualine_y = { "location" },
       lualine_z = {},
     },
+    -- tabline = {
+    --   lualine_b = { { "tabs", mode = 1 } },
+    --   lualine_y = { "branch" },
+    -- },
   },
+
+  init = function()
+    local lualine = require("lualine")
+
+    vim.api.nvim_create_autocmd("RecordingEnter", {
+      callback = function()
+        local reg = vim.fn.reg_recording()
+
+        vim.notify(
+          "Macro recording started [" .. reg .. "]",
+          vim.log.levels.INFO,
+          { title = "Macro Recording Started" }
+        )
+
+        lualine.refresh({ place = { "statusline" } })
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("RecordingLeave", {
+      callback = function()
+        local reg = vim.fn.reg_recording()
+        local recorded = vim.fn.keytrans(
+          vim.api.nvim_replace_termcodes(
+            vim.fn.keytrans(vim.fn.getreg(reg)),
+            true,
+            true,
+            true
+          )
+        )
+
+        vim.notify(
+          "Macro recording stopped [" .. reg .. "]\n" .. recorded,
+          vim.log.levels.INFO,
+          { title = "Macro Recording Stopped" }
+        )
+
+        vim.loop.new_timer():start(
+          50,
+          0,
+          vim.schedule_wrap(function()
+            lualine.refresh({ place = { "statusline" } })
+          end)
+        )
+      end,
+    })
+  end,
 }
