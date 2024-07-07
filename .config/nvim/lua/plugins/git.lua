@@ -24,7 +24,16 @@ return {
       signs = {
         add = { text = "▎" },
         change = { text = "▎" },
-        delete = { text = "▎" },
+
+        delete = { text = "_" },
+        topdelete = { text = "‾" },
+
+        changedelete = { text = "~" },
+        untracked = { text = "┆" },
+      },
+
+      current_line_blame_opts = {
+        virt_text_pos = "right_align",
       },
 
       on_attach = function(bufnr)
