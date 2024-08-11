@@ -99,8 +99,10 @@ return {
       icons = {
         group = "",
       },
-      window = {
-        winblend = 10,
+      win = {
+        wo = {
+          winblend = 10,
+        },
       },
     },
     init = function()
@@ -139,8 +141,34 @@ return {
   {
     "declancm/cinnamon.nvim",
     opts = {
-      default_delay = 4,
+      options = {
+        delay = 4,
+      },
     },
+    init = function()
+      local cinnamon = require("cinnamon")
+
+      vim.keymap.set("n", "<c-u>", function()
+        cinnamon.scroll("<c-u>")
+      end)
+      vim.keymap.set("n", "<c-d>", function()
+        cinnamon.scroll("<c-d>")
+      end)
+    end,
+  },
+
+  ------------------
+  -- Twilight
+  --
+  -- 🌅 Twilight is a Lua plugin for Neovim 0.5 that dims inactive portions of
+  -- the code you're editing using TreeSitter.
+  --
+  -- https://github.com/folke/twilight.nvim
+  ------------------
+  {
+    "folke/twilight.nvim",
+    cmd = { "Twilight" },
+    opts = {},
   },
 
   ------------------
@@ -152,13 +180,23 @@ return {
   ------------------
   {
     "folke/zen-mode.nvim",
+    dependencies = {
+      "folke/twilight.nvim",
+    },
     cmd = { "ZenMode" },
     opts = {
-      window = { width = 90 },
+      window = { width = 90, height = 0.75 },
       plugins = {
         tmux = { enabled = true },
+        twilight = { enabled = true },
         kitty = { enabled = true, font = "+4" },
       },
     },
+    on_open = function()
+      vim.opt.wrap = true
+    end,
+    on_close = function()
+      vim.opt.wrap = false
+    end,
   },
 }
