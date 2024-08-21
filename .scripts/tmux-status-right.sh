@@ -57,13 +57,13 @@ if [ "$status" == "charged" ]; then
 fi
 
 if [ "$status" == "AC attached" ]; then
-  echo "#[fg=$fg]$percentage% ﮣ"
+  echo "#[fg=$fg]$percentage% 󱐥"
   exit
 fi
 
 if [ "$status" == "charging" ]; then
   fg=$tier8
-  symbol="$percentage% ﮣ"
+  symbol="$percentage% 󱐥"
 fi
 
 echo "#[fg=$fg]$symbol"

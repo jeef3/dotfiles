@@ -57,6 +57,10 @@ LIGHT_TEAL="#acf2e4"
 GREEN="#84b360"
 LIGHT_GREEN="#b0e687"
 
+# Princess Colors
+ORANGE="#ffcc66"
+
+
 PRETTY_PATH=$(sed "s:^$HOME:~:" <<< $CURRENT_PATH)
 
 git_branch() {
@@ -142,6 +146,10 @@ else
     fi
   else
     STAT_R=""
+  fi
+
+  if tmux list-panes -F '#F' | grep -q Z; then
+    STAT_R="$STAT_R 󰘕"
   fi
 
   echo $(print_title -l "$STAT_L" -r "$STAT_R")

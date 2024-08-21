@@ -74,13 +74,16 @@ FORMULAS=(
   openssl
   mkcert
   nss
+  gpg
 
   # Languages
   node
+  corepack
   nvm
   haskell-stack
   # python@2
   # python3
+  rustup
 
   # Other language libs and bits
   yarn
@@ -127,6 +130,7 @@ CASKS=(
   figma
 
   bricklink-studio
+  kicad
 
   dosbox
 )

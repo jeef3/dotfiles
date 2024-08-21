@@ -9,4 +9,7 @@
 .tmux/resurrect
 .tmux/plugins/tmux-*
 
+.config/nvim/lua/.luarc.json
+.config/nvim/plugin
+
 .todo
