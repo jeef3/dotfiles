@@ -104,7 +104,15 @@ vim.opt.fillchars = {
   foldopen = "",
 }
 
+vim.opt.linebreak = true
 vim.opt.showbreak = "↪ " -- Displays when a line wraps.
+
+-- Highlight yanked text
+vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 700 })
+  end,
+})
 
 vim.opt.report = 0 -- Always show number of lines changed
 vim.opt.shortmess:append({
@@ -172,30 +180,33 @@ vim.opt.guicursor = {
 }
 
 -- Mappings
-require("which-key").register({
-  ["<leader>"] = {
-    g = {
-      name = " Git Tools…",
-      b = { "<cmd>Flog<CR>", "Open Git branch view" },
-      l = { "<cmd>LazyGit<CR>", "Open LazyGit" },
-      s = { "<cmd>Telescope git_branches<CR>", "Switch branch" },
-    },
-    h = {
-      name = " Git Changes…",
-      b = { ":Gitsigns blame_line<CR>", "Blame" },
-      d = { ":Gitsigns diffthis<CR>", "Show diff for whole file" },
-      p = { ":Gitsigns preview_hunk<CR>", "Preview hunk changes" },
-      r = { ":Gitsigns reset_hunk<CR>", "Reset hunk changes" },
-      s = { ":Gitsigns stage_hunk<CR>", "Stage hunk" },
-      t = { ":Gitsigns toggle_deleted<CR>", "Toggle show deleted" },
-      u = { ":Gitsigns unstage_hunk<CR>", "Unstage hunk" },
-    },
-    t = {
-      name = "󰙨 Test…",
-    },
+local wk = require("which-key")
+wk.add({
+  { "<leader>g", group = " Git Tools…" },
+  { "<leader>gb", "<cmd>Flog<CR>", desc = "Open Git branch view" },
+  { "<leader>gl", "<cmd>LazyGit<CR>", desc = "Open LazyGit" },
+  { "<leader>gs", "<cmd>Telescope git_branches<CR>", desc = "Switch branch" },
+
+  { "<leader>h", group = " Git Changes…" },
+  { "<leader>hb", ":Gitsigns blame_line<CR>", desc = "Blame" },
+  {
+    "<leader>hd",
+    ":Gitsigns diffthis<CR>",
+    desc = "Show diff for whole file",
   },
-  g = {
-    -- LSP
-    -- d = { "<cd>Lspsaga goto_definition<CR>", "Go to definition" },
+  {
+    "<leader>hp",
+    ":Gitsigns preview_hunk<CR>",
+    desc = "Preview hunk changes",
   },
+  { "<leader>hr", ":Gitsigns reset_hunk<CR>", desc = "Reset hunk changes" },
+  { "<leader>hs", ":Gitsigns stage_hunk<CR>", desc = "Stage hunk" },
+  {
+    "<leader>ht",
+    ":Gitsigns toggle_deleted<CR>",
+    desc = "Toggle show deleted",
+  },
+  { "<leader>hu", ":Gitsigns unstage_hunk<CR>", desc = "Unstage hunk" },
+
+  { "<leader>t", group = "󰙨 Test…" },
 })

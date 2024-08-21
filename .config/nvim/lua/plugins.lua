@@ -15,7 +15,6 @@ return {
   "tpope/vim-fugitive", -- Git wrapper, :Gstatus etc
 
   "Xvezda/vim-readonly", -- Lock a bunch of files like node_modules
-  "machakann/vim-highlightedyank", -- Highlight yanked
 
   "fladson/vim-kitty", -- Kitty config syntax
 
@@ -66,11 +65,20 @@ return {
     end,
   },
 
-  -- Useful quick fix list
+  ------------------
+  -- Trouble
+  --
+  -- 🚦 A pretty diagnostics, references, telescope results, quickfix and
+  -- location list to help you solve all the trouble your code is causing.
+  --
+  -- https://github.com/folke/trouble.nvim
+  ------------------
   {
     "folke/trouble.nvim",
+    -- enabled = false, -- View gone a little weird
     dependencies = "nvim-tree/nvim-web-devicons",
-    cmd = { "Trouble", "TroubleToggle" },
+    cmd = "Trouble",
+    config = true,
   },
 
   ------------------
@@ -176,19 +184,17 @@ return {
       --   end,
       -- })
 
-      vim.api.nvim_create_autocmd({ "User" }, {
-        pattern = "PersistedLoadPost",
-        group = group,
-        callback = function(session)
-          vim.notify("Loaded session " .. session.data.branch)
+      -- vim.api.nvim_create_autocmd({ "User" }, {
+      --   pattern = "PersistedLoadPost",
+      --   group = group,
+      --   callback = function(session)
+      --     -- if session == nil or session.name == nil then
+      --     --   return
+      --     -- end
 
-          local overseer = require("overseer")
-          overseer.load_task_bundle(
-            get_cwd_as_name(),
-            { ignore_missing = true }
-          )
-        end,
-      })
+      --     vim.notify("Loaded session " .. vim.inspect(session))
+      --   end,
+      -- })
     end,
   },
 }

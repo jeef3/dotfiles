@@ -172,28 +172,50 @@ return {
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
     opts = function()
-      -- local formatters = { "prettierd", "prettier" }
+      local formatters = { "prettierd", "prettier", stop_after_first = true }
       -- local formatters = { "prettier", "prettierd" }
-      local formatters = { "prettier" }
+      -- local formatters = { "prettier" }
       -- local formatters = { "prettierd" }
 
       return {
         formatters_by_ft = {
           cs = { "csharpier" },
-          javascript = { formatters },
-          javascriptreact = { formatters },
-          json = { formatters },
+          javascript = formatters,
+          javascriptreact = formatters,
+          json = formatters,
           lua = { "stylua" },
           rust = { "rustfmt" },
-          typescript = { formatters },
-          typescriptreact = { formatters },
+          typescript = formatters,
+          typescriptreact = formatters,
           -- yaml = { "yamlfix" },
         },
-        format_on_save = {
-          timeout_ms = 1000,
-          lps_fallback = true,
-        },
+        format_on_save = function(bufnr)
+          -- Disable with a global or buffer-local variable
+          if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+            return
+          end
+          return { timeout_ms = 1000, lsp_format = "fallback" }
+        end,
       }
+    end,
+    init = function()
+      vim.api.nvim_create_user_command("ConformDisable", function(args)
+        if args.bang then
+          -- FormatDisable! will disable formatting just for this buffer
+          vim.b.disable_autoformat = true
+        else
+          vim.g.disable_autoformat = true
+        end
+      end, {
+        desc = "Disable autoformat-on-save",
+        bang = true,
+      })
+      vim.api.nvim_create_user_command("ConformEnable", function()
+        vim.b.disable_autoformat = false
+        vim.g.disable_autoformat = false
+      end, {
+        desc = "Re-enable autoformat-on-save",
+      })
     end,
   },
 
@@ -272,6 +294,11 @@ return {
           lspconfig.omnisharp.setup({
             cmd = { mason .. "omnisharp" },
             capabilities = capabilities,
+            settings = {
+              MsBuild = {
+                LoadProjectsOnDemand = true,
+              },
+            },
           })
         end,
 
@@ -302,5 +329,19 @@ return {
         end,
       })
     end,
+  },
+
+  ----------------
+  -- Fidget
+  --
+  -- 💫 Extensible UI for Neovim notifications and LSP progress messages.
+  --
+  -- https://github.com/j-hui/fidget.nvim
+  ----------------
+  {
+    "j-hui/fidget.nvim",
+    opts = {
+      -- options
+    },
   },
 }

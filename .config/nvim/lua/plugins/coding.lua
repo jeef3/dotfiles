@@ -198,7 +198,9 @@ return {
       "rcarriga/nvim-notify",
       "stevearc/dressing.nvim",
     },
-    config = true,
+    config = {
+      templates = { "builtin", "user.eslint_build", "user.tsc" },
+    },
     init = function()
       local overseer = require("overseer")
 

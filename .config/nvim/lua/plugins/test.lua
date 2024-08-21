@@ -15,6 +15,7 @@ return {
       -- Runners
       "marilari88/neotest-vitest",
       "thenbe/neotest-playwright",
+      "Issafalcon/neotest-dotnet",
     },
     keys = {
       {
@@ -47,6 +48,8 @@ return {
               enable_dynamic_test_discovery = true,
             },
           }),
+
+          require("neotest-dotnet")({}),
         },
         icons = {
           failed = "󰅚",
