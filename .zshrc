@@ -4,7 +4,7 @@ BREW_HOME=$(brew --prefix)
 eval "$(zoxide init zsh)"
 
 # Shell history
-eval "$(atuin init zsh)"
+eval "$(atuin init zsh --disable-up-arrow)"
 
 # ~/.extra can be used for settings you don’t want to commit
 for file in ~/.{extra,exports,aliases,functions}; do
@@ -22,13 +22,12 @@ export SAVEHIST=${HISTSIZE}
 
 setopt hist_expire_dups_first
 
-# Completion
-zstyle ':completion:*' menu select
-
 source ~/.zsh/plugins.zsh
 source ~/.zsh/prompt.zsh
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Completion
+zstyle ':completion:*' menu select
+zstyle ':completion:*:*:*:*:descriptions' format '%F{#b3b3d4}%K{#ff3399} %d %F{#ff3399}%K{black}%f%k'
 
 # Add Homebrew's sbin to PATH
 export PATH="/usr/local/sbin:$PATH"
