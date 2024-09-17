@@ -43,3 +43,8 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+# Created by `pipx` on 2024-07-26 02:22:27
+export PATH="$PATH:$HOME/.local/bin"
+
+export PATH="$PATH:$HOME/.dotnet/tools"

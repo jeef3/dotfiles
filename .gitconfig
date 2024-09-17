@@ -11,7 +11,7 @@
 
 	# Updating local branch
 	u = merge --ff-only
-	l = fetch -avp
+	l = fetch -tavp
 
 	# Show assume unchanged
 	ignore = update-index --assume-unchanged

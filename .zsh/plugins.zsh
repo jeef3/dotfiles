@@ -26,6 +26,16 @@ load_plugins() {
 
   # Touchbar
   # source ~/.zsh/plugged/zsh-iterm-touchbar/zsh-iterm-touchbar.plugin.zsh
+
+  # FZF searching
+  source ~/.zsh/custom/fzf.zsh
+
+  # Autoload directory settings
+  source ~/.zsh/custom/autoload.zsh
+  load-local-conf
+
+  # Shell history
+  eval "$(atuin init zsh --disable-up-arrow)"
 }
 load_plugins
 

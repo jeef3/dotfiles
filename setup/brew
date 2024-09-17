@@ -23,6 +23,7 @@ info "Tapping"
 brew tap eddieantonio/eddieantonio
 brew tap osx-cross/avr
 brew tap sudar/arduino-mk
+brew tap mongodb/brew
 
 FORMULAS=(
   # Updated/nicer/faster tools
@@ -38,6 +39,7 @@ FORMULAS=(
   the_silver_searcher
   fzf
   ripgrep # Faster grepping
+  fd # Decent file searcher
 
   # Useful tools
   trash
@@ -78,7 +80,6 @@ FORMULAS=(
 
   # Languages
   node
-  corepack
   nvm
   haskell-stack
   # python@2
@@ -86,8 +87,12 @@ FORMULAS=(
   rustup
 
   # Other language libs and bits
+  corepack
   yarn
   platformio
+
+  # Databases
+  mongodb-community
 
   # Compilers
   make
