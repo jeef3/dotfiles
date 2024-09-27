@@ -142,8 +142,3 @@
 
 [diff "image"]
   command = ~/git-imgdiff
-
-[user]
-  name = Jeff Knaggs
-  email = mail@jeef3.com
-
