@@ -22,6 +22,7 @@ return {
         build = "make",
         -- enabled = vim.fn.executable("make") == 1,
       },
+      "Myzel394/jsonfly.nvim", -- JSON explorer
     },
     cmd = { "Telescope" },
     keys = {
@@ -31,6 +32,13 @@ return {
       { "gs", desc = "Find symbols in document" },
       -- { ":", "<cmd>Telescope cmdline<cr>" },
       { "gp", "<cmd>Telescope persisted<cr>", desc = "Switch session" },
+      {
+        "<leader>j",
+        "<cmd>Telescope jsonfly<cr>",
+        desc = "Open json(fly)",
+        ft = { "json", "xml", "yaml" },
+        mode = "n",
+      },
     },
     config = function()
       local telescope = require("telescope")
