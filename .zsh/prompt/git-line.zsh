@@ -11,7 +11,7 @@ CLEAN_ICON="\uf00c"
 SEPARATOR="${DARK_GRAY}•"
 
 git_line() {
-  precmd_update_git_vars
+  # precmd_update_git_vars
 
   if [ -n "$__CURRENT_GIT_STATUS" ]; then
     typeset BRANCH=$GIT_BRANCH

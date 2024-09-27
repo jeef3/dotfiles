@@ -12,7 +12,7 @@ setopt prompt_subst
 function noop() {}
 
 function my_prompt() {
-  RPROMPT='$(git_line)'
+  RPROMPT='$(gitprompt)'
 
   zle && zle .reset-prompt
   async_stop_worker prompt_worker -n

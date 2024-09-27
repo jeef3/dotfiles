@@ -1,6 +1,3 @@
-[submodule ".zsh/plugged/zsh-git-prompt"]
-	path = .zsh/plugged/zsh-git-prompt
-	url = https://github.com/olivierverdier/zsh-git-prompt.git
 [submodule ".zsh/plugged/zsh-completions"]
 	path = .zsh/plugged/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
@@ -10,6 +7,9 @@
 [submodule ".zsh/plugged/up.zsh"]
 	path = .zsh/plugged/up.zsh
 	url = https://github.com/peterhurford/up.zsh.git
+[submodule ".zsh/plugged/git-prompt.zsh"]
+	path = .zsh/plugged/git-prompt.zsh
+	url = https://github.com/woefe/git-prompt.zsh
 [submodule ".config/ranger/plugins"]
 	path = .config/ranger/plugins
 	url = https://github.com/alexanderjeurissen/ranger_devicons

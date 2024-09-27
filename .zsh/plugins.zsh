@@ -28,11 +28,11 @@ load_plugins() {
   # source ~/.zsh/plugged/zsh-iterm-touchbar/zsh-iterm-touchbar.plugin.zsh
 
   # FZF searching
-  source ~/.zsh/custom/fzf.zsh
+  # source ~/.zsh/custom/fzf.zsh
 
   # Autoload directory settings
-  source ~/.zsh/custom/autoload.zsh
-  load-local-conf
+  # source ~/.zsh/custom/autoload.zsh
+  # load-local-conf
 
   # Shell history
   eval "$(atuin init zsh --disable-up-arrow)"
@@ -45,15 +45,16 @@ load_plugins
 
 load_async_plugins() {
   # Git Prompt
-  if [ ! -e ~/.zsh/plugged/zsh-git-prompt/.stack-work ]; then
-    echo "\n"
-    info "Setting up Haskell support for zsh-git-prompt"
-    (cd ~/.zsh/plugged/zsh-git-prompt && \
-      stack setup && \
-      stack build && stack install)
-  fi
-  export GIT_PROMPT_EXECUTABLE="haskell"
-  source ~/.zsh/plugged/zsh-git-prompt/zshrc.sh
+  # if [ ! -e ~/.zsh/plugged/zsh-git-prompt/.stack-work ]; then
+  #   echo "\n"
+  #   info "Setting up Haskell support for zsh-git-prompt"
+  #   (cd ~/.zsh/plugged/zsh-git-prompt && \
+  #     stack setup && \
+  #     stack build && stack install)
+  # fi
+  # export GIT_PROMPT_EXECUTABLE="haskell"
+  # source ~/.zsh/plugged/zsh-git-prompt/zshrc.sh
+  source ~/.zsh/plugged/git-prompt.zsh/git-prompt.zsh
 
   # .. ... .... aliases
   source ~/.zsh/plugged/up.zsh/up.plugin.zsh
