@@ -48,3 +48,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$PATH:$HOME/.local/bin"
 
 export PATH="$PATH:$HOME/.dotnet/tools"
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/jeffknaggs/.dart-cli-completion/zsh-config.zsh ]] && . /Users/jeffknaggs/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+

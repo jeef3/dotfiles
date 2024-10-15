@@ -28,6 +28,7 @@ return {
         "cpp",
         "css",
         "csv",
+        "dart",
         "diff",
         "dockerfile",
         "embedded_template",

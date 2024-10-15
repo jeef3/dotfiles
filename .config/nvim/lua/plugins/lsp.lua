@@ -180,6 +180,7 @@ return {
       return {
         formatters_by_ft = {
           cs = { "csharpier" },
+          dart = { "dcm" },
           javascript = formatters,
           javascriptreact = formatters,
           json = formatters,
@@ -329,6 +330,34 @@ return {
         end,
       })
     end,
+  },
+
+  ----------------
+  -- Flutter Tools
+  --
+  -- Tools to help create flutter apps in neovim using the native lsp.
+  --
+  -- https://github.com/nvim-flutter/flutter-tools.nvim
+  ----------------
+  {
+    "akinsho/flutter-tools.nvim",
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "stevearc/dressing.nvim",
+    },
+    config = { fvm = true },
+  },
+
+  ----------------
+  -- Pubspec Assist
+  --
+  -- https://github.com/nvim-flutter/pubspec-assist.nvim
+  ----------------
+  {
+    "akinsho/pubspec-assist.nvim",
+    requires = "plenary.nvim",
+    config = true,
   },
 
   ----------------

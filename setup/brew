@@ -24,6 +24,7 @@ brew tap eddieantonio/eddieantonio
 brew tap osx-cross/avr
 brew tap sudar/arduino-mk
 brew tap mongodb/brew
+brew tap leoafarias/fvm
 
 FORMULAS=(
   # Updated/nicer/faster tools
@@ -85,6 +86,7 @@ FORMULAS=(
   # python@2
   # python3
   rustup
+  fvm
 
   # Other language libs and bits
   corepack
