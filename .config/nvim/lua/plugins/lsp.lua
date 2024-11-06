@@ -172,23 +172,23 @@ return {
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
     opts = function()
-      local formatters = { "prettierd", "prettier", stop_after_first = true }
-      -- local formatters = { "prettier", "prettierd" }
-      -- local formatters = { "prettier" }
-      -- local formatters = { "prettierd" }
+      local prettier = { "prettierd", "prettier", stop_after_first = true }
 
       return {
         formatters_by_ft = {
           cs = { "csharpier" },
+          css = prettier,
           dart = { "dcm" },
-          javascript = formatters,
-          javascriptreact = formatters,
-          json = formatters,
+          html = prettier,
+          javascript = prettier,
+          javascriptreact = prettier,
+          json = prettier,
           lua = { "stylua" },
+          markdown = prettier,
           rust = { "rustfmt" },
-          typescript = formatters,
-          typescriptreact = formatters,
-          -- yaml = { "yamlfix" },
+          typescript = prettier,
+          typescriptreact = prettier,
+          yaml = prettier,
         },
         format_on_save = function(bufnr)
           -- Disable with a global or buffer-local variable
