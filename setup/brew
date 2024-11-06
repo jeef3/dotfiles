@@ -92,6 +92,7 @@ FORMULAS=(
   corepack
   yarn
   platformio
+  esphome
 
   # Databases
   mongodb-community
