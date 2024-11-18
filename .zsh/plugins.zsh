@@ -35,7 +35,7 @@ load_plugins() {
   # load-local-conf
 
   # Shell history
-  eval "$(atuin init zsh --disable-up-arrow)"
+  # eval "$(atuin init zsh --disable-up-arrow)"
 }
 load_plugins
 

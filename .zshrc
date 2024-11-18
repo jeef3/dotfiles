@@ -4,7 +4,7 @@ BREW_HOME=$(brew --prefix)
 eval "$(zoxide init zsh)"
 
 # Shell history
-eval "$(atuin init zsh --disable-up-arrow)"
+# eval "$(atuin init zsh --disable-up-arrow)"
 
 # ~/.extra can be used for settings you don’t want to commit
 for file in ~/.{extra,exports,aliases,functions}; do
