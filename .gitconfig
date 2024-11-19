@@ -11,7 +11,7 @@
 
 	# Updating local branch
 	u = merge --ff-only
-	l = fetch -tavp
+	l = fetch -tap
 
 	# Show assume unchanged
 	ignore = update-index --assume-unchanged
@@ -142,3 +142,8 @@
 
 [diff "image"]
   command = ~/git-imgdiff
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process

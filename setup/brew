@@ -56,6 +56,7 @@ FORMULAS=(
 
   # Git
   git
+  git-lfs
   tig
   lazygit
   git-delta
