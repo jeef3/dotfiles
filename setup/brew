@@ -90,6 +90,9 @@ FORMULAS=(
   # python3
   rustup
   fvm
+  tilt
+  helm
+  dotnet
 
   # Other language libs and bits
   yarn
