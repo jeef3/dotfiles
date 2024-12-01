@@ -8,8 +8,8 @@
 ------------------
 
 return {
-  -- "jeef3/princess.nvim",
-  dir = "~/projects/princess.nvim",
+  "jeef3/princess.nvim",
+  -- dir = "~/projects/princess.nvim",
   lazy = false,
   priority = 1000,
   dependencies = { "rktjmp/lush.nvim" },

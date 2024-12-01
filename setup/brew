@@ -20,10 +20,10 @@ brew update && brew upgrade
 
 # Taps
 info "Tapping"
-brew tap eddieantonio/eddieantonio
-brew tap osx-cross/avr
-brew tap sudar/arduino-mk
-brew tap mongodb/brew
+# brew tap eddieantonio/eddieantonio
+# brew tap osx-cross/avr
+# brew tap sudar/arduino-mk
+# brew tap mongodb/brew
 brew tap leoafarias/fvm
 
 FORMULAS=(
@@ -31,9 +31,9 @@ FORMULAS=(
   coreutils # GNU core utilities (those that come with OS X are outdated)
   findutils # GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
   wget # Wget with iri
-  bat # Nicer cat
+  # bat # Nicer cat
   ncdu # Nicer du
-  tldr # Nicer man
+  # tldr # Nicer man
   gnupg
   less # Newer less
   ack
@@ -43,13 +43,13 @@ FORMULAS=(
   fd # Decent file searcher
 
   # Useful tools
-  trash
-  rename
+  # trash
+  # rename
   jq # JSON parser
-  fx # Interactive JSON explorer
+  # fx # Interactive JSON explorer
 
   # Terminal helpers and tools
-  bash # Just, because
+  # bash # Just, because
   zoxide
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -57,47 +57,47 @@ FORMULAS=(
   # Git
   git
   git-lfs
-  tig
+  # tig
   lazygit
   git-delta
   diff-so-fancy
 
   # Mah IDE
   tmux
-  macvim
+  # macvim
   neovim
   ranger
   todo-txt
 
   # Other seldom used tools
-  fontforge # For custom font icon patching
-  mdv # CLI Markdown viewer
-  httpie
-  imgcat
+  # fontforge # For custom font icon patching
+  # mdv # CLI Markdown viewer
+  # httpie
+  # imgcat
 
   # Certificate tools
   openssl
   mkcert
-  nss
+  # nss
   gpg
 
   # Languages
   node
-  deno
-  nvm
+  # deno
   haskell-stack
   # python@2
-  # python3
+  python3
   rustup
   fvm
+  java
 
   # Other language libs and bits
-  yarn
+  # yarn
   platformio
   esphome
 
   # Databases
-  mongodb-community
+  # mongodb-community
 
   # Compilers
   make
@@ -106,26 +106,26 @@ FORMULAS=(
   mono
 
   # Dev helpers
-  watchman
-  fswatch
-  awscli
-  azure-cli
+  # watchman
+  # fswatch
+  # awscli
+  # azure-cli
 
   # Gifiy
-  ffmpeg
-  gifsicle
-  imagemagick
+  # ffmpeg
+  # gifsicle
+  # imagemagick
 )
 
 CASKS=(
   kitty
 
   # Gifify
-  xquartz
+  # xquartz
 
   # Dev Tools
-  react-native-debugger
-  imageoptim
+  # react-native-debugger
+  # imageoptim
 
   # Other
   #dropbox
@@ -133,16 +133,16 @@ CASKS=(
 
   docker
 
-  sim-daltonism # Color blindness simulator
+  # sim-daltonism # Color blindness simulator
 
-  slack
+  # slack
 
   figma
 
-  # bricklink-studio
+  bricklink-studio
   kicad
 
-  # dosbox
+  dosbox
 )
 
 CASKS_SERVER=(
@@ -198,7 +198,7 @@ for index in ${!CASK_LIST[*]}
 do
   if ! formula_exists ${CASK_LIST[$index]}; then
     info "${CASK_LIST[$index]} not installed, installing..."
-    brew install ${CASK_LIST[$index]}
+    brew install --cask ${CASK_LIST[$index]}
   else
     success "${CASK_LIST[$index]} already installed, skipping"
   fi

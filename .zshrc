@@ -1,7 +1,7 @@
-BREW_HOME=$(brew --prefix)
-
-# Good ol z
+eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(zoxide init zsh)"
+
+BREW_HOME=$(brew --prefix)
 
 # Shell history
 # eval "$(atuin init zsh --disable-up-arrow)"

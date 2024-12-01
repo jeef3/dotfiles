@@ -29,11 +29,15 @@ symlinks=(
   .config/nvim
   .config/ranger
   .todo.cfg
+  .ssh
 )
 
 serverSymlinks=(
   prefs/org.virtualbox.launch.homeassistant.plist
 )
+
+# Needs to exist before linking
+mkdir -p ~/.config
 
 info "Linking dotfiles"
 
