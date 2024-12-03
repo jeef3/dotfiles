@@ -4,10 +4,7 @@ set -e
 
 SERVER=$1
 
-tit() { printf "\n $(tput bold)$1$(tput sgr0)\n\n"; }
-success() { printf " $(tput setaf 8)›  $(tput setaf 10)✓\t$(tput sgr0)$1\n"; }
-info() { printf " $(tput setaf 8)›  $(tput setaf 12)…\t$(tput sgr0)$1\n"; }
-cmd() { printf " $(tput setaf 8)›  $(tput setaf 14)↘️\t$(tput bold)$(tput setaf 8)$1$(tput sgr0)\n"; }
+source ./util.sh
 
 tit "Brew Setup"
 
@@ -30,10 +27,9 @@ FORMULAS=(
   # Updated/nicer/faster tools
   coreutils # GNU core utilities (those that come with OS X are outdated)
   findutils # GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
+
   wget # Wget with iri
-  # bat # Nicer cat
   ncdu # Nicer du
-  # tldr # Nicer man
   gnupg
   less # Newer less
   ack
@@ -43,61 +39,44 @@ FORMULAS=(
   fd # Decent file searcher
 
   # Useful tools
-  # trash
-  # rename
   jq # JSON parser
-  # fx # Interactive JSON explorer
 
   # Terminal helpers and tools
-  # bash # Just, because
-  zoxide
+  zoxide # aka: z
   zsh-autosuggestions
   zsh-syntax-highlighting
 
   # Git
   git
   git-lfs
-  # tig
   lazygit
   git-delta
   diff-so-fancy
 
   # Mah IDE
   tmux
-  # macvim
   neovim
   ranger
   todo-txt
 
-  # Other seldom used tools
-  # fontforge # For custom font icon patching
-  # mdv # CLI Markdown viewer
-  # httpie
-  # imgcat
-
   # Certificate tools
   openssl
   mkcert
-  # nss
   gpg
 
   # Languages
   node
-  # deno
   haskell-stack
-  # python@2
   python3
   rustup
   fvm
   java
+  dotnet
+  golang
 
-  # Other language libs and bits
-  # yarn
+  # Other language frameworks, libs and bits
   platformio
   esphome
-
-  # Databases
-  # mongodb-community
 
   # Compilers
   make

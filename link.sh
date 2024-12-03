@@ -1,12 +1,8 @@
 #!/bin/sh
 
-set -e
+source $(dirname "$0")/setup/util.sh
 
-SERVER=$1
-
-info() { printf "  [ \033[00;34m..\033[0m ] $1\n"; }
-success() { printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"; }
-fail() { printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"; exit; }
+title "Linking dotfiles"
 
 symlinks=(
   .gitconfig
@@ -32,19 +28,23 @@ symlinks=(
   .ssh
 )
 
-serverSymlinks=(
-  prefs/org.virtualbox.launch.homeassistant.plist
-)
-
 # Needs to exist before linking
-mkdir -p ~/.config
+CONFIG_DIR=~/.config
 
-info "Linking dotfiles"
+if [ ! -d "$CONFIG_DIR" ]; then
+  info "Initialise config dir"
+  mkdir -p $CONFIG_DIR
+
+  success "Config dir created"
+else
+  success "Config dir already exists"
+fi
+
 
 for symlink in ${symlinks[@]}
 do
   if [ -e "$HOME/$symlink" ] && ! [ -h "$HOME/$symlink" ]; then
-    fail "$HOME/$symlink exists. Please backup and/or remove this first"
+    warn "$HOME/$symlink exists. Please backup and/or remove this first"
   elif [ -h "$HOME/$symlink" ]; then
     success "Re-linking $symlink"
     rm "$HOME/$symlink"
