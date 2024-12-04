@@ -2,26 +2,32 @@
 
 set -e
 
+source $(dirname "$0")/util.sh
+source $(dirname "$0")/spinner.sh
+
 SERVER=$1
 
-source ./util.sh
-
-tit "Brew Setup"
+title "Brew Setup"
 
 # Ask for the administrator password upfront
-sudo -v
+# sudo -v
 
 # Make sure we’re using the latest Homebrew
-info "Update and upgrade brew"
-brew update && brew upgrade
+start_spinner "Updating and upgrading brew…"
+brew update >/dev/null 2>&1
+brew upgrade >/dev/null 2>&1
+stop_spinner
+success "Brew updated and upgraded"
 
 # Taps
-info "Tapping"
+start_spinner "Tapping…"
 # brew tap eddieantonio/eddieantonio
 # brew tap osx-cross/avr
 # brew tap sudar/arduino-mk
 # brew tap mongodb/brew
 brew tap leoafarias/fvm
+stop_spinner
+success "Tapped"
 
 FORMULAS=(
   # Updated/nicer/faster tools
@@ -147,44 +153,49 @@ INSTALLED=$(brew list)
 
 formula_exists() {
   if $(echo $INSTALLED | grep $1 > /dev/null); then
-  # if $(brew list | grep $1 > /dev/null); then
     return 0
   fi
 
   return 1
 }
 
+title "Install brews"
+
 for index in ${!FORMULAS[*]}
 do
   if ! formula_exists ${FORMULAS[$index]}; then
-    info "${FORMULAS[$index]} not installed, installing..."
-    brew install ${FORMULAS[$index]}
+    start_spinner "Installing $(tput bold)${FORMULAS[$index]}$(tput sgr0)…"
+    brew install ${FORMULAS[$index]} >/dev/null 2>&1
+    stop_spinner
+    success "$(tput bold)${FORMULAS[$index]}$(tput sgr0) installed"
   else
-    success "${FORMULAS[$index]} already installed, skipping"
+    skip "$(tput bold)${FORMULAS[$index]}$(tput sgr0)$(tput setaf 8) already installed, skipping"
   fi
 done
 
 if [ "$SERVER" == "server" ];
 then
-  info "Installing server casks"
   CASK_LIST=("${CASKS_SERVER[@]}")
 else
-  info "Installing casks"
   CASK_LIST=("${CASKS[@]}")
 fi
+
+title "Install brew casks"
 
 for index in ${!CASK_LIST[*]}
 do
   if ! formula_exists ${CASK_LIST[$index]}; then
-    info "${CASK_LIST[$index]} not installed, installing..."
-    brew install --cask ${CASK_LIST[$index]}
+    start_spinner "Installing $(tput bold)${CASK_LIST[$index]}$(tput sgr0)…"
+    brew install --cask ${CASK_LIST[$index]} >/dev/null 2>&1
+    success "$(tput bold)${CASK_LIST[$index]}$(tput sgr0) installed"
   else
-    success "${CASK_LIST[$index]} already installed, skipping"
+    skip "$(tput bold)${CASK_LIST[$index]}$(tput sgr0)$(tput setaf 8) already installed, skipping"
   fi
 done
 
-# TODO: Needed?
-# open /usr/local/Cellar/x-quartz/2.7.4/XQuartz.pkg
+title "Clean up"
 
-info "Brews installed, cleaning up."
-brew cleanup
+start_spinner "Brews installed, cleaning up…"
+brew cleanup >/dev/null 2>&1
+stop_spinner
+success "Brew cleaned up"

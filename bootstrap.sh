@@ -25,6 +25,7 @@ stop_spinner
 
 success "Xcode Command Line Tools installed: $? $X"
 
+
 # Homebrew
 which -s brew
 if [ ! $? -eq 0 ]; then
@@ -64,7 +65,6 @@ start_spinner "Installing submodules…"
 git submodule init >/dev/null 2>&1
 git submodule update --recursive >/dev/null 2>&1
 stop_spinner
-
 success "Git submodules updated"
 
 echo "cd $TARGET_DIR"

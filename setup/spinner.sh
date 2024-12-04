@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 function draw_spinner()
 {
   local -a marks=("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏")
