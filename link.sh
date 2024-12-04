@@ -25,19 +25,17 @@ symlinks=(
   .config/nvim
   .config/ranger
   .todo.cfg
-  .ssh
 )
 
 # Needs to exist before linking
 CONFIG_DIR=~/.config
 
 if [ ! -d "$CONFIG_DIR" ]; then
-  info "Initialise config dir"
   mkdir -p $CONFIG_DIR
 
   success "Config dir created"
 else
-  success "Config dir already exists"
+  skip "$(tput setaf 8)Config dir already exists"
 fi
 
 
@@ -46,11 +44,11 @@ do
   if [ -e "$HOME/$symlink" ] && ! [ -h "$HOME/$symlink" ]; then
     warn "$HOME/$symlink exists. Please backup and/or remove this first"
   elif [ -h "$HOME/$symlink" ]; then
-    success "Re-linking $symlink"
     rm "$HOME/$symlink"
     ln -s "$(pwd)/$symlink" "$HOME/$symlink"
+    success "$(tput bold)$symlink$(tput sgr0) $(tput setaf 8)re-linked"
   else
-    success "Linking $symlink"
     ln -s "$(pwd)/$symlink" "$HOME/$symlink"
+    success "$(tput bold)$symlink$(tput sgr0) linked"
   fi
 done
