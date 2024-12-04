@@ -58,6 +58,7 @@ FORMULAS=(
   lazygit
   git-delta
   diff-so-fancy
+  gh
 
   # Mah IDE
   tmux
@@ -68,17 +69,17 @@ FORMULAS=(
   # Certificate tools
   openssl
   mkcert
-  gpg
+  gnupg
 
   # Languages
   node
   haskell-stack
-  python3
+  python@3.13
   rustup
   fvm
-  java
+  openjdk
   dotnet
-  golang
+  go
 
   # Other language frameworks, libs and bits
   platformio
@@ -100,6 +101,9 @@ FORMULAS=(
   # ffmpeg
   # gifsicle
   # imagemagick
+
+  # Additional tools and helpers
+  blueutil
 )
 
 CASKS=(
@@ -152,7 +156,7 @@ CASKS_SERVER=(
 INSTALLED=$(brew list)
 
 formula_exists() {
-  if $(echo $INSTALLED | grep $1 > /dev/null); then
+  if $(echo $INSTALLED | grep -w "$1" > /dev/null); then
     return 0
   fi
 
@@ -165,7 +169,7 @@ for index in ${!FORMULAS[*]}
 do
   if ! formula_exists ${FORMULAS[$index]}; then
     start_spinner "Installing $(tput bold)${FORMULAS[$index]}$(tput sgr0)…"
-    brew install ${FORMULAS[$index]} >/dev/null 2>&1
+    brew install ${FORMULAS[$index]} >/dev/null
     stop_spinner
     success "$(tput bold)${FORMULAS[$index]}$(tput sgr0) installed"
   else

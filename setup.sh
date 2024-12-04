@@ -33,5 +33,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 title "Final steps"
 
+gh auth login
+
 git remote set-url origin git@github.com:jeef3/dotfiles.git
 success "Dotfiles remote updated for write access"
