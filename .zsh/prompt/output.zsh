@@ -21,13 +21,13 @@ ITALIC="%{\e[3m%}"
 UNDERLINE="%{\e[4m%}"
 RESET=$(echo "%{\x1b[0m%}")
 
-DARK_GRAY=$(hex_to_true 75715e)
-YELLOW=$(hex_to_true e6db74)
-MAGENTA=$(hex_to_true f92a72)
-GREEN=$(hex_to_true a6e22e)
-CYAN=$(hex_to_true 66d9ef)
-ORANGE=$(hex_to_true fd971f)
-PINK=$(hex_to_true fd64d5)
+DARK_GRAY=$(hex_to_true 686889)
+YELLOW=$(hex_to_true ffcc66)
+MAGENTA=$(hex_to_true ff3399)
+GREEN=$(hex_to_true 00d364)
+CYAN=$(hex_to_true 00bfff)
+ORANGE=$(hex_to_true ffcc66)
+PINK=$(hex_to_true ff3399)
 
 INDENT_ICON="\uf0da"
 CHECK_ICON="\uf00c"
