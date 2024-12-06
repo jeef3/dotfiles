@@ -14,36 +14,15 @@ tier3='#ff8000'
 tier2='#ff4000'
 tier1='#ff0000'
 
-if [ $percentage -lt 11 ]; then
+if [ $percentage -lt 20 ]; then
   fg=$tier1
-  symbol=""
-elif [ $percentage -lt 21 ]; then
-  fg=$tier2
-  symbol=""
-elif [ $percentage -lt 31 ]; then
+  symbol="󱊡 "
+elif [ $percentage -lt 70 ]; then
   fg=$tier3
-  symbol=""
-elif [ $percentage -lt 41 ]; then
-  fg=$tier4
-  symbol=""
-elif [ $percentage -lt 51 ]; then
-  fg=$tier5
-  symbol=""
-elif [ $percentage -lt 61 ]; then
-  fg=$tier6
-  symbol=""
-elif [ $percentage -lt 71 ]; then
-  fg=$tier6
-  symbol=""
-elif [ $percentage -lt 81 ]; then
-  fg=$tier7
-  symbol=""
-elif [ $percentage -lt 91 ]; then
-  fg=$tier7
-  symbol=""
+  symbol="󱊢 "
 else
-  fg=$tier8
-  symbol=""
+  fg=$tier7
+  symbol="󱊣 "
 fi
 
 if [ -z "$status" ]; then
@@ -53,17 +32,17 @@ fi
 
 if [ "$status" == "charged" ]; then
   fg=$tier8
-  symbol=""
+  symbol="󱊣 "
 fi
 
 if [ "$status" == "AC attached" ]; then
-  echo "#[fg=$fg]$percentage% 󱐥"
+  echo "#[fg=$fg]$percentage% 󱐥 "
   exit
 fi
 
 if [ "$status" == "charging" ]; then
   fg=$tier8
-  symbol="$percentage% 󱐥"
+  symbol="$percentage% 󱊦 "
 fi
 
 echo "#[fg=$fg]$symbol"
