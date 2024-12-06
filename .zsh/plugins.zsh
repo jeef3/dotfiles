@@ -24,9 +24,6 @@ load_plugins() {
   export ZSH_AUTOSUGGEST_USE_ASYNC=1
   fpath=(~/.zsh/plugged/zsh-completions/src $fpath)
 
-  # Touchbar
-  # source ~/.zsh/plugged/zsh-iterm-touchbar/zsh-iterm-touchbar.plugin.zsh
-
   # FZF searching
   # source ~/.zsh/custom/fzf.zsh
 
@@ -53,8 +50,8 @@ load_async_plugins() {
   #     stack build && stack install)
   # fi
   # export GIT_PROMPT_EXECUTABLE="haskell"
-  # source ~/.zsh/plugged/zsh-git-prompt/zshrc.sh
-  source ~/.zsh/plugged/git-prompt.zsh/git-prompt.zsh
+  source ~/.zsh/plugged/zsh-git-prompt.zsh/zshrc.sh
+  # source ~/.zsh/plugged/git-prompt.zsh/git-prompt.zsh
 
   # .. ... .... aliases
   source ~/.zsh/plugged/up.zsh/up.plugin.zsh

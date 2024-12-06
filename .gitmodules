@@ -10,12 +10,18 @@
 [submodule ".zsh/plugged/git-prompt.zsh"]
 	path = .zsh/plugged/git-prompt.zsh
 	url = https://github.com/woefe/git-prompt.zsh
+[submodule ".zsh/plugged/zsh-git-prompt.zsh"]
+	path = .zsh/plugged/zsh-git-prompt.zsh
+	url = https://github.com/olivierverdier/zsh-git-prompt
+
 [submodule ".config/ranger/plugins"]
 	path = .config/ranger/plugins
 	url = https://github.com/alexanderjeurissen/ranger_devicons
+
 [submodule ".tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+
 [submodule "kitty-icon"]
 	path = kitty-icon
 	url = https://github.com/DinkDonk/kitty-icon.git

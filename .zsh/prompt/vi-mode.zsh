@@ -1,7 +1,7 @@
 bindkey -v
 
-INSERT_MODE="$DARK_GRAY❯"
-CMD_MODE="$(hex_to_true 00dfff)❯"
+INSERT_MODE="$GREEN❯"
+CMD_MODE="$MAGENTA❯"
 VIM_MODE=$INSERT_MODE
 
 zle-keymap-select() {
