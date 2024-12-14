@@ -12,6 +12,8 @@ printf " · \e[9mstrikethrough\e[0m\n"
 printf "\n"
 printf "\e[4:3m\e[58;2;240;143;104m\e[32mCombination of green text and orange undercurl\e[0m\n"
 printf "\n"
+printf "Ligatures => ===\n"
+printf "\n"
 
 awk 'BEGIN{
     s="               "; s=s s s s s s s s;
