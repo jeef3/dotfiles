@@ -126,30 +126,6 @@ config.window_padding = {
   left = 0,
 }
 
-wz.on("update-right-status", function(window, pane)
-  if window:leader_is_active() then
-    window:set_left_status(wz.format({
-      { Attribute = { Intensity = "Bold" } },
-      { Foreground = { Color = silver_800 } },
-      { Background = { Color = orange } },
-      { Text = "        " },
-      { Foreground = { Color = orange } },
-      { Background = { Color = silver_900 } },
-      { Text = " " },
-    }))
-  else
-    window:set_left_status(wz.format({
-      { Attribute = { Intensity = "Bold" } },
-      { Foreground = { Color = silver_400 } },
-      { Background = { Color = silver_800 } },
-      { Text = "   TERM " },
-      { Foreground = { Color = silver_800 } },
-      { Background = { Color = silver_900 } },
-      { Text = " " },
-    }))
-  end
-end)
-
 -- wezterm.on("update-left-status", function(window, pane)
 --   local date = wezterm.strftime("󰸗 %a %d %b %H:%M")
 --   -- Make it italic and underlined

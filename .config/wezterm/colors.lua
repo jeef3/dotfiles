@@ -10,9 +10,17 @@ return {
   silver_900 = "#1d1d26",
 
   pink = "#ff3399",
+  pink_600 = "#CA3182",
+  pink_700 = "#96306C",
+  pink_900 = "#612E55",
+
   blue = "#00bfff",
+
   turquoise = "#00ced1",
+
   green = "#00d364",
+
   purple = "#cc66ff",
+
   orange = "#ffcc66",
 }
