@@ -21,9 +21,11 @@ symlinks=(
   .scripts
   .tmux
   .tmux.conf
+  .config/git
   .config/kitty
   .config/nvim
   .config/ranger
+  .config/wezterm
   .todo.cfg
 )
 
