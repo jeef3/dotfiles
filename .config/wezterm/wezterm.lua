@@ -1,16 +1,19 @@
 local wz = require("wezterm")
+local appearance = require("appearance")
 local act = wz.action
--- local resurrect =
---   wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
--- local bar = wz.plugin.require("https://github.com/adriankarlen/bar.wezterm")
+
 local c = require("colors")
 
+local config = wz.config_builder()
+config.keys = {}
+
+require("resurrect").setup(config)
 require("tabbar")
 
-local config = wz.config_builder()
+config.leader =
+  { key = "b", mods = "CTRL", timeout_milliseconds = math.maxinteger }
 
-config.keys = {}
-config.leader = { key = "b", mods = "CTRL", timeout = 5000 }
+config.status_update_interval = 100
 
 local function lm(key, action)
   table.insert(config.keys, { key = key, mods = "LEADER", action = action })
@@ -72,7 +75,7 @@ config.enable_scroll_bar = false
 config.font = wz.font("Operator Mono")
 -- config.font_antialias = "Subpixel"
 -- config.font_hinting = "Full"
--- config.font = wezterm.font("OperatorMonoLig Nerd Font")
+-- config.font = wz.font("OperatorMonoLig Nerd Font")
 config.font_rules = {
   {
     intensity = "Bold",
@@ -85,38 +88,46 @@ config.font_rules = {
     font = wz.font("OperatorMonoSSmLig Nerd Font", { italic = true }),
   },
 }
-config.font_size = 19
+config.font_size = 17
 
 config.colors = {
-  foreground = c.silver_200,
+  foreground = c.silver_100,
   background = c.silver_900,
 
   tab_bar = {
     background = c.silver_900,
+
+    active_tab = {
+      fg_color = c.silver_100,
+      bg_color = c.silver_500,
+    },
+
+    inactive_tab = {
+      fg_color = c.silver_400,
+      bg_color = c.silver_900,
+    },
+    inactive_tab_hover = {
+      fg_color = c.silver_300,
+      bg_color = c.silver_800,
+    },
   },
 }
 
 config.use_fancy_tab_bar = false
 config.show_new_tab_button_in_tab_bar = false
--- The filled in variant of the < symbol
-local SOLID_LEFT_ARROW = wz.nerdfonts.pl_right_hard_divider
 
--- The filled in variant of the > symbol
-local SOLID_RIGHT_ARROW = wz.nerdfonts.pl_left_hard_divider
-
-config.window_decorations = "TITLE|RESIZE"
--- config.window_background_opacity = 0.65
-config.macos_window_background_blur = 50
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 
 config.window_frame = {
-  border_left_width = 1,
-  border_right_width = 1,
-  border_bottom_height = 1,
+  border_left_width = 0,
+  border_right_width = 0,
+  border_bottom_height = 0,
   border_top_height = 0,
-  -- border_left_color = "silver",
-  -- border_right_color = "silver",
-  -- border_bottom_color = "silver",
-  -- border_top_color = "silver",
+
+  active_titlebar_bg = c.silver_900,
+
+  font = wz.font({ family = "Operator Mono" }),
+  font_size = 17,
 }
 
 config.window_padding = {
@@ -125,17 +136,6 @@ config.window_padding = {
   bottom = 0,
   left = 0,
 }
-
--- wezterm.on("update-left-status", function(window, pane)
---   local date = wezterm.strftime("󰸗 %a %d %b %H:%M")
---   -- Make it italic and underlined
---   window:set_left_status(wezterm.format({
---     { Foreground = { Color = green } },
---     { Text = "󱊣" },
---     { Foreground = { Color = orange } },
---     { Text = " " .. date },
---   }))
--- end)
 
 -- wezterm.on("update-right-status", function(window, pane)
 --   local date = wezterm.strftime("󰸗 %a %d %b %H:%M")
@@ -167,5 +167,11 @@ config.window_padding = {
 --     clock = { enabled = false },
 --   },
 -- })
+
+-- if appearance.is_dark() then
+--   config.color_scheme = "Tokyo Night"
+-- else
+--   config.color_scheme = "Tokyo Night Day"
+-- end
 
 return config

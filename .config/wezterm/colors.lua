@@ -1,5 +1,12 @@
+local wz = require("wezterm")
+local p = wz.color.parse
+
+local silver_100 = p("#dfdfe0")
+
+local pink = p("#ff3399")
+
 return {
-  silver_100 = "#dfdfe0",
+  silver_100 = silver_100,
   silver_200 = "#b3b3d4",
   silver_300 = "#7f8c98",
   silver_400 = "#686889",
@@ -9,8 +16,8 @@ return {
   silver_800 = "#2C2C3E",
   silver_900 = "#1d1d26",
 
-  pink = "#ff3399",
-  pink_600 = "#CA3182",
+  pink = pink,
+  pink_600 = "#ff007a",
   pink_700 = "#96306C",
   pink_900 = "#612E55",
 
