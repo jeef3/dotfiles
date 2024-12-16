@@ -1,11 +1,8 @@
 FOLDER_ICON="\uf07c"
-ANGLE="\ue0b0"
 
-START_SEGMENT=$(hex_to_true 999999 555555)
-END_SEGMENT=$(hex_to_true 555555 444444)
-TAIL=$(hex_to_true 444444 000000)
+START_SEGMENT=$(hex_to_true 999999)
 
-FOLDER="${START_SEGMENT} ${FOLDER_ICON} ${RESET}${END_SEGMENT}${ANGLE}${RESET}${TAIL}${ANGLE} "
+FOLDER="${START_SEGMENT} ${FOLDER_ICON} ${RESET} "
 
 the_dir() {
   typeset collapsed_dir=$(pwd | perl -pe '
@@ -27,6 +24,6 @@ current_dir() {
   ')
 
   if [ $(tput cols) -gt 54 ]; then
-    echo "${FOLDER}${YELLOW}${BOLD}${collapsed_dir}${RESET}"
+    echo "${FOLDER}${RESET}${YELLOW}${BOLD}${collapsed_dir}${RESET}"
   fi
 }
