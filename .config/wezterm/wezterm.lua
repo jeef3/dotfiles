@@ -14,7 +14,7 @@ require("tabbar")
 -- config.leader =
 --   { key = "b", mods = "CTRL", timeout_milliseconds = math.maxinteger }
 
-config.status_update_interval = 100
+config.status_update_interval = 1000
 
 table.insert(config.keys, {
   key = "b",

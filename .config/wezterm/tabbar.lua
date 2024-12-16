@@ -8,7 +8,7 @@ local function basename(s)
   if s then
     return string.gsub(s, "(.*[/\\])(.*)", "%2")
   else
-    return ""
+    return "-"
   end
 end
 
@@ -46,7 +46,14 @@ local function window_cwd(window)
 end
 
 local function window_git(window)
-  return "   main "
+  local success, stdout, stderr =
+    wz.run_child_process({ "git", "rev-parse", "--abbrev-ref", "HEAD" })
+  -- local stdout = ""
+  if success then
+    return "   " .. stdout
+  else
+    return ""
+  end
 end
 
 local function window_process(window)
@@ -139,8 +146,8 @@ tabline.setup({
       { "tab", icons_enabled = false },
     },
 
-    tabline_x = {},
-    tabline_y = { window_process, window_git },
+    tabline_x = { window_process },
+    tabline_y = { window_git },
     tabline_z = { window_cwd },
   },
 
