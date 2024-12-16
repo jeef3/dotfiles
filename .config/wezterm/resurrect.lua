@@ -13,9 +13,9 @@ function M.setup(config)
     end),
   })
 
-  table.insert(config.keys, {
+  table.insert(config.key_tables.tmux, {
     key = "r",
-    mods = "LEADER|CTRL",
+    mods = "CTRL",
     action = wz.action_callback(function(win, pane)
       resurrect.fuzzy_load(win, pane, function(id, label)
         local type = string.match(id, "^([^/]+)") -- match before '/'

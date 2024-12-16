@@ -6,17 +6,45 @@ local c = require("colors")
 
 local config = wz.config_builder()
 config.keys = {}
+config.key_tables = { tmux = {} }
 
 require("resurrect").setup(config)
 require("tabbar")
 
-config.leader =
-  { key = "b", mods = "CTRL", timeout_milliseconds = math.maxinteger }
+-- config.leader =
+--   { key = "b", mods = "CTRL", timeout_milliseconds = math.maxinteger }
 
 config.status_update_interval = 100
 
+table.insert(config.keys, {
+  key = "b",
+  mods = "CTRL",
+  action = act.ActivateKeyTable({
+    name = "tmux",
+    one_shot = true,
+  }),
+  -- action = wz.action_callback(function()
+  --   wz.log_info("Leader active")
+  --   act.ActivateKeyTable({
+  --     name = "tmux",
+  --     timeout_milliseconds = math.maxinteger,
+  --   })
+  --   act.EmitEvent("tmux_plugin.show")
+  -- end),
+  -- action = act.EmitEvent("tmux_plugin.show"),
+})
+
+wz.on("tmux_plugin.show", function()
+  wz.log_info("I heard ya")
+
+  act.ActivateKeyTable({
+    name = "tmux",
+    timeout_milliseconds = math.maxinteger,
+  })
+end)
+
 local function lm(key, action)
-  table.insert(config.keys, { key = key, mods = "LEADER", action = action })
+  table.insert(config.key_tables.tmux, { key = key, action = action })
 end
 
 lm(":", act.ActivateCommandPalette)
@@ -91,7 +119,7 @@ config.font_rules = {
 config.font_size = 17
 
 config.colors = {
-  foreground = c.silver_100,
+  foreground = c.silver_200,
   background = c.silver_900,
 
   tab_bar = {
@@ -110,6 +138,27 @@ config.colors = {
       fg_color = c.silver_300,
       bg_color = c.silver_800,
     },
+  },
+
+  ansi = {
+    c.silver_900,
+    c.pink,
+    c.green,
+    "olive",
+    c.blue,
+    c.purple,
+    c.turquoise,
+    c.silver_500,
+  },
+  brights = {
+    c.silver_500,
+    "red",
+    "lime",
+    c.orange,
+    c.blue,
+    c.pink_600,
+    "aqua",
+    c.silver_100,
   },
 }
 
@@ -169,9 +218,9 @@ config.window_padding = {
 -- })
 
 -- if appearance.is_dark() then
---   config.color_scheme = "Tokyo Night"
+--   config.color_scheme = "Mocha (dark) (terminal.sexy)"
 -- else
---   config.color_scheme = "Tokyo Night Day"
+--   config.color_scheme = "Mocha (light) (terminal.sexy)"
 -- end
 
 return config
