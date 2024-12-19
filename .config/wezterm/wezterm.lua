@@ -5,11 +5,11 @@ local princess = require("princess")
 
 local config = wezterm.config_builder()
 config.keys = {}
-config.key_tables = { tmux = {} }
+config.key_tables = { tmux_mode = {} }
 
 require("plugins.resurrect").setup(config)
 require("plugins.tabbar").setup(config)
-require("plugins.tmux").setup(config, {})
+require("plugins.tmux").setup(config)
 
 config.status_update_interval = 500
 

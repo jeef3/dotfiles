@@ -27,18 +27,18 @@ function M.setup(config, opts)
     config.key_tables = {}
   end
 
-  config.key_tables.tmux = {}
+  config.key_tables.tmux_mode = {}
 
   table.insert(config.keys, {
     key = opts.key,
     mods = opts.mods,
     action = act.ActivateKeyTable({
-      name = "tmux",
+      name = "tmux_mode",
       one_shot = true,
     }),
   })
 
-  local map = build_mapper(config.key_tables.tmux)
+  local map = build_mapper(config.key_tables.tmux_mode)
 
   map(":", act.ActivateCommandPalette)
 

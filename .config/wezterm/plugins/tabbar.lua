@@ -3,6 +3,7 @@ local tabline =
   wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
 local c = require("colors")
+
 local window_process = require("components.process")
 local window_git = require("components.git")
 local window_cwd = require("components.cwd")
@@ -36,39 +37,6 @@ local function test_fn(window)
   end
 end
 
-local function window_leader(window)
-  if window:leader_is_active() then
-    return "    "
-    -- return {
-    --   { Text = "   " },
-    --   { Foreground = { Color = c.silver_900 } },
-    --   { Background = { Color = c.orange } },
-    --   { Text = "" },
-    --   { Attribute = { Intensity = "Bold" } },
-    --   { Foreground = { Color = c.silver_800 } },
-    --   { Background = { Color = c.orange } },
-    --   { Text = "  " },
-    --   { Foreground = { Color = c.orange } },
-    --   { Background = { Color = c.silver_900 } },
-    --   { Text = "" },
-    -- }
-  else
-    return "    "
-    -- return {
-    --   { Text = "   " },
-    --   { Foreground = { Color = c.silver_900 } },
-    --   { Background = { Color = c.silver_800 } },
-    --   { Text = "" },
-    --   { Attribute = { Intensity = "Bold" } },
-    --   { Foreground = { Color = c.silver_400 } },
-    --   { Background = { Color = c.silver_800 } },
-    --   { Text = "  " },
-    --   { Foreground = { Color = c.silver_800 } },
-    --   { Background = { Color = c.silver_900 } },
-    --   { Text = "" },
-    -- }
-  end
-end
 local M = {}
 
 function M.setup(_)
@@ -85,36 +53,35 @@ function M.setup(_)
       },
 
       color_overrides = {
-        -- normal_mode = {
-        --   a = { fg = c.silver_300, bg = c.silver_800 },
-        --   b = { fg = c.silver_200, bg = c.silver_600 },
-        --   c = { fg = c.silver_200, bg = c.silver_800 },
-        --   z = { fg = c.silver_100, bg = c.pink_600 },
-        --   y = { fg = c.silver_200, bg = c.silver_600 },
-        --   x = { fg = c.silver_200, bg = c.silver_800 },
-        -- },
+        normal_mode = {
+          a = { fg = c.silver_300, bg = c.silver_800 },
+          b = { fg = c.silver_200, bg = c.silver_600 },
+          c = { fg = c.silver_200, bg = c.silver_800 },
+          x = { fg = c.silver_300, bg = c.silver_800 },
+          y = { fg = c.silver_200, bg = c.silver_600 },
+          z = { fg = c.silver_100, bg = c.pink_600 },
+        },
         tab = {
           active = { fg = c.silver_100, bg = c.silver_500 },
           inactive = { fg = c.silver_300, bg = c.silver_800 },
           inactive_hover = {},
         },
         tmux_mode = {
-          a = { fg = c.silver_300, bg = c.pink },
+          a = { fg = c.silver_800, bg = c.orange },
           b = { fg = c.silver_200, bg = c.silver_600 },
           c = { fg = c.silver_200, bg = c.silver_800 },
-          z = { fg = c.silver_100, bg = c.pink_600 },
+          x = { fg = c.silver_300, bg = c.silver_800 },
           y = { fg = c.silver_200, bg = c.silver_600 },
-          x = { fg = c.silver_200, bg = c.silver_800 },
+          z = { fg = c.silver_900, bg = c.orange },
         },
       },
     },
 
     sections = {
-      tabline_a = {
-        test_fn,
-      },
-      tabline_b = { "workspace" },
-      tabline_c = {},
+      tabline_a = { "mode" },
+      -- tabline_b = { { "workspace", icons_enabled = false } },
+      tabline_b = {},
+      tabline_c = { "" },
 
       tab_active = {
         { "zoomed" },
@@ -131,7 +98,7 @@ function M.setup(_)
       tabline_z = { window_cwd },
     },
 
-    extensions = { "resurrect" },
+    extensions = { "resurrect", tmux },
   })
 end
 

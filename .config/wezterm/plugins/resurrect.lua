@@ -13,7 +13,7 @@ function M.setup(config)
     end),
   })
 
-  table.insert(config.key_tables.tmux, {
+  table.insert(config.key_tables.tmux_mode, {
     key = "r",
     mods = "CTRL",
     action = wz.action_callback(function(win, pane)
