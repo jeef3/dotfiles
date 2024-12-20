@@ -25,21 +25,9 @@ local tmux = {
   },
 }
 
-local function test_fn(window)
-  local kt = window:active_key_table()
-
-  if kt == nil then
-    return "  "
-  elseif kt == "tmux" then
-    return "  "
-  else
-    return kt
-  end
-end
-
 local M = {}
 
-function M.setup(_)
+function M.setup(config)
   tabline.setup({
     options = {
       section_separators = {
@@ -81,7 +69,7 @@ function M.setup(_)
       tabline_a = { "mode" },
       -- tabline_b = { { "workspace", icons_enabled = false } },
       tabline_b = {},
-      tabline_c = { "" },
+      tabline_c = {},
 
       tab_active = {
         { "zoomed" },
@@ -98,8 +86,10 @@ function M.setup(_)
       tabline_z = { window_cwd },
     },
 
-    extensions = { "resurrect", tmux },
+    extensions = { "resurrect", "smart_workspace_switcher", tmux },
   })
+
+  tabline.apply_to_config(config)
 end
 
 return M

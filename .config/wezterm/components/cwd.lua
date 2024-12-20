@@ -7,13 +7,13 @@ return function(window)
   local pane = window:active_pane()
 
   if not pane then
-    return "no pane"
+    return " "
   end
 
   local cwd_uri = pane:get_current_working_dir()
 
   if not cwd_uri then
-    return "no cwd_uri"
+    return " "
   end
 
   cwd = cwd_uri.file_path:match("([^/]+)/?$")

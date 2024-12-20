@@ -15,6 +15,8 @@ local function build_mapper(tbl)
 end
 
 function M.setup(config, opts)
+  config.key_tables = { tmux_mode = {} }
+
   opts = opts or defaults
   opts.key = opts.key or defaults.key
   opts.mods = opts.mods or defaults.mods

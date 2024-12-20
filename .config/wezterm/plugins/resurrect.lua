@@ -1,14 +1,14 @@
-local wz = require("wezterm")
+local wezterm = require("wezterm")
 local resurrect =
-  wz.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
+  wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
 
 local M = {}
 
 function M.setup(config)
-  table.insert(config.keys, {
+  table.insert(config.key_tables.tmux_mode, {
     key = "s",
-    mods = "LEADER|CTRL",
-    action = wz.action_callback(function()
+    mods = "CTRL",
+    action = wezterm.action_callback(function()
       resurrect.save_state(resurrect.workspace_state.get_workspace_state())
     end),
   })
@@ -16,7 +16,7 @@ function M.setup(config)
   table.insert(config.key_tables.tmux_mode, {
     key = "r",
     mods = "CTRL",
-    action = wz.action_callback(function(win, pane)
+    action = wezterm.action_callback(function(win, pane)
       resurrect.fuzzy_load(win, pane, function(id, label)
         local type = string.match(id, "^([^/]+)") -- match before '/'
         id = string.match(id, "([^/]+)$") -- match after '/'

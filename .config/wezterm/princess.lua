@@ -34,7 +34,7 @@ return {
   },
   brights = {
     c.silver_500,
-    "red",
+    c.pink_600,
     "lime",
     c.orange,
     c.blue,
