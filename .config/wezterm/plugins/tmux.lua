@@ -10,7 +10,13 @@ local defaults = {
 
 local function build_mapper(tbl)
   return function(key, action)
-    table.insert(tbl, { key = key, action = action })
+    table.insert(tbl, {
+      key = key,
+      action = act.Multiple({
+        action,
+        act.EmitEvent("tmux_mode.inactive"),
+      }),
+    })
   end
 end
 
@@ -34,13 +40,18 @@ function M.setup(config, opts)
   table.insert(config.keys, {
     key = opts.key,
     mods = opts.mods,
-    action = act.ActivateKeyTable({
-      name = "tmux_mode",
-      one_shot = true,
+    action = act.Multiple({
+      act.ActivateKeyTable({
+        name = "tmux_mode",
+        one_shot = true,
+      }),
+      act.EmitEvent("tmux_mode.active"),
     }),
   })
 
   local map = build_mapper(config.key_tables.tmux_mode)
+
+  map("Escape", act.EmitEvent("tmux_mode.inactive"))
 
   map(":", act.ActivateCommandPalette)
 

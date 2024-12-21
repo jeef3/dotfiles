@@ -11,17 +11,36 @@ local window_cwd = require("components.cwd")
 local tmux = {
   "tmux",
   events = {
-    show = "tmux_plugin.show",
-    hide = "tmux_plugin.hide",
-    callback = function(window)
-      wezterm.log_info("CALLBACK")
-    end,
+    show = "tmux_mode.active",
+    hide = "tmux_mode.inactive",
   },
   sections = {
-    tabline_a = { "LEAD" },
+    tabline_a = { "  Tmux  " },
+    tabline_b = {},
+    tabline_c = {},
+
+    tab_active = {
+      { "zoomed" },
+      { "index" },
+      { "tab", icons_enabled = false },
+    },
+
+    tab_inactive = {
+      { "zoomed" },
+      { "index" },
+      { "tab", icons_enabled = false },
+    },
+    tabline_x = {},
+    tabline_y = {},
+    tabline_z = {},
   },
   colors = {
-    a = { bg = c.orange },
+    a = { fg = c.silver_800, bg = c.orange },
+    b = { fg = c.silver_200, bg = c.silver_600 },
+    c = { fg = c.silver_200, bg = c.silver_800 },
+    x = { fg = c.silver_300, bg = c.silver_800 },
+    y = { fg = c.silver_200, bg = c.silver_600 },
+    z = { fg = c.silver_900, bg = c.orange },
   },
 }
 
@@ -54,14 +73,7 @@ function M.setup(config)
           inactive = { fg = c.silver_300, bg = c.silver_800 },
           inactive_hover = {},
         },
-        tmux_mode = {
-          a = { fg = c.silver_800, bg = c.orange },
-          b = { fg = c.silver_200, bg = c.silver_600 },
-          c = { fg = c.silver_200, bg = c.silver_800 },
-          x = { fg = c.silver_300, bg = c.silver_800 },
-          y = { fg = c.silver_200, bg = c.silver_600 },
-          z = { fg = c.silver_900, bg = c.orange },
-        },
+        tmux_mode = {},
       },
     },
 
