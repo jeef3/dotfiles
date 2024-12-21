@@ -5,6 +5,10 @@ local resurrect =
 local M = {}
 
 function M.setup(config)
+  resurrect.periodic_save({
+    interval_seconds = 60 * 5,
+  })
+
   table.insert(config.key_tables.tmux_mode, {
     key = "s",
     mods = "CTRL",

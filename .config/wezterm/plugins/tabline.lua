@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
 local tabline =
-  wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
+  wezterm.plugin.require("file:///Users/jeffknaggs/projects/tabline.wez")
 
 local c = require("colors")
 
@@ -15,20 +15,20 @@ local tmux = {
     hide = "tmux_mode.inactive",
   },
   sections = {
-    tabline_a = { "  Tmux  " },
+    tabline_a = { "   " },
     tabline_b = {},
     tabline_c = {},
 
     tab_active = {
-      { "zoomed" },
       { "index" },
       { "tab", icons_enabled = false },
+      { "zoomed" },
     },
 
     tab_inactive = {
-      { "zoomed" },
       { "index" },
       { "tab", icons_enabled = false },
+      { "zoomed" },
     },
     tabline_x = {},
     tabline_y = {},
@@ -56,7 +56,7 @@ function M.setup(config)
       component_separators = "",
       tab_separators = {
         left = "",
-        right = "|",
+        right = "▎",
       },
 
       color_overrides = {
@@ -70,6 +70,7 @@ function M.setup(config)
         },
         tab = {
           active = { fg = c.silver_100, bg = c.silver_500 },
+          active_separator = { fg = "red", bg = "blue" },
           inactive = { fg = c.silver_300, bg = c.silver_800 },
           inactive_hover = {},
         },
@@ -78,14 +79,14 @@ function M.setup(config)
     },
 
     sections = {
-      tabline_a = { "mode" },
+      tabline_a = { "   " },
       -- tabline_b = { { "workspace", icons_enabled = false } },
       tabline_b = {},
       tabline_c = {},
 
       tab_active = {
-        { "zoomed" },
         { "tab", icons_enabled = false },
+        { "zoomed" },
       },
 
       tab_inactive = {

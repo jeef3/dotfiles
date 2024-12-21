@@ -9,8 +9,9 @@ config.keys = {}
 require("plugins.tmux").setup(config)
 require("plugins.resurrect").setup(config)
 require("plugins.workspace_switcher").setup(config)
-require("plugins.tabbar").setup(config)
+require("plugins.tabline").setup(config)
 
+config.default_workspace = "~"
 config.status_update_interval = 200
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.enable_scroll_bar = false
@@ -21,21 +22,25 @@ config.command_palette_font_size = 17
 config.color_schemes = { ["Princess"] = princess }
 config.color_scheme = "Princess"
 
-config.font_size = 17
-config.font = wezterm.font("Operator Mono")
--- config.font = wz.font("OperatorMonoLig Nerd Font")
-config.font_rules = {
-  {
-    intensity = "Bold",
-    italic = false,
-    font = wezterm.font("OperatorMonoSSmLig Nerd Font"),
-  },
-  {
-    intensity = "Bold",
-    italic = true,
-    font = wezterm.font("OperatorMonoSSmLig Nerd Font", { italic = true }),
-  },
+local harfbuzz_features = {
+  "calt",
+  "liga",
+  "dlig",
+  "ss01",
+  "ss02",
+  "ss03",
+  "ss04",
+  "ss05",
+  "ss06",
+  "ss07",
+  "ss08",
 }
+config.font_size = 17
+config.font = wezterm.font({
+  family = "Operator Mono",
+  weight = "Book",
+  harfbuzz_features = harfbuzz_features,
+})
 
 config.window_frame = {
   border_left_width = 0,
