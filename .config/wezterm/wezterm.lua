@@ -64,6 +64,6 @@ else
   config.color_scheme = "Princess"
 end
 
-wezterm.plugin.update_all()
+-- wezterm.plugin.update_all()
 
 return config
