@@ -1,7 +1,5 @@
 local wezterm = require("wezterm")
 
-local icon = wezterm.nerdfonts.fa_folder_open
-
 return function(window)
   local cwd
   local pane = window:active_pane()
@@ -22,5 +20,5 @@ return function(window)
     cwd = cwd:sub(1, 10 - 1) .. "…"
   end
 
-  return " " .. icon .. " " .. cwd .. " "
+  return "  " .. cwd .. " "
 end

@@ -11,7 +11,7 @@ return function(window)
   local name = pane:get_foreground_process_name()
 
   if name then
-    return "  " .. basename(name) .. " "
+    return "  " .. basename(name) .. " "
   else
     return " "
   end

@@ -40,7 +40,7 @@ return function(window)
   local branch = result:gsub("\n", "")
 
   if branch then
-    return " " .. icon .. " " .. branch .. " "
+    return "  " .. branch .. " "
   else
     return ""
   end
