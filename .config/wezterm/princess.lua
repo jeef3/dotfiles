@@ -30,7 +30,7 @@ return {
     c.blue,
     c.purple,
     c.turquoise,
-    c.silver_500,
+    c.silver_300,
   },
   brights = {
     c.silver_500,
