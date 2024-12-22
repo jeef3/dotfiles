@@ -22,25 +22,26 @@ config.command_palette_font_size = 17
 config.color_schemes = { ["Princess"] = princess }
 config.color_scheme = "Princess"
 
-local harfbuzz_features = {
-  "calt",
-  "liga",
-  "dlig",
-  "ss01",
-  "ss02",
-  "ss03",
-  "ss04",
-  "ss05",
-  "ss06",
-  "ss07",
-  "ss08",
-}
 config.font_size = 17
 config.font = wezterm.font({
-  family = "Operator Mono",
+  family = "OperatorMonoLig Nerd Font",
   weight = "Book",
-  harfbuzz_features = harfbuzz_features,
 })
+config.font_rules = {
+  {
+    intensity = "Bold",
+    italic = false,
+    font = wezterm.font("OperatorMonoSsmLig Nerd Font", { weight = "Bold" }),
+  },
+  {
+    intensity = "Bold",
+    italic = true,
+    font = wezterm.font(
+      "OperatorMonoSsmLig Nerd Font",
+      { weight = "Bold", italic = true }
+    ),
+  },
+}
 
 config.window_frame = {
   border_left_width = 0,
@@ -62,5 +63,7 @@ else
   -- config.color_scheme = "Princess Light"
   config.color_scheme = "Princess"
 end
+
+wezterm.plugin.update_all()
 
 return config
