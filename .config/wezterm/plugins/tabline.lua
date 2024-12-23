@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
 local tabline =
-  wezterm.plugin.require("file:///Users/jeffknaggs/projects/tabline.wez")
+  wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
 local c = require("colors")
 
@@ -54,10 +54,7 @@ function M.setup(config)
         right = "",
       },
       component_separators = "",
-      tab_separators = {
-        left = "",
-        right = "▎",
-      },
+      tab_separators = "",
 
       color_overrides = {
         normal_mode = {
@@ -70,9 +67,8 @@ function M.setup(config)
         },
         tab = {
           active = { fg = c.silver_100, bg = c.silver_500 },
-          active_separator = { fg = "red", bg = "blue" },
           inactive = { fg = c.silver_300, bg = c.silver_800 },
-          inactive_hover = {},
+          inactive_hover = { fg = c.silver_200, bg = c._cilver_600 },
         },
         tmux_mode = {},
       },
@@ -90,8 +86,8 @@ function M.setup(config)
       },
 
       tab_inactive = {
-        { "zoomed" },
         { "tab", icons_enabled = false },
+        { "zoomed" },
       },
 
       tabline_x = { window_process },
