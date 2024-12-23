@@ -46,9 +46,7 @@ do
   if [ -e "$HOME/$symlink" ] && ! [ -h "$HOME/$symlink" ]; then
     warn "$HOME/$symlink exists. Please backup and/or remove this first"
   elif [ -h "$HOME/$symlink" ]; then
-    rm "$HOME/$symlink"
-    ln -s "$(pwd)/$symlink" "$HOME/$symlink"
-    success "$(tput bold)$symlink$(tput sgr0) $(tput setaf 8)re-linked"
+    skip "$(tput setaf 8)$(tput bold)$symlink $(tput sgr0)$(tput setaf 8)linked, skipping"
   else
     ln -s "$(pwd)/$symlink" "$HOME/$symlink"
     success "$(tput bold)$symlink$(tput sgr0) linked"
