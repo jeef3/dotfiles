@@ -22,6 +22,8 @@ export SAVEHIST=${HISTSIZE}
 
 setopt hist_expire_dups_first
 
+source ~/.config/wezterm/shell_integration.sh
+
 source ~/.zsh/plugins.zsh
 source ~/.zsh/prompt.zsh
 

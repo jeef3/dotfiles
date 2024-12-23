@@ -28,7 +28,7 @@ local icons = {
   ["vim"] = wezterm.nerdfonts.dev_vim,
   ["wget"] = wezterm.nerdfonts.md_arrow_down_box,
   ["yarn"] = wezterm.nerdfonts.seti_yarn,
-  ["zsh"] = wezterm.nerdfonts.dev_terminal,
+  ["zsh"] = wezterm.nerdfonts.cod_terminal_zsh,
 }
 
 local function basename(str)
@@ -53,9 +53,9 @@ return function(window)
     local icon = icons[process_name]
 
     if icon then
-      return icon .. " " .. process_name .. " "
+      return " " .. icon .. " " .. process_name .. " "
     else
-      return "  " .. process_name .. " "
+      return " " .. wezterm.nerdfonts.dev_terminal .. " " .. process_name .. " "
     end
   else
     return " "

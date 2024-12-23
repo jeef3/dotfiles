@@ -12,7 +12,12 @@ local tmux = {
   "tmux",
   events = {
     show = "tmux_mode.active",
-    hide = "tmux_mode.inactive",
+    hide = {
+      "tmux_mode.inactive",
+      "smart_workspace_switcher.workspace_switcher.chosen",
+      "smart_workspace_switcher.workspace_switcher.canceled",
+      "smart_workspace_switcher.workspace_switcher.created",
+    },
   },
   sections = {
     tabline_a = { "   " },
@@ -76,8 +81,8 @@ function M.setup(config)
 
     sections = {
       tabline_a = { "   " },
-      -- tabline_b = { { "workspace", icons_enabled = false } },
-      tabline_b = {},
+      tabline_b = { { "workspace", icons_enabled = false } },
+      -- tabline_b = {},
       tabline_c = {},
 
       tab_active = {

@@ -96,10 +96,10 @@ function M.setup(config, opts)
   map(
     "$",
     act.PromptInputLine({
-      description = "Enter new name for session",
-      action = wezterm.action_callback(function(window, _, line)
+      description = "󰪘 Enter new name for workspace",
+      action = wezterm.action_callback(function(_, _, line)
         if line then
-          window:active_workspace():set_title(line)
+          wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
         end
       end),
     })
