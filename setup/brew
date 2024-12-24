@@ -97,8 +97,8 @@ FORMULAS=(
   # azure-cli
 
   # Gifiy
-  # ffmpeg
-  # gifsicle
+  ffmpeg
+  gifsicle
   # imagemagick
 )
 

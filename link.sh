@@ -5,27 +5,28 @@ source $(dirname "$0")/setup/util.sh
 title "Linking dotfiles"
 
 symlinks=(
+  .aliases
+  .editorconfig
+  .functions
+
   .gitconfig
   .gitignore-global
-  .oh-my-zsh
-  .vim
-  .vimrc
+
   .zsh
+  .zshenv
   .zshrc
-  .editorconfig
-  .aliases
-  .exports
-  .functions
-  .tigrc
-  .fzf.zsh
+
   .scripts
+
   .tmux
   .tmux.conf
+
   .config/git
   .config/kitty
   .config/nvim
   .config/ranger
   .config/wezterm
+
   .todo.cfg
 )
 

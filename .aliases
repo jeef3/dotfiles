@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
@@ -6,38 +8,20 @@ alias sd="showdesktop; show.applescript"
 
 alias bubu="bubu.sh"
 
-alias so="source"
-
 # App shortcuts
 alias t="todo.sh"
 alias todo="todotxt-machine ./todo.txt"
 
-alias ts="tig status"
 alias lg="lazygit"
-
-alias vims="vim -S Session.vim"
-alias nvims="nvim -S Session.vim"
 
 alias urldecode='python -c "import sys, urllib as ul; \
                 [sys.stdout.write(ul.unquote_plus(l)) for l in sys.stdin]"'
-
-# alias urldecode='python -c "import sys, urllib as ul; \
-#                 print ul.unquote_plus(sys.argv[1])"'
 
 alias urlencode='python -c "import sys, urllib as ul; \
                 print ul.quote_plus(sys.argv[1])"'
 
 alias la="ls -la"
 
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-
-alias -- -='cd -'
-
-alias f="fzf --preview 'bat --color always {}'"
 alias du="ncdu --color dark -rr --exclude .git --exclude node_modules"
-alias help="tldr"
 
 alias ssh="TERM=xterm ssh"

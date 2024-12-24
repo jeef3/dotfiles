@@ -1,9 +1,4 @@
-#!/bin/bash
-
-tit() { printf "\n $(tput bold)$1$(tput sgr0)\n\n"; }
-success() { printf " $(tput setaf 8)›  $(tput setaf 10)✓\t$(tput sgr0)$1\n"; }
-info() { printf " $(tput setaf 8)›  $(tput setaf 12)…\t$(tput sgr0)$1\n"; }
-cmd() { printf " $(tput setaf 8)›  $(tput setaf 14)↘️\t$(tput bold)$(tput setaf 8)$1$(tput sgr0)\n"; }
+#!/usr/bin/env bash
 
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
@@ -37,36 +32,10 @@ function port() {
   ps -o pid,command -p $(lsof -i:$1 -t)
 }
 
-function pcat() {
-  cat $1 | pygmentize
-}
-
 function pngToBase64() {
   local prefix="url('data:image/png;base64,"
   local encoded=$(openssl base64 -in $1 | tr -d '\n')
   local suffix="')"
 
   echo $prefix$encoded$suffix
-}
-
-function startNvm() {
-  tit "Start nvm"
-
-  which nvm > /dev/null
-  if [ $? -eq 0 ]; then
-    success "nvm already started"
-    return;
-  fi
-
-  info "Starting nvm"
-
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-  success "nvm started"
-
-  info "Switching to lts/carbon"
-  cmd "nvm use lts/carbon"
-  nvm use lts/carbon
 }
