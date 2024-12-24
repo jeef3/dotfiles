@@ -25,6 +25,7 @@ symlinks=(
   .config/kitty
   .config/nvim
   .config/ranger
+  .config/todotxt-tui
   .config/wezterm
 
   .todo.cfg

@@ -13,6 +13,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Install Brew packages
 ./setup/brew $SERVER
+./setup/rust
 
 title "Set up GitHub"
 

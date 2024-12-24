@@ -1,0 +1,107 @@
+init_widget = "List"
+window_title = "ToDo tui"
+layout = "[  Direction: Horizontal,  Size: 50%,  [    List: 80%, Preview: 20%,  ],  [    Direction: Vertical,    Done: 60%,    [      Contexts: 50%,      Projects: 50%,    ],  ],]"
+use_done = false
+pending_sort = "None"
+done_sort = "None"
+delete_final_date = true
+set_final_date = "OnlyMissing"
+todo_path = "/Users/jeffknaggs/todo.txt"
+file_watcher = true
+save_policy = "AutoSave"
+border_type = "Rounded"
+list_shift = 4
+preview_format = """
+Pending: $pending Done: $done
+Subject: $subject
+Priority: $priority
+Create date: $create_date
+Link: $link"""
+wrap_preview = true
+active_color = "Red"
+
+[window_keybinds]
+J = "MoveDown"
+E = "EditMode"
+S = "Save"
+L = "MoveRight"
+K = "MoveUp"
+q = "Quit"
+I = "InsertMode"
+"/" = "SearchMode"
+u = "Load"
+H = "MoveLeft"
+
+[list_refresh_rate]
+secs = 5
+nanos = 0
+
+[autosave_duration]
+secs = 900
+nanos = 0
+
+[tasks_keybind]
+Enter = "Select"
+N = "PrevSearch"
+n = "NextSearch"
+U = "SwapUpItem"
+x = "RemoveItem"
+D = "SwapDownItem"
+d = "MoveItem"
+
+[category_keybind]
+Enter = "Select"
+Backspace = "Remove"
+N = "PrevSearch"
+n = "NextSearch"
+
+[list_keybind]
+h = "CleanSearch"
+j = "ListDown"
+g = "ListFirst"
+G = "ListLast"
+k = "ListUp"
+
+[list_active_color]
+bg = "LightRed"
+
+[pending_active_color]
+
+[done_active_color]
+
+[category_active_color]
+
+[projects_active_color]
+
+[contexts_active_color]
+
+[tags_active_color]
+
+[priority_style.B]
+fg = "Yellow"
+
+[priority_style.C]
+fg = "Blue"
+
+[priority_style.A]
+fg = "Red"
+
+[projects_style]
+
+[contexts_style]
+
+[hashtags_style]
+
+[category_style]
+
+[category_select_style]
+fg = "Green"
+
+[category_remove_style]
+fg = "Red"
+
+[custom_category_style."+todo-tui"]
+fg = "LightBlue"
+
+[highlight]
+bg = "Yellow"
