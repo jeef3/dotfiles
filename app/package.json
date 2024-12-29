@@ -1,0 +1,20 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "start": "node --experimental-strip-types src/index.ts",
+    "dev": "node --watch --experimental-strip-types src/index.ts"
+  },
+  "author": "Jeff Knaggs",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@inquirer/prompts": "^7.2.1",
+    "chalk": "^5.4.1",
+    "inquirer-select-pro": "^1.0.0-alpha.9",
+    "ora": "^8.1.1",
+    "yaml": "^2.6.1"
+  }
+}
