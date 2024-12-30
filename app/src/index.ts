@@ -156,9 +156,10 @@ if (toInstall.length) {
       }
 
       result.stderr
-        ? spinner.fail(
-            `${chalk.bold(f)} ${chalk.dim(`install failed ->\n ${result.stderr}`)}`,
-          )
+        ? spinner.stopAndPersist({
+            symbol: chalk.yellowBright(""),
+            text: ` ${chalk.yellowBright.bold(f)} ${chalk.yellowBright(`install failed ↴\n ${chalk.grey(result.stderr)}`)}`,
+          })
         : spinner.succeed(`${chalk.bold(f)} ${chalk.dim("installed")}`);
     }
   }
