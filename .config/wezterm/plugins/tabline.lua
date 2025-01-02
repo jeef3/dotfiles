@@ -40,12 +40,12 @@ local tmux = {
     tabline_z = {},
   },
   colors = {
-    a = { fg = c.silver_800, bg = c.orange },
+    a = { fg = c.silver_800, bg = c.orange_500 },
     b = { fg = c.silver_200, bg = c.silver_600 },
     c = { fg = c.silver_200, bg = c.silver_800 },
     x = { fg = c.silver_300, bg = c.silver_800 },
     y = { fg = c.silver_200, bg = c.silver_600 },
-    z = { fg = c.silver_900, bg = c.orange },
+    z = { fg = c.silver_900, bg = c.orange_500 },
   },
 }
 
@@ -68,7 +68,7 @@ function M.setup(config)
           c = { fg = c.silver_200, bg = c.silver_800 },
           x = { fg = c.silver_300, bg = c.silver_800 },
           y = { fg = c.silver_200, bg = c.silver_600 },
-          z = { fg = c.silver_100, bg = c.pink_600 },
+          z = { fg = c.silver_100, bg = c.pink_500 },
         },
         tab = {
           active = { fg = c.silver_100, bg = c.silver_500 },
