@@ -38,16 +38,24 @@ const readFile = util.promisify(fs.readFile);
 const spinner = ora("Checking installed casks and formulas…");
 spinner.start();
 
-const { stdout: formulasRaw } = await exec(
+const { stdout: userInstalledFormulasRaw } = await exec(
   "brew leaves --installed-on-request",
 );
+const { stdout: allInstalledFormulasRaw } = await exec("brew list");
 const { stdout: casksRaw } = await exec("brew list --casks");
 
 spinner.stop();
 
 const config: Config = parse(await readFile("../setup/install.yml", "utf-8"));
 
-const installedFormulas = formulasRaw.trim().split("\n");
+const userInstalledFormulas = userInstalledFormulasRaw
+  .trim()
+  .split("\n")
+  .map((f) => f.match(/[^\/]+$/)?.[0] ?? "");
+const allInstalledFormulas = allInstalledFormulasRaw
+  .trim()
+  .split("\n")
+  .map((f) => f.match(/[^\/]+$/)?.[0] ?? "");
 const installedCasks = casksRaw.trim().split("\n");
 
 const theme: Parameters<typeof checkbox>[0]["theme"] = {
@@ -76,7 +84,7 @@ const formularChoices: Parameters<typeof checkbox>[0]["choices"] =
               value: i.value ?? i.name,
               description: i.description ?? "",
             }),
-        checked: installedFormulas.includes(
+        checked: allInstalledFormulas.includes(
           typeof i === "string" ? i : (i.value ?? i.name),
         )
           ? true
@@ -91,8 +99,8 @@ const install = (await checkbox({
   theme,
 })) as string[];
 
-const toInstall = install.filter((i) => !installedFormulas.includes(i));
-const toRemove = installedFormulas.filter((i) => !install.includes(i));
+const toInstall = install.filter((i) => !allInstalledFormulas.includes(i));
+const toRemove = userInstalledFormulas.filter((i) => !install.includes(i));
 
 if (toRemove.length) {
   console.log(chalk.bold("Uninstall Formulas?"));
@@ -158,7 +166,7 @@ if (toInstall.length) {
       result.stderr
         ? spinner.stopAndPersist({
             symbol: chalk.yellowBright(""),
-            text: ` ${chalk.yellowBright.bold(f)} ${chalk.yellowBright(`install failed ↴\n ${chalk.grey(result.stderr)}`)}`,
+            text: ` ${chalk.yellowBright.bold(f)} ${chalk.yellowBright(`install failed ↴\n ${chalk.white.dim(result.stderr)}`)}`,
           })
         : spinner.succeed(`${chalk.bold(f)} ${chalk.dim("installed")}`);
     }
