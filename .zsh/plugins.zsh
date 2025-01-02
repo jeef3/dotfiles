@@ -1,40 +1,18 @@
 source ~/.zsh/plugged/zsh-async/async.zsh
 
-noop() {}
+autoload bashcompinit; bashcompinit
+autoload -Uz compinit; compinit
 
-load() {
-  autoload bashcompinit; bashcompinit
-  autoload -Uz compinit; compinit
+# Auto-suggestions
+source $BREW_HOME/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
+fpath=(~/.zsh/plugged/zsh-completions/src $fpath)
 
-  load_async_plugins
-}
+# FZF searching
+source <(fzf --zsh)
 
-async_init
-async_start_worker load_worker -n
-async_register_callback load_worker load
-async_job load_worker noop
-
-# ==========
-# Sync
-#
-
-load_plugins() {
-  # Auto-suggestions
-  source $BREW_HOME/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  export ZSH_AUTOSUGGEST_USE_ASYNC=1
-  fpath=(~/.zsh/plugged/zsh-completions/src $fpath)
-
-  # FZF searching
-  # source ~/.zsh/custom/fzf.zsh
-
-  # Autoload directory settings
-  # source ~/.zsh/custom/autoload.zsh
-  # load-local-conf
-
-  # Shell history
-  # eval "$(atuin init zsh --disable-up-arrow)"
-}
-load_plugins
+# Shell history
+# eval "$(atuin init zsh --disable-up-arrow)"
 
 # ==========
 # Async
@@ -52,3 +30,10 @@ load_async_plugins() {
   export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
   export FZF_DEFAULT_OPTS='--height 40% --border'
 }
+
+noop() {}
+
+async_init
+async_start_worker load_worker -n
+async_register_callback load_worker load_async_plugins
+async_job load_worker noop

@@ -21,6 +21,7 @@ ITALIC="%{\e[3m%}"
 UNDERLINE="%{\e[4m%}"
 RESET=$(echo "%{\x1b[0m%}")
 
+GRAY_700=$(hex_to_true 333333)
 DARK_GRAY=$(hex_to_true 686889)
 YELLOW=$(hex_to_true ffcc66)
 MAGENTA=$(hex_to_true ff3399)

@@ -15,6 +15,15 @@ printf "\n"
 printf "Ligatures => ===\n"
 printf "\n"
 
+echo -e "\033[0;30mBlack\t\t\033[1;30mDark Grey"
+echo -e "\033[0;31mDark Red\t\033[1;31mRed"
+echo -e "\033[0;32mDark Green\t\033[1;32mGreen"
+echo -e "\033[0;33mDark Yellow\t\033[1;33mYellow"
+echo -e "\033[0;34mDark Blue\t\033[1;34mBlue"
+echo -e "\033[0;35mDark Purple\t\033[1;35mLIGHT_PURPLE"
+echo -e "\033[0;36mDark Cyan\t\033[1;36mCyan"
+echo -e "\033[0;37mLight Grey\t\033[1;37mWhite"
+
 awk 'BEGIN{
     s="               "; s=s s s s s s s s;
     for (colnum = 0; colnum<77; colnum++) {

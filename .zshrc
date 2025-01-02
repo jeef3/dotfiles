@@ -1,3 +1,8 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export BREW_HOME=$(brew --prefix)
+
+source "$BREW_HOME/opt/zinit/zinit.zsh"
+
 eval "$(zoxide init zsh)"
 
 export CLICOLOR=1
@@ -29,3 +34,15 @@ source ~/.zsh/prompt.zsh
 # Completion
 zstyle ':completion:*' menu select
 zstyle ':completion:*:*:*:*:descriptions' format '%F{#b3b3d4}%K{#ff3399} %d %F{#ff3399}%K{black}%f%k'
+
+
+# Java
+export PATH="$BREW_HOME/opt/openjdk/bin:$PATH"
+
+# Node/npm
+export NPM_PACKAGES="$HOME/.npm-packages"
+export PATH="$NPM_PACKAGES/bin:$PATH"
+
+# Rust
+export PATH="$BREW_HOME/opt/rustup/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"

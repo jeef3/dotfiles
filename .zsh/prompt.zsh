@@ -6,6 +6,7 @@ source $ROOT/prompt/exit-status.zsh
 source $ROOT/prompt/git-line.zsh
 source $ROOT/prompt/jobbies.zsh
 source $ROOT/prompt/vi-mode.zsh
+source $ROOT/prompt/border.zsh
 
 setopt prompt_subst
 
@@ -29,7 +30,9 @@ async_load_prompt() {
 
 function precmd() {
 
-  PROMPT='$(current_dir)$(jobbies)$(exit_status)${VIM_MODE}${RESET} '
+  PROMPT='$(border)
+$(current_dir)$(jobbies)
+$(exit_status)${VIM_MODE}${RESET} '
   RPROMPT=''
 
   async_load_prompt
