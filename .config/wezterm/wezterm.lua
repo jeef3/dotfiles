@@ -19,8 +19,9 @@ config.enable_scroll_bar = false
 config.command_palette_rows = 10
 config.command_palette_font_size = 17
 
-config.color_schemes = { ["Princess"] = princess }
-config.color_scheme = "Princess"
+config.color_schemes =
+  { ["Princess Light"] = princess.light, ["Princess Dark"] = princess.dark }
+config.color_scheme = "Princess Dark"
 
 config.font_size = 17
 config.font = wezterm.font({
@@ -57,13 +58,16 @@ config.window_padding = {
   left = 0,
 }
 
-if appearance.is_dark() then
-  config.color_scheme = "Princess"
-else
-  -- config.color_scheme = "Princess Light"
-  config.color_scheme = "Princess"
-end
+-- if appearance.is_dark() then
+--   config.color_scheme = "Princess"
+-- else
+--   -- config.color_scheme = "Princess Light"
+--   config.color_scheme = "Princess"
+-- end
 
+wezterm.on("window-config-reloaded", function(window, pane)
+  window:toast_notification("wezterm", "configuration reloaded!", nil, 4000)
+end)
 -- wezterm.plugin.update_all()
 
 return config

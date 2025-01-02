@@ -23,6 +23,8 @@ async_load_prompt() {
   async_start_worker prompt_worker -n
   async_register_callback prompt_worker my_prompt
   async_job prompt_worker noop
+
+  RPROMPT="…"
 }
 
 function precmd() {

@@ -1,4 +1,4 @@
-BRANCH_ICON=" "
+BRANCH_ICON=""
 BEHIND_ICON=" "
 AHEAD_ICON=" "
 
