@@ -1,15 +1,9 @@
-[submodule ".zsh/plugged/zsh-completions"]
-	path = .zsh/plugged/zsh-completions
-	url = https://github.com/zsh-users/zsh-completions.git
 [submodule ".zsh/plugged/zsh-async"]
 	path = .zsh/plugged/zsh-async
 	url = https://github.com/mafredri/zsh-async.git
 [submodule ".zsh/plugged/up.zsh"]
 	path = .zsh/plugged/up.zsh
 	url = https://github.com/peterhurford/up.zsh.git
-[submodule ".zsh/plugged/git-prompt.zsh"]
-	path = .zsh/plugged/git-prompt.zsh
-	url = https://github.com/woefe/git-prompt.zsh
 [submodule ".zsh/plugged/zsh-git-prompt.zsh"]
 	path = .zsh/plugged/zsh-git-prompt.zsh
 	url = https://github.com/olivierverdier/zsh-git-prompt
@@ -17,11 +11,3 @@
 [submodule ".config/ranger/plugins"]
 	path = .config/ranger/plugins
 	url = https://github.com/alexanderjeurissen/ranger_devicons
-
-[submodule ".tmux/plugins/tpm"]
-	path = .tmux/plugins/tpm
-	url = https://github.com/tmux-plugins/tpm
-
-[submodule "kitty-icon"]
-	path = kitty-icon
-	url = https://github.com/DinkDonk/kitty-icon.git

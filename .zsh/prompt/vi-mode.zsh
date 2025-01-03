@@ -1,7 +1,7 @@
 bindkey -v
 
-INSERT_MODE="$GREEN❯"
-CMD_MODE="$MAGENTA❯"
+INSERT_MODE="%F{10}❯"
+CMD_MODE="%F{9}❯"
 VIM_MODE=$INSERT_MODE
 
 zle-keymap-select() {

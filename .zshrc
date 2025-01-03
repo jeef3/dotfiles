@@ -30,19 +30,4 @@ source ~/.config/wezterm/shell_integration.sh
 
 source ~/.zsh/plugins.zsh
 source ~/.zsh/prompt.zsh
-
-# Completion
-zstyle ':completion:*' menu select
-zstyle ':completion:*:*:*:*:descriptions' format '%F{#b3b3d4}%K{#ff3399} %d %F{#ff3399}%K{black}%f%k'
-
-
-# Java
-export PATH="$BREW_HOME/opt/openjdk/bin:$PATH"
-
-# Node/npm
-export NPM_PACKAGES="$HOME/.npm-packages"
-export PATH="$NPM_PACKAGES/bin:$PATH"
-
-# Rust
-export PATH="$BREW_HOME/opt/rustup/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
+source ~/.zsh/path.zsh

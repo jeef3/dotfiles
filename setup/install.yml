@@ -31,7 +31,10 @@ templates:
       - name: less
         description: Newer less
       - name: ncdu
-        description: Newer `du`
+        description: "Newer `du`"
+      - name: Eza
+        description: "`ls` replacement"
+        value: eza
       - ack
       - the_silver_searcher
       - fzf
@@ -45,13 +48,6 @@ templates:
         description: JSON parser/viewer
       - name: zoxide
         description: "Aka: z"
-
-  - name: Zsh Tools
-    default: true
-    type: formula
-    items:
-      - zsh-autosuggestions
-      - zsh-syntax-highlighting
 
   - name: Git and tools
     default: true
