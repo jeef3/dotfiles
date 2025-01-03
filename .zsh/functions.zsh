@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Start an HTTP server from a directory, optionally specifying the port
 function server() {
     local port="${1:-8000}"

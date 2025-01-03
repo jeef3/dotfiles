@@ -5,16 +5,16 @@ source "$BREW_HOME/opt/zinit/zinit.zsh"
 
 eval "$(zoxide init zsh)"
 
+# Prefer US English and use UTF-8
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US"
+
+export EDITOR="nvim"
+
 export CLICOLOR=1
 
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X"
-
-# ~/.extra can be used for settings you don’t want to commit
-for file in ~/.{extra,aliases,functions}; do
-    [ -r "$file" ] && source "$file"
-done
-unset file
 
 # Load scripts
 [[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH
@@ -28,6 +28,7 @@ setopt hist_expire_dups_first
 
 source ~/.config/wezterm/shell_integration.sh
 
-source ~/.zsh/plugins.zsh
-source ~/.zsh/prompt.zsh
-source ~/.zsh/path.zsh
+for file in ~/.zsh/{plugins,prompt,path,aliases,functions}.zsh; do
+    [ -r "$file" ] && source "$file"
+done
+unset file
