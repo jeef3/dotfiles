@@ -11,11 +11,11 @@ zle-keymap-select() {
     [[ $1 = 'block' ]]; then
       echo -ne '\e[1 q'
 
-    elif [[ ${KEYMAP} == main ]] ||
-      [[ ${KEYMAP} == viins ]] ||
-      [[ ${KEYMAP} = '' ]] ||
-      [[ $1 = 'beam' ]]; then
-          echo -ne '\e[3 q'
+  elif [[ ${KEYMAP} == main ]] ||
+    [[ ${KEYMAP} == viins ]] ||
+    [[ ${KEYMAP} = '' ]] ||
+    [[ $1 = 'beam' ]]; then
+      echo -ne '\e[3 q'
   fi
 
   zle reset-prompt
