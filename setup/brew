@@ -25,6 +25,7 @@ start_spinner "Tapping…"
 # brew tap osx-cross/avr
 # brew tap sudar/arduino-mk
 # brew tap mongodb/brew
+brew tap oven-sh/bun
 brew tap isen-ng/dotnet-sdk-versions
 brew tap leoafarias/fvm
 stop_spinner
@@ -52,9 +53,8 @@ FORMULAS=(
   fd # Decent file searcher
   btop # Really nice activity monitor
   jq # JSON parser/viewer
-
-  # Terminal helpers and tools
   zoxide # aka: z
+
   zsh-autosuggestions
   zsh-syntax-highlighting
 
@@ -78,13 +78,14 @@ FORMULAS=(
   gnupg
 
   # Languages
-  node
+  bun
+  fvm
+  go
   haskell-stack
+  node
+  openjdk
   python@3.13
   rustup
-  fvm
-  openjdk
-  go
 
   # Other language frameworks, libs and bits
   platformio

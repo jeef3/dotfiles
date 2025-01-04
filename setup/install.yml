@@ -53,6 +53,15 @@ templates:
       - name: WeeChat
         description: Extensible IRC client
         value: weechat
+      - name: Bat
+        description: Clone of cat(1) with syntax highlighting and Git integration
+        value: bat
+      - name: Pandoc
+        description: Swiss-army knife of markup format conversion
+        value: pandoc
+      - name: Grc
+        description: Colorize logfiles and command output
+        value: grc
 
   - name: Git and tools
     default: true
@@ -141,6 +150,7 @@ templates:
       - dosbox
       - figma
       - kicad
+      - the-unarchiver
       - virtualbox
 
   - name: Server Apps

@@ -9,8 +9,6 @@ import { parse } from "yaml";
 import chalk from "chalk";
 import ora from "ora";
 
-import
-
 type Config = {
   taps: string[];
 
