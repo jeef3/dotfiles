@@ -12,6 +12,8 @@ templates:
         description: GNU core utilities (those that come with OS X are outdated)
       - name: findutils
         description: GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
+      - name: zinit
+        description: Flexible and fast Zsh plugin manager.
 
   - name: Compilers
     default: true
@@ -48,6 +50,9 @@ templates:
         description: JSON parser/viewer
       - name: zoxide
         description: "Aka: z"
+      - name: WeeChat
+        description: Extensible IRC client
+        value: weechat
 
   - name: Git and tools
     default: true
@@ -66,7 +71,7 @@ templates:
     default: true
     type: formula
     items:
-      - tmux
+      # - tmux
       - neovim
       - ranger
       - todo-txt
