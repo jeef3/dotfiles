@@ -29,7 +29,6 @@ async_load_prompt() {
 }
 
 function precmd() {
-
   PROMPT='$(border)
 $(current_dir)$(jobbies)
 $(exit_status)${VIM_MODE}${RESET} '

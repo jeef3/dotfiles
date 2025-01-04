@@ -3,7 +3,10 @@ compinit
 bashcompinit
 
 zinit light mafredri/zsh-async
+
 zinit light Aloxaf/fzf-tab
+zinit light Freed-Wu/fzf-tab-source
+
 zinit light zsh-users/zsh-autosuggestions
 zinit light olivierverdier/zsh-git-prompt
 
