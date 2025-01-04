@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local c = require("colors")
 local appearance = require("appearance")
 
 local princess = require("princess")
@@ -17,7 +18,13 @@ config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.enable_scroll_bar = false
 
 config.command_palette_rows = 10
-config.command_palette_font_size = 17
+config.command_palette_font_size = 19
+config.command_palette_fg_color = c.silver_300
+config.command_palette_bg_color = c.silver_800
+
+config.default_cursor_style = "BlinkingUnderline"
+config.cursor_blink_rate = 600
+config.cursor_thickness = 3
 
 config.color_schemes =
   { ["Princess Light"] = princess.light, ["Princess Dark"] = princess.dark }
@@ -58,12 +65,12 @@ config.window_padding = {
   left = 0,
 }
 
--- if appearance.is_dark() then
---   config.color_scheme = "Princess"
--- else
---   -- config.color_scheme = "Princess Light"
---   config.color_scheme = "Princess"
--- end
+if appearance.is_dark() then
+  config.color_scheme = "Princess Dark"
+else
+  -- config.color_scheme = "Princess Light"
+  config.color_scheme = "Princess Dark"
+end
 
 wezterm.on("window-config-reloaded", function(window, pane)
   window:toast_notification("wezterm", "configuration reloaded!", nil, 4000)

@@ -25,6 +25,7 @@ export HISTSIZE=10000
 export SAVEHIST=${HISTSIZE}
 
 setopt hist_expire_dups_first
+setopt interactive_comments
 
 source ~/.config/wezterm/shell_integration.sh
 

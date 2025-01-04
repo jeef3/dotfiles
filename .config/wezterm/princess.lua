@@ -30,6 +30,9 @@ return {
 
     foreground = c.silver_900,
     background = c.silver_100,
+
+    cursor_bg = c.silver_900,
+    cursor_border = c.silver_500,
   },
   dark = {
     ansi = ansi.dim,
@@ -55,5 +58,8 @@ return {
         bg_color = c.silver_800,
       },
     },
+
+    cursor_bg = c.silver_100,
+    cursor_border = c.silver_500,
   },
 }

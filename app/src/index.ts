@@ -9,6 +9,8 @@ import { parse } from "yaml";
 import chalk from "chalk";
 import ora from "ora";
 
+import
+
 type Config = {
   taps: string[];
 
@@ -60,11 +62,11 @@ const installedCasks = casksRaw.trim().split("\n");
 
 const theme: Parameters<typeof checkbox>[0]["theme"] = {
   prefix: {
-    idle: chalk.blue("󰄾"),
-    done: chalk.green(" "),
+    idle: chalk.blueBright("󰄾"),
+    done: chalk.greenBright(" "),
   },
   icon: {
-    checked: chalk.green(""),
+    checked: chalk.greenBright(""),
     unchecked: chalk.gray(""),
     cursor: "󰅂",
   },
@@ -108,7 +110,7 @@ if (toRemove.length) {
     "The following packages have been deselected and can be uninstalled:",
   );
 
-  toRemove.map((f) => console.log(` ${chalk.red("")} ${chalk.bold(f)}`));
+  toRemove.map((f) => console.log(` ${chalk.redBright("")} ${chalk.bold(f)}`));
 
   const answer = await confirm({
     message: "Uninstall these packages?",
