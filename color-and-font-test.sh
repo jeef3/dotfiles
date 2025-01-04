@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
 printf "\n"
 printf " · \e[1mbold\e[0m\n"
@@ -20,7 +20,7 @@ echo -e "\033[0;31mDark Red\t\033[1;31mRed"
 echo -e "\033[0;32mDark Green\t\033[1;32mGreen"
 echo -e "\033[0;33mDark Yellow\t\033[1;33mYellow"
 echo -e "\033[0;34mDark Blue\t\033[1;34mBlue"
-echo -e "\033[0;35mDark Purple\t\033[1;35mLIGHT_PURPLE"
+echo -e "\033[0;35mDark Purple\t\033[1;35mLight Purple"
 echo -e "\033[0;36mDark Cyan\t\033[1;36mCyan"
 echo -e "\033[0;37mLight Grey\t\033[1;37mWhite"
 

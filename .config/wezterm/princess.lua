@@ -7,8 +7,8 @@ local ansi = {
     c.green_600, -- Dark Green
     c.orange_600, -- Dark Yellow
     c.blue_600, -- Dark Blue
-    c.purple_500, -- Dark Purple
-    c.turquoise_500, -- Dark Cyan
+    c.purple_600, -- Dark Purple
+    c.turquoise_600, -- Dark Cyan
     c.silver_300, -- Light Grey
   },
   bright = {

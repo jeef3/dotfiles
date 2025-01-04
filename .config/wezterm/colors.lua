@@ -1,5 +1,5 @@
-local wz = require("wezterm")
-local p = wz.color.parse
+local wezterm = require("wezterm")
+local p = wezterm.color.parse
 
 local silver_100 = p("#f8f8ff")
 local silver_200 = p("#dfdfe0")
@@ -11,23 +11,23 @@ local silver_700 = p("#393b44")
 local silver_800 = p("#2C2C3E")
 local silver_900 = p("#1d1d26")
 
-local pink_400 = p("#FF7086")
 local pink_500 = p("#ff3399")
-local pink_600 = p("#b12350")
+local pink_600 = pink_500:darken(0.25)
 
 local blue_500 = p("#00bfff")
-local blue_600 = p("#8590EC")
+local blue_600 = blue_500:darken(0.25)
 
 local turquoise_500 = p("#00ced1")
+local turquoise_600 = turquoise_500:darken(0.25)
 
-local green_400 = p("#BBCE65")
 local green_500 = p("#00d364")
-local green_600 = p("#057867")
+local green_600 = green_500:darken(0.25)
 
 local purple_500 = p("#cc66ff")
+local purple_600 = purple_500:darken(0.25)
 
 local orange_500 = p("#ffcc66")
-local orange_600 = p("#ffb070")
+local orange_600 = orange_500:darken(0.25)
 
 return {
   silver_100 = silver_100,
@@ -40,7 +40,6 @@ return {
   silver_800 = silver_800,
   silver_900 = silver_900,
 
-  pink_400 = pink_400,
   pink_500 = pink_500,
   pink_600 = pink_600,
 
@@ -48,12 +47,13 @@ return {
   blue_600 = blue_600,
 
   turquoise_500 = turquoise_500,
+  turquoise_600 = turquoise_600,
 
-  green_400 = green_400,
   green_500 = green_500,
   green_600 = green_600,
 
   purple_500 = purple_500,
+  purple_600 = purple_600,
 
   orange_500 = orange_500,
   orange_600 = orange_600,
