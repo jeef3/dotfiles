@@ -50,7 +50,7 @@ fi
 # Some of my new setup scripts are written in JavaScript, so install Node now so
 # we can run them.
 which -s node
-if [ ! $? -eq 0]; then
+if [ ! $? -eq 0 ]; then
   start_spinner "Installing $(tput bold)NodeJS$(tput sgr0)…"
   brew install git >/dev/null
   stop_spinner
