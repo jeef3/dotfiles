@@ -154,11 +154,6 @@ vim.opt.scrolloff = 10     -- Scroll when within 10 rows of top/bottom
 vim.opt.sidescrolloff = 10 -- Scroll when within 10 columns of left/right
 vim.opt.updatetime = 250   -- Shorten the "idle" time for autocmds
 vim.opt.cursorline = true  -- Highlight the current cursor linea.
-vim.opt.guicursor = {
-  -- Styles for the cursor indicator
-  a = "block",
-  n = "Cursor",
-}
 vim.opt.mouse = "a"
 vim.opt.mousescroll = "ver:1,hor:1"
 
@@ -168,9 +163,8 @@ vim.opt.clipboard = "unnamed"
 -- Cursor
 vim.opt.guicursor = {
   "a:block",
-  "a:blinkon0",
   "n:Cursor",
-  "i-ci-sm:InsertCursor-hor10",
+  "i-ci-sm:Cursor-hor10-blinkon100",
 
   "v-ve:VisualCursor",
   "r-cr:ReplaceCursor-hor10",
