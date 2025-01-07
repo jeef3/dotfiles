@@ -23,11 +23,16 @@ config.command_palette_fg_color = c.silver_300
 config.command_palette_bg_color = c.silver_800
 
 config.default_cursor_style = "BlinkingUnderline"
-config.cursor_blink_rate = 600
 config.cursor_thickness = 3
+config.cursor_blink_rate = 600
+
+config.inactive_pane_hsb = {
+  saturation = 1,
+  brightness = 1
+}
 
 config.color_schemes =
-  { ["Princess Light"] = princess.light, ["Princess Dark"] = princess.dark }
+{ ["Princess Light"] = princess.light, ["Princess Dark"] = princess.dark }
 config.color_scheme = "Princess Dark"
 
 config.font_size = 17
@@ -58,6 +63,7 @@ config.window_frame = {
   border_top_height = 0,
 }
 
+config.use_resize_increments = true
 config.window_padding = {
   top = 0,
   right = 0,

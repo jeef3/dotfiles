@@ -30,6 +30,7 @@ return {
 
     foreground = c.silver_900,
     background = c.silver_100,
+    split = c.silver_500,
 
     cursor_bg = c.silver_900,
     cursor_border = c.silver_500,
@@ -40,6 +41,7 @@ return {
 
     foreground = c.silver_100,
     background = c.silver_900,
+    split = c.silver_500,
 
     tab_bar = {
       background = c.silver_900,
