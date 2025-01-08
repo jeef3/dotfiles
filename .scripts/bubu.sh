@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 title() { printf "\n $(tput bold)$1$(tput sgr0)\n\n"; }
 check() { printf " $(tput setaf 8)›  $(tput setaf 10)✓\t$(tput sgr0)$1\n"; }

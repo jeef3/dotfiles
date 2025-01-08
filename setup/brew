@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -e
 
@@ -25,6 +25,8 @@ start_spinner "Tapping…"
 # brew tap osx-cross/avr
 # brew tap sudar/arduino-mk
 # brew tap mongodb/brew
+brew tap oven-sh/bun
+brew tap isen-ng/dotnet-sdk-versions
 brew tap leoafarias/fvm
 stop_spinner
 success "Tapped"
@@ -34,21 +36,25 @@ FORMULAS=(
   coreutils # GNU core utilities (those that come with OS X are outdated)
   findutils # GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
 
+  # Compilers
+  make
+  cmake
+  ccls
+  mono
+
+  # CLI Tools
   wget # Wget with iri
-  ncdu # Nicer du
-  gnupg
   less # Newer less
+  ncdu # Nicer du
   ack
   the_silver_searcher
   fzf
   ripgrep # Faster grepping
   fd # Decent file searcher
-
-  # Useful tools
-  jq # JSON parser
-
-  # Terminal helpers and tools
+  btop # Really nice activity monitor
+  jq # JSON parser/viewer
   zoxide # aka: z
+
   zsh-autosuggestions
   zsh-syntax-highlighting
 
@@ -58,7 +64,7 @@ FORMULAS=(
   lazygit
   git-delta
   diff-so-fancy
-  gh
+  gh # GitHub CLI
 
   # Mah IDE
   tmux
@@ -72,24 +78,18 @@ FORMULAS=(
   gnupg
 
   # Languages
-  node
+  bun
+  fvm
+  go
   haskell-stack
+  node
+  openjdk
   python@3.13
   rustup
-  fvm
-  openjdk
-  dotnet
-  go
 
   # Other language frameworks, libs and bits
   platformio
   esphome
-
-  # Compilers
-  make
-  cmake
-  ccls
-  mono
 
   # Dev helpers
   # watchman
@@ -98,16 +98,14 @@ FORMULAS=(
   # azure-cli
 
   # Gifiy
-  # ffmpeg
-  # gifsicle
+  ffmpeg
+  gifsicle
   # imagemagick
-
-  # Additional tools and helpers
-  blueutil
 )
 
 CASKS=(
   kitty
+  wezterm
 
   # Gifify
   # xquartz
@@ -115,6 +113,10 @@ CASKS=(
   # Dev Tools
   # react-native-debugger
   # imageoptim
+
+  dotnet-sdk
+  dotnet-sdk8
+  dotnet-sdk8
 
   # Other
   #dropbox

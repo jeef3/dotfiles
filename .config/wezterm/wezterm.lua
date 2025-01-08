@@ -1,124 +1,69 @@
-local wz = require("wezterm")
-local act = wz.action
--- local resurrect =
---   wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
--- local bar = wz.plugin.require("https://github.com/adriankarlen/bar.wezterm")
+local wezterm = require("wezterm")
 local c = require("colors")
+local appearance = require("appearance")
 
-require("tabbar")
+local princess = require("princess")
 
-local config = wz.config_builder()
-
+local config = wezterm.config_builder()
 config.keys = {}
-config.leader = { key = "b", mods = "CTRL", timeout = 5000 }
 
-local function lm(key, action)
-  table.insert(config.keys, { key = key, mods = "LEADER", action = action })
-end
+require("plugins.tmux").setup(config)
+require("plugins.resurrect").setup(config)
+require("plugins.workspace_switcher").setup(config)
+require("plugins.tabline").setup(config)
 
-lm(":", act.ActivateCommandPalette)
-
--- Pane Splits
-lm('"', act.SplitHorizontal({ domain = "CurrentPaneDomain" }))
-lm("%", act.SplitVertical({ domain = "CurrentPaneDomain" }))
-lm(" ", act.RotatePanes("Clockwise"))
-
--- Pane Navigation
-lm("h", act.ActivatePaneDirection("Left"))
-lm("j", act.ActivatePaneDirection("Down"))
-lm("k", act.ActivatePaneDirection("Up"))
-lm("l", act.ActivatePaneDirection("Right"))
-
--- Pane Actions
-lm("z", act.TogglePaneZoomState)
-lm("x", act.CloseCurrentPane({ confirm = true }))
-
--- Tab Navigation
-lm("n", act.ActivateTabRelative(1))
-lm("p", act.ActivateTabRelative(-1))
--- for i = 1, 9 do
---   lm(toString(i), act.ActivateTab(i - 1))
--- end
-
--- Tab Actions
-lm(
-  ",",
-  act.PromptInputLine({
-    description = "Enter new name for tab",
-    action = wz.action_callback(function(window, pane, line)
-      if line then
-        window:active_tab():set_title(line)
-      end
-    end),
-  })
-)
-
-lm(
-  "$",
-  act.PromptInputLine({
-    description = "Enter new name for session",
-    action = wz.action_callback(function(window, pane, line)
-      window:perform_action(
-        act.SwitchToWorkspace({
-          name = line,
-        }),
-        pane
-      )
-    end),
-  })
-)
+config.default_workspace = "~"
+config.status_update_interval = 200
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.enable_scroll_bar = false
 
-config.font = wz.font("Operator Mono")
--- config.font_antialias = "Subpixel"
--- config.font_hinting = "Full"
--- config.font = wezterm.font("OperatorMonoLig Nerd Font")
+config.command_palette_rows = 10
+config.command_palette_font_size = 19
+config.command_palette_fg_color = c.silver_300
+config.command_palette_bg_color = c.silver_800
+
+config.default_cursor_style = "BlinkingUnderline"
+config.cursor_thickness = 3
+config.cursor_blink_rate = 600
+
+config.inactive_pane_hsb = {
+  saturation = 1,
+  brightness = 1
+}
+
+config.color_schemes =
+{ ["Princess Light"] = princess.light, ["Princess Dark"] = princess.dark }
+config.color_scheme = "Princess Dark"
+
+config.font_size = 17
+config.font = wezterm.font({
+  family = "OperatorMonoLig Nerd Font",
+  weight = "Book",
+})
 config.font_rules = {
   {
     intensity = "Bold",
     italic = false,
-    font = wz.font("OperatorMonoSSmLig Nerd Font"),
+    font = wezterm.font("OperatorMonoSsmLig Nerd Font", { weight = "Bold" }),
   },
   {
     intensity = "Bold",
     italic = true,
-    font = wz.font("OperatorMonoSSmLig Nerd Font", { italic = true }),
+    font = wezterm.font(
+      "OperatorMonoSsmLig Nerd Font",
+      { weight = "Bold", italic = true }
+    ),
   },
 }
-config.font_size = 19
-
-config.colors = {
-  foreground = c.silver_200,
-  background = c.silver_900,
-
-  tab_bar = {
-    background = c.silver_900,
-  },
-}
-
-config.use_fancy_tab_bar = false
-config.show_new_tab_button_in_tab_bar = false
--- The filled in variant of the < symbol
-local SOLID_LEFT_ARROW = wz.nerdfonts.pl_right_hard_divider
-
--- The filled in variant of the > symbol
-local SOLID_RIGHT_ARROW = wz.nerdfonts.pl_left_hard_divider
-
-config.window_decorations = "TITLE|RESIZE"
--- config.window_background_opacity = 0.65
-config.macos_window_background_blur = 50
 
 config.window_frame = {
-  border_left_width = 1,
-  border_right_width = 1,
-  border_bottom_height = 1,
+  border_left_width = 0,
+  border_right_width = 0,
+  border_bottom_height = 0,
   border_top_height = 0,
-  -- border_left_color = "silver",
-  -- border_right_color = "silver",
-  -- border_bottom_color = "silver",
-  -- border_top_color = "silver",
 }
 
+config.use_resize_increments = true
 config.window_padding = {
   top = 0,
   right = 0,
@@ -126,46 +71,16 @@ config.window_padding = {
   left = 0,
 }
 
--- wezterm.on("update-left-status", function(window, pane)
---   local date = wezterm.strftime("󰸗 %a %d %b %H:%M")
---   -- Make it italic and underlined
---   window:set_left_status(wezterm.format({
---     { Foreground = { Color = green } },
---     { Text = "󱊣" },
---     { Foreground = { Color = orange } },
---     { Text = " " .. date },
---   }))
--- end)
+if appearance.is_dark() then
+  config.color_scheme = "Princess Dark"
+else
+  -- config.color_scheme = "Princess Light"
+  config.color_scheme = "Princess Dark"
+end
 
--- wezterm.on("update-right-status", function(window, pane)
---   local date = wezterm.strftime("󰸗 %a %d %b %H:%M")
---   -- Make it italic and underlined
---   window:set_right_status(wezterm.format({
---     { Foreground = { Color = green } },
---     { Text = "󱊣" },
---     { Foreground = { Color = orange } },
---     { Text = " " .. date .. " " },
---   }))
--- end)
-
--- wezterm.on("format-window-title", function()
---   local title = "[" .. wezterm.mux.get_active_workspace() .. "]"
---   title = title .. " " .. wezterm.mux.get_domain():name()
---   title = title .. " - $W"
---   -- some logic here
---   return title
--- end)
-
--- bar.apply_to_config(config, {
---   position = "top",
---   modules = {
---     workspace = { enabled = true },
---     pane = { enabled = false },
---     leader = { enabled = true },
---     hostname = { enabled = false },
---     username = { enabled = false },
---     clock = { enabled = false },
---   },
--- })
+wezterm.on("window-config-reloaded", function(window, pane)
+  window:toast_notification("wezterm", "configuration reloaded!", nil, 4000)
+end)
+-- wezterm.plugin.update_all()
 
 return config

@@ -1,0 +1,166 @@
+taps:
+  - oven-sh/bin
+  - isen-ng/dotnet-sdk-versions
+  - leoafarias/fvm
+
+templates:
+  - name: Base
+    default: true
+    type: formula
+    items:
+      - name: coreutils
+        description: GNU core utilities (those that come with OS X are outdated)
+      - name: findutils
+        description: GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
+      - name: zinit
+        description: Flexible and fast Zsh plugin manager.
+
+  - name: Compilers
+    default: true
+    type: formula
+    items:
+      - make
+      - cmake
+      - ccls
+      - mono
+
+  - name: CLI Tools
+    default: true
+    type: formula
+    items:
+      - name: wget
+        description: Wget with iri
+      - name: less
+        description: Newer less
+      - name: ncdu
+        description: "Newer `du`"
+      - name: Eza
+        description: "`ls` replacement"
+        value: eza
+      - ack
+      - the_silver_searcher
+      - fzf
+      - name: ripgrep
+        description: Faster grepping
+      - name: fd
+        description: Decent file/directory searcher
+      - name: btop
+        description: Really nice activity monitor
+      - name: jq
+        description: JSON parser/viewer
+      - name: zoxide
+        description: "Aka: z"
+      - name: WeeChat
+        description: Extensible IRC client
+        value: weechat
+      - name: Bat
+        description: Clone of cat(1) with syntax highlighting and Git integration
+        value: bat
+      - name: Pandoc
+        description: Swiss-army knife of markup format conversion
+        value: pandoc
+      - name: Grc
+        description: Colorize logfiles and command output
+        value: grc
+
+  - name: Git and tools
+    default: true
+    type: formula
+    items:
+      - git
+      - git-lfs
+      - name: lazygit
+        description: Git terminal UI
+      - git-delta
+      - diff-so-fancy
+      - name: gh
+        description: GitHub CLI
+
+  - name: IDE Essentials
+    default: true
+    type: formula
+    items:
+      # - tmux
+      - neovim
+      - ranger
+      - todo-txt
+
+  - name: Certificate Tools
+    default: true
+    type: formula
+    items:
+      - mkcert
+      - gnupg
+
+  - name: Languages
+    default: true
+    type: formula
+    items:
+      - bun
+      - fvm
+      - go
+      - haskell-stack
+      - node
+      - openjdk
+      - python@3.13
+      - rustup
+
+  - name: Language Platforms
+    default: false
+    type: formula
+    items:
+      - platformio
+      - esphome
+      - name: LuaRocks
+        value: luarocks
+        description: The Lua package manager
+
+  - name: Gifify Dependencies
+    default: false
+    type: formula
+    items:
+      - ffmpeg
+      - gifsicle
+
+  - name: Terminal
+    default: true
+    type: cask
+    items:
+      - wezterm
+      - kitty
+
+  - name: Dotnet SDKs
+    default: false
+    type: cask
+    items:
+      - dotnet-sdk
+      - dotnet-sdk8
+      - dotnet-sdk9
+
+  - name: Apps
+    default: false
+    type: cask
+    items:
+      - appcleaner
+      - name: LEGO Studio
+        value: bricklink-studio
+        description: Build, render, and create LEGO instructions
+      - dropbox
+      - docker
+      - dosbox
+      - figma
+      - kicad
+      - the-unarchiver
+      - virtualbox
+
+  - name: Server Apps
+    default: false
+    type: cask
+    items:
+      - nginx
+      - plex-media-server
+      - radarr
+      - sabnzbd
+      - sonarr
+      - transmission
+      - virtualbox

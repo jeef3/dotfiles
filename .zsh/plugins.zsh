@@ -1,66 +1,24 @@
-source ~/.zsh/plugged/zsh-async/async.zsh
+autoload -Uz compinit bashcompinit
+compinit
+bashcompinit
 
-noop() {}
+zinit light mafredri/zsh-async
 
-load() {
-  autoload bashcompinit; bashcompinit
-  autoload -Uz compinit; compinit
+zinit light Aloxaf/fzf-tab
+zinit light Freed-Wu/fzf-tab-source
 
-  load_async_plugins
-}
+zinit light zsh-users/zsh-autosuggestions
+zinit light olivierverdier/zsh-git-prompt
 
-async_init
-async_start_worker load_worker -n
-async_register_callback load_worker load
-async_job load_worker noop
+# Syntax highlighting must be last
+zinit light zsh-users/zsh-syntax-highlighting
 
-# ==========
-# Sync
-#
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=9'
+ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=blue,bold'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=blue,bold'
+ZSH_HIGHLIGHT_STYLES[function]='fg=10'
 
-load_plugins() {
-  # Auto-suggestions
-  source $BREW_HOME/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  export ZSH_AUTOSUGGEST_USE_ASYNC=1
-  fpath=(~/.zsh/plugged/zsh-completions/src $fpath)
-
-  # FZF searching
-  # source ~/.zsh/custom/fzf.zsh
-
-  # Autoload directory settings
-  # source ~/.zsh/custom/autoload.zsh
-  # load-local-conf
-
-  # Shell history
-  # eval "$(atuin init zsh --disable-up-arrow)"
-}
-load_plugins
-
-# ==========
-# Async
-#
-
-load_async_plugins() {
-  # Git Prompt
-  # if [ ! -e ~/.zsh/plugged/zsh-git-prompt/.stack-work ]; then
-  #   echo "\n"
-  #   info "Setting up Haskell support for zsh-git-prompt"
-  #   (cd ~/.zsh/plugged/zsh-git-prompt && \
-  #     stack setup && \
-  #     stack build && stack install)
-  # fi
-  # export GIT_PROMPT_EXECUTABLE="haskell"
-  source ~/.zsh/plugged/zsh-git-prompt.zsh/zshrc.sh
-  # source ~/.zsh/plugged/git-prompt.zsh/git-prompt.zsh
-
-  # .. ... .... aliases
-  source ~/.zsh/plugged/up.zsh/up.plugin.zsh
-
-  # Syntax Highlighting
-  source $BREW_HOME/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-  # FZF
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-  export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-  export FZF_DEFAULT_OPTS='--height 40% --border'
-}
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=11'
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=9,bold'
+ZSH_HIGHLIGHT_STYLES[comment]='fg=8,italic'
