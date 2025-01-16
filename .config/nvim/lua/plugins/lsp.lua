@@ -5,6 +5,8 @@
 -- linting/formatting.
 --------------------------------
 
+local tools = require("config.tools")
+
 return {
   ----------------
   -- LSP Config
@@ -172,24 +174,8 @@ return {
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
     opts = function()
-      local prettier = { "prettierd", "prettier", stop_after_first = true }
-
       return {
-        formatters_by_ft = {
-          cs = { "csharpier" },
-          css = prettier,
-          dart = { "dcm" },
-          html = prettier,
-          javascript = prettier,
-          javascriptreact = prettier,
-          json = prettier,
-          lua = { "stylua" },
-          markdown = prettier,
-          rust = { "rustfmt" },
-          typescript = prettier,
-          typescriptreact = prettier,
-          yaml = prettier,
-        },
+        formatters_by_ft = tools.conform,
         format_on_save = function(bufnr)
           -- Disable with a global or buffer-local variable
           if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
@@ -232,25 +218,28 @@ return {
     "williamboman/mason.nvim",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
       "b0o/schemastore.nvim",
     },
     config = function()
       require("mason").setup()
       local lspconfig = require("lspconfig")
+      local mason_lspconfig = require("mason-lspconfig")
+
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      local mason = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/"
+      require("mason-tool-installer").setup({
+        ensure_installed = tools.formatters,
+      })
 
-      require("mason-lspconfig").setup_handlers({
+      local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
+
+      mason_lspconfig.setup_handlers({
         function(server_name)
           lspconfig[server_name].setup({
             capabilities = capabilities,
           })
         end,
-
-        -- ["ccls"] = function()
-        --   lspconfig.ccls.setup()
-        -- end,
 
         ["lua_ls"] = function()
           lspconfig.lua_ls.setup({
@@ -286,14 +275,14 @@ return {
 
         ["jdtls"] = function()
           lspconfig.jdtls.setup({
-            cmd = { mason .. "jdtls" },
+            cmd = { mason_bin .. "jdtls" },
             capabilities = capabilities,
           })
         end,
 
         ["omnisharp"] = function()
           lspconfig.omnisharp.setup({
-            cmd = { mason .. "omnisharp" },
+            cmd = { mason_bin .. "omnisharp" },
             capabilities = capabilities,
             settings = {
               MsBuild = {
