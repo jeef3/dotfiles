@@ -20,8 +20,9 @@ local tmux = {
     },
   },
   sections = {
-    tabline_a = { "   " },
-    tabline_b = {},
+    tabline_a = { "   " },
+    -- tabline_b = {},
+    tabline_b = { { "workspace", icons_enabled = false } },
     tabline_c = {},
 
     tab_active = {
@@ -59,7 +60,10 @@ function M.setup(config)
         right = "",
       },
       component_separators = "",
-      tab_separators = "",
+      tab_separators = {
+        left = "",
+        right = "",
+      },
 
       theme_overrides = {
         normal_mode = {
@@ -80,7 +84,7 @@ function M.setup(config)
     },
 
     sections = {
-      tabline_a = { "   " },
+      tabline_a = { "    " },
       tabline_b = { { "workspace", icons_enabled = false } },
       -- tabline_b = {},
       tabline_c = {},
