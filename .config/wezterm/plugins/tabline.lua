@@ -39,7 +39,7 @@ local tmux = {
     tabline_y = {},
     tabline_z = {},
   },
-  colors = {
+  theme = {
     a = { fg = c.silver_800, bg = c.orange_500 },
     b = { fg = c.silver_200, bg = c.silver_600 },
     c = { fg = c.silver_200, bg = c.silver_800 },
@@ -61,7 +61,7 @@ function M.setup(config)
       component_separators = "",
       tab_separators = "",
 
-      color_overrides = {
+      theme_overrides = {
         normal_mode = {
           a = { fg = c.silver_300, bg = c.silver_800 },
           b = { fg = c.silver_200, bg = c.silver_600 },
