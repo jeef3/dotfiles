@@ -37,3 +37,31 @@ function pngToBase64() {
 
   echo $prefix$encoded$suffix
 }
+
+function isSquashed() {
+  branch="$1"
+  main="${2:-main}"
+
+  if [ -z $branch ]; then
+    echo "No branch specified. Usage:"
+    echo "isSquashed <branch> [main]"
+    return 1;
+fi
+
+  ancestor_hash=$(git merge-base ${main} "${branch}")
+  tree_id=$(git rev-parse "${branch}^{tree}")
+
+  dangling_commit_id=$(git commit-tree "$tree_id" -p "$ancestor_hash" -m "Temp commit for ${branch}")
+  out=$(git cherry ${main} "$dangling_commit_id")
+
+  expr "$out" : -. >/dev/null
+}
+
+function listMerged() {
+  main="${1:-main}"
+  for branch in $(git for-each-ref refs/heads/ --format="%(refname:short)"); do
+    if isSquashed "$branch" "$main"; then
+      echo "$branch"
+    fi
+  done
+}
