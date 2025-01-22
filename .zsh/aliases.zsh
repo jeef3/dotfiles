@@ -12,11 +12,9 @@ alias todo="todotxt-machine ./todo.txt"
 
 alias lg="lazygit"
 
-alias urldecode='python -c "import sys, urllib as ul; \
-                [sys.stdout.write(ul.unquote_plus(l)) for l in sys.stdin]"'
+alias urldecode='python3 -c "import sys, urllib.parse; print(urllib.parse.unquote(sys.argv[1]))"'
 
-alias urlencode='python -c "import sys, urllib as ul; \
-                print ul.quote_plus(sys.argv[1])"'
+alias urlencode='python3 -c "import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1]))"'
 
 
 alias du="ncdu --color dark -rr --exclude .git --exclude node_modules"
