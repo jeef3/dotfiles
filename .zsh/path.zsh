@@ -8,3 +8,6 @@ export PATH="$NPM_PACKAGES/bin:$PATH"
 # Rust
 export PATH="$BREW_HOME/opt/rustup/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# Pipx
+export PATH="$HOME/.local/bin:$PATH"
