@@ -12,6 +12,8 @@ require("plugins.resurrect").setup(config)
 require("plugins.workspace_switcher").setup(config)
 require("plugins.tabline").setup(config)
 
+require("keys").setup(config)
+
 config.default_workspace = "~"
 config.status_update_interval = 200
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
@@ -28,14 +30,14 @@ config.cursor_blink_rate = 600
 
 config.inactive_pane_hsb = {
   saturation = 1,
-  brightness = 1
+  brightness = 1,
 }
 
 config.color_schemes =
-{ ["Princess Light"] = princess.light, ["Princess Dark"] = princess.dark }
+  { ["Princess Light"] = princess.light, ["Princess Dark"] = princess.dark }
 config.color_scheme = "Princess Dark"
 
-config.font_size = 17
+config.font_size = 19
 config.font = wezterm.font({
   family = "OperatorMonoLig Nerd Font",
   weight = "Book",
