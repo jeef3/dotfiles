@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 local tabline =
   wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
-local c = require("colors")
+local c = require("config.colors")
 
 local window_process = require("components.process")
 local window_git = require("components.git")
