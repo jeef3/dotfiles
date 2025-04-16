@@ -38,29 +38,19 @@ return {
       },
     },
     config = function()
-      for type, icon in pairs({
-        Error = " ",
-        Warn = " ",
-        Hint = " ",
-        Info = " ",
-      }) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
-
       vim.diagnostic.config({
         update_in_insert = false,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.HINT] = "",
+          },
+        },
         virtual_lines = {
-          only_current_line = true,
+          current_line = true,
         },
-        virtual_text = {
-          source = false,
-          prefix = "⏹",
-        },
-        inlay_hints = {
-          enabled = true,
-        },
-        float = { border = false },
       })
 
       vim.api.nvim_create_autocmd("LspAttach", {
