@@ -24,12 +24,6 @@ return {
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
       "b0o/schemastore.nvim",
-      "soulis-1256/eagle.nvim", -- mouse hover doc
-      {
-        "https://git.sr.ht/~whynothugo/lsp_lines.nvim", -- Fancy virtual text for errors
-        enabled = false,
-        config = true,
-      },
       {
         "folke/neodev.nvim",
         opts = {
@@ -82,7 +76,6 @@ return {
 
           -- bufmap("n", "K", "<cmd>Lspsaga hover_doc<CR>", "Show docs")
           bufmap("n", "K", vim.lsp.buf.hover)
-
           bufmap(
             "n",
             "[g",
@@ -105,13 +98,13 @@ return {
           )
           bufmap("n", "<leader>o", "<cmd>Lspsaga outline<CR>", "Toggle outline")
 
-          -- bufmap("n", "<space>e", vim.diagnostic.open_float, "Show line errors")
-          bufmap(
-            "n",
-            "<space>e",
-            "<cmd>Lspsaga show_line_diagnostics<CR>",
-            "Show line errors"
-          )
+          bufmap("n", "<space>e", vim.diagnostic.open_float, "Show line errors")
+          -- bufmap(
+          --   "n",
+          --   "<space>e",
+          --   "<cmd>Lspsaga show_line_diagnostics<CR>",
+          --   "Show line errors"
+          -- )
         end,
       })
     end,
@@ -126,6 +119,7 @@ return {
   ----------------
   {
     "nvimdev/lspsaga.nvim",
+    enabled = false,
     opts = {
       code_action = {},
       lightbulb = { enable = false },
@@ -228,6 +222,7 @@ return {
         function(server_name)
           lspconfig[server_name].setup({
             capabilities = capabilities,
+            handlers = handlers,
           })
         end,
 

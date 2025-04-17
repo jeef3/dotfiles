@@ -99,10 +99,14 @@ return {
         }),
         window = {
           completion = {
-            col_offset = -2,
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+            col_offset = -3,
             side_padding = 0,
           },
-          documentation = cmp.config.window.bordered(),
+          documentation = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+            border = { "▏", "", " ", " ", " ", "", "▏", "▏" },
+          },
         },
         formatting = {
           fields = { "kind", "abbr" },

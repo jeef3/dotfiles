@@ -224,7 +224,7 @@ return {
       },
       ignore = {
         buftype = { "nofile" },
-        filetype = { "netrw", "neotest-summary" },
+        filetype = { "neotest-summary" },
       },
     },
     init = function()
