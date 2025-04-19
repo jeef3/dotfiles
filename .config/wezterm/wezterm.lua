@@ -13,7 +13,7 @@ require("plugins.resurrect").setup(config)
 require("plugins.workspace_switcher").setup(config)
 require("plugins.tabline").setup(config)
 
-require("config.key_map").setup(config)
+require("config.keybinds").setup(config)
 
 config.default_workspace = "~"
 config.status_update_interval = 200

@@ -6,30 +6,30 @@
 --------------------------------
 
 local kind_icons = {
-  Text = " ",
-  Method = " ",
-  Function = " ",
-  Constructor = " ",
-  Field = " ",
-  Variable = " ",
-  Class = " ",
-  Interface = " ",
-  Module = " ",
-  Property = " ",
-  Unit = " ",
-  Value = " ",
-  Enum = " ",
-  Keyword = " ",
-  Snippet = " ",
-  Color = " ",
-  File = " ",
-  Reference = " ",
-  Folder = " ",
-  EnumMember = " ",
-  Constant = " ",
-  Struct = " ",
-  Event = " ",
-  Operator = " ",
+  Text = "󰉿",
+  Method = "󰆧",
+  Function = "󰊕",
+  Constructor = "",
+  Field = "󰜢",
+  Variable = "󰀫",
+  Class = "󰠱",
+  Interface = "",
+  Module = "",
+  Property = "󰜢",
+  Unit = "󰑭",
+  Value = "󰎠",
+  Enum = "",
+  Keyword = "󰌋",
+  Snippet = "",
+  Color = "󰏘",
+  File = "󰈙",
+  Reference = "󰈇",
+  Folder = "󰉋",
+  EnumMember = "",
+  Constant = "󰏿",
+  Struct = "󰙅",
+  Event = "",
+  Operator = "󰆕",
   TypeParameter = " ",
 }
 
@@ -51,7 +51,6 @@ return {
 
       "onsails/lspkind.nvim",
 
-      -- "ray-x/lsp_signature.nvim",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "windwp/nvim-autopairs",
     },
@@ -59,6 +58,10 @@ return {
     opts = function()
       local cmp = require("cmp")
 
+      cmp.event:on(
+        "confirm_done",
+        require("nvim-autopairs.completion.cmp").on_confirm_done()
+      )
       return {
         -- Don't show completion while editing comments
         enabled = function()
@@ -135,7 +138,6 @@ return {
     event = "InsertEnter",
     opts = {
       check_ts = true,
-      enable_check_bracket_line = true,
     },
   },
 

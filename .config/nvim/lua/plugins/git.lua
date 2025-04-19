@@ -1,4 +1,4 @@
-diffview_toggle = function()
+local diffview_toggle = function()
   local lib = require("diffview.lib")
   local view = lib.get_current_view()
   if view then

@@ -1,28 +1,25 @@
-----------------
--- Telescope
---
--- Find, Filter, Preview, Pick. All lua, all the time.
---
--- https://github.com/nvim-telescope/telescope.nvim
-----------------
-
 local noop = function() end
 
 return {
+  ----------------
+  -- Telescope
+  --
+  -- Find, Filter, Preview, Pick. All lua, all the time.
+  --
+  -- https://github.com/nvim-telescope/telescope.nvim
+  ----------------
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "rcarriga/nvim-notify",
       "olimorris/persisted.nvim",
-      "jonarrien/telescope-cmdline.nvim", -- Like Noice
       "debugloop/telescope-undo.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
         -- enabled = vim.fn.executable("make") == 1,
       },
-      "Myzel394/jsonfly.nvim", -- JSON explorer
     },
     cmd = { "Telescope" },
     keys = {
@@ -30,15 +27,7 @@ return {
       { "<c-p>" },
       { "<c-s>" },
       { "gs", desc = "Find symbols in document" },
-      -- { ":", "<cmd>Telescope cmdline<cr>" },
       { "gp", "<cmd>Telescope persisted<cr>", desc = "Switch session" },
-      {
-        "<leader>j",
-        "<cmd>Telescope jsonfly<cr>",
-        desc = "Open json(fly)",
-        ft = { "json", "xml", "yaml" },
-        mode = "n",
-      },
     },
     config = function()
       local telescope = require("telescope")
@@ -49,9 +38,7 @@ return {
 
       require("telescope.pickers.layout_strategies").my_layout = function(
         self,
-        max_columns,
-        max_lines,
-        layout_config
+        max_columns
       )
         local initial_options = p_window.get_initial_window_options(self)
         local prompt = initial_options.prompt
@@ -98,7 +85,6 @@ return {
       telescope.setup({
         extensions = {
           persisted = { prompt_prefix = "  󰁯  " },
-          cmdline = { picker = { prompt_prefix = "    " } },
           undo = { prompt_prefix = "  󰕌 " },
         },
         defaults = {
@@ -129,7 +115,6 @@ return {
       telescope.load_extension("notify")
       telescope.load_extension("persisted")
       telescope.load_extension("fzf")
-      telescope.load_extension("cmdline")
       telescope.load_extension("undo")
 
       -- <C-t> Find files

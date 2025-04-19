@@ -57,13 +57,15 @@ return {
           bufmap(
             "n",
             "gd",
-            "<cmd>Lspsaga goto_definition<CR>",
+            -- "<cmd>Lspsaga goto_definition<CR>",
+            vim.lsp.buf.definition,
             "Go to definition"
           )
           bufmap(
             "n",
             "gi",
-            "<cmd>Lspsaga goto_type_definition<CR>",
+            vim.lsp.buf.type_definition,
+            -- "<cmd>Lspsaga goto_type_definition<CR>",
             "Go to type definition"
           )
           bufmap(
@@ -93,7 +95,8 @@ return {
           bufmap(
             "n",
             "<leader>qf",
-            "<cmd>Lspsaga code_action<CR>",
+            vim.lsp.buf.code_action,
+            -- "<cmd>Lspsaga code_action<CR>",
             "Code action"
           )
           bufmap("n", "<leader>o", "<cmd>Lspsaga outline<CR>", "Toggle outline")
@@ -222,7 +225,6 @@ return {
         function(server_name)
           lspconfig[server_name].setup({
             capabilities = capabilities,
-            handlers = handlers,
           })
         end,
 

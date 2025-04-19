@@ -130,31 +130,31 @@ return {
         dapui.close()
       end
 
-      vim.fn.sign_define("DapBreakpoint", {
-        text = "",
-        texthl = "DapBreakpoint",
-        linehl = "DapBreakpointLine",
-      })
-      vim.fn.sign_define("DapBreakpointCondition", {
-        text = "",
-        texthl = "DapBreakpointCondition",
-        linehl = "DapBreakpointConditionLine",
-      })
-      vim.fn.sign_define("DapLogPoint", {
-        text = "",
-        texthl = "DapLogPoint",
-        linehl = "DapLogPointLine",
-      })
-      vim.fn.sign_define("DapStopped", {
-        text = "",
-        texthl = "DapStopped",
-        linehl = "DapStoppedLine",
-      })
-      vim.fn.sign_define("DapBreakpointRejected", {
-        text = "",
-        texthl = "DapBreakpointRejected",
-        linehl = "DapBreakpointRejectedLine",
-      })
+      -- vim.fn.sign_define("DapBreakpoint", {
+      --   text = "",
+      --   texthl = "DapBreakpoint",
+      --   linehl = "DapBreakpointLine",
+      -- })
+      -- vim.fn.sign_define("DapBreakpointCondition", {
+      --   text = "",
+      --   texthl = "DapBreakpointCondition",
+      --   linehl = "DapBreakpointConditionLine",
+      -- })
+      -- vim.fn.sign_define("DapLogPoint", {
+      --   text = "",
+      --   texthl = "DapLogPoint",
+      --   linehl = "DapLogPointLine",
+      -- })
+      -- vim.fn.sign_define("DapStopped", {
+      --   text = "",
+      --   texthl = "DapStopped",
+      --   linehl = "DapStoppedLine",
+      -- })
+      -- vim.fn.sign_define("DapBreakpointRejected", {
+      --   text = "",
+      --   texthl = "DapBreakpointRejected",
+      --   linehl = "DapBreakpointRejectedLine",
+      -- })
 
       vim.keymap.set("n", "<F5>", dap.continue, { desc = "Start debugger" })
       vim.keymap.set(

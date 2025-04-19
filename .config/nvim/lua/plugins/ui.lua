@@ -6,22 +6,6 @@
 
 return {
   ----------------
-  -- Splitsizer
-  --
-  -- Controlled split resizing
-  --
-  -- https://github.com/jeef3/splitsizer.vim
-  ----------------
-  {
-    "jeef3/splitsizer.vim",
-    enabled = false,
-    keys = {
-      { "<leader>a", desc = "Start SplitSizer" },
-      { "<leader>s", desc = "Stop SplitSizer" },
-    },
-  },
-
-  ----------------
   -- Noice
   --
   -- 💥Highly experimental plugin that completely replaces the UI for messages,
@@ -154,7 +138,6 @@ return {
   ------------------
   {
     "levouh/tint.nvim",
-    -- enabled = false, -- Some highlight changes have messed this up
     opts = {
       tint_background_colors = true,
       saturation = 0.5,
@@ -168,40 +151,6 @@ return {
         return buftype == "terminal" or floating
       end,
     },
-    init = function()
-      -- local tint = require("tint")
-      -- tint.disable()
-
-      -- local group = vim.api.nvim_create_augroup("TintHooks", {})
-
-      -- vim.api.nvim_create_autocmd("User", {
-      --   pattern = "TelescopeFindPre",
-      --   group = group,
-      --   callback = function()
-      --     tint.enable()
-      --   end,
-      -- })
-
-      -- vim.api.nvim_create_autocmd("BufLeave", {
-      --   pattern = "*",
-      --   group = group,
-      --   callback = function(event)
-      --     local ft = vim.api.nvim_buf_get_option(event.buf, "filetype")
-      --     if ft == "TelescopePrompt" then
-      --       tint.disable()
-      --     end
-
-      --     -- FIXME: For some reason we exit Telescope in insert mode?
-      --     if ft == "TelescopePrompt" and vim.fn.mode() == "i" then
-      --       vim.api.nvim_feedkeys(
-      --         vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
-      --         "i",
-      --         false
-      --       )
-      --     end
-      --   end,
-      -- })
-    end,
   },
 
   ------------------
