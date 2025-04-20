@@ -1,0 +1,36 @@
+tap "homebrew/bundle"
+tap "isen-ng/dotnet-sdk-versions"
+tap "leoafarias/fvm"
+tap "oven-sh/bun"
+
+# Language Platforms
+brew "platformio"
+brew "esphome"
+
+
+brew "mas"
+brew "transmission-cli"
+
+cask "appcleaner"
+cask "bricklink-studio"
+cask "discord"
+cask "docker"
+cask "dosbox"
+cask "dotnet-sdk"
+cask "dotnet-sdk8"
+cask "dotnet-sdk8-0-400"
+cask "dropbox"
+cask "figma"
+cask "kicad"
+cask "kitty"
+cask "obs"
+cask "steam"
+cask "the-unarchiver"
+cask "vlc"
+cask "wezterm"
+
+mas "Color Picker", id: 1545870783
+mas "DuckDuckGo", id: 663592361
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541

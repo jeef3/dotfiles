@@ -1,0 +1,93 @@
+tap "homebrew/bundle"
+tap "isen-ng/dotnet-sdk-versions"
+tap "leoafarias/fvm"
+tap "oven-sh/bun"
+
+# Base
+brew "coreutils"
+brew "findutils"
+brew "zinit"
+
+# Compilers
+brew "make"
+brew "cmake"
+brew "ccls"
+brew "mono"
+
+# CLI Tools
+brew "wget"
+brew "less"
+brew "ncdu"
+brew "eza"
+brew "ack"
+brew "the_silver_searcher"
+brew "fzf"
+brew "ripgrep"
+brew "fd"
+brew "btop"
+brew "jq"
+brew "zoxide"
+brew "weechat"
+brew "bat"
+brew "pandoc"
+brew "grc"
+
+# Git and tools
+brew "git"
+brew "git-delta"
+brew "git-lfs"
+brew "lazygit"
+brew "gh"
+brew "diff-so-fancy"
+
+# IDE Essentials
+brew "neovim"
+brew "ranger"
+brew "todo-txt"
+
+# Certificate Tools
+brew "mkcert"
+brew "openssl@3"
+brew "gnupg"
+
+# Languages
+brew "oven-sh/bun/bun"
+brew "leoafarias/fvm/fvm"
+brew "go"
+brew "haskell-stack"
+brew "node"
+brew "openjdk"
+brew "python@3.13"
+brew "rustup"
+brew "luarocks"
+
+# Gifify
+brew "ffmpeg"
+brew "gifsicle"
+
+brew "mas"
+brew "transmission-cli"
+
+cask "appcleaner"
+cask "bricklink-studio"
+cask "discord"
+cask "docker"
+cask "dosbox"
+cask "dotnet-sdk"
+cask "dotnet-sdk8"
+cask "dotnet-sdk8-0-400"
+cask "dropbox"
+cask "figma"
+cask "kicad"
+cask "kitty"
+cask "obs"
+cask "steam"
+cask "the-unarchiver"
+cask "vlc"
+cask "wezterm"
+
+mas "Color Picker", id: 1545870783
+mas "DuckDuckGo", id: 663592361
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
