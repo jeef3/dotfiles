@@ -7,7 +7,7 @@ function draw_spinner()
   message=${1:-}
 
   while :; do
-    printf '%s\r' "  $(tput setaf 8)[ $(tput setaf 12)${marks[i++ % ${#marks[@]}]} $(tput setaf 8)] $(tput sgr0)${message}"
+    printf '%s\r' "  $(tput setab 12; tput setaf 15) ${marks[i++ % ${#marks[@]}]}  $(tput sgr0) ${message}"
     sleep "${delay}"
   done
 }

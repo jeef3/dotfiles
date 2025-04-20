@@ -23,40 +23,40 @@ start_spinner "Checking XCode Command Line Tools"
 X=$(xcode-select --install >/dev/null 2>&1)
 stop_spinner
 
-success "Xcode Command Line Tools installed: $? $X"
-
+success "$(tput bold)Xcode Command Line Tools$tput sgr0) installed: $? $X"
 
 # Homebrew
 which -s brew
 if [ ! $? -eq 0 ]; then
-  info "Installing Homebrew"
+  info "Installing $(tput bold)Homebrew$(tput sgr0)"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   eval "$(/opt/homebrew/bin/brew shellenv)"
-  success "Homebrew installed"
+  success "$(tput bold)Homebrew$(tput sgr0) installed"
 else
-  success "Homebrew already installed"
+  success "$(tput bold)Homebrew$(tput sgr0) already installed"
 fi
 
 # Git
 if [ "$(which git)" = "/usr/bin/git" ]; then
-  start_spinner "System Git found, installing Homebrew Git…"
-  brew install git >/dev/null
-  success "Homebrew Git installed"
-else
-  success "Homebrew Git already installed"
-fi
-
-# Node
-# Some of my new setup scripts are written in JavaScript, so install Node now so
-# we can run them.
-which -s node
-if [ ! $? -eq 0 ]; then
-  start_spinner "Installing $(tput bold)NodeJS$(tput sgr0)…"
+  start_spinner "System Git found, installing $(tput bold)Homebrew Git$(tput sgr0)…"
   brew install git >/dev/null
   stop_spinner
-  success "NodeJS installed"
+
+  success "$(tput bold)Homebrew Git$(tput sgr0) installed"
 else
-  success "NodeJS already installed"
+  success "$(tput bold)Homebrew Git$(tput sgr0) already installed"
+fi
+
+# App Store
+which -s mas
+if [ ! $? -eq 0 ]; then
+  start_spinner "Installing $(tput bold)Mac App Store CLI$(tput sgr0)…"
+  brew install mas >/dev/null
+  stop_spinner
+
+  success "$(tput bold)Mac App Store CLI$(tput sgr0) installed"
+else
+  success "$(tput bold)Mac App Store CLI$(tput sgr0) already installed"
 fi
 
 if [ ! -d  "$TARGET_DIR" ]; then
