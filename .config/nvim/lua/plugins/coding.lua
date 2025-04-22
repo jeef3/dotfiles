@@ -6,30 +6,30 @@
 --------------------------------
 
 local kind_icons = {
-  Text = "󰉿",
-  Method = "󰆧",
-  Function = "󰊕",
-  Constructor = "",
-  Field = "󰜢",
-  Variable = "󰀫",
-  Class = "󰠱",
-  Interface = "",
-  Module = "",
-  Property = "󰜢",
-  Unit = "󰑭",
-  Value = "󰎠",
-  Enum = "",
-  Keyword = "󰌋",
-  Snippet = "",
-  Color = "󰏘",
-  File = "󰈙",
-  Reference = "󰈇",
-  Folder = "󰉋",
-  EnumMember = "",
-  Constant = "󰏿",
-  Struct = "󰙅",
-  Event = "",
-  Operator = "󰆕",
+  Text = "󰉿 ",
+  Method = "󰆧 ",
+  Function = "󰊕 ",
+  Constructor = " ",
+  Field = "󰜢 ",
+  Variable = "󰀫 ",
+  Class = "󰠱 ",
+  Interface = " ",
+  Module = " ",
+  Property = "󰜢 ",
+  Unit = "󰑭 ",
+  Value = "󰎠 ",
+  Enum = " ",
+  Keyword = "󰌋 ",
+  Snippet = " ",
+  Color = "󰏘 ",
+  File = "󰈙 ",
+  Reference = "󰈇 ",
+  Folder = "󰉋 ",
+  EnumMember = " ",
+  Constant = "󰏿 ",
+  Struct = "󰙅 ",
+  Event = " ",
+  Operator = "󰆕 ",
   TypeParameter = " ",
 }
 
@@ -114,7 +114,7 @@ return {
         formatting = {
           fields = { "kind", "abbr" },
           format = function(_, item)
-            item.kind = " " .. kind_icons[item.kind] or "" .. " "
+            item.kind = " " .. kind_icons[item.kind] or "" .. "  "
 
             return item
           end,
