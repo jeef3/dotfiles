@@ -23,7 +23,7 @@ start_spinner "Checking XCode Command Line Tools"
 X=$(xcode-select --install >/dev/null 2>&1)
 stop_spinner
 
-success "$(tput bold)Xcode Command Line Tools$tput sgr0) installed: $? $X"
+success "$(tput bold)Xcode Command Line Tools$(tput sgr0) installed: $? $X"
 
 # Homebrew
 which -s brew
@@ -31,46 +31,46 @@ if [ ! $? -eq 0 ]; then
   info "Installing $(tput bold)Homebrew$(tput sgr0)"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   eval "$(/opt/homebrew/bin/brew shellenv)"
-  success "$(tput bold)Homebrew$(tput sgr0) installed"
+  success "$(tput bold)Homebrew $(tput sgr0; tput setaf 7)installed$(tput sgr0)"
 else
-  success "$(tput bold)Homebrew$(tput sgr0) already installed"
+  skip "$(tput bold)Homebrew $(tput sgr0; tput setaf 7)already installed, skipping…$(tput sgr0)"
 fi
 
 # Git
 if [ "$(which git)" = "/usr/bin/git" ]; then
   start_spinner "System Git found, installing $(tput bold)Homebrew Git$(tput sgr0)…"
-  brew install git >/dev/null
+  brew install git >/dev/null 2>&1
   stop_spinner
 
-  success "$(tput bold)Homebrew Git$(tput sgr0) installed"
+  success "$(tput bold)Homebrew Git $(tput sgr0; tput setaf 7)installed$(tput sgr0)"
 else
-  success "$(tput bold)Homebrew Git$(tput sgr0) already installed"
+  skip "$(tput bold)Homebrew Git $(tput sgr0; tput setaf 7)already installed, skipping…$(tput sgr0)"
 fi
 
 # App Store
 which -s mas
 if [ ! $? -eq 0 ]; then
-  start_spinner "Installing $(tput bold)Mac App Store CLI$(tput sgr0)…"
-  brew install mas >/dev/null
+  start_spinner "$(tput sgr0; tput bold)Mac App Store CLI $(tput sgr0; tput setaf 7)Installing…$(tput sgr0)"
+  brew install mas >/dev/null 2>&1
   stop_spinner
 
-  success "$(tput bold)Mac App Store CLI$(tput sgr0) installed"
+  success "$(tput bold)Mac App Store CLI $(tput sgr0; tput setaf 7)installed"
 else
-  success "$(tput bold)Mac App Store CLI$(tput sgr0) already installed"
+  skip "$(tput bold)Mac App Store CLI $(tput sgr0; tput setaf 7)already installed"
 fi
 
 if [ ! -d  "$TARGET_DIR" ]; then
-  # git clone https://github.com/jeef3/dotfiles.git "$TARGET_DIR" >/dev/null 2>&1
-  # (git clone https://github.com/jeef3/dotfiles.git "$TARGET_DIR" >/dev/null 2>&1) & spinner
-  start_spinner "Cloning dotfiles…"
+  start_spinner "Cloning $(tput bold)Dotfiles$(tput sgr0)…"
   git clone https://github.com/jeef3/dotfiles.git "$TARGET_DIR" >/dev/null 2>&1
   stop_spinner
 
-  success "Dotfiles cloned"
+  success "Dotfiles$(tput sgr0) cloned"
 else
+  start_spinner "$(tput bold)Updating Dotfiles$(tput sgr0)…"
   (cd "$TARGET_DIR" && git fetch -a)
+  stop_spinner
 
-  success "Dotfiles updated"
+  success "$(tput bold)Dotfiles$(tput sgr0) updated"
 fi
 
 cd $TARGET_DIR

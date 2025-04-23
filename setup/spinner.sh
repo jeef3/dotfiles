@@ -1,13 +1,13 @@
 function draw_spinner()
 {
-  local -a marks=("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏")
+  local -a marks=("⠋⠁" "⠈⠙" " ⠹" " ⠸" " ⠼" "⠠⠴" "⠦⠄" "⠧ " "⠇ " "⠏ ")
   local i=0
 
   delay=${SPINNER_DELAY:-0.1}
   message=${1:-}
 
   while :; do
-    printf '%s\r' "  $(tput setab 12; tput setaf 15) ${marks[i++ % ${#marks[@]}]}  $(tput sgr0) ${message}"
+    printf '%s\r' "  $(tput setab 4; tput setaf 15) ${marks[i++ % ${#marks[@]}]} $(tput sgr0) ${message}"
     sleep "${delay}"
   done
 }

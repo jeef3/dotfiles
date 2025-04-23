@@ -8,7 +8,6 @@ brew "platformio"
 brew "esphome"
 
 
-brew "mas"
 brew "transmission-cli"
 
 cask "appcleaner"

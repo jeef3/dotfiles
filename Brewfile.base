@@ -65,7 +65,6 @@ brew "luarocks"
 brew "ffmpeg"
 brew "gifsicle"
 
-brew "mas"
 brew "transmission-cli"
 
 cask "appcleaner"
