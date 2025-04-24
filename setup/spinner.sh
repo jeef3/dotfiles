@@ -4,19 +4,21 @@ function draw_spinner()
   local i=0
 
   delay=${SPINNER_DELAY:-0.1}
-  message=${1:-}
+  title=${1:-}
+  description=${2:-}
 
   while :; do
-    printf '%s\r' "  $(tput setab 4; tput setaf 15) ${marks[i++ % ${#marks[@]}]} $(tput sgr0) ${message}"
+    printf '%s\r' "  $(tput setab 4; tput setaf 15) ${marks[i++ % ${#marks[@]}]} $(tput sgr0) $(tput bold)${title}$(tput sgr0) $(tput setaf 7)${description}$(tput sgr0)"
     sleep "${delay}"
   done
 }
 
 function start_spinner()
 {
-  message=${1:-}
+  title=${1:-}
+  description=${2:-}
 
-  draw_spinner "${message}" &
+  draw_spinner "${title}" "${description}" &
 
   SPIN_PID=$!
 
