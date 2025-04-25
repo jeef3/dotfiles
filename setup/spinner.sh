@@ -18,6 +18,10 @@ function start_spinner()
   title=${1:-}
   description=${2:-}
 
+  # Hide the cursor and disable input
+  printf '\e[?25l'
+  stty -echo -icanon
+
   draw_spinner "${title}" "${description}" &
 
   SPIN_PID=$!
@@ -33,5 +37,11 @@ function stop_spinner()
     kill -9 "${SPIN_PID}" > /dev/null 2>&1;
   fi
   SPIN_PID=0
+
+  # Show the cursor and enable input
+  printf '\e[?25h'
+  stty echo icanon
+
   printf '\033[2K'
 }
+
