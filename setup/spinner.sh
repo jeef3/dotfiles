@@ -76,13 +76,13 @@ function start_spinner()
 function update_spinner()
 {
   if read -u 3 line; then
-      title="$line"
-    fi
+    title="$line"
+  fi
 
-    # Check for data in DESCRIPTION_PIPE
-    if read -u 4 line; then
-      description="$line"
-    fi
+  if read -u 4 line; then
+    description="$line"
+  fi
+
   echo "$1" > "$TITLE_PIPE"
   echo "$2" > "$DESCRIPTION_PIPE"
 }
@@ -99,7 +99,6 @@ function stop_spinner()
   stty echo icanon
 
   printf '\033[2K'
-
 
   rm -f $TITLE_PIPE $DESCRIPTION_PIPE
 }

@@ -1,4 +1,3 @@
-tap "homebrew/bundle"
 tap "isen-ng/dotnet-sdk-versions"
 tap "leoafarias/fvm"
 tap "oven-sh/bun"
@@ -15,6 +14,7 @@ brew "ccls"
 brew "mono"
 
 # CLI Tools
+brew "7zip"
 brew "wget"
 brew "less"
 brew "ncdu"
@@ -51,39 +51,33 @@ brew "openssl@3"
 brew "gnupg"
 
 # Languages
-brew "oven-sh/bun/bun"
-brew "leoafarias/fvm/fvm"
+cask "dotnet-sdk"
+cask "dotnet-sdk8"
+cask "dotnet-sdk8-0-400"
 brew "go"
 brew "haskell-stack"
+brew "leoafarias/fvm/fvm"
+brew "luarocks"
 brew "node"
 brew "openjdk"
+brew "oven-sh/bun/bun"
 brew "python@3.13"
 brew "rustup"
-brew "luarocks"
 
 # Gifify
 brew "ffmpeg"
 brew "gifsicle"
 
-brew "transmission-cli"
-
-cask "appcleaner"
-cask "bricklink-studio"
-cask "discord"
-cask "docker"
-cask "dosbox"
-cask "dotnet-sdk"
-cask "dotnet-sdk8"
-cask "dotnet-sdk8-0-400"
-cask "dropbox"
-cask "figma"
-cask "kicad"
-cask "kitty"
-cask "obs"
-cask "steam"
-cask "the-unarchiver"
-cask "vlc"
+# Terminal
 cask "wezterm"
+cask "kitty"
+cask "ghostty"
+
+# Apps
+cask "appcleaner"
+cask "docker"
+cask "figma"
+cask "the-unarchiver"
 
 mas "Color Picker", id: 1545870783
 mas "DuckDuckGo", id: 663592361

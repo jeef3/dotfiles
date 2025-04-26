@@ -2,7 +2,7 @@
 
 source $(dirname "$0")/setup/util.sh
 
-title "Linking dotfiles"
+title "Linking Dotfiles"
 
 symlinks=(
   .aliases
@@ -17,9 +17,6 @@ symlinks=(
   .zshrc
 
   .scripts
-
-  .tmux
-  .tmux.conf
 
   .config/git
   .config/kitty
@@ -37,20 +34,19 @@ CONFIG_DIR=~/.config
 if [ ! -d "$CONFIG_DIR" ]; then
   mkdir -p $CONFIG_DIR
 
-  success "Config dir created"
+  success "Config dir" "created"
 else
-  skip "$(tput setaf 8)Config dir already exists"
+  skip "Config dir" "already exists, skipping…"
 fi
-
 
 for symlink in ${symlinks[@]}
 do
   if [ -e "$HOME/$symlink" ] && ! [ -h "$HOME/$symlink" ]; then
-    warn "$HOME/$symlink exists. Please backup and/or remove this first"
+    warn "$symlink" "exists. Please backup and/or remove this first"
   elif [ -h "$HOME/$symlink" ]; then
-    skip "$(tput setaf 8)$(tput bold)$symlink $(tput sgr0)$(tput setaf 8)linked, skipping"
+    skip "$symlink" "already linked, skipping…"
   else
     ln -s "$(pwd)/$symlink" "$HOME/$symlink"
-    success "$(tput bold)$symlink$(tput sgr0) linked"
+    success "$symlink" "linked"
   fi
 done

@@ -94,4 +94,4 @@ success "Git submodules" "updated"
 title "Next Steps"
 
 quote "Run the following command to continue:"
-quote "$(tput setab 8; tput setaf 7) cd $TARGET_DIR && ./setup.sh "
+quote "$(tput setab 8; tput setaf 0) cd $TARGET_DIR && ./setup.sh "
