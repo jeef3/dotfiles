@@ -81,6 +81,11 @@ return {
     config = true,
   },
 
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+  },
+
   ------------------
   -- Peek
   --

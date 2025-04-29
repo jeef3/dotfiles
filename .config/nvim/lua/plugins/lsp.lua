@@ -54,18 +54,11 @@ return {
             vim.keymap.set(mode, lhs, rhs, { buffer = ev.buf, desc = desc })
           end
 
-          bufmap(
-            "n",
-            "gd",
-            -- "<cmd>Lspsaga goto_definition<CR>",
-            vim.lsp.buf.definition,
-            "Go to definition"
-          )
+          bufmap("n", "gd", vim.lsp.buf.definition, "Go to definition")
           bufmap(
             "n",
             "gi",
             vim.lsp.buf.type_definition,
-            -- "<cmd>Lspsaga goto_type_definition<CR>",
             "Go to type definition"
           )
           bufmap(
@@ -74,20 +67,21 @@ return {
             "<cmd>Lspsaga peek_type_definition<CR>",
             "Peek type definition"
           )
-          bufmap("n", "gr", "<cmd>Lspsaga finder<CR>", "Show references")
+          bufmap("n", "gr", vim.lsp.buf.references, "Show references")
 
-          -- bufmap("n", "K", "<cmd>Lspsaga hover_doc<CR>", "Show docs")
           bufmap("n", "K", vim.lsp.buf.hover)
           bufmap(
             "n",
             "[g",
-            "<cmd>Lspsaga diagnostic_jump_prev<CR>",
+            vim.diagnostic.goto_prev,
+            -- "<cmd>Lspsaga diagnostic_jump_prev<CR>",
             "Next diagnostic"
           )
           bufmap(
             "n",
             "]g",
-            "<cmd>Lspsaga diagnostic_jump_next<CR>",
+            vim.diagnostic.goto_next,
+            -- "<cmd>Lspsaga diagnostic_jump_next<CR>",
             "Previous diagnostic"
           )
 

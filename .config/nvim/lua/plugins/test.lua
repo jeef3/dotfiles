@@ -13,9 +13,11 @@ return {
       "nvim-treesitter/nvim-treesitter",
 
       -- Runners
+      "nvim-neotest/neotest-jest",
       "marilari88/neotest-vitest",
       "thenbe/neotest-playwright",
       "Issafalcon/neotest-dotnet",
+      "fredrikaverpil/neotest-golang",
     },
     keys = {
       {
@@ -42,6 +44,7 @@ return {
     config = function()
       require("neotest").setup({
         adapters = {
+          require("neotest-jest")({}),
           require("neotest-vitest"),
           require("neotest-playwright").adapter({
             options = {
@@ -50,6 +53,7 @@ return {
           }),
 
           require("neotest-dotnet")({}),
+          require("neotest-golang")({}),
         },
         icons = {
           failed = "󰅚",
