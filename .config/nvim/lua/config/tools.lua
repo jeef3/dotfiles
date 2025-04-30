@@ -53,6 +53,7 @@ local syntax = {
   "gitcommit",
   "gitignore",
   "go",
+  "graphql",
   "haskell",
   "html",
   "java",
