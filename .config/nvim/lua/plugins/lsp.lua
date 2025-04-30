@@ -70,38 +70,17 @@ return {
           bufmap("n", "gr", vim.lsp.buf.references, "Show references")
 
           bufmap("n", "K", vim.lsp.buf.hover)
-          bufmap(
-            "n",
-            "[g",
-            vim.diagnostic.goto_prev,
-            -- "<cmd>Lspsaga diagnostic_jump_prev<CR>",
-            "Next diagnostic"
-          )
-          bufmap(
-            "n",
-            "]g",
-            vim.diagnostic.goto_next,
-            -- "<cmd>Lspsaga diagnostic_jump_next<CR>",
-            "Previous diagnostic"
-          )
 
-          bufmap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", "Rename")
-          bufmap(
-            "n",
-            "<leader>qf",
-            vim.lsp.buf.code_action,
-            -- "<cmd>Lspsaga code_action<CR>",
-            "Code action"
-          )
+          bufmap("n", "K", vim.lsp.buf.hover, "Show docs")
+
+          bufmap("n", "[g", vim.diagnostic.goto_prev, "Next diagnostic")
+          bufmap("n", "]g", vim.diagnostic.goto_next, "Previous diagnostic")
+
+          bufmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
+          bufmap("n", "<leader>qf", vim.lsp.buf.code_action, "Code action")
           bufmap("n", "<leader>o", "<cmd>Lspsaga outline<CR>", "Toggle outline")
 
           bufmap("n", "<space>e", vim.diagnostic.open_float, "Show line errors")
-          -- bufmap(
-          --   "n",
-          --   "<space>e",
-          --   "<cmd>Lspsaga show_line_diagnostics<CR>",
-          --   "Show line errors"
-          -- )
         end,
       })
     end,
