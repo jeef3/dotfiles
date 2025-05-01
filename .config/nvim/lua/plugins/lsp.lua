@@ -73,8 +73,18 @@ return {
 
           bufmap("n", "K", vim.lsp.buf.hover, "Show docs")
 
-          bufmap("n", "[g", vim.diagnostic.goto_prev, "Next diagnostic")
-          bufmap("n", "]g", vim.diagnostic.goto_next, "Previous diagnostic")
+          bufmap("n", "[g", function()
+            vim.diagnostic.jump({
+              count = -1,
+              severity = { min = vim.diagnostic.severity.WARN },
+            })
+          end, "Previous diagnostic")
+          bufmap("n", "]g", function()
+            vim.diagnostic.jump({
+              count = 1,
+              severity = { min = vim.diagnostic.severity.WARN },
+            })
+          end, "Next diagnostic")
 
           bufmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
           bufmap("n", "<leader>qf", vim.lsp.buf.code_action, "Code action")
