@@ -1,17 +1,51 @@
 get_icon() {
   case "$1" in
+    babel) echo "" ;;
     bash) echo "" ;;
+    bitbucket) echo "" ;;
     btop) echo "󰄧" ;;
     brew) echo "" ;;
+    cargo) echo "" ;;
+    clang) echo "" ;;
+    cmake) echo "" ;;
+    csharp) echo "" ;;
+    curl) echo "" ;;
+    dotnet) echo "" ;;
+    gcc) echo "" ;;
+    gh) echo "" ;;
+    git) echo "" ;;
+    gpg) echo "" ;;
+    jest) echo "" ;;
+    lazygit) echo "" ;;
+    make) echo "" ;;
+    mocha) echo "" ;;
+    nginx) echo "" ;;
     node) echo "" ;;
+    npm) echo "" ;;
     nvim) echo "" ;;
+    openssl) echo "" ;;
+    pip) echo "" ;;
+    pip3) echo "" ;;
     python) echo "" ;;
     Python) echo "" ;;
     ranger) echo "" ;;
+    react) echo "" ;;
     ruby) echo "" ;;
+    rustc) echo "" ;;
+    rustup) echo "" ;;
+    scp) echo "󰣀" ;;
+    tig) echo "" ;;
+    tmux) echo "" ;;
+    top) echo "" ;;
+    tsc) echo "" ;;
+    unzip) echo "" ;;
     vim) echo "" ;;
     Vim) echo "" ;;
+    weechat) echo "󰭹";;
+    wget) echo "" ;;
+    yarn) echo "" ;;
     yazi) echo "" ;;
+    zip) echo "" ;;
     zsh) echo "" ;;
   esac
 }
