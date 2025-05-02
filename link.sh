@@ -23,6 +23,7 @@ symlinks=(
   .config/nvim
   .config/ranger
   .config/todotxt-tui
+  .config/tmux
   .config/wezterm
 
   .todo.cfg

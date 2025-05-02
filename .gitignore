@@ -1,5 +1,5 @@
-.tmux/resurrect
-.tmux/plugins/tmux-*
+.config/tmux/resurrect
+.config/tmux/plugins
 
 .config/nvim/lua/.luarc.json
 .config/nvim/plugin
