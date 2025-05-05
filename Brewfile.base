@@ -43,7 +43,10 @@ brew "diff-so-fancy"
 # IDE Essentials
 brew "neovim"
 brew "ranger"
+brew "yazi"
 brew "todo-txt"
+brew "tpm"
+brew "tmux"
 
 # Certificate Tools
 brew "mkcert"
