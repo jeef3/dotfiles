@@ -14,7 +14,7 @@ local formatters = {
   "dcm",
   "prettier",
   "prettierd",
-  "rustfmt",
+  -- "rustfmt",
   "stylua",
 }
 local conform = {

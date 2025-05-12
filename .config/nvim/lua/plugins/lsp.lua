@@ -185,9 +185,10 @@ return {
   -- https://github.com/williamboman/mason.nvim
   ----------------
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
+    version = "^1.0.0",
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
+      { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "b0o/schemastore.nvim",
     },

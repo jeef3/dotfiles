@@ -221,4 +221,19 @@ return {
       end, {})
     end,
   },
+
+  ------------------
+  -- Dropbar
+  --
+  -- IDE-like breadcrumbs, out of the box
+  --
+  -- https://github.com/Bekaboo/dropbar.nvim
+  ------------------
+  {
+    "Bekaboo/dropbar.nvim",
+    dependencies = {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+    },
+  },
 }
