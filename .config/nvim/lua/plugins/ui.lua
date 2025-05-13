@@ -130,26 +130,19 @@ return {
   },
 
   ------------------
-  -- Tint
+  -- Vimade
   --
-  -- Dim inactive windows in Neovim using window-local highlight namespaces.
+  -- Vimade let's you dim, fade, tint, animate, and customize colors in your
+  -- windows and buffers for (Neo)vim
   --
-  -- https://github.com/levouh/tint.nvim
+  -- https://github.com/TaDaa/vimade
   ------------------
   {
-    "levouh/tint.nvim",
+    "tadaa/vimade",
+    enabled = true,
     opts = {
-      tint_background_colors = true,
-      saturation = 0.5,
-      window_ignore_function = function(winid)
-        -- We only enable tint when Telescope opens, but still need to tell tint
-        -- to not tint the floating windows
-        local bufid = vim.api.nvim_win_get_buf(winid)
-        local buftype = vim.api.nvim_buf_get_option(bufid, "buftype")
-        local floating = vim.api.nvim_win_get_config(winid).relative ~= ""
-
-        return buftype == "terminal" or floating or buftype == "nofile"
-      end,
+      recipe = { "default", { animate = true } },
+      fadelevel = 0.6,
     },
   },
 
