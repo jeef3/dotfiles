@@ -88,7 +88,7 @@ return {
 
           bufmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
           bufmap("n", "<leader>qf", vim.lsp.buf.code_action, "Code action")
-          bufmap("n", "<leader>o", "<cmd>Lspsaga outline<CR>", "Toggle outline")
+          -- bufmap("n", "<leader>o", "<cmd>Lspsaga outline<CR>", "Toggle outline")
 
           bufmap("n", "<space>e", vim.diagnostic.open_float, "Show line errors")
         end,
@@ -129,6 +129,36 @@ return {
         hover = " ",
       },
       symbol_in_winbar = { enable = true, separator = "  " },
+    },
+  },
+
+  ----------------
+  -- Aerial
+  --
+  -- Neovim plugin for a code outline window
+  --
+  -- https://github.com/stevearc/aerial.nvim
+  ----------------
+  {
+    "stevearc/aerial.nvim",
+    opts = {
+      on_attach = function(buf)
+        vim.keymap.set(
+          "n",
+          "<leader>o",
+          "<cmd>AerialToggle!<CR>",
+          { buffer = buf, desc = "Toggle outline" }
+        )
+      end,
+      attach_mode = "global",
+
+      layout = {
+        min_width = 30,
+        max_width = 50,
+
+        placement = "edge",
+        default_direction = "right",
+      },
     },
   },
 
