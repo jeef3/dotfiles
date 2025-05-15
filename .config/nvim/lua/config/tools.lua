@@ -69,6 +69,7 @@ local syntax = {
   "make",
   "markdown",
   "markdown_inline",
+  "prisma",
   "python",
   "query",
   "regex",

@@ -59,7 +59,7 @@ return {
         user_default_options = {
           names = false,
           mode = "virtualtext",
-          virtualtext = "⏹",
+          virtualtext = "󱓻",
         },
       })
     end,
