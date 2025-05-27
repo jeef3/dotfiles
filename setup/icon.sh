@@ -34,6 +34,7 @@ get_icon() {
     rustc) echo "" ;;
     rustup) echo "" ;;
     scp) echo "󰣀" ;;
+    sudo) echo "" ;;
     tig) echo "" ;;
     tmux) echo "" ;;
     top) echo "" ;;
