@@ -82,6 +82,7 @@ cask "docker"
 cask "figma"
 cask "the-unarchiver"
 
+mas "Xcode", id: 497799835
 mas "Color Picker", id: 1545870783
 mas "DuckDuckGo", id: 663592361
 mas "Keynote", id: 409183694

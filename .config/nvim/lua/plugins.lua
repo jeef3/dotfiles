@@ -10,7 +10,7 @@ return {
   "tpope/vim-vinegar", -- Netrw enhancements
   "tpope/vim-repeat", -- Get more use out of "."
   "tpope/vim-sleuth", -- Set shiftwidth and expandtab based on current file
-  "tpope/vim-commentary", -- gcc to comment line/paragraph
+  -- "tpope/vim-commentary", -- gcc to comment line/paragraph
   "tpope/vim-surround", -- Change surrounds, quotes etc
   "tpope/vim-fugitive", -- Git wrapper, :Gstatus etc
 
@@ -29,6 +29,12 @@ return {
 
       require("leap").opts.highlight_unlabeled_phase_one_targets = true
     end,
+  },
+
+  {
+    "folke/ts-comments.nvim",
+    opts = {},
+    event = "VeryLazy",
   },
 
   {
@@ -158,6 +164,8 @@ return {
   -- Telescope support
   --
   -- https://github.com/olimorris/persisted.nvim
+  --
+  -- TODO: Try https://github.com/folke/persistence.nvim
   ------------------
   {
     "olimorris/persisted.nvim",

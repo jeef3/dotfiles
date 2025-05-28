@@ -192,6 +192,40 @@ return {
   },
 
   ------------------
+  -- TODO Comments
+  --
+  -- ✅ Highlight, list and search todo comments in your projects
+  --
+  -- https://github.com/folke/todo-comments.nvim
+  ------------------
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      highlight = {
+        multiline = false,
+      },
+      keywords = {
+        PERF = { color = "perf" },
+      },
+      colors = { perf = { "Constant" } },
+    },
+  },
+
+  ------------------
+  -- ts-comments
+  --
+  -- Tiny plugin to enhance Neovim's native comments
+  --
+  -- https://github.com/folke/ts-comments.nvim
+  ------------------
+  {
+    "folke/ts-comments.nvim",
+    opts = {},
+    event = "VeryLazy",
+  },
+
+  ------------------
   -- Overseer
   --
   -- A task runner and job management plugin for Neovim
