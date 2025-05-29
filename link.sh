@@ -20,6 +20,7 @@ symlinks=(
 
   .config/git
   .config/kitty
+  .config/ghostty
   .config/nvim
   .config/ranger
   .config/todotxt-tui
