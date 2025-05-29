@@ -89,7 +89,7 @@ CMD="${icon} #[bold]$CURRENT_COMMAND"
 
 if [ $WIDTH -lt 90 ]; then
   if [ $IS_ACTIVE -eq 0 ]; then
-    STAT="┤#[fg=$SILVER_500] $CMD #[default]├"
+    STAT="┤#[fg=$SILVER_600] $CMD #[default]├"
   else
     STAT="┤#[fg=$SILVER_200] $CMD #[default]├"
   fi
@@ -99,14 +99,14 @@ else
   GIT_STAT=$(cd $CURRENT_PATH && git_branch)
 
   if [ $IS_ACTIVE -eq 0 ]; then
-    STAT_L="┤#[fg=$SILVER_500] $CMD #[default,fg=$SILVER_600]  $PRETTY_PATH #[default]├"
+    STAT_L="┤#[fg=$SILVER_600] $CMD #[default,fg=$SILVER_600]  $PRETTY_PATH #[default]├"
   else
     STAT_L="┤#[fg=$SILVER_200] $CMD #[default,fg=$SILVER_500]  $PRETTY_PATH #[default]├"
   fi
 
   if [ -n "$GIT_STAT" ]; then
     if [ $IS_ACTIVE -eq 0 ]; then
-      STAT_R="#[fg=$SILVER_500,bg=default]#[fg=$SILVER_800,bg=$SILVER_500] $BRANCH_ICON $GIT_STAT #[fg=$SILVER_500,bg=default]#[default]"
+      STAT_R="#[fg=$SILVER_800,bg=default]┤#[fg=$SILVER_500,bg=$SILVER_800] $BRANCH_ICON $GIT_STAT #[fg=$SILVER_800,bg=default]├#[default]"
     else
       STAT_R="#[fg=$SILVER_600,bg=default]┤#[fg=$SILVER_200,bg=$SILVER_600] $BRANCH_ICON $GIT_STAT #[fg=$SILVER_600,bg=default]├#[default]"
     fi
