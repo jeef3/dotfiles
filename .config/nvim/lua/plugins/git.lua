@@ -129,10 +129,28 @@ return {
       "LazyGitFilter",
       "LazyGitFilterCurrentFile",
     },
+    enabled = false,
     config = function()
       vim.g.lazygit_floating_window_winblend = 10
       vim.g.lazygit_floating_window_use_plenary = 0
     end,
+  },
+
+  {
+    "folke/snacks.nvim",
+    ---@type snacks.Config
+    opts = {
+      lazygit = {
+        win = {
+          position = "float",
+          width = 90,
+          height = 90,
+        },
+        -- your lazygit configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      },
+    },
   },
 
   ----------------
