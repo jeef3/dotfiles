@@ -17,7 +17,7 @@ return {
   "Xvezda/vim-readonly", -- Lock a bunch of files like node_modules
 
   "fladson/vim-kitty", -- Kitty config syntax
-
+  "MunifTanjim/nui.nvim", -- UI Library
   -- "justinmk/vim-sneak", -- Minimal EasyMotion s
   {
     "ggandor/leap.nvim",
@@ -29,12 +29,6 @@ return {
 
       require("leap").opts.highlight_unlabeled_phase_one_targets = true
     end,
-  },
-
-  {
-    "folke/ts-comments.nvim",
-    opts = {},
-    event = "VeryLazy",
   },
 
   {

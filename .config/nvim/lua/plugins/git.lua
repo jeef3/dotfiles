@@ -143,8 +143,8 @@ return {
       lazygit = {
         win = {
           position = "float",
-          width = 90,
-          height = 90,
+          -- width = 90,
+          -- height = 90,
         },
         -- your lazygit configuration comes here
         -- or leave it empty to use the default settings

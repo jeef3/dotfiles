@@ -70,7 +70,6 @@ return {
           bufmap("n", "gr", vim.lsp.buf.references, "Show references")
 
           bufmap("n", "K", vim.lsp.buf.hover)
-
           bufmap("n", "K", vim.lsp.buf.hover, "Show docs")
 
           bufmap("n", "[g", function()
@@ -242,6 +241,21 @@ return {
           })
         end,
 
+        ["denols"] = function()
+          lspconfig.denols.setup({
+            capabilities = capabilities,
+            root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+          })
+        end,
+
+        ["ts_ls"] = function()
+          lspconfig.ts_ls.setup({
+            capabilities = capabilities,
+            root_dir = lspconfig.util.root_pattern("package.json"),
+            single_file_support = false,
+          })
+        end,
+
         ["lua_ls"] = function()
           lspconfig.lua_ls.setup({
             capabilities = capabilities,
@@ -338,7 +352,47 @@ return {
     },
     config = { fvm = true },
   },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+    enabled = true,
+  },
+  {
+    "OXY2DEV/markview.nvim",
+    lazy = false,
+    enabled = false,
 
+    -- For blink.cmp's completion
+    -- source
+    -- dependencies = {
+    --   "saghen/blink.cmp",
+    -- },
+  },
+  {
+    "jinzhongjia/LspUI.nvim",
+    enabled = false,
+    branch = "main",
+    opts = {
+      hover = {
+        enable = true,
+        key_binding = {
+          quit = "<esc>",
+        },
+        transparency = 10,
+      },
+      signature = {
+        enable = true,
+      },
+    },
+  },
   ----------------
   -- Pubspec Assist
   --
