@@ -39,12 +39,15 @@ return {
     },
     sections = {
       lualine_a = { { "macro-recording", fmt = show_macro_recording }, "mode" },
-      lualine_b = { "filename" },
+      lualine_b = { { "filename", path = 1 } },
       lualine_c = {
         -- require("auto-session.lib").current_session_name,
       },
 
-      lualine_x = {},
+      lualine_x = { {
+        "lsp_status",
+        separator = "•",
+      } },
       lualine_y = {
         {
           "diagnostics",
@@ -73,7 +76,7 @@ return {
     },
     inactive_sections = {
       lualine_a = {},
-      lualine_b = { "filename" },
+      lualine_b = { { "filename", path = 1 } },
       lualine_c = {},
 
       lualine_x = {
@@ -99,7 +102,6 @@ return {
         },
       },
       lualine_y = { "location" },
-      lualine_z = {},
     },
     -- tabline = {
     --   lualine_b = { { "tabs", mode = 1 } },
