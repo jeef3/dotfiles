@@ -4,4 +4,5 @@
 .config/nvim/lua/.luarc.json
 .config/nvim/plugin
 
+.gitconfig.local
 .todo

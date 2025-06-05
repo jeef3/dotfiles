@@ -1,91 +1,91 @@
 [alias]
-	c = commit
-	co = checkout
-	cob = checkout -b
-	p = push
-	s = status -s
-	dt = difftool
-	mt = mergetool
+    c = commit
+    co = checkout
+    cob = checkout -b
+    p = push
+    s = status -s
+    dt = difftool
+    mt = mergetool
 
-	wtf = blame
+    wtf = blame
 
-	# Updating local branch
-	u = merge --ff-only
-	l = fetch -tap
+    # Updating local branch
+    u = merge --ff-only
+    l = fetch -tap
 
-	# Show assume unchanged
-	ignore = update-index --assume-unchanged
-	unignore = update-index --no-assume-unchanged
-	ignored = !git ls-files -v | grep '^[[:lower:]]'
+    # Show assume unchanged
+    ignore = update-index --assume-unchanged
+    unignore = update-index --no-assume-unchanged
+    ignored = !git ls-files -v | grep '^[[:lower:]]'
 
-	# Viewing changes
-	# staged = diff --color --color-words --abbrev --cached
+    # Viewing changes
+    # staged = diff --color --color-words --abbrev --cached
 
-	# Commit Details
-	# fileschanged = log --pretty=format:'%C(bold black)(%h)%C(reset) %C(bold magenta)%d%C(reset) %C(white)%s%C(reset) %C(black)(%ar, %an)%C(reset)' --decorate --numstat
-	# dr = "!f() { git diff "$1"^.."$1"; }; f"
-	# lc = "!f() { git fileschanged "$1"^.."$1"; }; f"
+    # Commit Details
+    # fileschanged = log --pretty=format:'%C(bold black)(%h)%C(reset) %C(bold magenta)%d%C(reset) %C(white)%s%C(reset) %C(black)(%ar, %an)%C(reset)' --decorate --numstat
+    # dr = "!f() { git diff "$1"^.."$1"; }; f"
+    # lc = "!f() { git fileschanged "$1"^.."$1"; }; f"
 
-	# Commit graph
-	tree = log --color --graph --pretty=format:'%C(bold red)%d%C(reset)%n %C(bold black)%h%C(reset) %C(white)%s%C(reset)%n				 %C(bold white)%aN (%aE)%C(reset)%n					%C(yellow)%ar%C(reset)' --decorate=short
-	t = "log --color --graph --pretty=format:'%C(#75715e)%C(bold)%h%C(reset)%C(bold red)%d%C(reset) %C(white)%s%C(reset)' --all"
-	tv = "log --color --graph --pretty=format:'%C(#75715e)%C(bold)%h%C(reset) %G?%C(bold red)%d%C(reset) %C(white)%s%C(reset)' --all"
-	tp = "!git --no-pager log --color --graph --pretty=format:'%C(#75715e)%C(bold)%h%C(reset)%C(bold red)%d%C(reset) %C(white)%s%C(reset)' --all -n 20"
-	ts = "log --color --graph --pretty=format:'%C(#75715e)%C(bold)%h%C(reset)%C(bold red)%d%C(reset) %C(white)%s%C(reset)'"
+    # Commit graph
+    tree = log --color --graph --pretty=format:'%C(bold red)%d%C(reset)%n %C(bold black)%h%C(reset) %C(white)%s%C(reset)%n    			 %C(bold white)%aN (%aE)%C(reset)%n					%C(yellow)%ar%C(reset)' --decorate=short
+    t = "log --color --graph --pretty=format:'%C(#75715e)%C(bold)%h%C(reset)%C(bold red)%d%C(reset) %C(white)%s%C(reset)' --all"
+    tv = "log --color --graph --pretty=format:'%C(#75715e)%C(bold)%h%C(reset) %G?%C(bold red)%d%C(reset) %C(white)%s%C(reset)' --all"
+    tp = "!git --no-pager log --color --graph --pretty=format:'%C(#75715e)%C(bold)%h%C(reset)%C(bold red)%d%C(reset) %C(white)%s%C(reset)' --all -n 20"
+    ts = "log --color --graph --pretty=format:'%C(#75715e)%C(bold)%h%C(reset)%C(bold red)%d%C(reset) %C(white)%s%C(reset)'"
 
-	br = branch --format='%(HEAD) %(color:bold red)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+    br = branch --format='%(HEAD) %(color:bold red)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [color]
-	ui = auto
+    ui = auto
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
 [core]
-	editor = nvim
-	excludesfile = ~/.gitignore-global
-	attributesfile = ~/.gitattributes
-	pager = less -LRc --mouse
-	autocrlf = input
-	ignorecase = false
+    editor = nvim
+    excludesfile = ~/.gitignore-global
+    attributesfile = ~/.gitattributes
+    pager = less -LRc --mouse
+    autocrlf = input
+    ignorecase = false
 [color "diff"]
-	meta = yellow bold
-	commit = green bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+    meta = yellow bold
+    commit = green bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
 [color "diff-highlight"]
-	oldNormal = "red bold"
-	oldHighlight = "red bold 52"
-	newNormal = "green bold"
-	newHighlight = "green bold 22"
+    oldNormal = "red bold"
+    oldHighlight = "red bold 52"
+    newNormal = "green bold"
+    newHighlight = "green bold 22"
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+    current = yellow reverse
+    local = yellow
+    remote = green
 [color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+    added = yellow
+    changed = green
+    untracked = cyan
 
 [mergetool "nvim"]
-	cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
-	prompt = false
-	keepbackup = false
+    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+    prompt = false
+    keepbackup = false
 [merge]
-	log = true
-	defaultToUpstream = true
-	tool = nvim
-	conflictstyle = diff3
-	prompt = false
+    log = true
+    defaultToUpstream = true
+    tool = nvim
+    conflictstyle = diff3
+    prompt = false
 
 [rebase]
-	autostash = true
+    autostash = true
 
 [help]
-	autocorrect = 1
+    autocorrect = 1
 [push]
-	default = tracking
+    default = tracking
 
 [delta "woolly-mammoth"]
     # author: https://github.com/Kr1ss-XD
@@ -120,19 +120,19 @@
     blame-palette = "#101010 #200020 #002800 #000028 #202000 #280000 #002020 #002800 #202020"
 
 [delta]
-  navigate = true
-  line-numbers = true
-  plus-style = bold green
-  minus-style = bold red
-  wrap-max-lines = 0
-  features = woolly-mammoth
+    navigate = true
+    line-numbers = true
+    plus-style = bold green
+    minus-style = bold red
+    wrap-max-lines = 0
+    features = woolly-mammoth
 
 [pager]
-  diff = LESS='LRc --mouse' delta
-  ; show = LESS='LRc --mouse' delta
-  ; stash = LESS='LRc --mouse' delta
-  ; log = LESS='--mouse' delta
-  ; reflog = LESS='LRc --mouse' delta
+    diff = LESS='LRc --mouse' delta
+    ; show = LESS='LRc --mouse' delta
+    ; stash = LESS='LRc --mouse' delta
+    ; log = LESS='--mouse' delta
+    ; reflog = LESS='LRc --mouse' delta
 
 [interactive]
   diffFilter = delta --color-only --wrap-max-lines 0
@@ -143,7 +143,10 @@
 [diff "image"]
   command = ~/git-imgdiff
 [filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+
+[include]
+    path = ~/.gitconfig.local
