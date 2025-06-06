@@ -10,6 +10,7 @@ symlinks=(
   .functions
 
   .gitconfig
+  .gitconfig.local
   .gitignore-global
 
   .zsh
