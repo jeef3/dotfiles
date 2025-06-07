@@ -1,12 +1,18 @@
 font-size = 19
-font-family = "OperatorMonoLig Nerd Font"
-font-style = "Book"
-font-style-italic = "Book Italic"
+font-family = "Operator Mono"
+font-style = "Extra Light"
+font-style-italic = "Extra Light Italic"
 font-style-bold = "Bold"
 font-style-bold-italic = "Bold Italic"
 
-font-thicken = false
-font-thicken-strength = 0
+# font-family = "Annotation Mono"
+# font-style = "Light"
+# font-style-italic = "Light Italic"
+# font-style-bold = "ExtraBlack"
+# font-style-bold-italic = "ExtraBlack Oblique"
+
+font-thicken = true
+font-thicken-strength = 255
 
 background = #1d1d26
 
