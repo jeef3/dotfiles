@@ -221,8 +221,18 @@ return {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "b0o/schemastore.nvim",
     },
-    config = function()
-      require("mason").setup()
+    opts = {
+      ui = {
+        icons = {
+          package_pending = " ",
+          package_installed = " ",
+          package_uninstalled = " ",
+        },
+      },
+    },
+    config = function(_, opts)
+      require("mason").setup(opts)
+
       local lspconfig = require("lspconfig")
       local mason_lspconfig = require("mason-lspconfig")
 
