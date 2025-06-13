@@ -19,6 +19,7 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
+      preset = "helix",
       plugins = {
         presets = {
           operators = false,
@@ -28,10 +29,11 @@ return {
       },
       icons = {
         group = "",
+        separator = "│",
       },
       win = {
         wo = {
-          winblend = 10,
+          winblend = 30,
         },
       },
     },

@@ -1,6 +1,9 @@
 -- LSP -> nvim-lspconfig
 local lsp = {
+  "denols",
+  "jsonls",
   "lua_ls",
+  "ts_ls",
 }
 
 -- DAP -> nvim-dap

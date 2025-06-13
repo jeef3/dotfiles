@@ -37,6 +37,10 @@ return {
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
     end,
   },
+  {
+    "bezhermoso/tree-sitter-ghostty",
+    build = "make nvim_install",
+  },
 
   ----------------
   -- Rainbow delimiters

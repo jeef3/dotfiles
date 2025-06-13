@@ -136,23 +136,6 @@ return {
     end,
   },
 
-  {
-    "folke/snacks.nvim",
-    ---@type snacks.Config
-    opts = {
-      lazygit = {
-        win = {
-          position = "float",
-          -- width = 90,
-          -- height = 90,
-        },
-        -- your lazygit configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      },
-    },
-  },
-
   ----------------
   -- Flog
   --
@@ -164,8 +147,25 @@ return {
     "rbong/vim-flog",
     lazy = true,
     cmd = { "Flog", "Flogsplit", "Floggit" },
+    keys = {
+      {
+        "<leader>gb",
+        "<cmd>Flog<CR>",
+        desc = "Open Git branch view",
+      },
+    },
     dependencies = {
       "tpope/vim-fugitive",
     },
+  },
+
+  {
+    "pwntester/octo.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = true,
   },
 }
