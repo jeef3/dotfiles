@@ -24,6 +24,8 @@ local mason_tools = {
 
 -- Formatter -> Conform
 local prettier = { "prettierd", "prettier", stop_after_first = true }
+
+--- @module "conform"
 local conform = {
   cs = { "csharpier" },
   css = prettier,
@@ -31,8 +33,10 @@ local conform = {
   javascript = prettier,
   javascriptreact = prettier,
   json = prettier,
+  graphql = prettier,
   lua = { "stylua" },
   markdown = prettier,
+  python = prettier,
   rust = { "rustfmt" },
   typescript = prettier,
   typescriptreact = prettier,

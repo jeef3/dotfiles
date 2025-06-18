@@ -143,18 +143,10 @@ return {
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
-    opts = function()
-      return {
-        formatters_by_ft = tools.conform,
-        format_on_save = function(bufnr)
-          -- Disable with a global or buffer-local variable
-          if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-            return
-          end
-          return { timeout_ms = 1000, lsp_format = "fallback" }
-        end,
-      }
-    end,
+    opts = {
+      formatters_by_ft = tools.conform,
+      format_on_save = true,
+    },
   },
 
   ----------------
@@ -187,8 +179,28 @@ return {
   ----------------
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = {
+      "mason-org/mason.nvim",
+    },
     opts = {
       ensure_installed = tools.mason_tools,
+    },
+  },
+
+  ----------------
+  -- Mason LSP Config
+  --
+  -- Extension to mason.nvim that makes it easier to use lspconfig with
+  -- mason.nvim.
+  --
+  -- https://github.com/mason-org/mason-lspconfig.nvim
+  ----------------
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {},
+    dependencies = {
+      "mason-org/mason.nvim",
+      "neovim/nvim-lspconfig",
     },
   },
 
@@ -198,7 +210,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
-    ---@module 'render-markdown'
+    ---@module "render-markdown"
     ---@type render.md.UserConfig
     opts = {},
     enabled = true,
