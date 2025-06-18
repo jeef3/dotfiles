@@ -1,29 +1,32 @@
--- LSP -> nvim-lspconfig
-local lsp = {
-  "denols",
-  "jsonls",
-  "lua_ls",
-  "ts_ls",
+-- Mason
+local mason_tools = {
+  -- LSP
+  "bash-language-server",
+  "deno",
+  "lemminx",
+  "json-lsp", -- jsonls
+  "lua-language-server",
+  "pyright",
+  "typescript-language-server", -- ts_ls
+  "yaml-language-server", -- yamlls
+
+  -- Formatters
+  "csharpier",
+  "prettier",
+  "prettierd",
+  "stylua",
+
+  -- Linters
+  "stylelint",
 }
 
 -- DAP -> nvim-dap
 
--- Linter -> ?
-
 -- Formatter -> Conform
 local prettier = { "prettierd", "prettier", stop_after_first = true }
-local formatters = {
-  "csharpier",
-  "dcm",
-  "prettier",
-  "prettierd",
-  -- "rustfmt",
-  "stylua",
-}
 local conform = {
   cs = { "csharpier" },
   css = prettier,
-  dart = { "dcm" },
   html = prettier,
   javascript = prettier,
   javascriptreact = prettier,
@@ -92,9 +95,8 @@ local syntax = {
 }
 
 return {
-  lsp = lsp,
+  mason_tools = mason_tools,
 
-  formatters = formatters,
   conform = conform,
 
   syntax = syntax,

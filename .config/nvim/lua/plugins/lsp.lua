@@ -98,8 +98,7 @@ return {
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
       })
 
-      -- vim.lsp.config("denols", {})
-      -- vim.lsp.config("ts_ls", {})
+      vim.lsp.enable("sourcekit")
     end,
   },
 
@@ -167,161 +166,38 @@ return {
   -- https://github.com/williamboman/mason.nvim
   ----------------
   {
-    "mason-org/mason-lspconfig.nvim",
-    dependencies = {
-      {
-        "mason-org/mason.nvim",
-        opts = {
-          ui = {
-            icons = {
-              package_pending = " ",
-              package_installed = " ",
-              package_uninstalled = " ",
-            },
-          },
+    "mason-org/mason.nvim",
+    opts = {
+      ui = {
+        icons = {
+          package_pending = " ",
+          package_installed = " ",
+          package_uninstalled = " ",
         },
       },
-      "b0o/schemastore.nvim",
     },
-    opts = {
-      ensure_installed = tools.lsp,
-    },
-    -- config = function(_, opts)
-    --   require("mason").setup(opts)
-
-    -- local lspconfig = require("lspconfig")
-    -- local mason_lspconfig = require("mason-lspconfig")
-    --
-    -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    --
-    -- local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
-    --
-    -- mason_lspconfig.setup_handlers({
-    --   function(server_name)
-    --     lspconfig[server_name].setup({
-    --       capabilities = capabilities,
-    --     })
-    --   end,
-    --
-    --   ["denols"] = function()
-    --     lspconfig.denols.setup({
-    --       capabilities = capabilities,
-    --       root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-    --     })
-    --   end,
-    --
-    --   ["ts_ls"] = function()
-    --     lspconfig.ts_ls.setup({
-    --       capabilities = capabilities,
-    --       root_dir = lspconfig.util.root_pattern("package.json"),
-    --       single_file_support = false,
-    --     })
-    --   end,
-    --
-    --   ["lua_ls"] = function()
-    --     lspconfig.lua_ls.setup({
-    --       capabilities = capabilities,
-    --       settings = {
-    --         Lua = {
-    --           runtime = { version = "LuaJIT" },
-    --           diagnostics = { globals = { "vim" } },
-    --           workspace = {
-    --             library = vim.api.nvim_get_runtime_file("", true),
-    --             checkThirdParty = false,
-    --           },
-    --           telemetry = { enable = false },
-    --           completion = {
-    --             callSnippet = "Replace",
-    --           },
-    --         },
-    --       },
-    --     })
-    --   end,
-    --
-    --   ["jsonls"] = function()
-    --     lspconfig.jsonls.setup({
-    --       capabilities = capabilities,
-    --       settings = {
-    --         json = {
-    --           schemas = require("schemastore").json.schemas(),
-    --           validate = { enable = true },
-    --         },
-    --       },
-    --     })
-    --   end,
-    --
-    --   ["jdtls"] = function()
-    --     lspconfig.jdtls.setup({
-    --       cmd = { mason_bin .. "jdtls" },
-    --       capabilities = capabilities,
-    --     })
-    --   end,
-    --
-    --   ["omnisharp"] = function()
-    --     lspconfig.omnisharp.setup({
-    --       cmd = { mason_bin .. "omnisharp" },
-    --       capabilities = capabilities,
-    --       settings = {
-    --         MsBuild = {
-    --           LoadProjectsOnDemand = true,
-    --         },
-    --       },
-    --     })
-    --   end,
-    --
-    --   ["stylelint_lsp"] = function()
-    --     lspconfig.stylelint_lsp.setup({
-    --       settings = {
-    --         stylelintplus = {
-    --           autoFixOnFormat = true,
-    --           autoFixOnSave = true,
-    --         },
-    --       },
-    --     })
-    --   end,
-    --
-    --   ["yamlls"] = function()
-    --     lspconfig.yamlls.setup({
-    --       settings = {
-    --         yaml = {
-    --           schemaStore = {
-    --             enable = false,
-    --             url = "",
-    --           },
-    --           schemas = require("schemastore").yaml.schemas(),
-    --         },
-    --       },
-    --       capabilities = capabilities,
-    --     })
-    --   end,
-    -- })
-    -- end,
   },
 
   ----------------
-  -- Flutter Tools
+  -- Mason Tools Installer
   --
-  -- Tools to help create flutter apps in neovim using the native lsp.
+  -- Install and upgrade third party tools automatically
   --
-  -- https://github.com/nvim-flutter/flutter-tools.nvim
+  -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
   ----------------
   {
-    "akinsho/flutter-tools.nvim",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    opts = {
+      ensure_installed = tools.mason_tools,
     },
-    config = { fvm = true },
   },
+
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
-    }, -- if you prefer nvim-web-devicons
+    },
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {},
@@ -331,53 +207,5 @@ return {
     "OXY2DEV/markview.nvim",
     lazy = false,
     enabled = false,
-
-    -- For blink.cmp's completion
-    -- source
-    -- dependencies = {
-    --   "saghen/blink.cmp",
-    -- },
-  },
-  {
-    "jinzhongjia/LspUI.nvim",
-    enabled = false,
-    branch = "main",
-    opts = {
-      hover = {
-        enable = true,
-        key_binding = {
-          quit = "<esc>",
-        },
-        transparency = 10,
-      },
-      signature = {
-        enable = true,
-      },
-    },
-  },
-  ----------------
-  -- Pubspec Assist
-  --
-  -- https://github.com/nvim-flutter/pubspec-assist.nvim
-  ----------------
-  {
-    "akinsho/pubspec-assist.nvim",
-    requires = "plenary.nvim",
-    config = true,
-  },
-
-  ----------------
-  -- Fidget
-  --
-  -- 💫 Extensible UI for Neovim notifications and LSP progress messages.
-  --
-  -- https://github.com/j-hui/fidget.nvim
-  ----------------
-  {
-    "j-hui/fidget.nvim",
-    enabled = false,
-    opts = {
-      -- options
-    },
   },
 }
