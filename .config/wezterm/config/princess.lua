@@ -1,8 +1,8 @@
-local c = require("colors")
+local c = require("config.colors")
 
 local ansi = {
   dim = {
-    c.silver_900, -- Black
+    c.silver_800, -- Black
     c.pink_600, -- Dark Red
     c.green_600, -- Dark Green
     c.orange_600, -- Dark Yellow

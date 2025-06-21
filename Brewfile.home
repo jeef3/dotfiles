@@ -1,0 +1,12 @@
+# Language Platforms
+brew "platformio"
+brew "esphome"
+
+# Apps
+cask "bricklink-studio"
+cask "discord"
+cask "dropbox"
+cask "dosbox"
+cask "kicad"
+cask "steam"
+cask "vlc"

@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 local tabline =
   wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 
-local c = require("colors")
+local c = require("config.colors")
 
 local window_process = require("components.process")
 local window_git = require("components.git")
@@ -20,8 +20,9 @@ local tmux = {
     },
   },
   sections = {
-    tabline_a = { "   " },
-    tabline_b = {},
+    tabline_a = { "   " },
+    -- tabline_b = {},
+    tabline_b = { { "workspace", icons_enabled = false } },
     tabline_c = {},
 
     tab_active = {
@@ -39,7 +40,7 @@ local tmux = {
     tabline_y = {},
     tabline_z = {},
   },
-  colors = {
+  theme = {
     a = { fg = c.silver_800, bg = c.orange_500 },
     b = { fg = c.silver_200, bg = c.silver_600 },
     c = { fg = c.silver_200, bg = c.silver_800 },
@@ -59,9 +60,12 @@ function M.setup(config)
         right = "",
       },
       component_separators = "",
-      tab_separators = "",
+      tab_separators = {
+        left = "",
+        right = "",
+      },
 
-      color_overrides = {
+      theme_overrides = {
         normal_mode = {
           a = { fg = c.silver_300, bg = c.silver_800 },
           b = { fg = c.silver_200, bg = c.silver_600 },
@@ -80,7 +84,7 @@ function M.setup(config)
     },
 
     sections = {
-      tabline_a = { "   " },
+      tabline_a = { "    " },
       tabline_b = { { "workspace", icons_enabled = false } },
       -- tabline_b = {},
       tabline_c = {},

@@ -19,8 +19,8 @@ require("lazy").setup("plugins")
 --
 
 vim.opt.diffopt = {
-  "filler",   -- Show filler lines
-  "iwhite",   -- Ignore whitespace changes
+  "filler", -- Show filler lines
+  "iwhite", -- Ignore whitespace changes
   "vertical", -- Start in vertical split mode
   "closeoff", -- Stop the diff when we close
   "algorithm:histogram",
@@ -37,7 +37,7 @@ vim.opt.writebackup = false
 vim.opt.swapfile = false
 
 vim.o.sessionoptions =
-"blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+  "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
@@ -104,12 +104,12 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 
 vim.opt.report = 0 -- Always show number of lines changed
 vim.opt.shortmess:append({
-  a = true,        -- Uses filmnrwx (see :h shortmess)
-  I = true,        -- Hide the intro messages
-  c = true,        -- Don't show completion messages, e.g.: "-- XXX completion (YYY)"
+  a = true, -- Uses filmnrwx (see :h shortmess)
+  I = true, -- Hide the intro messages
+  c = true, -- Don't show completion messages, e.g.: "-- XXX completion (YYY)"
 })
 
-vim.opt.wrap = false      -- Don't wrap by default
+vim.opt.wrap = false -- Don't wrap by default
 
 vim.opt.ignorecase = true -- When searching, ignore case
 
@@ -125,7 +125,7 @@ vim.opt.foldminlines = 0
 vim.opt.foldnestmax = 3
 
 -- Tab and status lines
-vim.opt.showtabline = 2  -- Always display the tab bar.
+vim.opt.showtabline = 2 -- Always display the tab bar.
 vim.opt.showmode = false -- Hide current mode, it is in our status line
 
 -- Split behaviour
@@ -133,15 +133,15 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Gutter
-vim.opt.number = true         -- Display line numbers
+vim.opt.number = true -- Display line numbers
 vim.opt.relativenumber = true -- Set line numbers to realtive numbers
-vim.opt.signcolumn = "yes"    -- Always show the full gutter, even if empty.
+vim.opt.signcolumn = "yes" -- Always show the full gutter, even if empty.
 
 -- Cursor and mouse
-vim.opt.scrolloff = 10     -- Scroll when within 10 rows of top/bottom
+vim.opt.scrolloff = 10 -- Scroll when within 10 rows of top/bottom
 vim.opt.sidescrolloff = 10 -- Scroll when within 10 columns of left/right
-vim.opt.updatetime = 250   -- Shorten the "idle" time for autocmds
-vim.opt.cursorline = true  -- Highlight the current cursor linea.
+vim.opt.updatetime = 250 -- Shorten the "idle" time for autocmds
+vim.opt.cursorline = true -- Highlight the current cursor linea.
 vim.opt.mouse = "a"
 vim.opt.mousescroll = "ver:1,hor:1"
 
@@ -161,12 +161,20 @@ vim.opt.guicursor = {
   "o:hor50-Cursor",
 }
 
+vim.g.markdown_fenced_languages = {
+  "ts=typescript",
+}
+
 -- Mappings
 local wk = require("which-key")
 wk.add({
   { "<leader>g", group = " Git Tools…" },
   { "<leader>gb", "<cmd>Flog<CR>", desc = "Open Git branch view" },
-  { "<leader>gl", "<cmd>LazyGit<CR>", desc = "Open LazyGit" },
+  {
+    "<leader>gl",
+    "<cmd>lua require('snacks').lazygit()<cr>",
+    desc = "Open LazyGit",
+  },
   { "<leader>gs", "<cmd>Telescope git_branches<CR>", desc = "Switch branch" },
 
   { "<leader>h", group = " Git Changes…" },
@@ -190,5 +198,10 @@ wk.add({
   },
   { "<leader>hu", ":Gitsigns unstage_hunk<CR>", desc = "Unstage hunk" },
 
+  {
+    "<leader>o",
+    "<cmd>AerialToggle!<CR>",
+    desc = "Toggle outline",
+  },
   { "<leader>t", group = "󰙨 Test…" },
 })

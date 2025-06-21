@@ -6,30 +6,30 @@
 --------------------------------
 
 local kind_icons = {
-  Text = " ",
-  Method = " ",
-  Function = " ",
-  Constructor = " ",
-  Field = " ",
-  Variable = " ",
-  Class = " ",
-  Interface = " ",
-  Module = " ",
-  Property = " ",
-  Unit = " ",
-  Value = " ",
-  Enum = " ",
-  Keyword = " ",
-  Snippet = " ",
-  Color = " ",
-  File = " ",
-  Reference = " ",
-  Folder = " ",
-  EnumMember = " ",
-  Constant = " ",
-  Struct = " ",
-  Event = " ",
-  Operator = " ",
+  Text = "󰉿 ",
+  Method = "󰆧 ",
+  Function = "󰊕 ",
+  Constructor = " ",
+  Field = "󰜢 ",
+  Variable = "󰀫 ",
+  Class = "󰠱 ",
+  Interface = " ",
+  Module = " ",
+  Property = "󰜢 ",
+  Unit = "󰑭 ",
+  Value = "󰎠 ",
+  Enum = " ",
+  Keyword = "󰌋 ",
+  Snippet = " ",
+  Color = "󰏘 ",
+  File = "󰈙 ",
+  Reference = "󰈇 ",
+  Folder = "󰉋 ",
+  EnumMember = " ",
+  Constant = "󰏿 ",
+  Struct = "󰙅 ",
+  Event = " ",
+  Operator = "󰆕 ",
   TypeParameter = " ",
 }
 
@@ -51,7 +51,6 @@ return {
 
       "onsails/lspkind.nvim",
 
-      -- "ray-x/lsp_signature.nvim",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "windwp/nvim-autopairs",
     },
@@ -59,6 +58,10 @@ return {
     opts = function()
       local cmp = require("cmp")
 
+      cmp.event:on(
+        "confirm_done",
+        require("nvim-autopairs.completion.cmp").on_confirm_done()
+      )
       return {
         -- Don't show completion while editing comments
         enabled = function()
@@ -99,15 +102,19 @@ return {
         }),
         window = {
           completion = {
-            col_offset = -2,
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+            col_offset = -3,
             side_padding = 0,
           },
-          documentation = cmp.config.window.bordered(),
+          documentation = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+            border = { "▏", "", " ", " ", " ", "", "▏", "▏" },
+          },
         },
         formatting = {
           fields = { "kind", "abbr" },
           format = function(_, item)
-            item.kind = " " .. kind_icons[item.kind] or "" .. " "
+            item.kind = " " .. kind_icons[item.kind] or "" .. "  "
 
             return item
           end,
@@ -131,7 +138,6 @@ return {
     event = "InsertEnter",
     opts = {
       check_ts = true,
-      enable_check_bracket_line = true,
     },
   },
 
@@ -186,6 +192,40 @@ return {
   },
 
   ------------------
+  -- TODO Comments
+  --
+  -- ✅ Highlight, list and search todo comments in your projects
+  --
+  -- https://github.com/folke/todo-comments.nvim
+  ------------------
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      highlight = {
+        multiline = false,
+      },
+      keywords = {
+        PERF = { color = "perf" },
+      },
+      colors = { perf = { "Constant" } },
+    },
+  },
+
+  ------------------
+  -- ts-comments
+  --
+  -- Tiny plugin to enhance Neovim's native comments
+  --
+  -- https://github.com/folke/ts-comments.nvim
+  ------------------
+  {
+    "folke/ts-comments.nvim",
+    opts = {},
+    event = "VeryLazy",
+  },
+
+  ------------------
   -- Overseer
   --
   -- A task runner and job management plugin for Neovim
@@ -214,5 +254,53 @@ return {
         end
       end, {})
     end,
+  },
+
+  ------------------
+  -- Dropbar
+  --
+  -- IDE-like breadcrumbs, out of the box
+  --
+  -- https://github.com/Bekaboo/dropbar.nvim
+  ------------------
+  {
+    "Bekaboo/dropbar.nvim",
+    dependencies = {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+    },
+  },
+
+  ------------------
+  -- Convert
+  --
+  -- A Neovim plugin to help with css unit, and number conversions.
+  --
+  -- https://github.com/cjodo/convert.nvim
+  ------------------
+  {
+    "cjodo/convert.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    keys = {
+      {
+        "<leader>cn",
+        "<cmd>ConvertFindNext<CR>",
+        desc = "Find next convertable unit",
+      },
+      {
+        "<leader>cc",
+        "<cmd>ConvertFindCurrent<CR>",
+        desc = "Find convertable unit in current line",
+      },
+      -- Add "v" to enable converting a selected region
+      {
+        "<leader>ca",
+        "<cmd>ConvertAll<CR>",
+        mode = { "n", "v" },
+        desc = "Convert all of a specified unit",
+      },
+    },
   },
 }

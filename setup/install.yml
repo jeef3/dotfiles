@@ -127,7 +127,6 @@ templates:
     type: cask
     items:
       - wezterm
-      - kitty
 
   - name: Dotnet SDKs
     default: false
@@ -145,11 +144,17 @@ templates:
       - name: LEGO Studio
         value: bricklink-studio
         description: Build, render, and create LEGO instructions
+      - name: Discord
+        description: Voice and text chat software
+        value: discord
       - dropbox
       - docker
       - dosbox
       - figma
       - kicad
+      - name: Steam
+        description: Video game digital distribution service
+        value: steam
       - the-unarchiver
       - virtualbox
 

@@ -1,207 +1,94 @@
 #!/usr/bin/env bash
 
-set -e
+# set -e
 
 source $(dirname "$0")/util.sh
 source $(dirname "$0")/spinner.sh
 
-SERVER=$1
+# SERVER=$1
+brewfile=$1
 
 title "Brew Setup"
 
-# Ask for the administrator password upfront
-# sudo -v
-
-# Make sure we’re using the latest Homebrew
-start_spinner "Updating and upgrading brew…"
-brew update >/dev/null 2>&1
-brew upgrade >/dev/null 2>&1
-stop_spinner
-success "Brew updated and upgraded"
-
 # Taps
-start_spinner "Tapping…"
-# brew tap eddieantonio/eddieantonio
-# brew tap osx-cross/avr
-# brew tap sudar/arduino-mk
-# brew tap mongodb/brew
-brew tap oven-sh/bun
-brew tap isen-ng/dotnet-sdk-versions
-brew tap leoafarias/fvm
+start_spinner "Tapping" "started…"
+
+tap_cmds=()
+while IFS= read -r line; do
+  if [[ $line == tap* ]]; then
+    tap_cmds+=("$line")
+  fi
+done < <(cat "$brewfile")
+
+for tap_cmd in "${tap_cmds[@]}";
+do
+  tap=$(echo "$tap_cmd" | sed 's/tap "//; s/"//')
+  update_spinner "Tapping" "${tap}…"
+  command="brew $tap_cmd"
+  output=$(eval $command 2>&1)
+done
 stop_spinner
-success "Tapped"
+success "Tapped" "taps"
 
-FORMULAS=(
-  # Updated/nicer/faster tools
-  coreutils # GNU core utilities (those that come with OS X are outdated)
-  findutils # GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
-
-  # Compilers
-  make
-  cmake
-  ccls
-  mono
-
-  # CLI Tools
-  wget # Wget with iri
-  less # Newer less
-  ncdu # Nicer du
-  ack
-  the_silver_searcher
-  fzf
-  ripgrep # Faster grepping
-  fd # Decent file searcher
-  btop # Really nice activity monitor
-  jq # JSON parser/viewer
-  zoxide # aka: z
-
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-
-  # Git
-  git
-  git-lfs
-  lazygit
-  git-delta
-  diff-so-fancy
-  gh # GitHub CLI
-
-  # Mah IDE
-  tmux
-  neovim
-  ranger
-  todo-txt
-
-  # Certificate tools
-  openssl
-  mkcert
-  gnupg
-
-  # Languages
-  bun
-  fvm
-  go
-  haskell-stack
-  node
-  openjdk
-  python@3.13
-  rustup
-
-  # Other language frameworks, libs and bits
-  platformio
-  esphome
-
-  # Dev helpers
-  # watchman
-  # fswatch
-  # awscli
-  # azure-cli
-
-  # Gifiy
-  ffmpeg
-  gifsicle
-  # imagemagick
-)
-
-CASKS=(
-  kitty
-  wezterm
-
-  # Gifify
-  # xquartz
-
-  # Dev Tools
-  # react-native-debugger
-  # imageoptim
-
-  dotnet-sdk
-  dotnet-sdk8
-  dotnet-sdk8
-
-  # Other
-  #dropbox
-  appcleaner
-
-  docker
-
-  # sim-daltonism # Color blindness simulator
-
-  # slack
-
-  figma
-
-  bricklink-studio
-  kicad
-
-  dosbox
-)
-
-CASKS_SERVER=(
-  kitty
-
-  nginx
-  sabnzbd
-  sonarr
-  radarr
-  transmission
-  plex-media-server
-
-  virtualbox
-)
-
-# TODO: To Save
-# Fonts
-
-# Not available or still figuring out:
-# Xcode
-
-INSTALLED=$(brew list)
+installed_formulas=$(brew list)
 
 formula_exists() {
-  if $(echo $INSTALLED | grep -w "$1" > /dev/null); then
+  if $(echo $installed_formulas | grep -w "$1" > /dev/null); then
     return 0
   fi
 
   return 1
 }
 
-title "Install brews"
+title "Install Formulas"
 
-for index in ${!FORMULAS[*]}
+formula_cmds=()
+while IFS= read -r line; do
+  if [[ $line == brew* ]]; then
+    formula_cmds+=("$line")
+  fi
+done < <(cat "$brewfile")
+
+for formula_cmd in "${formula_cmds[@]}";
 do
-  if ! formula_exists ${FORMULAS[$index]}; then
-    start_spinner "Installing $(tput bold)${FORMULAS[$index]}$(tput sgr0)…"
-    brew install ${FORMULAS[$index]} >/dev/null
+  formula=$(echo "$formula_cmd" | sed 's/brew "//; s/"//')
+  if ! formula_exists $formula; then
+    start_spinner "$formula" "Installing…"
+    command="brew $formula_cmd"
+    output=$(eval $command 2>&1)
     stop_spinner
-    success "$(tput bold)${FORMULAS[$index]}$(tput sgr0) installed"
+    success "$formula" "installed"
   else
-    skip "$(tput bold)${FORMULAS[$index]}$(tput sgr0)$(tput setaf 8) already installed, skipping"
+    skip "$formula" "already installed, skipping"
   fi
 done
 
-if [ "$SERVER" == "server" ];
-then
-  CASK_LIST=("${CASKS_SERVER[@]}")
-else
-  CASK_LIST=("${CASKS[@]}")
-fi
+title "Install Casks"
 
-title "Install brew casks"
+cask_cmds=()
+while IFS= read -r line; do
+  if [[ $line == cask* ]]; then
+    cask_cmds+=("$line")
+  fi
+done < <(cat "$brewfile")
 
-for index in ${!CASK_LIST[*]}
+for cask_cmd in "${cask_cmds[@]}";
 do
-  if ! formula_exists ${CASK_LIST[$index]}; then
-    start_spinner "Installing $(tput bold)${CASK_LIST[$index]}$(tput sgr0)…"
-    brew install --cask ${CASK_LIST[$index]} >/dev/null 2>&1
-    success "$(tput bold)${CASK_LIST[$index]}$(tput sgr0) installed"
+  cask=$(echo "$cask_cmd" | sed 's/cask "//; s/"//')
+  if ! formula_exists $cask; then
+    start_spinner "$cask" "Installing…"
+    command="brew $cask_cmd"
+    output=$(eval $command 2>&1)
+    stop_spinner
+    success "$cask" "installed"
   else
-    skip "$(tput bold)${CASK_LIST[$index]}$(tput sgr0)$(tput setaf 8) already installed, skipping"
+    skip "$cask" "already installed, skipping"
   fi
 done
 
 title "Clean up"
 
-start_spinner "Brews installed, cleaning up…"
+start_spinner "Formulas and casks" "installed, cleaning up…"
 brew cleanup >/dev/null 2>&1
 stop_spinner
 success "Brew cleaned up"

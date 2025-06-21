@@ -6,22 +6,6 @@
 
 return {
   ----------------
-  -- Splitsizer
-  --
-  -- Controlled split resizing
-  --
-  -- https://github.com/jeef3/splitsizer.vim
-  ----------------
-  {
-    "jeef3/splitsizer.vim",
-    enabled = false,
-    keys = {
-      { "<leader>a", desc = "Start SplitSizer" },
-      { "<leader>s", desc = "Stop SplitSizer" },
-    },
-  },
-
-  ----------------
   -- Noice
   --
   -- 💥Highly experimental plugin that completely replaces the UI for messages,
@@ -146,62 +130,20 @@ return {
   },
 
   ------------------
-  -- Tint
+  -- Vimade
   --
-  -- Dim inactive windows in Neovim using window-local highlight namespaces.
+  -- Vimade let's you dim, fade, tint, animate, and customize colors in your
+  -- windows and buffers for (Neo)vim
   --
-  -- https://github.com/levouh/tint.nvim
+  -- https://github.com/TaDaa/vimade
   ------------------
   {
-    "levouh/tint.nvim",
-    -- enabled = false, -- Some highlight changes have messed this up
+    "tadaa/vimade",
+    enabled = true,
     opts = {
-      tint_background_colors = true,
-      saturation = 0.5,
-      window_ignore_function = function(winid)
-        -- We only enable tint when Telescope opens, but still need to tell tint
-        -- to not tint the floating windows
-        local bufid = vim.api.nvim_win_get_buf(winid)
-        local buftype = vim.api.nvim_buf_get_option(bufid, "buftype")
-        local floating = vim.api.nvim_win_get_config(winid).relative ~= ""
-
-        return buftype == "terminal" or floating
-      end,
+      recipe = { "default", { animate = true } },
+      fadelevel = 0.6,
     },
-    init = function()
-      -- local tint = require("tint")
-      -- tint.disable()
-
-      -- local group = vim.api.nvim_create_augroup("TintHooks", {})
-
-      -- vim.api.nvim_create_autocmd("User", {
-      --   pattern = "TelescopeFindPre",
-      --   group = group,
-      --   callback = function()
-      --     tint.enable()
-      --   end,
-      -- })
-
-      -- vim.api.nvim_create_autocmd("BufLeave", {
-      --   pattern = "*",
-      --   group = group,
-      --   callback = function(event)
-      --     local ft = vim.api.nvim_buf_get_option(event.buf, "filetype")
-      --     if ft == "TelescopePrompt" then
-      --       tint.disable()
-      --     end
-
-      --     -- FIXME: For some reason we exit Telescope in insert mode?
-      --     if ft == "TelescopePrompt" and vim.fn.mode() == "i" then
-      --       vim.api.nvim_feedkeys(
-      --         vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
-      --         "i",
-      --         false
-      --       )
-      --     end
-      --   end,
-      -- })
-    end,
   },
 
   ------------------
@@ -224,7 +166,7 @@ return {
       },
       ignore = {
         buftype = { "nofile" },
-        filetype = { "netrw", "neotest-summary" },
+        filetype = { "neotest-summary" },
       },
     },
     init = function()

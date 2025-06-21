@@ -1,4 +1,4 @@
-diffview_toggle = function()
+local diffview_toggle = function()
   local lib = require("diffview.lib")
   local view = lib.get_current_view()
   if view then
@@ -25,8 +25,8 @@ return {
         add = { text = "▎" },
         change = { text = "▎" },
 
-        delete = { text = "_" },
-        topdelete = { text = "‾" },
+        delete = { text = "🭼" },
+        topdelete = { text = "🭽" },
 
         changedelete = { text = "~" },
         untracked = { text = "┆" },
@@ -129,6 +129,7 @@ return {
       "LazyGitFilter",
       "LazyGitFilterCurrentFile",
     },
+    enabled = false,
     config = function()
       vim.g.lazygit_floating_window_winblend = 10
       vim.g.lazygit_floating_window_use_plenary = 0
@@ -146,8 +147,25 @@ return {
     "rbong/vim-flog",
     lazy = true,
     cmd = { "Flog", "Flogsplit", "Floggit" },
+    keys = {
+      {
+        "<leader>gb",
+        "<cmd>Flog<CR>",
+        desc = "Open Git branch view",
+      },
+    },
     dependencies = {
       "tpope/vim-fugitive",
     },
+  },
+
+  {
+    "pwntester/octo.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = true,
   },
 }

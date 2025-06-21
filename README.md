@@ -6,15 +6,15 @@ First, make sure full Xcode is installed.
 
 Run the initial Bootstrap:
 
-```
+```sh
 curl -fsSL https://raw.github.com/jeef3/dotfiles/master/bootstrap.sh | bash
 ```
 
-This will install Homebrew then Git and then clone this rpository to `~/projects/dotfiles`
+This will install Homebrew then Git and then clone this repository to `~/projects/dotfiles`
 
 ## Next Steps
 
-```
+```sh
 ./setup.sh
 ```
 
@@ -24,7 +24,7 @@ Links the dotfiles and installs all my base Brews and settings.
 
 Add additional custom/private info to `~/.extra`, e.g.: Git name/email:
 
-```
+```sh
 GIT_AUTHOR_NAME="Mr Smith"
 GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
 git config --global user.name "$GIT_AUTHOR_NAME"

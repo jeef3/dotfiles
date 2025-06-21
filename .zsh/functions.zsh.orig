@@ -37,6 +37,7 @@ function pngToBase64() {
 
   echo $prefix$encoded$suffix
 }
+<<<<<<< HEAD
 
 function isSquashed() {
   branch="$1"
@@ -65,6 +66,8 @@ function listMerged() {
     fi
   done
 }
+||||||| parent of 497a69a (Few updates)
+=======
 
 PROG='@a = split " ";
 print join " ", @a[0..($#a-1)];
@@ -86,3 +89,4 @@ function _up-dir {
 }
 zle -N _up-dir
 bindkey "^h" _up-dir
+>>>>>>> 497a69a (Few updates)

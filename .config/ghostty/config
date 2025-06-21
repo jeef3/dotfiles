@@ -1,0 +1,52 @@
+font-size = 19
+font-family = "Operator Mono"
+font-style = "Extra Light"
+font-style-italic = "Extra Light Italic"
+font-style-bold = "Bold"
+font-style-bold-italic = "Bold Italic"
+
+# font-family = "Annotation Mono"
+# font-style = "Light"
+# font-style-italic = "Light Italic"
+# font-style-bold = "ExtraBlack"
+# font-style-bold-italic = "ExtraBlack Oblique"
+
+font-thicken = true
+font-thicken-strength = 255
+
+background = #1d1d26
+
+palette = 0=#4b4b50
+palette = 1=#ff3399
+palette = 2=#00d364
+palette = 3=#ffcc66
+palette = 4=#00bfff
+palette = 5=#cc66ff
+palette = 6=#00ced1
+palette = 7=#f8f8ff
+
+palette = 8=#686889
+palette = 9=#ff3399
+palette = 10=#00d364
+palette = 11=#ffcc66
+palette = 12=#00bfff
+palette = 13=#cc66ff
+palette = 14=#00ced1
+palette = 15=#ff0000
+
+window-decoration = true
+window-padding-balance = true
+macos-titlebar-style = transparent
+macos-titlebar-proxy-icon = hidden
+macos-window-shadow = false
+
+title = " "
+
+command = ~/.scripts/start-tmux.sh
+
+# custom-shader = /Users/jeff.knaggs/projects/crt-shader-with-chromatic-aberration-glow-scanlines-dot-matrix/crt-shader-with-chromatic-aberration-glow-scanlines-dot-matrix.glsl
+
+# custom-shader = /Users/jeff.knaggs/projects/Fearless-Geek-Shaders-for-Ghostty/computer-glitchy-4.glsl
+
+# custom-shader = /Users/jeff.knaggs/projects/ghostty_shaders/glow.glsl
+# custom-shader = /Users/jeff.knaggs/projects/gshaders/tft.glsl

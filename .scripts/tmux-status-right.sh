@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 pm=$(pmset -g batt)
 percentage=$(echo "$pm" | grep -o "[0-9]\{1,3\}%" | sed 's/.$//')

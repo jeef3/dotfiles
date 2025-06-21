@@ -1,3 +1,5 @@
+local tools = require("config.tools")
+
 return {
   ----------------
   -- Treesitter
@@ -19,57 +21,7 @@ return {
       endwise = {
         enable = true,
       },
-      ensure_installed = {
-        "arduino",
-        "bash",
-        "c",
-        "c_sharp",
-        "cmake",
-        "cpp",
-        "css",
-        "csv",
-        "dart",
-        "diff",
-        "dockerfile",
-        "embedded_template",
-        "git_config",
-        "git_rebase",
-        "gitattributes",
-        "gitcommit",
-        "gitignore",
-        "go",
-        "haskell",
-        "html",
-        "java",
-        "javascript",
-        "jq",
-        "jsdoc",
-        "json",
-        "json5",
-        "jsonc",
-        "lua",
-        "luadoc",
-        "luap",
-        "make",
-        "markdown",
-        "markdown_inline",
-        "python",
-        "query",
-        "regex",
-        "ruby",
-        "rust",
-        "scss",
-        "swift",
-        "tmux",
-        "todotxt",
-        "toml",
-        "tsx",
-        "typescript",
-        "vim",
-        "vimdoc",
-        "xml",
-        "yaml",
-      },
+      ensure_installed = tools.treesitter_syntaxes,
     },
     init = function(plugin)
       -- Apparently for performance
@@ -84,6 +36,10 @@ return {
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
     end,
+  },
+  {
+    "bezhermoso/tree-sitter-ghostty",
+    build = "make nvim_install",
   },
 
   ----------------
