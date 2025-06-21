@@ -51,6 +51,8 @@ return {
 
   -- DAP -> nvim-dap
 
+  --- @module "conform"
+  --- @type table<string, conform.FiletypeFormatter>
   conform_filetypes = {
     cs = { "csharpier" },
     css = prettier_def,
