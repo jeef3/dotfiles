@@ -6,6 +6,7 @@ return {
   lsp_configs = {
     "bashls",
     "denols",
+    "ghostty",
     "jsonls",
     "lemminx",
     "lua_ls",
@@ -23,6 +24,7 @@ return {
     -- LSP
     "bash-language-server", -- bashls
     "deno", -- denols
+    "ghostty-ls", -- ghostty
     "lemminx", -- lemminx
     "json-lsp", -- jsonls
     "lua-language-server", -- lua_ls
