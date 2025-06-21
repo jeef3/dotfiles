@@ -66,6 +66,11 @@ return {
     yaml = prettier_def,
   },
 
+  lint_filetypes = {
+    javascript = { "eslint_d" },
+    typescript = { "eslint_d" },
+  },
+
   treesitter_syntaxes = {
     "arduino",
     "bash",

@@ -1,5 +1,3 @@
 return {
-  settings = {
-    single_file_support = false,
-  },
+  workspace_required = true,
 }
