@@ -161,6 +161,10 @@ vim.opt.guicursor = {
   "o:hor50-Cursor",
 }
 
+vim.g.markdown_fenced_languages = {
+  "ts=typescript",
+}
+
 -- Mappings
 local wk = require("which-key")
 wk.add({
@@ -194,5 +198,10 @@ wk.add({
   },
   { "<leader>hu", ":Gitsigns unstage_hunk<CR>", desc = "Unstage hunk" },
 
+  {
+    "<leader>o",
+    "<cmd>AerialToggle!<CR>",
+    desc = "Toggle outline",
+  },
   { "<leader>t", group = "󰙨 Test…" },
 })

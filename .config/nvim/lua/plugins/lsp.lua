@@ -9,6 +9,48 @@ local tools = require("config.tools")
 
 return {
   ----------------
+  -- Mason
+  --
+  -- Portable package manager for Neovim that runs everywhere Neovim runs.
+  -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
+  --
+  -- https://github.com/williamboman/mason.nvim
+  ----------------
+  {
+    "mason-org/mason.nvim",
+    opts = {
+      ui = {
+        icons = {
+          package_pending = " ",
+          package_installed = " ",
+          package_uninstalled = " ",
+        },
+      },
+      registries = {
+        "github:mason-org/mason-registry",
+        "github:mkindberg/ghostty-ls",
+      },
+    },
+  },
+
+  ----------------
+  -- Mason Tools Installer
+  --
+  -- Install and upgrade third party tools automatically
+  --
+  -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
+  ----------------
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = {
+      "mason-org/mason.nvim",
+    },
+    opts = {
+      ensure_installed = tools.mason_tools,
+    },
+  },
+
+  ----------------
   -- LSP Config
   --
   -- https://github.com/neovim/nvim-lspconfig
@@ -19,15 +61,16 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
 
-      "nvimdev/lspsaga.nvim",
-
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-nvim-lsp",
       "b0o/schemastore.nvim",
       {
-        "folke/neodev.nvim",
+        "folke/lazydev.nvim",
+        ft = "lua",
         opts = {
-          library = { plugins = { "neotest" }, types = true },
+          library = {
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          },
         },
       },
     },
@@ -92,73 +135,13 @@ return {
           bufmap("n", "<space>e", vim.diagnostic.open_float, "Show line errors")
         end,
       })
+
+      vim.lsp.config("*", {
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+      })
+
+      vim.lsp.enable(tools.lsp_configs)
     end,
-  },
-
-  ----------------
-  -- LSP Saga
-  --
-  -- Improve neovim lsp experience
-  --
-  -- https://github.com/nvimdev/lspsaga.nvim
-  ----------------
-  {
-    "nvimdev/lspsaga.nvim",
-    enabled = false,
-    opts = {
-      code_action = {},
-      lightbulb = { enable = false },
-      finder = {
-        max_height = 0.8,
-        force_max_height = true,
-        layout = "float",
-      },
-      outline = {
-        win_width = 5,
-        auto_preview = false,
-      },
-      ui = {
-        title = true,
-        border = "rounded",
-        winblend = 5,
-        expand = "",
-        collapse = "",
-        preview = " ",
-        code_action = "💡",
-        hover = " ",
-      },
-      symbol_in_winbar = { enable = true, separator = "  " },
-    },
-  },
-
-  ----------------
-  -- Aerial
-  --
-  -- Neovim plugin for a code outline window
-  --
-  -- https://github.com/stevearc/aerial.nvim
-  ----------------
-  {
-    "stevearc/aerial.nvim",
-    opts = {
-      on_attach = function(buf)
-        vim.keymap.set(
-          "n",
-          "<leader>o",
-          "<cmd>AerialToggle!<CR>",
-          { buffer = buf, desc = "Toggle outline" }
-        )
-      end,
-      attach_mode = "global",
-
-      layout = {
-        min_width = 30,
-        max_width = 50,
-
-        placement = "edge",
-        default_direction = "right",
-      },
-    },
   },
 
   ----------------
@@ -172,260 +155,50 @@ return {
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
-    opts = function()
-      return {
-        formatters_by_ft = tools.conform,
-        format_on_save = function(bufnr)
-          -- Disable with a global or buffer-local variable
-          if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-            return
-          end
-          return { timeout_ms = 1000, lsp_format = "fallback" }
-        end,
-      }
-    end,
-    init = function()
-      vim.api.nvim_create_user_command("ConformDisable", function(args)
-        if args.bang then
-          -- FormatDisable! will disable formatting just for this buffer
-          vim.b.disable_autoformat = true
-        else
-          vim.g.disable_autoformat = true
-        end
-      end, {
-        desc = "Disable autoformat-on-save",
-        bang = true,
-      })
-      vim.api.nvim_create_user_command("ConformEnable", function()
-        vim.b.disable_autoformat = false
-        vim.g.disable_autoformat = false
-      end, {
-        desc = "Re-enable autoformat-on-save",
-      })
-    end,
-  },
 
-  ----------------
-  -- Mason
-  --
-  -- Portable package manager for Neovim that runs everywhere Neovim runs.
-  -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
-  --
-  -- https://github.com/williamboman/mason.nvim
-  ----------------
-  {
-    "mason-org/mason.nvim",
-    version = "^1.0.0",
-    dependencies = {
-      { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-      "b0o/schemastore.nvim",
-    },
+    --- @module "conform"
+    --- @type conform.setupOpts
     opts = {
-      ui = {
-        icons = {
-          package_pending = " ",
-          package_installed = " ",
-          package_uninstalled = " ",
-        },
-      },
+      formatters_by_ft = tools.conform_filetypes,
+      format_on_save = {},
     },
-    config = function(_, opts)
-      require("mason").setup(opts)
-
-      local lspconfig = require("lspconfig")
-      local mason_lspconfig = require("mason-lspconfig")
-
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      require("mason-tool-installer").setup({
-        ensure_installed = tools.formatters,
-      })
-
-      local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
-
-      mason_lspconfig.setup_handlers({
-        function(server_name)
-          lspconfig[server_name].setup({
-            capabilities = capabilities,
-          })
-        end,
-
-        ["denols"] = function()
-          lspconfig.denols.setup({
-            capabilities = capabilities,
-            root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-          })
-        end,
-
-        ["ts_ls"] = function()
-          lspconfig.ts_ls.setup({
-            capabilities = capabilities,
-            root_dir = lspconfig.util.root_pattern("package.json"),
-            single_file_support = false,
-          })
-        end,
-
-        ["lua_ls"] = function()
-          lspconfig.lua_ls.setup({
-            capabilities = capabilities,
-            settings = {
-              Lua = {
-                runtime = { version = "LuaJIT" },
-                diagnostics = { globals = { "vim" } },
-                workspace = {
-                  library = vim.api.nvim_get_runtime_file("", true),
-                  checkThirdParty = false,
-                },
-                telemetry = { enable = false },
-                completion = {
-                  callSnippet = "Replace",
-                },
-              },
-            },
-          })
-        end,
-
-        ["jsonls"] = function()
-          lspconfig.jsonls.setup({
-            capabilities = capabilities,
-            settings = {
-              json = {
-                schemas = require("schemastore").json.schemas(),
-                validate = { enable = true },
-              },
-            },
-          })
-        end,
-
-        ["jdtls"] = function()
-          lspconfig.jdtls.setup({
-            cmd = { mason_bin .. "jdtls" },
-            capabilities = capabilities,
-          })
-        end,
-
-        ["omnisharp"] = function()
-          lspconfig.omnisharp.setup({
-            cmd = { mason_bin .. "omnisharp" },
-            capabilities = capabilities,
-            settings = {
-              MsBuild = {
-                LoadProjectsOnDemand = true,
-              },
-            },
-          })
-        end,
-
-        ["stylelint_lsp"] = function()
-          lspconfig.stylelint_lsp.setup({
-            settings = {
-              stylelintplus = {
-                autoFixOnFormat = true,
-                autoFixOnSave = true,
-              },
-            },
-          })
-        end,
-
-        ["yamlls"] = function()
-          lspconfig.yamlls.setup({
-            settings = {
-              yaml = {
-                schemaStore = {
-                  enable = false,
-                  url = "",
-                },
-                schemas = require("schemastore").yaml.schemas(),
-              },
-            },
-            capabilities = capabilities,
-          })
-        end,
-      })
-    end,
   },
 
-  ----------------
-  -- Flutter Tools
-  --
-  -- Tools to help create flutter apps in neovim using the native lsp.
-  --
-  -- https://github.com/nvim-flutter/flutter-tools.nvim
-  ----------------
-  {
-    "akinsho/flutter-tools.nvim",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "stevearc/dressing.nvim",
-    },
-    config = { fvm = true },
-  },
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
-    }, -- if you prefer nvim-web-devicons
-    ---@module 'render-markdown'
+    },
+    ---@module "render-markdown"
     ---@type render.md.UserConfig
     opts = {},
     enabled = true,
   },
-  {
-    "OXY2DEV/markview.nvim",
-    lazy = false,
-    enabled = false,
 
-    -- For blink.cmp's completion
-    -- source
-    -- dependencies = {
-    --   "saghen/blink.cmp",
-    -- },
-  },
+  ----------------
+  -- Aerial
+  --
+  -- Neovim plugin for a code outline window
+  --
+  -- https://github.com/stevearc/aerial.nvim
+  ----------------
   {
-    "jinzhongjia/LspUI.nvim",
-    enabled = false,
-    branch = "main",
-    opts = {
-      hover = {
-        enable = true,
-        key_binding = {
-          quit = "<esc>",
-        },
-        transparency = 10,
-      },
-      signature = {
-        enable = true,
-      },
+    "stevearc/aerial.nvim",
+    lazy = true,
+    cmd = {
+      "AerialToggle",
     },
-  },
-  ----------------
-  -- Pubspec Assist
-  --
-  -- https://github.com/nvim-flutter/pubspec-assist.nvim
-  ----------------
-  {
-    "akinsho/pubspec-assist.nvim",
-    requires = "plenary.nvim",
-    config = true,
-  },
-
-  ----------------
-  -- Fidget
-  --
-  -- 💫 Extensible UI for Neovim notifications and LSP progress messages.
-  --
-  -- https://github.com/j-hui/fidget.nvim
-  ----------------
-  {
-    "j-hui/fidget.nvim",
-    enabled = false,
     opts = {
-      -- options
+      attach_mode = "global",
+
+      layout = {
+        min_width = 30,
+        max_width = 50,
+
+        placement = "edge",
+        default_direction = "right",
+      },
     },
   },
 }

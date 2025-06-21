@@ -10,6 +10,6 @@ if [ $? -eq 0 ]; then
   /opt/homebrew/bin/tmux attach-session -t $SESSION_NAME
 else
   # If the session doesn't exist, start a new one
-  /opt/homebew/bin/tmux new-session -s $SESSION_NAME -d
-  /opt/homebew/bin/tmux attach-session -t $SESSION_NAME
+  /opt/homebrew/bin/tmux new-session -s $SESSION_NAME -d
+  /opt/homebrew/bin/tmux attach-session -t $SESSION_NAME
 fi

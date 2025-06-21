@@ -1,3 +1,5 @@
+--@class snacks.picker
+--
 local noop = function() end
 
 return {
@@ -10,6 +12,7 @@ return {
   ----------------
   {
     "nvim-telescope/telescope.nvim",
+    enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "rcarriga/nvim-notify",
@@ -172,5 +175,44 @@ return {
         })
       end)
     end,
+  },
+
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    enabled = true,
+    keys = {
+      {
+        "<leader><space>",
+        function()
+          Snacks.picker.smart()
+        end,
+        desc = "Smart Find Files",
+      },
+      {
+        "<leader>e",
+        function()
+          Snacks.explorer()
+        end,
+        desc = "File Explorer",
+      },
+    },
+    ---@type snacks.Config
+    opts = {
+      bigfile = { enabled = true },
+      picker = {},
+      -- explorer = {}, -- Replaces netrw
+      lazygit = {
+        win = {
+          position = "float",
+          -- width = 90,
+          -- height = 90,
+        },
+        -- your lazygit configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      },
+    },
   },
 }

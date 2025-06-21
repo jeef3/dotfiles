@@ -81,11 +81,6 @@ return {
     config = true,
   },
 
-  {
-    "folke/lazydev.nvim",
-    ft = "lua",
-  },
-
   ------------------
   -- Peek
   --
@@ -158,8 +153,6 @@ return {
   -- Telescope support
   --
   -- https://github.com/olimorris/persisted.nvim
-  --
-  -- TODO: Try https://github.com/folke/persistence.nvim
   ------------------
   {
     "olimorris/persisted.nvim",
