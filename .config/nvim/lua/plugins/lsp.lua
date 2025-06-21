@@ -9,6 +9,44 @@ local tools = require("config.tools")
 
 return {
   ----------------
+  -- Mason
+  --
+  -- Portable package manager for Neovim that runs everywhere Neovim runs.
+  -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
+  --
+  -- https://github.com/williamboman/mason.nvim
+  ----------------
+  {
+    "mason-org/mason.nvim",
+    opts = {
+      ui = {
+        icons = {
+          package_pending = " ",
+          package_installed = " ",
+          package_uninstalled = " ",
+        },
+      },
+    },
+  },
+
+  ----------------
+  -- Mason Tools Installer
+  --
+  -- Install and upgrade third party tools automatically
+  --
+  -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
+  ----------------
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = {
+      "mason-org/mason.nvim",
+    },
+    opts = {
+      ensure_installed = tools.mason_tools,
+    },
+  },
+
+  ----------------
   -- LSP Config
   --
   -- https://github.com/neovim/nvim-lspconfig
@@ -103,44 +141,6 @@ return {
   },
 
   ----------------
-  -- Mason
-  --
-  -- Portable package manager for Neovim that runs everywhere Neovim runs.
-  -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
-  --
-  -- https://github.com/williamboman/mason.nvim
-  ----------------
-  {
-    "mason-org/mason.nvim",
-    opts = {
-      ui = {
-        icons = {
-          package_pending = " ",
-          package_installed = " ",
-          package_uninstalled = " ",
-        },
-      },
-    },
-  },
-
-  ----------------
-  -- Mason Tools Installer
-  --
-  -- Install and upgrade third party tools automatically
-  --
-  -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
-  ----------------
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    dependencies = {
-      "mason-org/mason.nvim",
-    },
-    opts = {
-      ensure_installed = tools.mason_tools,
-    },
-  },
-
-  ----------------
   -- Conform
   --
   -- Lightweight yet powerful formatter plugin for Neovim
@@ -158,6 +158,19 @@ return {
     },
   },
 
+  ----------------
+  -- Nvim Lint
+  --
+  -- An asynchronous linter plugin for Neovim complementary to the built-in
+  -- Language Server Protocol support.
+  --
+  -- https://github.com/mfussenegger/nvim-lint
+  ----------------
+  {
+    "mfussenegger/nvim-lint",
+    opts = {},
+  },
+
   {
     "MeanderingProgrammer/render-markdown.nvim",
     dependencies = {
@@ -169,11 +182,6 @@ return {
     opts = {},
     enabled = true,
   },
-  {
-    "OXY2DEV/markview.nvim",
-    lazy = false,
-    enabled = false,
-  },
 
   ----------------
   -- Aerial
@@ -184,15 +192,11 @@ return {
   ----------------
   {
     "stevearc/aerial.nvim",
+    lazy = true,
+    cmd = {
+      "AerialToggle",
+    },
     opts = {
-      on_attach = function(buf)
-        vim.keymap.set(
-          "n",
-          "<leader>o",
-          "<cmd>AerialToggle!<CR>",
-          { buffer = buf, desc = "Toggle outline" }
-        )
-      end,
       attach_mode = "global",
 
       layout = {

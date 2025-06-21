@@ -198,5 +198,10 @@ wk.add({
   },
   { "<leader>hu", ":Gitsigns unstage_hunk<CR>", desc = "Unstage hunk" },
 
+  {
+    "<leader>o",
+    "<cmd>AerialToggle!<CR>",
+    desc = "Toggle outline",
+  },
   { "<leader>t", group = "󰙨 Test…" },
 })
