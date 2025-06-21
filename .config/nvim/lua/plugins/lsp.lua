@@ -98,55 +98,8 @@ return {
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
       })
 
-      vim.lsp.enable("sourcekit")
+      vim.lsp.enable(tools.lsp_configs)
     end,
-  },
-
-  ----------------
-  -- Aerial
-  --
-  -- Neovim plugin for a code outline window
-  --
-  -- https://github.com/stevearc/aerial.nvim
-  ----------------
-  {
-    "stevearc/aerial.nvim",
-    opts = {
-      on_attach = function(buf)
-        vim.keymap.set(
-          "n",
-          "<leader>o",
-          "<cmd>AerialToggle!<CR>",
-          { buffer = buf, desc = "Toggle outline" }
-        )
-      end,
-      attach_mode = "global",
-
-      layout = {
-        min_width = 30,
-        max_width = 50,
-
-        placement = "edge",
-        default_direction = "right",
-      },
-    },
-  },
-
-  ----------------
-  -- Conform
-  --
-  -- Lightweight yet powerful formatter plugin for Neovim
-  --
-  -- https://github.com/stevearc/conform.nvim
-  ----------------
-  {
-    "stevearc/conform.nvim",
-    event = { "BufWritePre" },
-    cmd = { "ConformInfo" },
-    opts = {
-      formatters_by_ft = tools.conform,
-      format_on_save = true,
-    },
   },
 
   ----------------
@@ -188,19 +141,20 @@ return {
   },
 
   ----------------
-  -- Mason LSP Config
+  -- Conform
   --
-  -- Extension to mason.nvim that makes it easier to use lspconfig with
-  -- mason.nvim.
+  -- Lightweight yet powerful formatter plugin for Neovim
   --
-  -- https://github.com/mason-org/mason-lspconfig.nvim
+  -- https://github.com/stevearc/conform.nvim
   ----------------
   {
-    "mason-org/mason-lspconfig.nvim",
-    opts = {},
-    dependencies = {
-      "mason-org/mason.nvim",
-      "neovim/nvim-lspconfig",
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    --- @module "conform"
+    opts = {
+      formatters_by_ft = tools.conform_filetypes,
+      format_on_save = { lsp_format = "fallback" },
     },
   },
 
@@ -219,5 +173,35 @@ return {
     "OXY2DEV/markview.nvim",
     lazy = false,
     enabled = false,
+  },
+
+  ----------------
+  -- Aerial
+  --
+  -- Neovim plugin for a code outline window
+  --
+  -- https://github.com/stevearc/aerial.nvim
+  ----------------
+  {
+    "stevearc/aerial.nvim",
+    opts = {
+      on_attach = function(buf)
+        vim.keymap.set(
+          "n",
+          "<leader>o",
+          "<cmd>AerialToggle!<CR>",
+          { buffer = buf, desc = "Toggle outline" }
+        )
+      end,
+      attach_mode = "global",
+
+      layout = {
+        min_width = 30,
+        max_width = 50,
+
+        placement = "edge",
+        default_direction = "right",
+      },
+    },
   },
 }

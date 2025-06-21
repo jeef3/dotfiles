@@ -21,7 +21,7 @@ return {
       endwise = {
         enable = true,
       },
-      ensure_installed = tools.syntax,
+      ensure_installed = tools.treesitter_syntaxes,
     },
     init = function(plugin)
       -- Apparently for performance

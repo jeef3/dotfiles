@@ -161,6 +161,10 @@ vim.opt.guicursor = {
   "o:hor50-Cursor",
 }
 
+vim.g.markdown_fenced_languages = {
+  "ts=typescript",
+}
+
 -- Mappings
 local wk = require("which-key")
 wk.add({
