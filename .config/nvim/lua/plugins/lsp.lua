@@ -84,6 +84,10 @@ return {
             [vim.diagnostic.severity.INFO] = "󰋽 ",
             [vim.diagnostic.severity.HINT] = "󰌶 ",
           },
+          numhl = {
+            [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+            [vim.diagnostic.severity.WARN] = "WarningMsg",
+          },
         },
         virtual_lines = {
           current_line = true,
