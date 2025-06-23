@@ -76,8 +76,19 @@ return {
     },
     config = function()
       vim.diagnostic.config({
-        update_in_insert = false,
+        virtual_text = {
+          spacing = 4,
+          prefix = "●",
+          current_line = true,
+        },
+
+        severity_sort = true,
+
         signs = {
+          linehl = {
+            [vim.diagnostic.severity.ERROR] = "DiagnosticLineNrError",
+            [vim.diagnostic.severity.WARN] = "DiagnosticLineNrWarn",
+          },
           text = {
             [vim.diagnostic.severity.ERROR] = "󰅚 ",
             [vim.diagnostic.severity.WARN] = "󰀪 ",
@@ -85,12 +96,9 @@ return {
             [vim.diagnostic.severity.HINT] = "󰌶 ",
           },
           numhl = {
-            [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+            [vim.diagnostic.severity.ERROR] = "DiagnosticLineNrError",
             [vim.diagnostic.severity.WARN] = "WarningMsg",
           },
-        },
-        virtual_lines = {
-          current_line = true,
         },
       })
 
