@@ -64,8 +64,15 @@ return {
               },
               title = "{title}",
               title_pos = "center",
-              { win = "input", height = 1, border = "solid" },
-              { win = "list", border = "none" },
+              {
+                win = "input",
+                height = 1,
+                border = { "", "", "", " ", " ", "🬭", " ", " " },
+              },
+              {
+                win = "list",
+                border = { " ", " ", " ", " ", "", "", "", " " },
+              },
             },
           },
         },
