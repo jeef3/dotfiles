@@ -124,7 +124,6 @@ return {
           )
           bufmap("n", "gr", vim.lsp.buf.references, "Show references")
 
-          bufmap("n", "K", vim.lsp.buf.hover)
           bufmap("n", "K", vim.lsp.buf.hover, "Show docs")
 
           bufmap("n", "[g", function()
@@ -142,7 +141,6 @@ return {
 
           bufmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
           bufmap("n", "<leader>qf", vim.lsp.buf.code_action, "Code action")
-          -- bufmap("n", "<leader>o", "<cmd>Lspsaga outline<CR>", "Toggle outline")
 
           bufmap("n", "<space>e", vim.diagnostic.open_float, "Show line errors")
         end,
