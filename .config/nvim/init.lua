@@ -170,11 +170,6 @@ local wk = require("which-key")
 wk.add({
   { "<leader>g", group = " Git Tools…" },
   { "<leader>gb", "<cmd>Flog<CR>", desc = "Open Git branch view" },
-  {
-    "<leader>gl",
-    "<cmd>lua require('snacks').lazygit()<cr>",
-    desc = "Open LazyGit",
-  },
   { "<leader>gs", "<cmd>Telescope git_branches<CR>", desc = "Switch branch" },
 
   { "<leader>h", group = " Git Changes…" },

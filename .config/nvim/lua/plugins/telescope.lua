@@ -26,7 +26,7 @@ return {
     },
     cmd = { "Telescope" },
     keys = {
-      { "<c-t>" },
+      -- { "<c-t>" },
       { "<c-p>" },
       { "<c-s>" },
       { "gs", desc = "Find symbols in document" },
@@ -121,21 +121,21 @@ return {
       telescope.load_extension("undo")
 
       -- <C-t> Find files
-      vim.keymap.set({ "n", "v" }, "<C-t>", function()
-        builtin.find_files({
-          find_command = {
-            "fd",
-            "--type",
-            "f",
-            "--hidden",
-            "-E",
-            ".git",
-            "--strip-cwd-prefix",
-          },
-          prompt_prefix = "    ",
-          previewer = false,
-        })
-      end)
+      -- vim.keymap.set({ "n", "v" }, "<C-t>", function()
+      --   builtin.find_files({
+      --     find_command = {
+      --       "fd",
+      --       "--type",
+      --       "f",
+      --       "--hidden",
+      --       "-E",
+      --       ".git",
+      --       "--strip-cwd-prefix",
+      --     },
+      --     prompt_prefix = "    ",
+      --     previewer = false,
+      --   })
+      -- end)
 
       -- <C-p> Find in file
       vim.keymap.set({ "n", "v" }, "<C-p>", function()
@@ -175,44 +175,5 @@ return {
         })
       end)
     end,
-  },
-
-  {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    enabled = true,
-    keys = {
-      {
-        "<leader><space>",
-        function()
-          Snacks.picker.smart()
-        end,
-        desc = "Smart Find Files",
-      },
-      {
-        "<leader>e",
-        function()
-          Snacks.explorer()
-        end,
-        desc = "File Explorer",
-      },
-    },
-    ---@type snacks.Config
-    opts = {
-      bigfile = { enabled = true },
-      picker = {},
-      -- explorer = {}, -- Replaces netrw
-      lazygit = {
-        win = {
-          position = "float",
-          -- width = 90,
-          -- height = 90,
-        },
-        -- your lazygit configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      },
-    },
   },
 }
