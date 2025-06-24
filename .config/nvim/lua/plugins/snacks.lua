@@ -7,8 +7,18 @@ return {
     keys = {
       {
         "<C-t>",
-        "<cmd>lua Snacks.picker.files({ title = 'Find', hidden = true })<CR>",
-        desc = "Smart Find Files",
+        "<cmd>lua Snacks.picker.files({ title = 'Files', hidden = true })<CR>",
+        desc = "Find files",
+      },
+      {
+        "<C-p>",
+        function()
+          Snacks.picker.grep({
+            title = "Find in files",
+            hidden = true,
+          })
+        end,
+        desc = "Find in files",
       },
       {
         "<leader>e",
@@ -42,8 +52,8 @@ return {
         },
         layout = {
           layout = {
-            backdrop = false,
-            row = 3,
+            backdrop = false, -- Vimade does this for me
+            row = 4,
             width = 0.4,
             min_width = 80,
             height = 0.8,

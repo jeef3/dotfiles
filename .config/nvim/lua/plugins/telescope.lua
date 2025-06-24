@@ -138,21 +138,21 @@ return {
       -- end)
 
       -- <C-p> Find in file
-      vim.keymap.set({ "n", "v" }, "<C-p>", function()
-        builtin.live_grep({
-          vimgrep_arguments = {
-            "rg",
-            "--hidden",
-            "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case",
-          },
-          prompt_prefix = "    ",
-        })
-      end)
+      -- vim.keymap.set({ "n", "v" }, "<C-p>", function()
+      --   builtin.live_grep({
+      --     vimgrep_arguments = {
+      --       "rg",
+      --       "--hidden",
+      --       "--color=never",
+      --       "--no-heading",
+      --       "--with-filename",
+      --       "--line-number",
+      --       "--column",
+      --       "--smart-case",
+      --     },
+      --     prompt_prefix = "    ",
+      --   })
+      -- end)
 
       -- <C-s> Find symbols
       vim.keymap.set({ "n", "v" }, "<C-s>", function()
