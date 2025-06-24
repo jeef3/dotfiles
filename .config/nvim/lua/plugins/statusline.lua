@@ -53,10 +53,10 @@ return {
           "diagnostics",
           sources = { "nvim_diagnostic" },
           symbols = {
-            error = " ",
-            warn = " ",
-            hint = " ",
-            info = " ",
+            error = "󰅚 ",
+            warn = "󰀪 ",
+            info = "󰋽 ",
+            hint = "󰌶 ",
           },
         },
         {
@@ -84,10 +84,10 @@ return {
           "diagnostics",
           sources = { "nvim_diagnostic" },
           symbols = {
-            error = " ",
-            warn = " ",
-            hint = " ",
-            info = " ",
+            error = "󰅚 ",
+            warn = "󰀪 ",
+            info = "󰋽 ",
+            hint = "󰌶 ",
           },
         },
         {
