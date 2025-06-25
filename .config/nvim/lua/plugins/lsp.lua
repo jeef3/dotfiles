@@ -86,8 +86,8 @@ return {
 
         signs = {
           linehl = {
-            [vim.diagnostic.severity.ERROR] = "DiagnosticLineNrError",
-            [vim.diagnostic.severity.WARN] = "DiagnosticLineNrWarn",
+            -- [vim.diagnostic.severity.ERROR] = "DiagnosticLineNrError",
+            -- [vim.diagnostic.severity.WARN] = "DiagnosticLineNrWarn",
           },
           text = {
             [vim.diagnostic.severity.ERROR] = "󰅚 ",
