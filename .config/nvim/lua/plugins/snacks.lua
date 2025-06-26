@@ -7,7 +7,13 @@ return {
     keys = {
       {
         "<C-t>",
-        "<cmd>lua Snacks.picker.files({ title = 'Files', hidden = true })<CR>",
+        function()
+          Snacks.picker.files({
+            title = "Files",
+            hidden = true,
+            prompt = "   ",
+          })
+        end,
         desc = "Find files",
       },
       {
@@ -16,6 +22,7 @@ return {
           Snacks.picker.grep({
             title = "Find in files",
             hidden = true,
+            prompt = "   ",
           })
         end,
         desc = "Find in files",
