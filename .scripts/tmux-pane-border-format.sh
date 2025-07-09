@@ -76,7 +76,13 @@ print_title() {
   GAP=`expr $COUNT - ${LEFT_WIDTH} - ${CENTER_WIDTH} - ${RIGHT_WIDTH}`
   GAP=`expr $GAP / 2`
 
-  PAD=$(printf "%.0s─" $(eval "echo {1..$GAP}"))
+  if [ $IS_ACTIVE -eq 0 ]; then
+    PAD=$(printf "%.0s─" $(eval "echo {1..$GAP}"))
+  else
+    PAD=$(printf "%.0s━" $(eval "echo {1..$GAP}"))
+    PAD="#[fg=$GREEN_500]$PAD"
+  fi
+
   echo "${LEFT_CONTENT}\
 ${PAD}\
 ${CENTER_CONTENT}\
@@ -91,7 +97,7 @@ if [ $WIDTH -lt 90 ]; then
   if [ $IS_ACTIVE -eq 0 ]; then
     STAT="┤#[fg=$SILVER_600] $CMD #[default]├"
   else
-    STAT="┤#[fg=$BLUE_500]#[bold] $CMD #[default]├"
+    STAT="#[fg=$GREEN_500]┫#[fg=$BLUE_500]#[bold] $CMD #[fg=$GREEN_500]┣"
   fi
 
   echo $(print_title -c "$STAT")
@@ -101,21 +107,21 @@ else
   if [ $IS_ACTIVE -eq 0 ]; then
     STAT_L="┤#[fg=$SILVER_600] $CMD #[default,fg=$SILVER_600]  $PRETTY_PATH #[default]├"
   else
-    STAT_L="┤#[fg=$BLUE_500]#[bold] $CMD #[default,fg=$SILVER_500]  $PRETTY_PATH #[default]├"
+    STAT_L="#[fg=$GREEN_500]┫#[fg=$BLUE_500]#[bold] $CMD #[default,fg=$SILVER_200]  $PRETTY_PATH #[fg=$GREEN_500]┣"
   fi
 
   if [ -n "$GIT_STAT" ]; then
     if [ $IS_ACTIVE -eq 0 ]; then
       STAT_R="#[fg=$SILVER_800,bg=default]┤#[fg=$SILVER_500] $BRANCH_ICON $GIT_STAT #[fg=$SILVER_800]├#[default]"
     else
-      STAT_R="#[fg=$SILVER_600,bg=default]┤#[fg=$SILVER_200] $BRANCH_ICON $GIT_STAT #[fg=$SILVER_600]├#[default]"
+      STAT_R="#[fg=$GREEN_600,bg=default]┫#[fg=$SILVER_200] $BRANCH_ICON $GIT_STAT #[fg=$GREEN_500]┣#[default]"
     fi
   else
     STAT_R=""
   fi
 
   if tmux list-panes -F '#F' | grep -q Z; then
-    STAT_R="${STAT_R}─┤ 󰊔 ├"
+    STAT_R="${STAT_R}#[fg=$GREEN_500]━┫ 󰊔 ┣"
   fi
 
   echo $(print_title -l "$STAT_L" -r "$STAT_R")
