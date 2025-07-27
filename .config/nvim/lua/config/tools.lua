@@ -13,6 +13,7 @@ return {
     "lua_ls",
     "omnisharp",
     "prismals",
+    "postgres_lsp",
     "pyright",
     "sourcekit",
     "ts_ls",
@@ -32,6 +33,7 @@ return {
     "lua-language-server", -- lua_ls
     "omnisharp", -- omnisharp
     "prisma-language-server", -- prismals
+    "postgrestools", -- postgres_lsp
     "pyright", --pyright
     "typescript-language-server", -- ts_ls
     "yaml-language-server", -- yamlls
@@ -39,6 +41,8 @@ return {
     -- Formatters
     "beautysh",
     "csharpier",
+    "dprint",
+    "pgformatter",
     "prettier",
     "prettierd",
     "stylua",
@@ -49,6 +53,7 @@ return {
     "jsonlint",
     "mypy",
     "stylelint",
+    "swiftlint",
   },
 
   -- DAP -> nvim-dap
@@ -67,6 +72,8 @@ return {
     markdown = prettier_def,
     python = prettier_def,
     rust = { "rustfmt" },
+    swift = { "swift" },
+    sql = { "pg_format" },
     typescript = prettier_def,
     typescriptreact = prettier_def,
     yaml = prettier_def,
@@ -75,6 +82,7 @@ return {
   lint_filetypes = {
     javascript = { "eslint_d" },
     typescript = { "eslint_d" },
+    swift = { "swiftlint" },
   },
 
   treesitter_syntaxes = {
