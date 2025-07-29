@@ -116,13 +116,15 @@ return {
             vim.lsp.buf.type_definition,
             "Go to type definition"
           )
-          bufmap(
-            "n",
-            "gK",
-            "<cmd>Lspsaga peek_type_definition<CR>",
-            "Peek type definition"
-          )
-          bufmap("n", "gr", vim.lsp.buf.references, "Show references")
+          -- bufmap(
+          --   "n",
+          --   "gK",
+          --   "<cmd>Lspsaga peek_type_definition<CR>",
+          --   "Peek type definition"
+          -- )
+          bufmap("n", "gr", function()
+            Snacks.picker.lsp_references()
+          end, "Show references")
 
           bufmap("n", "K", vim.lsp.buf.hover, "Show docs")
 

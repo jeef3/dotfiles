@@ -166,6 +166,7 @@ return {
       "nvim-telescope/telescope.nvim",
       "nvim-tree/nvim-web-devicons",
     },
+    enabled = false,
     config = true,
   },
 }
