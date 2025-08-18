@@ -125,7 +125,7 @@ vim.opt.foldminlines = 0
 vim.opt.foldnestmax = 3
 
 -- Tab and status lines
-vim.opt.showtabline = 2 -- Always display the tab bar.
+vim.opt.showtabline = 1 -- Only show tab bar if there are 2 or more tabs.
 vim.opt.showmode = false -- Hide current mode, it is in our status line
 
 -- Split behaviour

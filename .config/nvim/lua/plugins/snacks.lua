@@ -67,6 +67,7 @@ return {
             border = false,
             box = "vertical",
             {
+              -- max_height = 15,
               box = "vertical",
               border = {
                 "🬕",
@@ -83,13 +84,33 @@ return {
               {
                 win = "input",
                 height = 1,
-                border = { "", "", "", " ", " ", "🬭", " ", " " },
+                border = { "", "", "", " ", " ", "▁", " ", " " },
               },
               {
                 win = "list",
                 border = { " ", " ", " ", " ", "", "", "", " " },
               },
             },
+            -- {
+            --   box = "vertical",
+            --   auto_hide = true,
+            --   row = 1,
+            --   border = {
+            --     "🬕",
+            --     "🬂",
+            --     "🬨",
+            --     "▐",
+            --     "🬷",
+            --     "🬭",
+            --     "🬲",
+            --     "▌",
+            --   },
+            --   title = "Preview",
+            --   title_pos = "center",
+            --   {
+            --     win = "preview",
+            --   },
+            -- },
           },
         },
       },

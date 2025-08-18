@@ -197,4 +197,24 @@ return {
       -- })
     end,
   },
+
+  ------------------
+  -- Nvim Orgmode
+  --
+  -- Orgmode clone written in Lua for Neovim 0.10.3+.
+  --
+  -- https://github.com/nvim-orgmode/orgmode
+  ------------------
+  {
+    "nvim-orgmode/orgmode",
+    lazy = false,
+    ft = { "org" },
+
+    --- @module "orgmode"
+    --- @type orgmode.Config
+    opts = {
+      org_agenda_files = { "~/org/agenda/**/*" },
+      org_default_notes_file = "~/org/notes.org",
+    },
+  },
 }
