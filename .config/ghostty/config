@@ -36,9 +36,8 @@ palette = 15=#ff0000
 
 window-decoration = true
 window-padding-balance = true
-# macos-titlebar-style = transparent
-# macos-titlebar-proxy-icon = hidden
-# macos-window-shadow = false
+macos-titlebar-style = transparent
+macos-titlebar-proxy-icon = hidden
 
 title = " "
 
