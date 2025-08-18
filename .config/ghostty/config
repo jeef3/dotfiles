@@ -41,7 +41,7 @@ macos-titlebar-proxy-icon = hidden
 
 title = " "
 
-initial-command = ~/.scripts/start-tmux.sh
+# initial-command = ~/.scripts/start-tmux.sh
 
 # custom-shader = /Users/jeff.knaggs/projects/crt-shader-with-chromatic-aberration-glow-scanlines-dot-matrix/crt-shader-with-chromatic-aberration-glow-scanlines-dot-matrix.glsl
 
