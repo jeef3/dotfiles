@@ -1,6 +1,7 @@
 return {
   {
     "folke/snacks.nvim",
+    lazy = false,
     priority = 1000,
     enabled = true,
     keys = {
@@ -49,6 +50,11 @@ return {
       bigfile = { enabled = true },
 
       picker = {
+        notify = { enabled = true },
+        input = {
+          prompt = "   ",
+          hidden = true,
+        },
         win = {
           input = {
             keys = {
