@@ -206,6 +206,7 @@ return {
   -- https://github.com/nvim-orgmode/orgmode
   ------------------
   {
+    enabled = false,
     "nvim-orgmode/orgmode",
     lazy = false,
     ft = { "org" },
@@ -215,6 +216,36 @@ return {
     opts = {
       org_agenda_files = { "~/org/agenda/**/*" },
       org_default_notes_file = "~/org/notes.org",
+    },
+  },
+
+  ------------------
+  -- Neorg
+  --
+  -- Modernity meets insane extensibility. The future of organizing your life in Neovim.
+  --
+  -- https://github.com/nvim-neorg/neorg
+  ------------------
+  {
+    "nvim-neorg/neorg",
+    enabled = true,
+    lazy = false,
+
+    --- @module "neorg"
+    --- @type neorg.Config
+    opts = {
+      load = {
+        ["core.defaults"] = {},
+        ["core.concealer"] = {},
+        ["core.dirman"] = {
+          config = {
+            workspaces = {
+              notes = "~/notes",
+            },
+            default_workspace = "notes",
+          },
+        },
+      },
     },
   },
 }
