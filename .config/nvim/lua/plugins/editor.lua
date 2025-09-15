@@ -121,7 +121,7 @@ return {
       plugins = {
         tmux = { enabled = true },
         twilight = { enabled = true },
-        kitty = { enabled = true, font = "+4" },
+        -- kitty = { enabled = true, font = "+4" },
       },
     },
     on_open = function()

@@ -58,7 +58,7 @@ vim.keymap.set("n", "<C-h>", "<C-W>h")
 vim.keymap.set("n", "<C-l>", "<C-W>l")
 
 -- Toggle display of listchars
-vim.keymap.set("n", "<Leader>c", ":set list!<cr>")
+-- vim.keymap.set("n", "<Leader>c", ":set list!<cr>")
 
 -- Close Quickfix window
 vim.keymap.set("n", "<leader>qq", ":cclose<CR>")
@@ -199,4 +199,21 @@ wk.add({
     desc = "Toggle outline",
   },
   { "<leader>t", group = "󰙨 Test…" },
+
+  -- Copilot keys
+  {
+    "<leader>cc",
+    "<cmd>CopilotChatToggle<cr>",
+    desc = "Open Copilot Chat",
+  },
+  {
+    "<leader>cC",
+    "<cmd>CopilotChatClear<cr>",
+    desc = "Clear Copilot Chat",
+  },
+  {
+    "<leader>cS",
+    "<cmd>CopilotChatSend<cr>",
+    desc = "Send message to Copilot Chat",
+  },
 })

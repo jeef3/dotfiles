@@ -160,7 +160,7 @@ return {
       "anuvyklack/middleclass",
       "anuvyklack/animation.nvim",
     },
-    config = {
+    opts = {
       autowidth = {
         winwidth = 7, -- 6 characer gutter and 1 character pad
       },

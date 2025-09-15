@@ -43,8 +43,13 @@ return {
     },
     config = function()
       require("neotest").setup({
+        discovery = { enabled = false },
         adapters = {
-          require("neotest-jest")({}),
+          require("neotest-jest")({
+            jestCommand = require("neotest-jest.jest-util").getJestCommand(
+              vim.fn.expand("%:p:h")
+            ),
+          }),
           require("neotest-vitest"),
           require("neotest-playwright").adapter({
             options = {
