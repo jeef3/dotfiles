@@ -34,12 +34,24 @@ return {
         replace = { a = "StatusLineReplace" },
         command = { a = "StatusLineCommand" },
       },
-      component_separators = "╲",
+      component_separators = "",
       section_separators = { left = "", right = "" },
     },
     sections = {
       lualine_a = { { "macro-recording", fmt = show_macro_recording }, "mode" },
-      lualine_b = { { "filename", path = 1 } },
+      lualine_b = {
+        require("codeowners").codeowners,
+        {
+          "filename",
+          path = 0,
+
+          on_click = function()
+            local filepath = vim.api.nvim_buf_get_name(0)
+            local relpath = vim.fn.fnamemodify(filepath, ":.")
+            vim.notify(relpath, vim.log.levels.INFO)
+          end,
+        },
+      },
       lualine_c = {
         -- require("auto-session.lib").current_session_name,
       },

@@ -169,4 +169,19 @@ return {
     enabled = false,
     config = true,
   },
+
+  ----------------
+  -- Codeowners
+  --
+  -- A Neovim plugin that integrates with Git's CODEOWNERS file to display code
+  -- ownership information in your editor.
+  --
+  -- https://github.com/JonasGavenavicius/codeowners.nvim
+  ----------------
+  {
+    "JonasGavenavicius/codeowners.nvim",
+    config = function()
+      require("codeowners").setup()
+    end,
+  },
 }
