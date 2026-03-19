@@ -163,11 +163,17 @@ return {
     "pwntester/octo.nvim",
     requires = {
       "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
+      "folke/snacks.nvim",
       "nvim-tree/nvim-web-devicons",
     },
-    enabled = false,
-    config = true,
+    enabled = true,
+    opts = {
+      picker = "snacks",
+      -- reviews = {
+      --   auto_show_threads = true,
+      --   focus = "right",
+      -- },
+    },
   },
 
   ----------------

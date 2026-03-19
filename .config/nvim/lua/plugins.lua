@@ -19,17 +19,17 @@ return {
   "fladson/vim-kitty", -- Kitty config syntax
   "MunifTanjim/nui.nvim", -- UI Library
   -- "justinmk/vim-sneak", -- Minimal EasyMotion s
-  {
-    "ggandor/leap.nvim",
-    lazy = false,
-    config = function()
-      -- require("leap").create_default_mappings()
-      vim.keymap.set("n", "s", "<Plug>(leap)")
-      vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
-
-      require("leap").opts.highlight_unlabeled_phase_one_targets = true
-    end,
-  },
+  -- {
+  --   "ggandor/leap.nvim",
+  --   lazy = false,
+  --   config = function()
+  --     -- require("leap").create_default_mappings()
+  --     vim.keymap.set("n", "s", "<Plug>(leap)")
+  --     vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
+  --
+  --     require("leap").opts.highlight_unlabeled_phase_one_targets = true
+  --   end,
+  -- },
 
   {
     "kevinhwang91/nvim-hlslens",
@@ -247,5 +247,29 @@ return {
         },
       },
     },
+  },
+
+  {
+    "piersolenski/wtf.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "folke/snacks.nvim",
+    },
+    opts = {},
+  },
+
+  {
+    enabled = true,
+    "giusgad/pets.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "giusgad/hologram.nvim" },
+    opts = {
+      row = 9,
+    },
+  },
+
+  {
+    "cachebag/nvim-tcss",
+    config = true,
   },
 }

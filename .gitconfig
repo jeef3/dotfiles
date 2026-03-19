@@ -138,6 +138,7 @@
   diffFilter = delta --color-only --wrap-max-lines 0
 
 [diff]
+  tool = diffsitter
   colorMoved = default
 
 [diff "image"]
@@ -147,6 +148,9 @@
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
+
+[difftool "diffsitter"]
+  cmd = diffsitter diff "$LOCAL" "$REMOTE"
 
 [include]
     path = ~/.gitconfig.local

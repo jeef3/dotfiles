@@ -66,6 +66,10 @@ function listMerged() {
   done
 }
 
+function listGone() {
+  git branch -vv | awk '/: gone]/ {print $1}'
+}
+
 PROG='@a = split " ";
 print join " ", @a[0..($#a-1)];
 if (rindex($a[$#a], "/") != -1) {

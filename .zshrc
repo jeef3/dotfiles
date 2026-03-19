@@ -1,6 +1,3 @@
-eval "$(/opt/homebrew/bin/brew shellenv)"
-export BREW_HOME=$(brew --prefix)
-
 source "$BREW_HOME/opt/zinit/zinit.zsh"
 
 eval "$(zoxide init zsh)"
@@ -34,3 +31,15 @@ for file in ~/.zsh/{plugins,prompt,path,aliases,functions}.zsh; do
     [ -r "$file" ] && source "$file"
 done
 unset file
+
+export NODE_OPTIONS="--max-old-space-size=8192"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+(( ${+commands[rush]} )) && {
+  _rush_completion() {
+    compadd -- $(rush tab-complete --position ${CURSOR} --word "${BUFFER}" 2>>/dev/null)
+  }
+  compdef _rush_completion rush
+}

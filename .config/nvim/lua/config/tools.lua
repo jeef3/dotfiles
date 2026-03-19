@@ -5,7 +5,7 @@ return {
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
   lsp_configs = {
     "bashls",
-    "denols",
+    -- "denols",
     "eslint",
     "ghostty",
     "jsonls",
@@ -15,6 +15,7 @@ return {
     "prismals",
     "postgres_lsp",
     "pyright",
+    -- "rnix-lsp",
     "sourcekit",
     "ts_ls",
     "yamlls",
@@ -33,15 +34,18 @@ return {
     "lua-language-server", -- lua_ls
     "omnisharp", -- omnisharp
     "prisma-language-server", -- prismals
-    "postgrestools", -- postgres_lsp
+    "postgres-language-server", -- postgres_lsp
     "pyright", --pyright
+    "sonarlint-language-server", --
     "typescript-language-server", -- ts_ls
     "yaml-language-server", -- yamlls
 
     -- Formatters
     "beautysh",
+    "black",
     "csharpier",
     "dprint",
+    "isort",
     "pgformatter",
     "prettier",
     "prettierd",
@@ -70,7 +74,7 @@ return {
     graphql = prettier_def,
     lua = { "stylua" },
     markdown = prettier_def,
-    python = prettier_def,
+    python = { "isort", "black" },
     rust = { "rustfmt" },
     swift = { "swift" },
     sql = { "pg_format" },

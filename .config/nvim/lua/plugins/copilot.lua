@@ -7,16 +7,16 @@ vim.api.nvim_create_autocmd("BufEnter", {
     vim.opt_local.conceallevel = 0
   end,
 })
-
--- Quick chat keybinding
-vim.keymap.set("n", "<leader>cq", function()
-  local input = vim.fn.input("Quick Chat: ")
-  if input ~= "" then
-    require("CopilotChat").ask(input, {
-      selection = require("CopilotChat.select").buffer,
-    })
-  end
-end, { desc = "CopilotChat - Quick chat" })
+--
+-- -- Quick chat keybinding
+-- vim.keymap.set({ "n", "v" }, "<leader>cq", function()
+--   local input = vim.fn.input("Quick Chat: ")
+--   if input ~= "" then
+--     require("CopilotChat").ask(input, {
+--       selection = require("CopilotChat.select").buffer,
+--     })
+--   end
+-- end, { desc = "CopilotChat - Quick chat" })
 
 return {
   {
@@ -29,26 +29,22 @@ return {
     },
     build = "make tiktoken",
 
-    --- @module "copilot.chat"
-    --- @type copilot.chat.Config
+    --- @module "CopilotChat"
+    --- @type CopilotChat.config.Config
     opts = {
       headers = {
-        user = " ",
-        assistant = " ",
-        tool = "󱁤 ",
+        user = " Me",
+        assistant = "  Copilot",
+        tool = "󱁤 Tool",
       },
 
       window = {
         width = 60,
+        title = "🤖 AI Assistant",
       },
 
-      -- window = {
-      --   layout = "float",
-      --   relative = "cursor",
-      --   width = 1,
-      --   height = 0.4,
-      --   row = 1,
-      -- },
+      separator = "-",
+      auto_fold = true,
     },
   },
 }

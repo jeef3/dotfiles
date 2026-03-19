@@ -139,7 +139,7 @@ return {
   ------------------
   {
     "tadaa/vimade",
-    enabled = true,
+    enabled = false,
     opts = {
       recipe = { "default", { animate = true } },
       fadelevel = 0.6,

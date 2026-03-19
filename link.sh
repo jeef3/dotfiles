@@ -14,8 +14,8 @@ symlinks=(
   .gitignore-global
 
   .zsh
-  .zshenv
   .zshrc
+  .zprofile
 
   .scripts
 

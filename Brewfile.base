@@ -1,6 +1,7 @@
 tap "isen-ng/dotnet-sdk-versions"
 tap "leoafarias/fvm"
 tap "oven-sh/bun"
+tap "afnanenayet/tap"
 
 # Base
 brew "coreutils"
@@ -31,6 +32,7 @@ brew "weechat"
 brew "bat"
 brew "pandoc"
 brew "grc"
+brew "fswatch"
 
 # Git and tools
 brew "git"
@@ -38,7 +40,10 @@ brew "git-delta"
 brew "git-lfs"
 brew "lazygit"
 brew "gh"
+brew "copilot-cli"
 brew "diff-so-fancy"
+brew "diffsitter"
+
 
 # IDE Essentials
 brew "neovim"

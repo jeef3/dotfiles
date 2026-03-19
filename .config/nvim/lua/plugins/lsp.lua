@@ -143,6 +143,7 @@ return {
 
           bufmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
           bufmap("n", "<leader>qf", vim.lsp.buf.code_action, "Code action")
+          bufmap("n", "<leader>qg", vim.lsp.buf.format, "Format")
 
           bufmap("n", "<space>e", vim.diagnostic.open_float, "Show line errors")
         end,
@@ -185,7 +186,7 @@ return {
     ---@module "render-markdown"
     ---@type render.md.UserConfig
     opts = {},
-    enabled = true,
+    ft = { "markdown", "codecompanion" },
   },
 
   ----------------
@@ -212,5 +213,29 @@ return {
         default_direction = "right",
       },
     },
+  },
+
+  ----------------
+  -- venv-selector.nvim
+  --
+  -- Allows selection of python virtual environment from within neovim
+  --
+  -- https://github.com/linux-cultist/venv-selector.nvim
+  ----------------
+  {
+    "linux-cultist/venv-selector.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      {
+        "nvim-telescope/telescope.nvim",
+        branch = "0.1.x",
+        dependencies = { "nvim-lua/plenary.nvim" },
+      }, -- optional: you can also use fzf-lua, snacks, mini-pick instead.
+    },
+    ft = "python", -- Load when opening Python files
+    keys = {
+      { ",v", "<cmd>VenvSelect<cr>" }, -- Open picker on keymap
+    },
+    opts = {},
   },
 }

@@ -100,6 +100,7 @@ return {
   {
     "folke/twilight.nvim",
     cmd = { "Twilight" },
+    enabled = false,
     opts = {},
   },
 
