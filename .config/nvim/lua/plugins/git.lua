@@ -159,6 +159,14 @@ return {
     },
   },
 
+  ----------------
+  -- Octo
+  --
+  -- Edit and review GitHub issues and pull requests from the comfort of your
+  -- favorite editor
+  --
+  -- https://github.com/pwntester/octo.nvim
+  ----------------
   {
     "pwntester/octo.nvim",
     requires = {
@@ -188,6 +196,31 @@ return {
     "JonasGavenavicius/codeowners.nvim",
     config = function()
       require("codeowners").setup()
+    end,
+  },
+
+  ----------------
+  -- difftastic.nvim
+  --
+  -- A Neovim plugin that displays difftastic's structural diffs in a
+  -- side-by-side view with syntax highlighting.
+  --
+  -- https://github.com/clabby/difftastic.nvim
+  ----------------
+  {
+    "clabby/difftastic.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "folke/snacks.nvim",
+    },
+    config = function()
+      require("difftastic-nvim").setup({
+        download = true,
+        vcs = "git",
+        snacks_picker = {
+          enabled = true,
+        },
+      })
     end,
   },
 }
