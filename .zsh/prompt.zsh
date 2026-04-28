@@ -29,6 +29,21 @@ async_load_prompt() {
   RPROMPT="…"
 }
 
+# Redraw prompt on terminal focus (requires focus reporting)
+printf '\e[?1004h'
+
+function _terminal_focus_in() {
+  zle && zle .reset-prompt
+}
+
+function _terminal_focus_out() { }
+
+zle -N _terminal_focus_in
+zle -N _terminal_focus_out
+
+bindkey '\e[I' _terminal_focus_in
+bindkey '\e[O' _terminal_focus_out
+
 function precmd() {
   PROMPT='$(border)
 $(current_dir) $(node_version) $(jobbies)
