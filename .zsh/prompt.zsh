@@ -52,10 +52,13 @@ $(exit_status)${VIM_MODE}${RESET} '
   async_load_rprompt
 }
 
-function preexec() { _disable_focus_reporting; }
+function preexec() {
+  _disable_focus_reporting
+}
 
 zle -N zle-line-init
 zle -N _terminal_focus_in
 zle -N _terminal_focus_out
+
 bindkey '\e[I' _terminal_focus_in
 bindkey '\e[O' _terminal_focus_out
