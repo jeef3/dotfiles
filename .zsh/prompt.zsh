@@ -39,9 +39,11 @@ function _terminal_focus_in() {
 }
 function _terminal_focus_out() { }
 
-function precmd() {
+function zle-line-init() {
   _enable_focus_reporting
+}
 
+function precmd() {
   PROMPT='$(border)
 $(current_dir) $(node_version) $(jobbies)
 $(exit_status)${VIM_MODE}${RESET} '
@@ -52,9 +54,8 @@ $(exit_status)${VIM_MODE}${RESET} '
 
 function preexec() { _disable_focus_reporting; }
 
+zle -N zle-line-init
 zle -N _terminal_focus_in
 zle -N _terminal_focus_out
 bindkey '\e[I' _terminal_focus_in
 bindkey '\e[O' _terminal_focus_out
-
-_enable_focus_reporting
