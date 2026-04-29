@@ -8,6 +8,7 @@ source $ROOT/prompt/jobbies.zsh
 source $ROOT/prompt/vi-mode.zsh
 source $ROOT/prompt/border.zsh
 source $ROOT/prompt/node.sh
+source $ROOT/prompt/git-watcher.zsh
 
 setopt prompt_subst
 
@@ -44,6 +45,8 @@ function zle-line-init() {
 }
 
 function precmd() {
+  _git_watcher_ensure
+
   PROMPT='$(border)
 $(current_dir) $(node_version) $(jobbies)
 $(exit_status)${VIM_MODE}${RESET} '
@@ -54,6 +57,11 @@ $(exit_status)${VIM_MODE}${RESET} '
 
 function preexec() {
   _disable_focus_reporting
+  _git_watcher_stop
+}
+
+function zshexit() {
+  _git_watcher_cleanup
 }
 
 zle -N zle-line-init
