@@ -1,4 +1,5 @@
 local prettier_def = { "prettierd", "prettier", stop_after_first = true }
+local shell_def = { "shfmt" }
 
 return {
   -- LSP configs as per nvim-lspconfig
@@ -41,7 +42,7 @@ return {
     "yaml-language-server", -- yamlls
 
     -- Formatters
-    "beautysh",
+    -- "beautysh",
     "black",
     "csharpier",
     "dprint",
@@ -49,6 +50,7 @@ return {
     "pgformatter",
     "prettier",
     "prettierd",
+    "shfmt",
     "stylua",
 
     -- Linters
@@ -76,11 +78,13 @@ return {
     markdown = prettier_def,
     python = { "isort", "black" },
     rust = { "rustfmt" },
+    sh = shell_def,
     swift = { "swift" },
     sql = { "pg_format" },
     typescript = prettier_def,
     typescriptreact = prettier_def,
     yaml = prettier_def,
+    zsh = shell_def,
   },
 
   lint_filetypes = {
