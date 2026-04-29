@@ -6,3 +6,7 @@ indent_size = 2
 
 [**.js]
 jslint_happy = true
+
+[**.{sh,zsh}]
+indent_style = space
+indent_size = 2
