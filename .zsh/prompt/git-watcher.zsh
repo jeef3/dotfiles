@@ -68,8 +68,11 @@ function _git_watcher_start() {
 }
 
 function _git_watcher_stop() {
+  setopt local_options no_monitor no_notify
+
   if (( _GIT_WATCHER_PID > 0 )); then
     kill $_GIT_WATCHER_PID 2>/dev/null
+    wait $_GIT_WATCHER_PID 2>/dev/null
     _GIT_WATCHER_PID=0
   fi
 
