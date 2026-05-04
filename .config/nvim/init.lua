@@ -29,7 +29,7 @@ vim.opt.diffopt = {
 ----------------
 -- Other settings
 --
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = 0
 vim.opt.omnifunc = "syntaxcomplete#Complete"
 
 vim.opt.undofile = true
