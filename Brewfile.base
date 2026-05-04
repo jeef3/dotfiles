@@ -47,6 +47,7 @@ brew "diffsitter"
 
 # IDE Essentials
 brew "neovim"
+brew "tree-sitter-cli"
 brew "ranger"
 brew "yazi"
 brew "todo-txt"

@@ -121,7 +121,8 @@ vim.opt.backspace = { "indent", "eol", "start" }
 vim.opt.foldenable = false
 vim.opt.foldlevel = 20
 vim.opt.foldlevelstart = 20
-vim.opt.foldmethod = "syntax" -- If folding is used, let the syntax to do it.
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldminlines = 0
 vim.opt.foldnestmax = 3
 

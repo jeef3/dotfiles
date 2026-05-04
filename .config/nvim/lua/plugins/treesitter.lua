@@ -4,37 +4,23 @@ return {
   ----------------
   -- Treesitter
   --
-  -- https://github.com/
+  -- Parser installer and query provider for tree-sitter languages.
+  -- Highlighting, folding, and indentation are now native Neovim features.
+  --
+  -- https://github.com/nvim-treesitter/nvim-treesitter
   ----------------
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     build = ":TSUpdate",
-    event = { "VeryLazy" },
-    dependencies = {
-      "RRethy/nvim-treesitter-endwise",
-      "nvim-treesitter/playground",
-    },
-    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-    opts = {
-      indent = { enable = true },
-      highlight = { enable = true },
-      endwise = {
-        enable = true,
-      },
-      ensure_installed = tools.treesitter_syntaxes,
-    },
-    init = function(plugin)
-      -- Apparently for performance
-      require("lazy.core.loader").add_to_rtp(plugin)
-      require("nvim-treesitter.query_predicates")
-    end,
+    config = function()
+      require("nvim-treesitter").install(tools.treesitter_syntaxes)
 
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-
-      vim.opt.foldlevel = 20
-      vim.opt.foldmethod = "expr"
-      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          pcall(vim.treesitter.start)
+        end,
+      })
     end,
   },
   {
@@ -51,9 +37,6 @@ return {
   ----------------
   {
     "HiPhish/rainbow-delimiters.nvim",
-    dependencies = {
-      "nvim-treesitter/playground",
-    },
     opts = {
       highlight = {
         "RainbowDelimiterYellow",
