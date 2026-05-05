@@ -41,11 +41,8 @@ function _git_watcher_start() {
   local pipe_file=$(mktemp -u)
   mkfifo "$pipe_file"
 
-  # Build list of paths to watch (only include files that exist)
   local -a watch_paths
-  watch_paths=("$git_dir/HEAD" "$git_dir/index" "$git_dir/refs")
-  [[ -f "$git_dir/MERGE_HEAD" ]] && watch_paths+=("$git_dir/MERGE_HEAD")
-  [[ -f "$git_dir/REBASE_HEAD" ]] && watch_paths+=("$git_dir/REBASE_HEAD")
+  watch_paths=("$git_dir/HEAD" "$git_dir/refs")
 
   # Start fswatch watching key git paths (suppress job notifications)
   setopt local_options no_monitor no_notify
