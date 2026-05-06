@@ -1,5 +1,5 @@
 jobbies() {
-  typeset list=$(jobs | cut -d " " -f 6 | tr '\n' ', ' | rev | cut -c 2- | rev)
+  typeset list=$(jobs -s 2>/dev/null | awk '{print $NF}' | tr '\n' ', ' | sed 's/,$//')
 
   if [ -n "${list}" ]; then
     echo " ${DARK_GRAY}${ITALIC}($list)%{$RESET%} "
