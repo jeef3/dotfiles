@@ -44,12 +44,10 @@ function _git_watcher_start() {
   local -a watch_paths
   watch_paths=("$git_dir/HEAD" "$git_dir/refs")
 
-  # Start fswatch watching key git paths (suppress job notifications)
-  setopt local_options no_monitor no_notify
-
+  # Start fswatch watching key git paths (&! backgrounds and disowns)
   fswatch --latency=0.3 \
     "${watch_paths[@]}" \
-    > "$pipe_file" 2>/dev/null &
+    > "$pipe_file" 2>/dev/null &!
 
   _GIT_WATCHER_PID=$!
 
@@ -65,15 +63,15 @@ function _git_watcher_start() {
 }
 
 function _git_watcher_stop() {
-  if (( _GIT_WATCHER_PID > 0 )); then
-    kill $_GIT_WATCHER_PID 2>/dev/null
-    _GIT_WATCHER_PID=0
-  fi
-
   if (( _GIT_WATCHER_FD > 0 )); then
     zle -F $_GIT_WATCHER_FD
     exec {_GIT_WATCHER_FD}<&-
     _GIT_WATCHER_FD=0
+  fi
+
+  if (( _GIT_WATCHER_PID > 0 )); then
+    command kill $_GIT_WATCHER_PID 2>/dev/null
+    _GIT_WATCHER_PID=0
   fi
 
   _GIT_WATCHER_ROOT=""
