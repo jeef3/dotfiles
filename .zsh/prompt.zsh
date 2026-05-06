@@ -48,7 +48,7 @@ function precmd() {
   _git_watcher_ensure
 
   PROMPT='$(border)
-$(current_dir) $(node_version) $(jobbies)
+$(current_dir)$(node_version)$(jobbies)
 $(exit_status)${VIM_MODE}${RESET} '
   RPROMPT=''
 
