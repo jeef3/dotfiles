@@ -57,7 +57,6 @@ $(exit_status)${VIM_MODE}${RESET} '
 
 function preexec() {
   _disable_focus_reporting
-  _git_watcher_stop
 }
 
 function zshexit() {
