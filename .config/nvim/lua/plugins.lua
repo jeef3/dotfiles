@@ -103,50 +103,6 @@ return {
   },
 
   ------------------
-  -- Wilder
-  --
-  -- A more adventurous wildmenu
-  --
-  -- https://github.com/gelguy/wilder.nvim
-  ------------------
-  {
-    "gelguy/wilder.nvim",
-    -- enabled = false, -- Doesn't play well with noice
-    config = function()
-      local wilder = require("wilder")
-      wilder.setup({
-        modes = { ":", "/" },
-        next_key = "<C-k>",
-        previous_key = "<C-j>",
-        accept_key = "<Tab>",
-      })
-
-      wilder.set_option(
-        "pipeline",
-        wilder.branch(wilder.cmdline_pipeline({
-          fuzzy = 1,
-        }))
-      )
-
-      wilder.set_option(
-        "renderer",
-        wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
-          highlights = {
-            border = "Normal",
-          },
-          border = "rounded",
-          pumblend = 20,
-          -- highlighter applies highlighting to the candidates
-          highlighter = wilder.basic_highlighter(),
-          reverse = 1,
-          left = { " ", wilder.popupmenu_devicons() },
-          right = { " ", wilder.popupmenu_scrollbar() },
-        }))
-      )
-    end,
-  },
-
-  ------------------
   -- Persisted
   --
   -- 💾 Simple session management for Neovim with git branching, autoloading and
@@ -215,10 +171,5 @@ return {
     opts = {
       row = 9,
     },
-  },
-
-  {
-    "cachebag/nvim-tcss",
-    config = true,
   },
 }

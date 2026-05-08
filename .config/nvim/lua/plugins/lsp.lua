@@ -61,8 +61,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
 
-      "hrsh7th/nvim-cmp",
-      "hrsh7th/cmp-nvim-lsp",
+      "saghen/blink.cmp",
       "b0o/schemastore.nvim",
       {
         "folke/lazydev.nvim",
@@ -150,7 +149,7 @@ return {
       })
 
       vim.lsp.config("*", {
-        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
       })
 
       vim.lsp.enable(tools.lsp_configs)

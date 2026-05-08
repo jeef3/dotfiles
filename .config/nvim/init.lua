@@ -201,21 +201,4 @@ wk.add({
     desc = "Toggle outline",
   },
   { "<leader>t", group = "󰙨 Test…" },
-
-  -- Copilot keys
---   {
---     "<leader>cc",
---     "<cmd>CopilotChatToggle<cr>",
---     desc = "Open Copilot Chat",
---   },
---   {
---     "<leader>cC",
---     "<cmd>CopilotChatClear<cr>",
---     desc = "Clear Copilot Chat",
---   },
---   {
---     "<leader>cS",
---     "<cmd>CopilotChatSend<cr>",
---     desc = "Send message to Copilot Chat",
---   },
 })

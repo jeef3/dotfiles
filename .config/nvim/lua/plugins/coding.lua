@@ -5,126 +5,53 @@
 -- stored separately.
 --------------------------------
 
-local kind_icons = {
-  Text = "󰉿 ",
-  Method = "󰆧 ",
-  Function = "󰊕 ",
-  Constructor = " ",
-  Field = "󰜢 ",
-  Variable = "󰀫 ",
-  Class = "󰠱 ",
-  Interface = " ",
-  Module = " ",
-  Property = "󰜢 ",
-  Unit = "󰑭 ",
-  Value = "󰎠 ",
-  Enum = " ",
-  Keyword = "󰌋 ",
-  Snippet = " ",
-  Color = "󰏘 ",
-  File = "󰈙 ",
-  Reference = "󰈇 ",
-  Folder = "󰉋 ",
-  EnumMember = " ",
-  Constant = "󰏿 ",
-  Struct = "󰙅 ",
-  Event = " ",
-  Operator = "󰆕 ",
-  TypeParameter = " ",
-}
-
 return {
   ----------------
-  -- CMP
+  -- Blink.cmp
   --
-  -- A completion plugin for neovim coded in Lua.
+  -- Performant, batteries-included completion plugin for Neovim
   --
-  -- https://github.com/hrsh7th/nvim-cmp
+  -- https://github.com/saghen/blink.cmp
   ------------------
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip",
+    "saghen/blink.cmp",
+    version = "1.*",
+    event = { "InsertEnter", "CmdlineEnter" },
 
-      "onsails/lspkind.nvim",
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      keymap = {
+        ["<C-j>"] = { "select_next", "fallback" },
+        ["<C-k>"] = { "select_prev", "fallback" },
+        ["<C-x><C-o>"] = { "show", "fallback" },
+        ["<CR>"] = { "accept", "fallback" },
+      },
 
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "windwp/nvim-autopairs",
-    },
-
-    opts = function()
-      local cmp = require("cmp")
-
-      cmp.event:on(
-        "confirm_done",
-        require("nvim-autopairs.completion.cmp").on_confirm_done()
-      )
-      return {
-        -- Don't show completion while editing comments
-        enabled = function()
-          local context = require("cmp.config.context")
-
-          if vim.api.nvim_get_mode().mode == "c" then
-            return true
-          else
-            return not context.in_treesitter_capture("comment")
-              and not context.in_syntax_group("Comment")
-          end
-        end,
-        snippet = {
-          expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
-          end,
+      cmdline = {
+        keymap = {
+          ["<C-j>"] = { "select_next", "fallback" },
+          ["<C-k>"] = { "select_prev", "fallback" },
+          ["<CR>"] = { "accept_and_enter", "fallback" },
         },
         completion = {
-          completeopt = "menu,menuone,noinsert",
+          menu = { auto_show = true },
         },
-        sources = cmp.config.sources({
-          { name = "vsnip" },
-          { name = "nvim_lsp" },
-          { name = "nvim_lsp_signature_help" },
-          { name = "neorg" },
-        }),
-        mapping = cmp.mapping.preset.insert({
-          ["<C-j>"] = cmp.mapping.select_next_item({
-            behavior = cmp.SelectBehavior.Insert,
-          }),
-          ["<C-k>"] = cmp.mapping.select_prev_item({
-            behavior = cmp.SelectBehavior.Insert,
-          }),
-          ["<C-x><C-o>"] = cmp.mapping.complete(),
-          ["<cr>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          }),
-        }),
-        window = {
-          completion = {
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-            col_offset = -3,
-            side_padding = 0,
-          },
-          documentation = {
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-            border = { "▏", "", " ", " ", " ", "", "▏", "▏" },
-          },
-        },
-        formatting = {
-          fields = { "kind", "abbr" },
-          format = function(_, item)
-            item.kind = " " .. kind_icons[item.kind] or "" .. "  "
+      },
 
-            return item
-          end,
-        },
-        experimental = {
-          ghost_text = true,
-        },
-      }
-    end,
+      appearance = {
+        nerd_font_variant = "normal",
+      },
+
+      completion = {
+        documentation = { auto_show = true },
+        ghost_text = { enabled = true },
+      },
+
+      signature = { enabled = true },
+
+      fuzzy = { implementation = "prefer_rust" },
+    },
   },
 
   ------------------
