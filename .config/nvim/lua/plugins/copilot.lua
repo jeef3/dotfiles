@@ -20,12 +20,20 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 return {
   {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+    },
+  },
+
+  {
     "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
-      {
-        "github/copilot.vim",
-        { "nvim-lua/plenary.nvim", branch = "master" },
-      },
+      "zbirenbaum/copilot.lua",
+      { "nvim-lua/plenary.nvim", branch = "master" },
     },
     build = "make tiktoken",
 

@@ -17,6 +17,9 @@ return {
     "saghen/blink.cmp",
     version = "1.*",
     event = { "InsertEnter", "CmdlineEnter" },
+    dependencies = {
+      "giuxtaposition/blink-cmp-copilot",
+    },
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -32,10 +35,16 @@ return {
         keymap = {
           ["<C-j>"] = { "select_next", "fallback" },
           ["<C-k>"] = { "select_prev", "fallback" },
-          ["<CR>"] = { "accept_and_enter", "fallback" },
         },
         completion = {
-          menu = { auto_show = true },
+          menu = {
+            auto_show = function()
+              return vim.fn.getcmdtype() == ":"
+            end,
+          },
+          list = {
+            selection = { preselect = false, auto_insert = true },
+          },
         },
       },
 
@@ -49,6 +58,28 @@ return {
       },
 
       signature = { enabled = true },
+
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer", "copilot" },
+        providers = {
+          copilot = {
+            name = "copilot",
+            module = "blink-cmp-copilot",
+            score_offset = 100,
+            async = true,
+            transform_items = function(_, items)
+              local CompletionItemKind =
+                require("blink.cmp.types").CompletionItemKind
+              local kind_idx = #CompletionItemKind + 1
+              CompletionItemKind[kind_idx] = "Copilot"
+              for _, item in ipairs(items) do
+                item.kind = kind_idx
+              end
+              return items
+            end,
+          },
+        },
+      },
 
       fuzzy = { implementation = "prefer_rust" },
     },

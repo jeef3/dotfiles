@@ -125,7 +125,9 @@ return {
             Snacks.picker.lsp_references()
           end, "Show references")
 
-          bufmap("n", "K", vim.lsp.buf.hover, "Show docs")
+          bufmap("n", "K", function()
+            vim.lsp.buf.hover({ border = { { " ", "NormalFloat" } } })
+          end, "Show docs")
 
           bufmap("n", "[g", function()
             vim.diagnostic.jump({
