@@ -6,6 +6,7 @@ return {
   -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
   lsp_configs = {
     "bashls",
+    "basedpyright",
     -- "denols",
     "eslint",
     "ghostty",
@@ -15,8 +16,9 @@ return {
     "omnisharp",
     "prismals",
     "postgres_lsp",
-    "pyright",
+    -- "pyright",
     -- "rnix-lsp",
+    "ruff",
     "sourcekit",
     "ts_ls",
     "yamlls",
@@ -26,6 +28,7 @@ return {
   -- https://github.com/mason-org/mason-registry/tree/main/packages
   mason_tools = {
     -- LSP
+    "basedpyright", --
     "bash-language-server", -- bashls
     "deno", -- denols
     "eslint-lsp", -- eslint
@@ -37,6 +40,7 @@ return {
     "prisma-language-server", -- prismals
     "postgres-language-server", -- postgres_lsp
     "pyright", --pyright
+    "ruff", --
     "sonarlint-language-server", --
     "typescript-language-server", -- ts_ls
     "yaml-language-server", -- yamlls
@@ -121,7 +125,7 @@ return {
     "jsdoc",
     "json",
     "json5",
-    "jsonc",
+    -- "jsonc",
     "lua",
     "luadoc",
     "luap",
