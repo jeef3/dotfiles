@@ -78,8 +78,6 @@ brew "ffmpeg"
 brew "gifsicle"
 
 # Terminal
-cask "wezterm"
-cask "kitty"
 cask "ghostty"
 
 # Apps
