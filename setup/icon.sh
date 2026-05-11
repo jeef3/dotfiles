@@ -42,7 +42,7 @@ get_icon() {
     unzip) echo "" ;;
     vim) echo "" ;;
     Vim) echo "" ;;
-    weechat) echo "󰭹";;
+    weechat) echo "󰭹" ;;
     wget) echo "" ;;
     yarn) echo "" ;;
     yazi) echo "" ;;

@@ -8,14 +8,14 @@ zle-keymap-select() {
   VIM_MODE="${${KEYMAP/vicmd/${CMD_MODE}}/(main|viins)/${INSERT_MODE}}"
 
   if [[ ${KEYMAP} == vicmd ]] ||
-    [[ $1 = 'block' ]]; then
-      echo -ne '\e[2 q'
+  [[ $1 = 'block' ]]; then
+    echo -ne '\e[2 q'
 
   elif [[ ${KEYMAP} == main ]] ||
-    [[ ${KEYMAP} == viins ]] ||
-    [[ ${KEYMAP} = '' ]] ||
-    [[ $1 = 'beam' ]]; then
-      echo -ne '\e[3 q'
+  [[ ${KEYMAP} == viins ]] ||
+  [[ ${KEYMAP} = '' ]] ||
+  [[ $1 = 'beam' ]]; then
+    echo -ne '\e[3 q'
   fi
 
   zle reset-prompt

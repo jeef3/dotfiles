@@ -27,7 +27,7 @@ while [ ! -z "$1"  ]; do
       ;;
     *)
   esac
-shift
+  shift
 done
 
 BRANCH_ICON=""

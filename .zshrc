@@ -26,7 +26,7 @@ setopt hist_expire_dups_first
 setopt interactive_comments
 
 for file in ~/.zsh/{plugins,prompt,path,aliases,functions}.zsh; do
-    [ -r "$file" ] && source "$file"
+  [ -r "$file" ] && source "$file"
 done
 unset file
 
@@ -36,8 +36,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 ((${+commands[rush]})) && {
-    _rush_completion() {
+  _rush_completion() {
 
-    }
-    compdef _rush_completion rush
+  }
+  compdef _rush_completion rush
 }
