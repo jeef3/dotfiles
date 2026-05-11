@@ -1,5 +1,5 @@
 local prettier_def = { "prettierd", "prettier", stop_after_first = true }
-local shell_def = { "shfmt" }
+local shell_def = { "beautysh" }
 
 return {
   -- LSP configs as per nvim-lspconfig
@@ -46,7 +46,7 @@ return {
     "yaml-language-server", -- yamlls
 
     -- Formatters
-    -- "beautysh",
+    "beautysh",
     "black",
     "csharpier",
     "dprint",
@@ -54,7 +54,8 @@ return {
     "pgformatter",
     "prettier",
     "prettierd",
-    "shfmt",
+    -- "shfmt",
+    "shellharden",
     "stylua",
 
     -- Linters
@@ -94,7 +95,9 @@ return {
   lint_filetypes = {
     javascript = { "eslint_d" },
     typescript = { "eslint_d" },
+    sh = { "shellharden" },
     swift = { "swiftlint" },
+    zsh = { "shellharden" },
   },
 
   treesitter_syntaxes = {

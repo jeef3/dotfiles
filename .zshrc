@@ -25,8 +25,6 @@ export SAVEHIST=${HISTSIZE}
 setopt hist_expire_dups_first
 setopt interactive_comments
 
-source ~/.config/wezterm/shell_integration.sh
-
 for file in ~/.zsh/{plugins,prompt,path,aliases,functions}.zsh; do
     [ -r "$file" ] && source "$file"
 done
@@ -34,12 +32,12 @@ unset file
 
 export NODE_OPTIONS="--max-old-space-size=8192"
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-(( ${+commands[rush]} )) && {
-  _rush_completion() {
-    compadd -- $(rush tab-complete --position ${CURSOR} --word "${BUFFER}" 2>>/dev/null)
-  }
-  compdef _rush_completion rush
+((${+commands[rush]})) && {
+    _rush_completion() {
+
+    }
+    compdef _rush_completion rush
 }

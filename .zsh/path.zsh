@@ -1,5 +1,3 @@
-export PATH="$HOME/.local/bin:$PATH"
-
 # Java
 export PATH="$BREW_HOME/opt/openjdk/bin:$PATH"
 
@@ -11,7 +9,7 @@ export PATH="$NPM_PACKAGES/bin:$PATH"
 export PATH="$BREW_HOME/opt/rustup/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# Pipx
+# Pythons app binaries
 export PATH="$HOME/.local/bin:$PATH"
 
 # Go
