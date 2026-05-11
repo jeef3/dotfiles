@@ -111,32 +111,6 @@ return {
   },
 
   ----------------
-  -- Lazygit
-  --
-  -- Plugin for calling lazygit from within neovim.
-  --
-  -- https://github.com/kdheepak/lazygit.nvim
-  ----------------
-  {
-    "kdheepak/lazygit.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    enabled = false,
-    config = function()
-      vim.g.lazygit_floating_window_winblend = 10
-      vim.g.lazygit_floating_window_use_plenary = 0
-    end,
-  },
-
-  ----------------
   -- Flog
   --
   -- A fast, beautiful, and powerful git branch viewer for vim.
@@ -147,13 +121,6 @@ return {
     "rbong/vim-flog",
     lazy = true,
     cmd = { "Flog", "Flogsplit", "Floggit" },
-    keys = {
-      {
-        "<leader>gb",
-        "<cmd>Flog<CR>",
-        desc = "Open Git branch view",
-      },
-    },
     dependencies = {
       "tpope/vim-fugitive",
     },
@@ -169,7 +136,7 @@ return {
   ----------------
   {
     "pwntester/octo.nvim",
-    requires = {
+    dependencies = {
       "nvim-lua/plenary.nvim",
       "folke/snacks.nvim",
       "nvim-tree/nvim-web-devicons",

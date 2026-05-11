@@ -190,32 +190,6 @@ return {
   },
 
   ----------------
-  -- Aerial
-  --
-  -- Neovim plugin for a code outline window
-  --
-  -- https://github.com/stevearc/aerial.nvim
-  ----------------
-  {
-    "stevearc/aerial.nvim",
-    lazy = true,
-    cmd = {
-      "AerialToggle",
-    },
-    opts = {
-      attach_mode = "global",
-
-      layout = {
-        min_width = 30,
-        max_width = 50,
-
-        placement = "edge",
-        default_direction = "right",
-      },
-    },
-  },
-
-  ----------------
   -- venv-selector.nvim
   --
   -- Allows selection of python virtual environment from within neovim
@@ -224,14 +198,6 @@ return {
   ----------------
   {
     "linux-cultist/venv-selector.nvim",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      {
-        "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",
-        dependencies = { "nvim-lua/plenary.nvim" },
-      }, -- optional: you can also use fzf-lua, snacks, mini-pick instead.
-    },
     ft = "python", -- Load when opening Python files
     keys = {
       { ",v", "<cmd>VenvSelect<cr>" }, -- Open picker on keymap
