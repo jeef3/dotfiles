@@ -1,3 +1,6 @@
+# Deduplicate PATH entries
+typeset -U PATH path
+
 # Java
 export PATH="$BREW_HOME/opt/openjdk/bin:$PATH"
 

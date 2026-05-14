@@ -7,7 +7,7 @@ source $ROOT/prompt/git-line.zsh
 source $ROOT/prompt/jobbies.zsh
 source $ROOT/prompt/vi-mode.zsh
 source $ROOT/prompt/border.zsh
-source $ROOT/prompt/node.sh
+source $ROOT/prompt/node.zsh
 source $ROOT/prompt/git-watcher.zsh
 
 setopt prompt_subst
