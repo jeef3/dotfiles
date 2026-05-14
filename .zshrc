@@ -31,9 +31,8 @@ done
 unset file
 
 export NODE_OPTIONS="--max-old-space-size=8192"
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+eval "$(fnm env --use-on-cd --shell zsh)"
+eval "$(fnm completions --shell zsh)"
 
 ((${+commands[rush]})) && {
   _rush_completion() {

@@ -1,5 +1,5 @@
 function node_version() {
-  if command -v nvm &>/dev/null; then
+  if command -v node &>/dev/null; then
     local dir=$(pwd)
     while [ "$dir" != "/" ]; do
       if [ -f "$dir/.nvmrc" ]; then
