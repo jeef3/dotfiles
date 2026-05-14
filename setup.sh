@@ -8,6 +8,9 @@ source $(dirname "$0")/setup/util.sh
 # Install Brew packages
 ./setup/brew ./Brewfile.base
 
+# Install global npm packages
+./setup/npm ./npmfile.base
+
 title "Set up GitHub"
 
 gh auth login

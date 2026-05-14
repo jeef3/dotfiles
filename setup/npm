@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+source $(dirname "$0")/util.sh
+source $(dirname "$0")/spinner.sh
+
+npmfile=$1
+
+if [ -z "$npmfile" ]; then
+  fail "No npmfile specified"
+  exit 1
+fi
+
+if [ ! -f "$npmfile" ]; then
+  fail "$npmfile" "not found"
+  exit 1
+fi
+
+title "npm Global Packages"
+
+while IFS= read -r package || [ -n "$package" ]; do
+  # Skip empty lines and comments
+  [[ -z "$package" || "$package" == \#* ]] && continue
+
+  if npm ls -g "$package" --depth=0 >/dev/null 2>&1; then
+    skip "$package" "already installed, skipping"
+  else
+    start_spinner "$package" "installing…"
+    output=$(npm install -g "$package" 2>&1)
+    if [ $? -eq 0 ]; then
+      stop_spinner
+      success "$package" "installed"
+    else
+      stop_spinner
+      fail "$package" "failed to install"
+    fi
+  fi
+done < "$npmfile"

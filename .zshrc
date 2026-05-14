@@ -36,7 +36,9 @@ eval "$(fnm completions --shell zsh)"
 
 ((${+commands[rush]})) && {
   _rush_completion() {
-
+    local words=("${(@s: :)LBUFFER}")
+    local completions=$(rush tab-complete --position ${CURSOR} --word "${words[-1]}" 2>/dev/null)
+    reply=(${(f)completions})
   }
-  compdef _rush_completion rush
+  compctl -K _rush_completion rush
 }
