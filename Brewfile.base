@@ -15,7 +15,7 @@ brew "ccls"
 brew "mono"
 
 # CLI Tools
-brew "7zip"
+brew "sevenzip" # 7zip
 brew "wget"
 brew "less"
 brew "ncdu"
@@ -25,10 +25,10 @@ brew "the_silver_searcher"
 brew "fzf"
 brew "ripgrep"
 brew "fd"
+brew "glow"
 brew "btop"
 brew "jq"
 brew "zoxide"
-brew "weechat"
 brew "bat"
 brew "pandoc"
 brew "grc"
@@ -40,13 +40,14 @@ brew "git-delta"
 brew "git-lfs"
 brew "lazygit"
 brew "gh"
-brew "copilot-cli"
 brew "diff-so-fancy"
-brew "diffsitter"
+brew "difftastic"
+cask "copilot-cli"
 
 
 # IDE Essentials
 brew "neovim"
+brew "tree-sitter"
 brew "tree-sitter-cli"
 brew "ranger"
 brew "yazi"
@@ -67,11 +68,11 @@ brew "go"
 brew "haskell-stack"
 brew "leoafarias/fvm/fvm"
 brew "luarocks"
-brew "fnm"
-brew "node"
+brew "fnm" # Node version manager, installed NodeJS
 brew "openjdk"
 brew "oven-sh/bun/bun"
 brew "python@3.13"
+brew "uv"
 brew "rustup"
 
 # Gifify
@@ -87,9 +88,10 @@ cask "docker"
 cask "figma"
 cask "the-unarchiver"
 
+# Mac App Store apps
+brew "mas"
 mas "Xcode", id: 497799835
 mas "Color Picker", id: 1545870783
-mas "DuckDuckGo", id: 663592361
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541

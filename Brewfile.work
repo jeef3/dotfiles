@@ -1,0 +1,3 @@
+brew "direnv"
+brew "jfrog-cli"
+brew "ldcli"
