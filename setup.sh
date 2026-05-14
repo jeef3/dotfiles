@@ -13,7 +13,11 @@ source $(dirname "$0")/setup/util.sh
 
 title "Set up GitHub"
 
-gh auth login
+if gh auth status >/dev/null 2>&1; then
+  skip "GitHub" "already logged in, skipping"
+else
+  gh auth login
+fi
 
 git remote set-url origin git@github.com:jeef3/dotfiles.git
 success "Dotfiles remote updated for write access"
