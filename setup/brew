@@ -2,8 +2,8 @@
 
 # set -e
 
-source $(dirname "$0")/util.sh
-source $(dirname "$0")/spinner.sh
+source "$(dirname "$0")/util.sh"
+source "$(dirname "$0")/spinner.sh"
 
 # SERVER=$1
 brewfile=$1

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-source $(dirname "$0")/setup/util.sh
-source $(dirname "$0")/setup/spinner.sh
+source "$(dirname "$0")/setup/util.sh"
+source "$(dirname "$0")/setup/spinner.sh"
 
 DEFAULT_DIR="$HOME/projects/dotfiles"
 
@@ -84,7 +84,7 @@ else
   success "Dotfiles" "updated"
 fi
 
-cd $TARGET_DIR
+cd "$TARGET_DIR"
 start_spinner "Git submodules" "installing…"
 git submodule init >/dev/null 2>&1
 git submodule update --recursive >/dev/null 2>&1

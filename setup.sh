@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-source $(dirname "$0")/setup/util.sh
+source "$(dirname "$0")/setup/util.sh"
 
 # Link dotfiles
 ./link.sh

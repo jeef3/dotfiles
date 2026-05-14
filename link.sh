@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $(dirname "$0")/setup/util.sh
+source "$(dirname "$0")/setup/util.sh"
 
 title "Linking Dotfiles"
 
