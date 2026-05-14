@@ -25,7 +25,7 @@ export SAVEHIST=${HISTSIZE}
 setopt hist_expire_dups_first
 setopt interactive_comments
 
-for file in ~/.zsh/{plugins,prompt,path,aliases,functions}.zsh; do
+for file in ~/.zsh/{plugins,prompt,aliases,functions}.zsh; do
   [ -r "$file" ] && source "$file"
 done
 unset file
