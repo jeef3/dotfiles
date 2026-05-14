@@ -56,26 +56,6 @@ return {
   },
 
   ------------------
-  -- Nvim Notify
-  --
-  -- A fancy, configurable, notification manager for NeoVim
-  --
-  -- https://github.com/rcarriga/nvim-notify
-  ------------------
-  {
-    "rcarriga/nvim-notify",
-    opts = {
-      render = "wrapped-compact",
-      on_open = function(win)
-        vim.api.nvim_win_set_config(win, { focusable = false })
-      end,
-    },
-    init = function()
-      vim.notify = require("notify")
-    end,
-  },
-
-  ------------------
   -- Netrw
   --
   -- It's not because we use netrw that we cannot have nice things!

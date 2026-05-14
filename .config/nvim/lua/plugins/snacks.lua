@@ -49,6 +49,11 @@ return {
     opts = {
       bigfile = { enabled = true },
 
+      notifier = {
+        enabled = true,
+        timeout = 3000,
+      },
+
       picker = {
         notify = { enabled = true },
         input = {
