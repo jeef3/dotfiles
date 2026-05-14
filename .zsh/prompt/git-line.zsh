@@ -11,6 +11,9 @@ CLEAN_ICON="\uf00c"
 SEPARATOR="${DARK_GRAY}•"
 
 git_line() {
+  # Wait for zsh-git-prompt plugin to be available
+  (( $+functions[precmd_update_git_vars] )) || return
+
   precmd_update_git_vars
 
   if [ -n "$__CURRENT_GIT_STATUS" ]; then
