@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+main="${1:-main}"
+for branch in $(git for-each-ref refs/heads/ --format="%(refname:short)"); do
+  if is-squashed "$branch" "$main"; then
+    echo "$branch"
+  fi
+done

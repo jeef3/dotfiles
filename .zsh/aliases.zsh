@@ -1,10 +1,8 @@
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
-alias hd="hidedesktop; hide.applescript"
-alias sd="showdesktop; show.applescript"
-
-alias bubu="bubu.sh"
+alias hd="hidedesktop; hide"
+alias sd="showdesktop; show"
 
 # App shortcuts
 alias t="todo.sh"

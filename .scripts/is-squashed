@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+branch="$1"
+main="${2:-main}"
+
+if [ -z "$branch" ]; then
+  echo "No branch specified. Usage:"
+  echo "isSquashed <branch> [main]"
+  exit 1
+fi
+
+ancestor_hash=$(git merge-base "$main" "$branch")
+tree_id=$(git rev-parse "${branch}^{tree}")
+
+dangling_commit_id=$(git commit-tree "$tree_id" -p "$ancestor_hash" -m "Temp commit for ${branch}")
+out=$(git cherry "$main" "$dangling_commit_id")
+
+expr "$out" : -. >/dev/null

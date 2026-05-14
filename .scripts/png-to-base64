@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+prefix="url('data:image/png;base64,"
+encoded=$(openssl base64 -in "$1" | tr -d '\n')
+suffix="')"
+
+echo "${prefix}${encoded}${suffix}"
