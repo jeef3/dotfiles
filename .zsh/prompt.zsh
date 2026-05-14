@@ -12,7 +12,7 @@ source $ROOT/prompt/git-watcher.zsh
 
 setopt prompt_subst
 
-function noop() { }
+zmodload zsh/sched
 
 function render_git_status() {
   # Escape codes move the git status up one row
@@ -22,13 +22,24 @@ function render_git_status() {
   async_stop_worker prompt_worker -n
 }
 
+function _rprompt_timeout() {
+  if [[ "$RPROMPT" == "…" ]]; then
+    async_stop_worker prompt_worker -n
+    RPROMPT='%{'$'\e[1A''%}%F{red}⚠%f%{'$'\e[1B''%}'
+    zle && zle .reset-prompt
+  fi
+}
+
 function async_load_rprompt() {
   async_init
   async_start_worker prompt_worker -n
   async_register_callback prompt_worker render_git_status
-  async_job prompt_worker noop
+  async_job prompt_worker :
 
   RPROMPT="…"
+
+  # Clear stale "…" after 5 seconds if git hasn't responded
+  sched +5 _rprompt_timeout
 }
 
 # Redraw prompt on terminal focus (requires focus reporting)
