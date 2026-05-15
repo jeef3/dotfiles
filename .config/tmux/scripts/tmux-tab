@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $(dirname "$0")/../setup/color.sh
+source "$(dirname "$0")/../colors.sh"
 
 while [ ! -z "$1"  ]; do
   case "$1" in

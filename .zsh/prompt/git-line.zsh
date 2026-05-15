@@ -8,7 +8,7 @@ CHANGED_ICON=" "
 UNTRACKED_ICON="\u2026"
 CLEAN_ICON="\uf00c"
 
-SEPARATOR="${DARK_GRAY}•"
+SEPARATOR="${BRIGHT_BLACK}•"
 
 git_line() {
   # Wait for zsh-git-prompt plugin to be available
@@ -40,10 +40,10 @@ git_line() {
     STATUS="${MAGENTA}${BOLD}${BRANCH_ICON} ${BRANCH}${RESET}"
 
     if [ "$GIT_BEHIND" -ne "0" ]; then
-      STATUS="${STATUS} ${SEPARATOR} ${PINK}${BEHIND_ICON}${GIT_BEHIND}${RESET}"
+      STATUS="${STATUS} ${SEPARATOR} ${MAGENTA}${BEHIND_ICON}${GIT_BEHIND}${RESET}"
     fi
     if [ "$GIT_AHEAD" -ne "0" ]; then
-      STATUS="${STATUS} ${SEPARATOR} ${PINK}${AHEAD_ICON}${GIT_AHEAD}${RESET}"
+      STATUS="${STATUS} ${SEPARATOR} ${MAGENTA}${AHEAD_ICON}${GIT_AHEAD}${RESET}"
     fi
 
     STATUS="${STATUS} ${SEPARATOR}"
@@ -52,7 +52,7 @@ git_line() {
       STATUS="${STATUS} ${MAGENTA}${CONFLICTS_ICON}${GIT_CONFLICTS}"
     fi
     if [ "$GIT_STAGED" -ne "0" ]; then
-      STATUS="${STATUS} ${ORANGE}${STAGED_ICON}${GIT_STAGED}"
+      STATUS="${STATUS} ${YELLOW}${STAGED_ICON}${GIT_STAGED}"
     fi
     if [ "$GIT_CHANGED" -ne "0" ]; then
       STATUS="${STATUS} ${GREEN}${CHANGED_ICON}${GIT_CHANGED}"
@@ -70,7 +70,7 @@ git_line() {
 
     if [ "$COLS" -gt 100 ]; then
       REMOTE_ORIGIN_URL=$(git config --get remote.origin.url | sed -En 's/(https:\/\/|git@)[^:\/]+(:|\/)(.+)\.git/\3/p')
-      REMOTE="${ITALIC}${DARK_GRAY}${REMOTE_ORIGIN_URL}"
+      REMOTE="${ITALIC}${BRIGHT_BLACK}${REMOTE_ORIGIN_URL}"
 
       STATUS="${STATUS} ${REMOTE}"
     fi

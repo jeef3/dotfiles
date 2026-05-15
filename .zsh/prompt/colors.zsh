@@ -1,0 +1,13 @@
+BOLD="%B"
+ITALIC="%{\e[3m%}"
+UNDERLINE="%U"
+RESET="%b%u%f%k%{\e[0m%}"
+
+BRIGHT_BLACK="%F{8}"
+BRIGHT_RED="%F{9}"
+BRIGHT_GREEN="%F{10}"
+RED="%F{1}"
+YELLOW="%F{3}"
+MAGENTA="%F{5}"
+GREEN="%F{2}"
+CYAN="%F{6}"

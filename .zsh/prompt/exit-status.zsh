@@ -1,3 +1,3 @@
 exit_status() {
-  echo "%(?.%F{10}󱢠.%F{9}󰴔) "
+  echo "%(?.${BRIGHT_GREEN}󱢠.${BRIGHT_RED}󰴔) "
 }

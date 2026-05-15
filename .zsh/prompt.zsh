@@ -1,5 +1,5 @@
 ROOT=${0:A:h}
-source $ROOT/prompt/output.zsh
+source $ROOT/prompt/colors.zsh
 
 source $ROOT/prompt/current-dir.zsh
 source $ROOT/prompt/exit-status.zsh
@@ -14,9 +14,13 @@ setopt prompt_subst
 
 zmodload zsh/sched
 
+# Cursor movement for RPROMPT on row above
+CURSOR_UP=$'%{\e[1A%}'
+CURSOR_DOWN=$'%{\e[1B%}'
+
 function render_git_status() {
   # Escape codes move the git status up one row
-  RPROMPT='%{'$'\e[1A''%}$(git_line)%{'$'\e[1B''%}'
+  RPROMPT="${CURSOR_UP}$(git_line)${CURSOR_DOWN}"
 
   zle && zle .reset-prompt
   async_stop_worker prompt_worker -n
@@ -25,7 +29,7 @@ function render_git_status() {
 function _rprompt_timeout() {
   if [[ "$RPROMPT" == "…" ]]; then
     async_stop_worker prompt_worker -n
-    RPROMPT='%{'$'\e[1A''%}%F{red}⚠%f%{'$'\e[1B''%}'
+    RPROMPT="${CURSOR_UP}${RED}⚠${RESET}${CURSOR_DOWN}"
     zle && zle .reset-prompt
   fi
 }
@@ -41,7 +45,7 @@ function async_load_rprompt() {
   async_register_callback prompt_worker render_git_status
   async_job prompt_worker :
 
-  RPROMPT='%{'$'\e[1A''%}%F{8}▬▬▬  • %f%{'$'\e[1B''%}'
+  RPROMPT="${CURSOR_UP}${BRIGHT_BLACK}▬▬▬  • ${RESET}${CURSOR_DOWN}"
 
   # Clear stale "…" after 5 seconds if git hasn't responded
   sched +5 _rprompt_timeout
