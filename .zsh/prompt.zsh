@@ -31,12 +31,17 @@ function _rprompt_timeout() {
 }
 
 function async_load_rprompt() {
+  if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+    RPROMPT=""
+    return
+  fi
+
   async_init
   async_start_worker prompt_worker -n
   async_register_callback prompt_worker render_git_status
   async_job prompt_worker :
 
-  RPROMPT="…"
+  RPROMPT='%{'$'\e[1A''%}%F{8}▬▬▬  • %f%{'$'\e[1B''%}'
 
   # Clear stale "…" after 5 seconds if git hasn't responded
   sched +5 _rprompt_timeout

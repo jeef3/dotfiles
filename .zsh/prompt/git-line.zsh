@@ -14,6 +14,9 @@ git_line() {
   # Wait for zsh-git-prompt plugin to be available
   (( $+functions[precmd_update_git_vars] )) || return
 
+  # Not in a git repo
+  git rev-parse --is-inside-work-tree &>/dev/null || return
+
   precmd_update_git_vars
 
   if [ -n "$__CURRENT_GIT_STATUS" ]; then
