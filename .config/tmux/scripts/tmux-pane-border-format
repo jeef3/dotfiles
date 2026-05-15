@@ -114,7 +114,7 @@ else
     if [ $IS_ACTIVE -eq 0 ]; then
       STAT_R="#[fg=$SILVER_800,bg=default]┤#[fg=$SILVER_500] $BRANCH_ICON $GIT_STAT #[fg=$SILVER_800]├#[default]"
     else
-      STAT_R="#[fg=$GREEN_600,bg=default]┫#[fg=$SILVER_200] $BRANCH_ICON $GIT_STAT #[fg=$GREEN_500]┣#[default]"
+      STAT_R="#[fg=$GREEN_500,bg=default]┫#[fg=$SILVER_200] $BRANCH_ICON $GIT_STAT #[fg=$GREEN_500]┣#[default]"
     fi
   else
     STAT_R=""

@@ -15,24 +15,25 @@ font-thicken = true
 font-thicken-strength = 255
 
 background = #1d1d26
+foreground = #ffffff
 
-palette = 0=#4b4b50
-palette = 1=#ff3399
-palette = 2=#00d364
-palette = 3=#ffcc66
-palette = 4=#00bfff
-palette = 5=#cc66ff
-palette = 6=#00ced1
-palette = 7=#f8f8ff
+palette = 0=#2c2c3e
+palette = 1=#d4096e
+palette = 2=#069248
+palette = 3=#f5a70d
+palette = 4=#0786b1
+palette = 5=#a70df5
+palette = 6=#068f91
+palette = 7=#b8b8b8
 
-palette = 8=#686889
+palette = 8=#3d3d56
 palette = 9=#ff3399
 palette = 10=#00d364
 palette = 11=#ffcc66
 palette = 12=#00bfff
 palette = 13=#cc66ff
 palette = 14=#00ced1
-palette = 15=#ff0000
+palette = 15=#ffffff
 
 window-decoration = true
 window-padding-balance = true
