@@ -2,18 +2,28 @@
 
 source "$(dirname "$0")/../colors.sh"
 
+IS_ACTIVE=0
+FLAGS=""
+
 while [ ! -z "$1"  ]; do
   case "$1" in
     --active)
-      shift
       IS_ACTIVE=1
+      ;;
+    --flags)
+      shift
+      FLAGS="$1"
       ;;
     *)
   esac
   shift
 done
 
-if [ $IS_ACTIVE -eq 1 ]; then
+BELL_ICON="󰂞"
+
+if [[ "$FLAGS" == *"!"* ]]; then
+  echo "#[fg=$PINK_500]$BELL_ICON #W #[default]"
+elif [ $IS_ACTIVE -eq 1 ]; then
   echo "#[fg=$PURPLE_500]#[bold]#I #W #[default]"
 else
   echo "#[fg=$SILVER_500]#I #W #[default]"
