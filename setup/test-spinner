@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+source "$(dirname "$0")/util.sh"
+source "$(dirname "$0")/spinner.sh"
+
+title "Spinner Test"
+
+# Test 1: Basic start/stop
+info "Test 1" "start_spinner + stop_spinner"
+start_spinner "Installing" "something cool…"
+sleep 2
+stop_spinner
+success "Test 1" "basic start/stop"
+
+# Test 2: Update spinner
+info "Test 2" "update_spinner"
+start_spinner "Tapping" "first item…"
+sleep 1
+update_spinner "Tapping" "second item…"
+sleep 1
+update_spinner "Tapping" "third item…"
+sleep 1
+stop_spinner
+success "Test 2" "update spinner"
+
+# Test 3: Verify temp file cleanup
+info "Test 3" "temp file cleanup"
+start_spinner "Cleanup test" "checking…"
+SPINNER_DIR_CHECK="$SPINNER_DIR"
+sleep 1
+stop_spinner
+if [ -d "$SPINNER_DIR_CHECK" ]; then
+  fail "Test 3" "temp directory still exists: $SPINNER_DIR_CHECK"
+else
+  success "Test 3" "temp directory cleaned up"
+fi
+
+# Test 4: Rapid start/stop cycles
+info "Test 4" "rapid start/stop cycles"
+for i in 1 2 3; do
+  start_spinner "Cycle $i" "running…"
+  sleep 0.5
+  stop_spinner
+done
+success "Test 4" "rapid cycles"
+
+# Check no leftover temp dirs
+leftover=$(find "${TMPDIR:-/tmp}" -maxdepth 1 -name "dotfiles-spinner.*" -type d 2>/dev/null)
+if [ -n "$leftover" ]; then
+  warn "Cleanup" "leftover temp dirs found: $leftover"
+else
+  success "Cleanup" "no leftover temp dirs"
+fi
+
+title "All tests passed!"
