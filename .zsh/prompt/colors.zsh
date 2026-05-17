@@ -1,7 +1,7 @@
 BOLD="%B"
 ITALIC="%{\e[3m%}"
 UNDERLINE="%U"
-RESET="%b%u%f%k%{\e[0m%}"
+RESET="%b%u%f%k"
 
 BRIGHT_BLACK="%F{8}"
 BRIGHT_RED="%F{9}"
