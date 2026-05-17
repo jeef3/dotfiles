@@ -37,19 +37,19 @@ git_line() {
     fi
 
     # Branch name
-    STATUS="${MAGENTA}${BOLD}${BRANCH_ICON} ${BRANCH}${RESET}"
+    STATUS="${RED}${BOLD}${BRANCH_ICON} ${BRANCH}${RESET}"
 
     if [ "$GIT_BEHIND" -ne "0" ]; then
-      STATUS="${STATUS} ${SEPARATOR} ${MAGENTA}${BEHIND_ICON}${GIT_BEHIND}${RESET}"
+      STATUS="${STATUS} ${SEPARATOR} ${RED}${BEHIND_ICON}${GIT_BEHIND}${RESET}"
     fi
     if [ "$GIT_AHEAD" -ne "0" ]; then
-      STATUS="${STATUS} ${SEPARATOR} ${MAGENTA}${AHEAD_ICON}${GIT_AHEAD}${RESET}"
+      STATUS="${STATUS} ${SEPARATOR} ${RED}${AHEAD_ICON}${GIT_AHEAD}${RESET}"
     fi
 
     STATUS="${STATUS} ${SEPARATOR}"
 
     if [ "$GIT_CONFLICTS" -ne "0" ]; then
-      STATUS="${STATUS} ${MAGENTA}${CONFLICTS_ICON}${GIT_CONFLICTS}"
+      STATUS="${STATUS} ${RED}${CONFLICTS_ICON}${GIT_CONFLICTS}"
     fi
     if [ "$GIT_STAGED" -ne "0" ]; then
       STATUS="${STATUS} ${YELLOW}${STAGED_ICON}${GIT_STAGED}"
@@ -76,7 +76,7 @@ git_line() {
     fi
 
     if [ "$COLS" -lt 55 ]; then
-      STATUS="$MAGENTA$BOLD$BRANCH_ICON"
+      STATUS="$RED$BOLD$BRANCH_ICON"
     fi
 
     echo "${STATUS}${RESET}"

@@ -1,5 +1,5 @@
 BOLD="%B"
-ITALIC="%{\e[3m%}"
+ITALIC=$'%{\e[3m%}'
 UNDERLINE="%U"
 RESET="%b%u%f%k"
 
