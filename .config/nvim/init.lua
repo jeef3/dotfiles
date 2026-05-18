@@ -58,7 +58,7 @@ vim.keymap.set("n", "<C-h>", "<C-W>h")
 vim.keymap.set("n", "<C-l>", "<C-W>l")
 
 -- Toggle display of listchars
--- vim.keymap.set("n", "<Leader>c", ":set list!<cr>")
+vim.keymap.set("n", "<Leader>c", ":set list!<cr>")
 
 -- Close Quickfix window
 vim.keymap.set("n", "<leader>qq", ":cclose<CR>")
