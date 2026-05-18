@@ -1,0 +1,9 @@
+# ov pager config
+QuitSmall: false
+SectionHeader: true
+
+General:
+  Wrap: false
+  Prompt:
+    Normal: {}
+    Input: {}

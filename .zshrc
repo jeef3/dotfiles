@@ -7,12 +7,12 @@ export LC_ALL="en_US.UTF-8"
 export LANG="en_US.UTF-8"
 
 export EDITOR="nvim"
-export LESS="-FXR --mouse"
+export PAGER="ov"
 
 export CLICOLOR=1
 
 # Don’t clear the screen after quitting a manual page
-export MANPAGER="less -X"
+export MANPAGER="ov"
 
 # Load scripts
 [[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH

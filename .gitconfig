@@ -30,7 +30,7 @@
     editor = nvim
     excludesfile = ~/.gitignore-global
     attributesfile = ~/.gitattributes
-    pager = less -LRc --mouse
+    pager = ov -F
     autocrlf = input
     ignorecase = false
 [color "diff"]
@@ -40,11 +40,6 @@
     old = red bold
     new = green bold
     whitespace = red reverse
-[color "diff-highlight"]
-    oldNormal = "red bold"
-    oldHighlight = "red bold 52"
-    newNormal = "green bold"
-    newHighlight = "green bold 22"
 [color "branch"]
     current = yellow reverse
     local = yellow
@@ -69,9 +64,9 @@
     autostash = true
 
 [help]
-    autocorrect = 1
+    autocorrect = prompt
 [push]
-    default = tracking
+    default = current
 
 [delta "woolly-mammoth"]
     # author: https://github.com/Kr1ss-XD
@@ -108,35 +103,27 @@
 [delta]
     navigate = true
     line-numbers = true
-    plus-style = bold green
-    minus-style = bold red
     wrap-max-lines = 0
+    max-line-length = 0
     features = woolly-mammoth
 
 [pager]
-    diff = LESS='LRc --mouse' delta
-    ; show = LESS='LRc --mouse' delta
-    ; stash = LESS='LRc --mouse' delta
-    ; log = LESS='--mouse' delta
-    ; reflog = LESS='LRc --mouse' delta
+    diff = delta --pager='ov -F'
+    show = delta --pager='ov -F'
+    log = ov -F
+    stash = delta --pager='ov -F'
 
 [interactive]
-  diffFilter = delta --color-only --wrap-max-lines 0
+    diffFilter = delta --color-only --wrap-max-lines 0
 
 [diff]
-  tool = diffsitter
-  colorMoved = default
+    colorMoved = default
 
-[diff "image"]
-  command = ~/git-imgdiff
 [filter "lfs"]
     required = true
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
-
-[difftool "diffsitter"]
-  cmd = diffsitter diff "$LOCAL" "$REMOTE"
 
 [include]
     path = ~/.gitconfig.local

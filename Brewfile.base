@@ -17,6 +17,7 @@ brew "mono"
 # CLI Tools
 brew "sevenzip" # 7zip
 brew "wget"
+brew "ov"
 brew "less"
 brew "ncdu"
 brew "eza"

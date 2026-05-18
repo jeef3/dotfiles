@@ -23,6 +23,7 @@ symlinks=(
   .config/kitty
   .config/ghostty
   .config/nvim
+  .config/ov
   .config/ranger
   .config/todotxt-tui
   .config/tmux
