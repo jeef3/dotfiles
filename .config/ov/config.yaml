@@ -4,6 +4,4 @@ SectionHeader: true
 
 General:
   Wrap: false
-  Prompt:
-    Normal: {}
-    Input: {}
+  StatusLine: false
