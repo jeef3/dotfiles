@@ -1,7 +1,7 @@
 bindkey -v
 
-INSERT_MODE="${BRIGHT_GREEN}❯"
-CMD_MODE="${BRIGHT_RED}❯"
+INSERT_MODE="${GREEN}❯"
+CMD_MODE="${RED}❯"
 VIM_MODE=$INSERT_MODE
 
 zle-keymap-select() {
