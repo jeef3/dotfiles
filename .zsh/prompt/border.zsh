@@ -1,3 +1,3 @@
 border() {
-  print -- ${BRIGHT_BLACK}${(l:COLUMNS::╌:)}
+  print -- ${BLACK}${(l:COLUMNS::╌:)}
 }

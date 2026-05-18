@@ -14,10 +14,10 @@ font-style-bold-italic = "Bold Italic"
 font-thicken = true
 font-thicken-strength = 255
 
-background = #25252b
+background = #1d1d23
 foreground = #ffffff
 
-palette = 0=#1d1d23
+palette = 0=#2d2d35
 palette = 1=#ff3399
 palette = 2=#00d364
 palette = 3=#ffcc66
@@ -26,7 +26,7 @@ palette = 5=#cc66ff
 palette = 6=#00ced1
 palette = 7=#b4b3ce
 
-palette = 8=#4b4b5a
+palette = 8=#6c6c82
 palette = 9=#ff5cad
 palette = 10=#10ff81
 palette = 11=#ffd685
