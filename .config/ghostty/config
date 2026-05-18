@@ -5,12 +5,6 @@ font-style-italic = "Extra Light Italic"
 font-style-bold = "Bold"
 font-style-bold-italic = "Bold Italic"
 
-# font-family = "Annotation Mono"
-# font-style = "Light"
-# font-style-italic = "Light Italic"
-# font-style-bold = "ExtraBlack"
-# font-style-bold-italic = "ExtraBlack Oblique"
-
 font-thicken = true
 font-thicken-strength = 255
 
@@ -41,12 +35,3 @@ macos-titlebar-style = transparent
 macos-titlebar-proxy-icon = hidden
 
 title = " "
-
-# initial-command = ~/.scripts/start-tmux.sh
-
-# custom-shader = /Users/jeff.knaggs/projects/crt-shader-with-chromatic-aberration-glow-scanlines-dot-matrix/crt-shader-with-chromatic-aberration-glow-scanlines-dot-matrix.glsl
-
-# custom-shader = /Users/jeff.knaggs/projects/Fearless-Geek-Shaders-for-Ghostty/computer-glitchy-4.glsl
-
-# custom-shader = /Users/jeff.knaggs/projects/ghostty_shaders/glow.glsl
-# custom-shader = /Users/jeff.knaggs/projects/gshaders/tft.glsl
