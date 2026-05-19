@@ -12,8 +12,7 @@ TITLE_PIPE=""
 DESCRIPTION_PIPE=""
 SPIN_PID=0
 
-function draw_spinner()
-{
+function draw_spinner() {
   local i=0
 
   local title=""
@@ -32,7 +31,7 @@ function draw_spinner()
     fi
 
     if [[ "$title" != "$previous_title" || "$description" != "$previous_description" ]]; then
-      printf '\033[2K\r'  # Clear the line
+      printf '\033[2K\r' # Clear the line
 
       previous_title="$title"
       previous_description="$description"
@@ -48,19 +47,18 @@ function draw_spinner()
   exec 4>&-
 }
 
-function start_spinner()
-{
+function start_spinner() {
   SPINNER_DIR=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-spinner.XXXXXX")
   TITLE_PIPE="$SPINNER_DIR/title.pipe"
   DESCRIPTION_PIPE="$SPINNER_DIR/description.pipe"
 
   mkfifo "$TITLE_PIPE" "$DESCRIPTION_PIPE"
 
-  exec 3<> "$TITLE_PIPE"
-  exec 4<> "$DESCRIPTION_PIPE"
+  exec 3<>"$TITLE_PIPE"
+  exec 4<>"$DESCRIPTION_PIPE"
 
-  echo "$1" > "$TITLE_PIPE"
-  echo "$2" > "$DESCRIPTION_PIPE"
+  echo "$1" >"$TITLE_PIPE"
+  echo "$2" >"$DESCRIPTION_PIPE"
 
   # Hide the cursor and disable input
   printf '\e[?25l'
@@ -74,14 +72,13 @@ function start_spinner()
 }
 
 function update_spinner() {
-  echo "$1" > "$TITLE_PIPE"
-  echo "$2" > "$DESCRIPTION_PIPE"
+  echo "$1" >"$TITLE_PIPE"
+  echo "$2" >"$DESCRIPTION_PIPE"
 }
 
-function stop_spinner()
-{
+function stop_spinner() {
   if [[ "${SPIN_PID}" -gt 0 ]]; then
-    kill -TERM "${SPIN_PID}" > /dev/null 2>&1
+    kill -TERM "${SPIN_PID}" >/dev/null 2>&1
     wait "${SPIN_PID}" 2>/dev/null
   fi
   SPIN_PID=0

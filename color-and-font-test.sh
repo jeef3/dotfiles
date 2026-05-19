@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 # Font styles
 printf "\n"
@@ -22,8 +22,8 @@ colors=(black red green yellow blue purple cyan white)
 printf " Normal (0-7)   Bright (8-15)\n"
 for i in {0..7}; do
   printf "\e[%dm %-8s \e[0m     \e[%dm %-8s \e[0m\n" \
-    $((30+i)) "${colors[$((i+1))]}" \
-    $((90+i)) "${colors[$((i+1))]}"
+    $((30+i)) "${colors[$i]}" \
+    $((90+i)) "${colors[$i]}"
 done
 printf "\n"
 
