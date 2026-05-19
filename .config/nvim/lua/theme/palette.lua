@@ -86,7 +86,7 @@ M.palette = {
   [13] = M.purple_400,
   [14] = M.turquoise_400,
   [15] = M.silver_100,
-  fg   = M.silver_100,
+  fg   = M.silver_200,
   bg   = M.silver_900,
 }
 

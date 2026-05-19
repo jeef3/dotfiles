@@ -14,6 +14,8 @@ local comment = p.silver_500
 local gutter = p.silver_600
 local subtle = p.silver_700
 local float_bg = p.silver_800
+local selected_fg = p.silver_100
+local selected_bg = p.blue_700
 
 local pink = p.pink_500
 local blue = p.blue_500
@@ -97,7 +99,7 @@ local function setup()
   hi("MatchWord", { bg = p.blue_800, bold = true })
 
   -- === Misc ===
-  hi("Title", { fg = pink, bold = true })
+  hi("Title", { fg = bg, bg = pink, bold = true })
   hi("MoreMsg", { fg = green, bold = true })
   hi("NonText", { fg = subtle, bold = true })
 
@@ -132,7 +134,7 @@ local function setup()
   hi("Pmenu", { fg = fg, bg = float_bg })
   hi("PmenuSbar", { fg = fg, bg = subtle })
   hi("PmenuThumb", { fg = fg, bg = gutter })
-  hi("PmenuSel", { fg = p.silver_200, bg = p.blue_700, bold = true })
+  hi("PmenuSel", { fg = selected_fg, bg = selected_bg, bold = true })
 
   -- === Completion (cmp) ===
   hi("CmpItemAbbrDeprecated", { fg = fg })
@@ -202,7 +204,7 @@ local function setup()
   hi("SnacksPickerMatch", { fg = blue })
   hi(
     "SnacksPickerListCursorLine",
-    { fg = p.silver_200, bg = p.blue_700, bold = true }
+    { fg = selected_fg, bg = selected_bg, bold = true }
   )
 
   -- === DAP ===

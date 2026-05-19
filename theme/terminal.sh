@@ -22,6 +22,5 @@ PALETTE_12="$BLUE_400"      # bright blue
 PALETTE_13="$PURPLE_400"    # bright magenta
 PALETTE_14="$TURQUOISE_400" # bright cyan
 PALETTE_15="$SILVER_100"    # bright white
-
-PALETTE_FG="$SILVER_100"    # foreground
+PALETTE_FG="$SILVER_200"    # foreground
 PALETTE_BG="$SILVER_900"    # background

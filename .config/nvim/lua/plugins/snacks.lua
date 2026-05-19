@@ -69,7 +69,6 @@ return {
         },
         layout = {
           layout = {
-            backdrop = false, -- Vimade does this for me
             row = 4,
             width = 0.4,
             min_width = 80,
@@ -102,31 +101,9 @@ return {
                 border = { " ", " ", " ", " ", "", "", "", " " },
               },
             },
-            -- {
-            --   box = "vertical",
-            --   auto_hide = true,
-            --   row = 1,
-            --   border = {
-            --     "🬕",
-            --     "🬂",
-            --     "🬨",
-            --     "▐",
-            --     "🬷",
-            --     "🬭",
-            --     "🬲",
-            --     "▌",
-            --   },
-            --   title = "Preview",
-            --   title_pos = "center",
-            --   {
-            --     win = "preview",
-            --   },
-            -- },
           },
         },
       },
-
-      -- explorer = {}, -- Replaces netrw
 
       lazygit = {
         win = {

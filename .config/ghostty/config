@@ -19,7 +19,7 @@ title = " "
 # ⚠️  DO NOT EDIT BELOW — generated from theme/palette.sh
 # =============================================================================
 background = #1d1d23
-foreground = #ffffff
+foreground = #d9d8ea
 
 palette = 0=#2d2d35
 palette = 1=#ff3399
