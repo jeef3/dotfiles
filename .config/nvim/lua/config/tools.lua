@@ -27,7 +27,7 @@ return {
   -- https://github.com/mason-org/mason-registry/tree/main/packages
   mason_tools = {
     -- LSP
-    "basedpyright", --
+    "basedpyright", -- basedpyright
     "bash-language-server", -- bashls
     "deno", -- denols
     "eslint-lsp", -- eslint
@@ -38,13 +38,12 @@ return {
     "omnisharp", -- omnisharp
     "prisma-language-server", -- prismals
     "postgres-language-server", -- postgres_lsp
-    "ruff", --
+    "ruff", -- ruff
     "typescript-language-server", -- ts_ls
     "yaml-language-server", -- yamlls
 
     -- Formatters
     "csharpier",
-    "pgformatter",
     "prettier",
     "prettierd",
     "shfmt",
@@ -104,7 +103,6 @@ return {
     "jsdoc",
     "json",
     "json5",
-    -- "jsonc",
     "lua",
     "luadoc",
     "luap",

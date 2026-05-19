@@ -176,7 +176,7 @@ return {
       formatters_by_ft = tools.conform_filetypes,
       format_on_save = {},
       formatters = {
-        beautysh = {
+        shfmt = {
           prepend_args = { "-i", "2" },
         },
       },
