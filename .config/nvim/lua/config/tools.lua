@@ -72,7 +72,6 @@ return {
     typescript = prettier_def,
     typescriptreact = prettier_def,
     yaml = prettier_def,
-    zsh = shell_def,
   },
 
   treesitter_syntaxes = {
