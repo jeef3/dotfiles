@@ -45,14 +45,13 @@ return {
   {
     "lewis6991/satellite.nvim",
     enabled = true,
-    config = function()
-      require("satellite").setup({
-        current_only = true,
-        handlers = {
-          gitsigns = { enable = false },
-        },
-      })
-    end,
+    opts = {
+      current_only = true,
+      handlers = {
+        gitsigns = { enable = false },
+        -- search = { enable = true },
+      },
+    },
   },
 
   ------------------
