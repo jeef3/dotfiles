@@ -53,7 +53,7 @@ HEADER
       fi
 
       # Convert to lowercase for lua (SILVER_100 → silver_100)
-      local lua_name="${name,,}"
+      local lua_name="$(echo "$name" | tr '[:upper:]' '[:lower:]')"
       echo "M.$lua_name = \"$value\"" >>"$outfile"
     fi
   done <"$PALETTE_FILE"
@@ -66,7 +66,7 @@ HEADER
   while IFS= read -r line; do
     if [[ "$line" =~ ^PALETTE_([0-9]+|FG|BG)=\"\$([A-Z_0-9]+)\" ]]; then
       local slot="${BASH_REMATCH[1]}"
-      local ref="${BASH_REMATCH[2],,}" # lowercase
+      local ref="$(echo "${BASH_REMATCH[2]}" | tr '[:upper:]' '[:lower:]')" # lowercase
 
       case "$slot" in
       FG) printf '  fg   = M.%s,\n' "$ref" >>"$outfile" ;;
