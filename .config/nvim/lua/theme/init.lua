@@ -8,7 +8,7 @@ local p = require("theme.palette")
 
 -- Semantic aliases
 local bg = p.silver_900
-local fg = p.silver_300
+local fg = p.silver_200
 local white = p.silver_100
 local comment = p.silver_500
 local gutter = p.silver_600
@@ -84,10 +84,10 @@ local function setup()
   hi("StatusLineNC", { fg = p.pink_700 })
   hi("StatusLineNormalA", { fg = white, bg = p.pink_600 })
   hi("StatusLineNormalB", { fg = white, bg = float_bg })
-  hi("StatusLineNormalC", { fg = comment, bg = p.silver_800 })
+  hi("StatusLineNormalC", { fg = comment, bg = float_bg })
   hi("StatusLineInactiveA", { fg = fg, bg = p.pink_600 })
   hi("StatusLineInactiveB", { fg = fg, bg = float_bg })
-  hi("StatusLineInactiveC", { fg = comment, bg = p.silver_800 })
+  hi("StatusLineInactiveC", { fg = comment, bg = float_bg })
   hi("StatusLineInsert", { fg = white, bg = p.green_600 })
   hi("StatusLineReplace", { fg = bg, bg = p.orange_600 })
   hi("StatusLineCommand", { fg = white, bg = p.purple_600 })
@@ -106,7 +106,7 @@ local function setup()
   hi("SpellLocal", { undercurl = true, sp = p.purple_700 })
   hi("SpellRare", { undercurl = true, sp = p.green_700 })
 
-  -- === Syntax ===
+  -- === Syntax (legacy vim groups, fallback when treesitter inactive) ===
   hi("Constant", { fg = purple, bold = true })
   hi("String", { fg = orange })
   hi("Character", { fg = purple })
@@ -186,17 +186,6 @@ local function setup()
   hi("Folded", { fg = comment, bg = float_bg, italic = true })
   hi("FoldColumn", { fg = comment, bg = bg })
 
-  -- === Telescope ===
-  hi("TelescopeNormal", { bg = float_bg })
-  hi("TelescopeBorder", { bg = float_bg })
-  hi("TelescopeSelection", { fg = white, bg = comment })
-  hi("TelescopeSelectionCaret", { fg = purple })
-  hi("TelescopeMatching", { fg = blue, bold = true })
-  hi("TelescopePromptNormal", { fg = fg, bg = subtle })
-  hi("TelescopePromptBorder", { fg = subtle, bg = subtle })
-  hi("TelescopePreviewBorder", { link = "TelescopeBorder" })
-  hi("TelescopePromptPrefix", { fg = gutter })
-
   -- === Noice ===
   hi("NoiceCmdline", { fg = fg, bg = subtle })
   hi("NoiceCmdlinePopup", { fg = fg, bg = subtle })
@@ -241,9 +230,9 @@ local function setup()
   hi("LeapLabelSecondary", { fg = p.blue_600 })
 
   -- === Illuminate ===
-  hi("IlluminatedWordText", { bg = gutter })
-  hi("IlluminatedWordRead", { bg = gutter })
-  hi("IlluminatedWordWrite", { bg = gutter })
+  hi("IlluminatedWordText", { bg = float_bg })
+  hi("IlluminatedWordRead", { bg = float_bg })
+  hi("IlluminatedWordWrite", { bg = float_bg })
 
   -- === Rainbow Delimiters ===
   hi("RainbowDelimiterYellow", { fg = orange })
@@ -275,7 +264,7 @@ local function setup()
   -- === Indent ===
   hi("MiniIndentscopeSymbol", { fg = gutter })
 
-  -- === CSS ===
+  -- === CSS (legacy vim-syntax fallback) ===
   hi("cssClassName", { fg = green })
   hi("cssBraces", { fg = fg })
   hi("cssDefinition", { fg = blue, italic = true })
@@ -296,12 +285,11 @@ local function setup()
   hi("cssColor", { fg = purple })
 
   -- === Treesitter ===
-  hi("@conditional.ternary", { fg = pink, bold = true })
+  hi("@keyword.conditional.ternary", { fg = pink, bold = true })
   hi("@constant.builtin", { fg = purple })
   hi("@constructor", { fg = blue })
 
   hi("@keyword", { fg = pink, bold = true })
-  hi("@keyword.lua", { fg = pink, bold = true })
   hi("@keyword.function", { fg = blue, bold = true, italic = true })
   hi("@keyword.return", { fg = pink, bold = true })
   hi("@keyword.import", { fg = pink, bold = true })
@@ -322,8 +310,6 @@ local function setup()
   hi("@function.call", { fg = green })
   hi("@function.macro", { fg = green })
   hi("@function.css", { fg = turquoise })
-
-  hi("@parameter", { fg = orange, italic = true })
 
   hi("@property", { fg = fg })
   hi("@property.css", { fg = blue, italic = true })
