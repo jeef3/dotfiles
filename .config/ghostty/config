@@ -8,6 +8,15 @@ font-style-bold-italic = "Bold Italic"
 font-thicken = true
 font-thicken-strength = 255
 
+window-decoration = true
+window-padding-balance = true
+macos-titlebar-style = transparent
+macos-titlebar-proxy-icon = hidden
+
+title = " "
+
+# Princess palette — generated from theme/palette.sh
+# Do not touch anything below this line
 background = #1d1d23
 foreground = #ffffff
 
@@ -21,17 +30,10 @@ palette = 6=#00ced1
 palette = 7=#b4b3ce
 
 palette = 8=#6c6c82
-palette = 9=#ff5cad
-palette = 10=#10ff81
-palette = 11=#ffd685
-palette = 12=#33ccff
-palette = 13=#d685ff
-palette = 14=#0efcff
+palette = 9=#ff72b0
+palette = 10=#67de86
+palette = 11=#ffd686
+palette = 12=#70cdff
+palette = 13=#db8cff
+palette = 14=#6ad9db
 palette = 15=#ffffff
-
-window-decoration = true
-window-padding-balance = true
-macos-titlebar-style = transparent
-macos-titlebar-proxy-icon = hidden
-
-title = " "
