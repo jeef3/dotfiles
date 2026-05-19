@@ -1,9 +1,7 @@
 -- =============================================================================
 -- Princess — Neovim Colorscheme
--- Based on Tinacious Design: https://github.com/tinacious/vscode-tinacious-design-syntax
--- =============================================================================
--- No dependencies. Uses generated palette.
--- Source of truth: theme/palette.sh
+-- Based on Tinacious Design:
+-- https://github.com/tinacious/vscode-tinacious-design-syntax
 -- =============================================================================
 
 local p = require("theme.palette")
@@ -213,7 +211,10 @@ local function setup()
   hi("SnacksPickerDir", { fg = comment })
   hi("SnacksPickerList", { fg = white, bg = subtle })
   hi("SnacksPickerMatch", { fg = blue })
-  hi("SnacksPickerListCursorLine", { fg = p.silver_200, bg = p.blue_700, bold = true })
+  hi(
+    "SnacksPickerListCursorLine",
+    { fg = p.silver_200, bg = p.blue_700, bold = true }
+  )
 
   -- === DAP ===
   hi("DapBreakpoint", { fg = pink })

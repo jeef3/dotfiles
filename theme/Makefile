@@ -13,8 +13,8 @@ ghostty:
 	@$(SCRIPT) ghostty
 
 watch:
-	@echo "Watching palette.sh for changes..."
-	@fswatch -o palette.sh | xargs -n1 -I{} $(SCRIPT) all
+	@echo "Watching palette.sh and terminal.sh for changes..."
+	@fswatch -o palette.sh terminal.sh | xargs -n1 -I{} $(SCRIPT) all
 
 clean:
 	@rm -f ../.config/nvim/lua/theme/palette.lua

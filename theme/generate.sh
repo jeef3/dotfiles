@@ -12,9 +12,11 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
 PALETTE_FILE="$SCRIPT_DIR/palette.sh"
+TERMINAL_FILE="$SCRIPT_DIR/terminal.sh"
 
-# Source the palette to resolve variables
+# Source palette and terminal mapping to resolve variables
 source "$PALETTE_FILE"
+source "$TERMINAL_FILE"
 
 # --- Generate Lua palette ---
 
@@ -72,7 +74,7 @@ HEADER
       *) printf '  [%s]%s= M.%s,\n' "$slot" "$(printf '%*s' $((3 - ${#slot})) '')" "$ref" >>"$outfile" ;;
       esac
     fi
-  done <"$PALETTE_FILE"
+  done <"$TERMINAL_FILE"
 
   echo "}" >>"$outfile"
   echo "" >>"$outfile"
