@@ -1,5 +1,5 @@
 local prettier_def = { "prettierd", "prettier", stop_after_first = true }
-local shell_def = { "beautysh" }
+local shell_def = { "shfmt" }
 
 return {
   -- LSP configs as per nvim-lspconfig
@@ -16,7 +16,6 @@ return {
     "omnisharp",
     "prismals",
     "postgres_lsp",
-    -- "pyright",
     -- "rnix-lsp",
     "ruff",
     "sourcekit",
@@ -39,32 +38,17 @@ return {
     "omnisharp", -- omnisharp
     "prisma-language-server", -- prismals
     "postgres-language-server", -- postgres_lsp
-    "pyright", --pyright
     "ruff", --
-    "sonarlint-language-server", --
     "typescript-language-server", -- ts_ls
     "yaml-language-server", -- yamlls
 
     -- Formatters
-    "beautysh",
-    "black",
     "csharpier",
-    "dprint",
-    "isort",
     "pgformatter",
     "prettier",
     "prettierd",
-    -- "shfmt",
-    "shellharden",
+    "shfmt",
     "stylua",
-
-    -- Linters
-    "eslint_d",
-    "luacheck",
-    "jsonlint",
-    "mypy",
-    "stylelint",
-    "swiftlint",
   },
 
   -- DAP -> nvim-dap
@@ -81,7 +65,7 @@ return {
     graphql = prettier_def,
     lua = { "stylua" },
     markdown = prettier_def,
-    python = { "isort", "black" },
+    python = { "ruff_format", "ruff_organize_imports" },
     rust = { "rustfmt" },
     sh = shell_def,
     swift = { "swift" },
@@ -90,14 +74,6 @@ return {
     typescriptreact = prettier_def,
     yaml = prettier_def,
     zsh = shell_def,
-  },
-
-  lint_filetypes = {
-    javascript = { "eslint_d" },
-    typescript = { "eslint_d" },
-    sh = { "shellharden" },
-    swift = { "swiftlint" },
-    zsh = { "shellharden" },
   },
 
   treesitter_syntaxes = {
