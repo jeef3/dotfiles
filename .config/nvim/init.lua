@@ -8,6 +8,7 @@ vim.g.maplocalleader = "\\"
 -- Lazy
 --
 -- Plug in management
+vim.opt.termguicolors = true
 vim.opt.background = "dark"
 
 require("config.lazy")
