@@ -84,10 +84,6 @@ return {
         severity_sort = true,
 
         signs = {
-          linehl = {
-            -- [vim.diagnostic.severity.ERROR] = "DiagnosticLineNrError",
-            -- [vim.diagnostic.severity.WARN] = "DiagnosticLineNrWarn",
-          },
           text = {
             [vim.diagnostic.severity.ERROR] = "󰅚 ",
             [vim.diagnostic.severity.WARN] = "󰀪 ",
@@ -109,18 +105,14 @@ return {
           end
 
           bufmap("n", "gd", vim.lsp.buf.definition, "Go to definition")
+          bufmap("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+
           bufmap(
             "n",
             "gi",
             vim.lsp.buf.type_definition,
             "Go to type definition"
           )
-          -- bufmap(
-          --   "n",
-          --   "gK",
-          --   "<cmd>Lspsaga peek_type_definition<CR>",
-          --   "Peek type definition"
-          -- )
           bufmap("n", "gr", function()
             Snacks.picker.lsp_references()
           end, "Show references")
