@@ -8,7 +8,6 @@ vim.g.maplocalleader = "\\"
 -- Lazy
 --
 -- Plug in management
-vim.opt.termguicolors = true
 vim.opt.background = "dark"
 
 require("config.lazy")
@@ -30,13 +29,12 @@ vim.opt.diffopt = {
 -- Other settings
 --
 vim.opt.cmdheight = 1
-vim.opt.omnifunc = "syntaxcomplete#Complete"
 
 vim.opt.undofile = true
 vim.opt.writebackup = false
 vim.opt.swapfile = false
 
-vim.o.sessionoptions =
+vim.opt.sessionoptions =
   "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 vim.g.loaded_ruby_provider = 0
@@ -113,17 +111,16 @@ vim.opt.shortmess:append({
 vim.opt.wrap = false -- Don't wrap by default
 
 vim.opt.ignorecase = true -- When searching, ignore case
+vim.opt.smartcase = true -- Case-sensitive if search contains uppercase
 
 -- Backspace behaviour in insert mode. This makes <Backspace|Delete> "work".
 vim.opt.backspace = { "indent", "eol", "start" }
 
--- Folding (prefer no folds)
-vim.opt.foldenable = false
-vim.opt.foldlevel = 20
-vim.opt.foldlevelstart = 20
+-- Folding (available but open by default)
+vim.opt.foldenable = true
+vim.opt.foldlevelstart = 99
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldminlines = 0
 vim.opt.foldnestmax = 3
 
 -- Tab and status lines
@@ -143,7 +140,7 @@ vim.opt.signcolumn = "yes" -- Always show the full gutter, even if empty.
 vim.opt.scrolloff = 10 -- Scroll when within 10 rows of top/bottom
 vim.opt.sidescrolloff = 10 -- Scroll when within 10 columns of left/right
 vim.opt.updatetime = 250 -- Shorten the "idle" time for autocmds
-vim.opt.cursorline = true -- Highlight the current cursor linea.
+vim.opt.cursorline = true -- Highlight the current cursor line.
 vim.opt.mouse = "a"
 vim.opt.mousescroll = "ver:1,hor:1"
 
