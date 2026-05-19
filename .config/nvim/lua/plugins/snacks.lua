@@ -28,16 +28,6 @@ return {
         desc = "Find in files",
       },
       {
-        "<leader>e",
-        "<cmd>lua Snacks.picker.explorer()<CR>",
-        desc = "File Explorer",
-      },
-      {
-        "<leader><space>",
-        "<cmd>lua Snacks.picker.lines()<CR>",
-        desc = "Buffer lines",
-      },
-      {
         "<leader>gl",
         "<cmd>lua Snacks.lazygit()<cr>",
         desc = "Open LazyGit",
@@ -70,14 +60,13 @@ return {
         layout = {
           layout = {
             row = 4,
-            width = 0.4,
-            min_width = 80,
+            width = 0.7,
+            min_width = 50,
             height = 0.8,
             max_height = 20,
             border = false,
             box = "vertical",
             {
-              -- max_height = 15,
               box = "vertical",
               border = {
                 "🬕",
@@ -89,7 +78,7 @@ return {
                 "🬲",
                 "▌",
               },
-              title = "{title}",
+              title = "  {title}",
               title_pos = "center",
               {
                 win = "input",
@@ -108,6 +97,33 @@ return {
       lazygit = {
         win = {
           position = "float",
+        },
+      },
+
+      indent = {
+        indent = {
+          char = "┊",
+          only_current = true,
+        },
+        chunk = {
+          enabled = true,
+          char = {
+            corner_top = "╭",
+            corner_bottom = "╰",
+            horizontal = "─",
+            vertical = "┊",
+            arrow = "►",
+          },
+        },
+      },
+
+      words = { enabled = true },
+
+      scroll = {
+        enabled = true,
+        animate = {
+          duration = { step = 8, total = 200 },
+          easing = "inOutCubic",
         },
       },
     },

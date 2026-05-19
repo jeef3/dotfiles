@@ -194,7 +194,8 @@ local function setup()
   hi("NoiceCmdlinePopupBorder", { fg = subtle, bg = subtle })
   hi("NoiceCmdlineIcon", { fg = gutter })
 
-  -- === Snacks Picker ===
+  -- === Snacks ===
+  hi("SnacksIndentScope", { fg = p.orange_700 })
   hi("SnacksPickerTitle", { fg = bg, bg = pink, bold = true })
   hi("SnacksPickerPrompt", { fg = turquoise, bg = subtle })
   hi("SnacksPickerInput", { fg = fg, bg = subtle })
