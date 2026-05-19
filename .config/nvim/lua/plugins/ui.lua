@@ -49,7 +49,6 @@ return {
       current_only = true,
       handlers = {
         gitsigns = { enable = false },
-        -- search = { enable = true },
       },
     },
   },
