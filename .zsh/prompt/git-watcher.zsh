@@ -51,6 +51,9 @@ function _git_watcher_start() {
 
   _GIT_WATCHER_PID=$!
 
+  # Store PID in git dir so stale processes can be identified
+  echo $$ $_GIT_WATCHER_PID > "$git_dir/.fswatch-pid" 2>/dev/null || true
+
   # Open the pipe as a file descriptor for zle
   exec {_GIT_WATCHER_FD}<"$pipe_file"
   rm -f "$pipe_file"
@@ -93,6 +96,18 @@ function _git_watcher_ensure() {
   if [[ "$git_root" != "$_GIT_WATCHER_ROOT" ]]; then
     # Different repo (or first time) — restart watcher
     _git_watcher_stop
+
+    # Clean up any stale fswatch from a dead shell for this repo
+    local pid_file="$git_root/.git/.fswatch-pid"
+    if [[ -f "$pid_file" ]]; then
+      local old_shell old_pid
+      read -r old_shell old_pid < "$pid_file" 2>/dev/null
+      # If the shell that started it is dead, kill the orphaned fswatch
+      if [[ -n "$old_pid" ]] && ! kill -0 "$old_shell" 2>/dev/null; then
+        kill "$old_pid" 2>/dev/null || true
+      fi
+    fi
+
     _git_watcher_start "$git_root"
   fi
 }
