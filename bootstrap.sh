@@ -1,97 +1,102 @@
 #!/usr/bin/env bash
+# =============================================================================
+# Dotfiles Bootstrap
+# =============================================================================
+# Designed to run via: curl -fsSL <url> | bash
+# Safe to re-run — all steps are idempotent.
+# =============================================================================
 
-source "$(dirname "$0")/setup/util.sh"
-source "$(dirname "$0")/setup/spinner.sh"
+set -euo pipefail
+
+# --- Colors ---
+BOLD=$(tput bold)
+DIM=$(tput setaf 7)
+GREEN=$(tput setaf 2)
+BLUE=$(tput setaf 4)
+RESET=$(tput sgr0)
 
 DEFAULT_DIR="$HOME/projects/dotfiles"
-
 TARGET_DIR="${1:-$DEFAULT_DIR}"
 
-title "Dotfiles"
-
-quote "$(tput sitm; tput setaf 7)This will create and clone your Dotfiles to:"
-quote "📁 $(tput bold)$TARGET_DIR$(tput sgr0)"
-quote
-read -n 1 -p "$(quote 'Would you like to continue? (y/n): ')" answer
+echo ""
+echo "  ${BOLD}Dotfiles Bootstrap${RESET}"
+echo "  ${DIM}─────────────────────────────────${RESET}"
+echo ""
+echo "  This will set up your machine and clone dotfiles to:"
+echo "  📁 ${BOLD}$TARGET_DIR${RESET}"
+echo ""
+read -n 1 -p "  Would you like to continue? (y/n): " answer
 echo ""
 
-if [ ! "$answer" == "y" ]; then
-  printf "\n🛑 Stopping Dotfiles bootstrap\n\n"
-  exit
+if [ "$answer" != "y" ]; then
+  echo ""
+  echo "  🛑 Stopping bootstrap"
+  echo ""
+  exit 0
 fi
 
-title "Bootstrapping Dotfiles"
+echo ""
+echo "  ${BOLD}Bootstrapping...${RESET}"
+echo ""
 
-# FIXME: Check CLI Tools
-xcode-select -p 1>/dev/null;
-if [ ! $? -eq 0 ]; then
-  success "Xcode Command Line Tools" "installed: $? $X"
+# --- Xcode CLI Tools ---
+if xcode-select -p &>/dev/null; then
+  echo "  ${GREEN}✓${RESET} ${BOLD}Xcode CLI Tools${RESET} ${DIM}— already installed${RESET}"
 else
-  skip "XCode CLI Tools" "already installed, skipping…"
+  echo "  ${BLUE}…${RESET} ${BOLD}Xcode CLI Tools${RESET} ${DIM}— installing (this may open a dialog)…${RESET}"
+  xcode-select --install 2>/dev/null || true
+
+  # Wait for installation to complete
+  until xcode-select -p &>/dev/null; do
+    sleep 5
+  done
+
+  echo "  ${GREEN}✓${RESET} ${BOLD}Xcode CLI Tools${RESET} ${DIM}— installed${RESET}"
 fi
 
-
-# Homebrew
-which -s brew
-if [ ! $? -eq 0 ]; then
-  info "Homebrew" "not installed, sudo needed for install"
-  sudo -v
-
-  start_spinner "Homebrew" "installing…"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" >/dev/null 2>&1
+# --- Homebrew ---
+if command -v brew &>/dev/null; then
+  echo "  ${GREEN}✓${RESET} ${BOLD}Homebrew${RESET} ${DIM}— already installed${RESET}"
+else
+  echo "  ${BLUE}…${RESET} ${BOLD}Homebrew${RESET} ${DIM}— installing (sudo may be required)…${RESET}"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   eval "$(/opt/homebrew/bin/brew shellenv)"
-  stop_spinner
 
-  success "Homebrew" "installed"
-else
-  skip "Homebrew" "already installed, skipping…"
+  echo "  ${GREEN}✓${RESET} ${BOLD}Homebrew${RESET} ${DIM}— installed${RESET}"
 fi
 
-# Git
-if [ "$(which git)" = "/usr/bin/git" ]; then
-  start_spinner "Homebrew Git" "system Git found, installing Homebrew Git…"
-  brew install git >/dev/null 2>&1
-  stop_spinner
-
-  success "Homebrew Git" "installed"
+# --- Git (Homebrew version) ---
+if [ "$(which git)" != "/usr/bin/git" ]; then
+  echo "  ${GREEN}✓${RESET} ${BOLD}Homebrew Git${RESET} ${DIM}— already installed${RESET}"
 else
-  skip "Homebrew Git" "already installed, skipping…"
+  echo "  ${BLUE}…${RESET} ${BOLD}Homebrew Git${RESET} ${DIM}— installing…${RESET}"
+  brew install git --quiet
+
+  echo "  ${GREEN}✓${RESET} ${BOLD}Homebrew Git${RESET} ${DIM}— installed${RESET}"
 fi
 
-# App Store
-which -s mas
-if [ ! $? -eq 0 ]; then
-  start_spinner "$(tput sgr0; tput bold)Mac App Store CLI $(tput sgr0; tput setaf 7)Installing…$(tput sgr0)"
-  brew install mas >/dev/null 2>&1
-  stop_spinner
+# --- Clone dotfiles ---
+if [ ! -d "$TARGET_DIR" ]; then
+  echo "  ${BLUE}…${RESET} ${BOLD}Dotfiles${RESET} ${DIM}— cloning…${RESET}"
+  git clone https://github.com/jeef3/dotfiles.git "$TARGET_DIR" 2>/dev/null
 
-  success "Mac App Store CLI" "installed"
+  echo "  ${GREEN}✓${RESET} ${BOLD}Dotfiles${RESET} ${DIM}— cloned${RESET}"
 else
-  skip "Mac App Store CLI" "already installed, skipping…"
+  echo "  ${GREEN}✓${RESET} ${BOLD}Dotfiles${RESET} ${DIM}— already exists${RESET}"
 fi
 
-if [ ! -d  "$TARGET_DIR" ]; then
-  start_spinner "Dotiles" "cloning…"
-  git clone https://github.com/jeef3/dotfiles.git "$TARGET_DIR" >/dev/null 2>&1
-  stop_spinner
+# --- Git submodules ---
+echo "  ${BLUE}…${RESET} ${BOLD}Git submodules${RESET} ${DIM}— updating…${RESET}"
+(cd "$TARGET_DIR" && git submodule init 2>/dev/null && git submodule update --recursive 2>/dev/null)
+echo "  ${GREEN}✓${RESET} ${BOLD}Git submodules${RESET} ${DIM}— updated${RESET}"
 
-  success "Dotfiles" "cloned"
-else
-  start_spinner "Dotfiles" "already installed, updating…"
-  (cd "$TARGET_DIR" && git fetch -a)
-  stop_spinner
-
-  success "Dotfiles" "updated"
-fi
-
-cd "$TARGET_DIR"
-start_spinner "Git submodules" "installing…"
-git submodule init >/dev/null 2>&1
-git submodule update --recursive >/dev/null 2>&1
-stop_spinner
-success "Git submodules" "updated"
-
-title "Next Steps"
-
-quote "Run the following command to continue:"
-quote "$(tput setab 8; tput setaf 0) cd $TARGET_DIR && ./setup.sh "
+# --- Done ---
+echo ""
+echo "  ${BOLD}Next Steps${RESET}"
+echo "  ${DIM}─────────────────────────────────${RESET}"
+echo ""
+echo "  Run the following command to continue:"
+echo ""
+echo "    ${BOLD}cd $TARGET_DIR && ./setup.sh${RESET}"
+echo ""
+echo "  ${DIM}─────────────────────────────────${RESET}"
