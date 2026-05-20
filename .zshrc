@@ -30,6 +30,9 @@ for file in ~/.zsh/{plugins,prompt,aliases,functions}.zsh; do
 done
 unset file
 
+# Load local secrets (not committed)
+[[ -f "$HOME/.env.local" ]] && source "$HOME/.env.local"
+
 export NODE_OPTIONS="--max-old-space-size=8192"
 eval "$(fnm env --use-on-cd --shell zsh)"
 eval "$(fnm completions --shell zsh)"
