@@ -1,3 +1,4 @@
+.config/textual/__pycache__
 .config/tmux/resurrect
 .config/tmux/plugins
 
