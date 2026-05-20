@@ -25,7 +25,7 @@ function _git_watcher_handler() {
 
   if (( elapsed >= _GIT_WATCHER_DEBOUNCE )); then
     _GIT_WATCHER_LAST_REFRESH=$now
-    zle && zle .reset-prompt
+    async_load_rprompt
   fi
 }
 
