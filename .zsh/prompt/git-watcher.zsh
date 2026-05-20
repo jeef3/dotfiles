@@ -4,10 +4,11 @@
 zmodload zsh/datetime
 zmodload zsh/system
 
-typeset -g _GIT_WATCHER_PID=0
-typeset -g _GIT_WATCHER_FD=0
-typeset -g _GIT_WATCHER_ROOT=""
-typeset -g _GIT_WATCHER_LAST_REFRESH=0
+# Preserve state across re-source to avoid orphaning fswatch processes
+typeset -g _GIT_WATCHER_PID=${_GIT_WATCHER_PID:-0}
+typeset -g _GIT_WATCHER_FD=${_GIT_WATCHER_FD:-0}
+typeset -g _GIT_WATCHER_ROOT=${_GIT_WATCHER_ROOT:-""}
+typeset -g _GIT_WATCHER_LAST_REFRESH=${_GIT_WATCHER_LAST_REFRESH:-0}
 typeset -g _GIT_WATCHER_DEBOUNCE=0.5
 
 function _git_watcher_handler() {
@@ -93,8 +94,9 @@ function _git_watcher_ensure() {
     return
   fi
 
-  if [[ "$git_root" != "$_GIT_WATCHER_ROOT" ]]; then
-    # Different repo (or first time) — restart watcher
+  # Restart if different repo, or if the watcher process died
+  if [[ "$git_root" != "$_GIT_WATCHER_ROOT" ]] || \
+     (( _GIT_WATCHER_PID > 0 )) && ! kill -0 $_GIT_WATCHER_PID 2>/dev/null; then
     _git_watcher_stop
 
     # Clean up any stale fswatch from a dead shell for this repo
