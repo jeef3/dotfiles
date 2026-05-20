@@ -10,7 +10,7 @@ function node_version() {
         local current_clean=${current#v}
 
         if [[ "$current_clean" != "$expected_clean"* ]]; then
-          echo " ${GREEN} ${PINK}${BOLD}${current}${RESET}${BRIGHT_BLACK} (v${expected_clean})"
+          echo " ${GREEN} ${RED}${BOLD}${current}${RESET}${BRIGHT_BLACK} (v${expected_clean})"
         else
           echo " ${GREEN} ${BRIGHT_BLACK}${current}"
         fi
