@@ -133,6 +133,39 @@ EOF
   echo "  ✓ Updated $config"
 }
 
+# --- Generate Textual theme ---
+
+generate_textual() {
+  local outfile="$DOTFILES_DIR/.config/textual/theme.py"
+  mkdir -p "$(dirname "$outfile")"
+
+  cat >"$outfile" <<EOF
+# =============================================================================
+# ⚠️  DO NOT EDIT — generated from theme/palette.sh
+# =============================================================================
+
+from textual.theme import Theme
+
+theme = Theme(
+    name="princess",
+    primary="${PINK_500}",
+    secondary="${PURPLE_500}",
+    warning="${ORANGE_500}",
+    error="${PINK_600}",
+    success="${GREEN_500}",
+    accent="${BLUE_500}",
+    foreground="${SILVER_200}",
+    background="${SILVER_900}",
+    surface="${SILVER_800}",
+    panel="${SILVER_700}",
+    boost="${SILVER_600}",
+    dark=True,
+)
+EOF
+
+  echo "  ✓ Generated $outfile"
+}
+
 # --- Main ---
 
 echo "Generating theme from $PALETTE_FILE"
@@ -145,12 +178,16 @@ lua | nvim)
 ghostty)
   generate_ghostty
   ;;
+textual)
+  generate_textual
+  ;;
 all)
   generate_lua
   generate_ghostty
+  generate_textual
   ;;
 *)
-  echo "Usage: $0 [all|lua|ghostty]"
+  echo "Usage: $0 [all|lua|ghostty|textual]"
   exit 1
   ;;
 esac

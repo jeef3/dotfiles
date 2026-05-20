@@ -25,6 +25,7 @@ symlinks=(
   .config/nvim
   .config/ov
   .config/ranger
+  .config/textual
   .config/todotxt-tui
   .config/tmux
   .config/wezterm
