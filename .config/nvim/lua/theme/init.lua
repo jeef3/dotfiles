@@ -51,6 +51,8 @@ local function setup()
   hi("ColorColumn", { bg = bg })
   hi("Visual", { bg = subtle })
   hi("Comment", { fg = comment, italic = true })
+  hi("WinBar", { fg = p.silver_500, bg = bg })
+  hi("WinBarNC", { fg = p.silver_600, bg = bg })
 
   hi("LineNr", { fg = gutter, bg = bg })
   hi("CursorLineNr", { fg = p.orange_400, bg = subtle })
