@@ -136,7 +136,9 @@ return {
 
           bufmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
           bufmap("n", "<leader>qf", vim.lsp.buf.code_action, "Code action")
-          bufmap("n", "<leader>qg", vim.lsp.buf.format, "Format")
+          bufmap("n", "<leader>qg", function()
+            vim.lsp.buf.format({ name = "eslint", timeout_ms = 5000 })
+          end, "Format")
 
           bufmap("n", "<space>e", vim.diagnostic.open_float, "Show line errors")
         end,
