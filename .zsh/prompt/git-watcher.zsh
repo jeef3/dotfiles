@@ -26,7 +26,9 @@ function _git_watcher_handler() {
 
   if (( elapsed >= _GIT_WATCHER_DEBOUNCE )); then
     _GIT_WATCHER_LAST_REFRESH=$now
-    async_load_rprompt
+    # Recalculate git status inline and refresh prompt
+    RPROMPT="${CURSOR_UP}$(git_line)${CURSOR_DOWN}"
+    zle && zle .reset-prompt
   fi
 }
 
@@ -94,9 +96,17 @@ function _git_watcher_ensure() {
     return
   fi
 
-  # Restart if different repo, or if the watcher process died
-  if [[ "$git_root" != "$_GIT_WATCHER_ROOT" ]] || \
-     (( _GIT_WATCHER_PID > 0 )) && ! kill -0 $_GIT_WATCHER_PID 2>/dev/null; then
+  # Restart if: different repo, no watcher running, or watcher process died
+  local should_restart=0
+  if [[ "$git_root" != "$_GIT_WATCHER_ROOT" ]]; then
+    should_restart=1
+  elif (( _GIT_WATCHER_PID == 0 )); then
+    should_restart=1
+  elif ! kill -0 $_GIT_WATCHER_PID 2>/dev/null; then
+    should_restart=1
+  fi
+
+  if (( should_restart )); then
     _git_watcher_stop
 
     # Clean up any stale fswatch from a dead shell for this repo
