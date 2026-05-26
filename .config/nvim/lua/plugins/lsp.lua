@@ -75,12 +75,6 @@ return {
     },
     config = function()
       vim.diagnostic.config({
-        virtual_text = {
-          spacing = 4,
-          prefix = "●",
-          current_line = true,
-        },
-
         severity_sort = true,
 
         signs = {
@@ -173,6 +167,30 @@ return {
         shfmt = {
           prepend_args = { "-i", "2" },
         },
+      },
+    },
+  },
+
+  ----------------
+  -- Tiny Inline Diagnostic
+  --
+  -- A Neovim plugin for displaying inline diagnostic messages with customizable
+  -- styles and icons.
+  --
+  -- https://github.com/rachartier/tiny-inline-diagnostic.nvim
+  ----------------
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    priority = 1000,
+    opts = {
+      preset = "amongus",
+      transparent_bg = false,
+      transparent_cursorline = false,
+
+      options = {
+        show_code = false,
+        override_open_float = true,
       },
     },
   },

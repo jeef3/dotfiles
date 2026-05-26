@@ -7,7 +7,7 @@ return {
   lsp_configs = {
     "bashls",
     "basedpyright",
-    -- "denols",
+    "denols",
     "eslint",
     "ghostty",
     "jsonls",
@@ -29,6 +29,7 @@ return {
     -- LSP
     "basedpyright", -- basedpyright
     "bash-language-server", -- bashls
+    "postgres-language-server", --
     "deno", -- denols
     "eslint-lsp", -- eslint
     "ghostty-ls", -- ghostty
