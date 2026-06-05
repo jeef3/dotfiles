@@ -17,6 +17,7 @@ zmodload zsh/sched
 # Cursor movement for RPROMPT on row above
 CURSOR_UP=$'%{\e[1A%}'
 CURSOR_DOWN=$'%{\e[1B%}'
+typeset -g GIT_WATCHER_ENABLED=${GIT_WATCHER_ENABLED:-0}
 
 function render_git_status() {
   # Escape codes move the git status up one row
@@ -56,6 +57,16 @@ function _enable_focus_reporting() { printf '\e[?1004h'; }
 function _disable_focus_reporting() { printf '\e[?1004l'; }
 
 function _terminal_focus_in() {
+  if (( GIT_WATCHER_ENABLED )); then
+    _git_watcher_ensure
+  fi
+
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    RPROMPT="${CURSOR_UP}$(git_line)${CURSOR_DOWN}"
+  else
+    RPROMPT=''
+  fi
+
   zle && zle .reset-prompt
 }
 function _terminal_focus_out() { }
@@ -65,7 +76,11 @@ function zle-line-init() {
 }
 
 function precmd() {
-  _git_watcher_ensure
+  if (( GIT_WATCHER_ENABLED )); then
+    _git_watcher_ensure
+  else
+    _git_watcher_cleanup
+  fi
 
   PROMPT='$(border)
 $(current_dir)$(node_version)$(jobbies)

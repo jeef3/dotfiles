@@ -10,6 +10,7 @@ typeset -g _GIT_WATCHER_FD=${_GIT_WATCHER_FD:-0}
 typeset -g _GIT_WATCHER_ROOT=${_GIT_WATCHER_ROOT:-""}
 typeset -g _GIT_WATCHER_LAST_REFRESH=${_GIT_WATCHER_LAST_REFRESH:-0}
 typeset -g _GIT_WATCHER_DEBOUNCE=0.5
+typeset -g _GIT_WATCHER_OWNER_PID=${_GIT_WATCHER_OWNER_PID:-0}
 
 function _git_watcher_handler() {
   local fd=$1
@@ -47,15 +48,16 @@ function _git_watcher_start() {
   local -a watch_paths
   watch_paths=("$git_dir/HEAD" "$git_dir/refs")
 
-  # Start fswatch watching key git paths (&! backgrounds and disowns)
+  # Start fswatch watching key git paths
   fswatch --latency=0.3 \
     "${watch_paths[@]}" \
-    > "$pipe_file" 2>/dev/null &!
+    > "$pipe_file" 2>/dev/null &
 
   _GIT_WATCHER_PID=$!
+  _GIT_WATCHER_OWNER_PID=$$
 
   # Store PID in git dir so stale processes can be identified
-  echo $$ $_GIT_WATCHER_PID > "$git_dir/.fswatch-pid" 2>/dev/null || true
+  echo "$_GIT_WATCHER_OWNER_PID $_GIT_WATCHER_PID" > "$git_dir/.fswatch-pid" 2>/dev/null || true
 
   # Open the pipe as a file descriptor for zle
   exec {_GIT_WATCHER_FD}<"$pipe_file"
@@ -81,6 +83,7 @@ function _git_watcher_stop() {
   fi
 
   _GIT_WATCHER_ROOT=""
+  _GIT_WATCHER_OWNER_PID=0
 }
 
 function _git_watcher_ensure() {
@@ -103,6 +106,12 @@ function _git_watcher_ensure() {
   elif (( _GIT_WATCHER_PID == 0 )); then
     should_restart=1
   elif ! kill -0 $_GIT_WATCHER_PID 2>/dev/null; then
+    should_restart=1
+  elif (( _GIT_WATCHER_FD == 0 )); then
+    should_restart=1
+  elif [[ ! -e "/dev/fd/$_GIT_WATCHER_FD" ]]; then
+    should_restart=1
+  elif ! zle -F $_GIT_WATCHER_FD >/dev/null 2>&1; then
     should_restart=1
   fi
 
