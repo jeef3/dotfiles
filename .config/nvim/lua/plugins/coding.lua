@@ -134,37 +134,6 @@ return {
   },
 
   ------------------
-  -- Overseer
-  --
-  -- A task runner and job management plugin for Neovim
-  --
-  -- https://github.com/stevearc/overseer.nvim
-  ------------------
-  {
-    "stevearc/overseer.nvim",
-    dependencies = {
-      "rcarriga/nvim-notify",
-      "stevearc/dressing.nvim",
-    },
-    opts = {
-      templates = { "builtin", "user.eslint_build", "user.tsc" },
-    },
-    init = function()
-      local overseer = require("overseer")
-
-      vim.api.nvim_create_user_command("OverseerRestartLast", function()
-        local tasks = overseer.list_tasks({ recent_first = true })
-
-        if vim.tbl_isempty(tasks) then
-          vim.notify("No tasks found", vim.log.levels.WARN)
-        else
-          overseer.run_action(tasks[1], "restart")
-        end
-      end, {})
-    end,
-  },
-
-  ------------------
   -- Dropbar
   --
   -- IDE-like breadcrumbs, out of the box
@@ -173,10 +142,6 @@ return {
   ------------------
   {
     "Bekaboo/dropbar.nvim",
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-    },
     opts = {
       bar = {
         enable = function(buf, win)
@@ -207,6 +172,34 @@ return {
               method = vim.lsp.protocol.Methods.textDocument_documentSymbol,
             }))
         end,
+        --   enable = function(buf, win)
+        --     if
+        --       not vim.api.nvim_buf_is_valid(buf)
+        --       or not vim.api.nvim_win_is_valid(win)
+        --       or vim.fn.win_gettype(win) ~= ""
+        --       or vim.wo[win].winbar ~= ""
+        --       or vim.bo[buf].ft == "help"
+        --     then
+        --       return false
+        --     end
+        --
+        --     if vim.bo[buf].ft == "copilot-chat" then
+        --       return false
+        --     end
+        --
+        --     local stat = vim.uv.fs_stat(vim.api.nvim_buf_get_name(buf))
+        --     if stat and stat.size > 1024 * 1024 then
+        --       return false
+        --     end
+        --
+        --     return vim.bo[buf].bt == "terminal"
+        --       or vim.bo[buf].ft == "markdown"
+        --       or pcall(vim.treesitter.get_parser, buf)
+        --       or not vim.tbl_isempty(vim.lsp.get_clients({
+        --         bufnr = buf,
+        --         method = vim.lsp.protocol.Methods.textDocument_documentSymbol,
+        --       }))
+        --   end,
       },
     },
   },
