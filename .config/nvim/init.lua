@@ -146,7 +146,7 @@ vim.opt.mouse = "a"
 vim.opt.mousescroll = "ver:1,hor:1"
 
 -- Clipboard
-vim.opt.clipboard = "unnamed,unnamedplus"
+vim.opt.clipboard = "unnamedplus"
 
 -- Cursor
 vim.opt.guicursor = {
