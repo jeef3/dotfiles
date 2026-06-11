@@ -54,14 +54,14 @@ return {
   },
 
   ------------------
-  -- Netrw
+  -- netrw-icons.nvim
   --
-  -- It's not because we use netrw that we cannot have nice things!
+  -- icons support for nvim built in netrw
   --
-  -- https://github.com/prichrd/netrw.nvim
+  -- https://github.com/its-wasabi/netrw-icons.nvim
   ------------------
   {
-    "prichrd/netrw.nvim",
+    "Fasamii/netrw-icons.nvim",
     config = true,
   },
 }

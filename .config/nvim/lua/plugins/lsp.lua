@@ -99,7 +99,6 @@ return {
           end
 
           bufmap("n", "gd", vim.lsp.buf.definition, "Go to definition")
-          bufmap("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
 
           bufmap(
             "n",
