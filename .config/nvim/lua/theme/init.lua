@@ -51,7 +51,7 @@ local function setup()
   hi("ColorColumn", { bg = bg })
   hi("Visual", { bg = subtle })
   hi("Comment", { fg = comment, italic = true })
-  hi("WinBar", { fg = p.silver_500, bg = bg })
+  hi("WinBar", { fg = p.silver_500, bg = float_bg })
   hi("WinBarNC", { fg = p.silver_600, bg = bg })
 
   hi("LineNr", { fg = gutter, bg = bg })
@@ -290,7 +290,6 @@ local function setup()
   hi("cssColor", { fg = purple })
 
   -- === Treesitter ===
-  hi("@keyword.conditional.ternary", { fg = pink, bold = true })
   hi("@constant.builtin", { fg = purple })
   hi("@constructor", { fg = blue })
 
@@ -302,7 +301,7 @@ local function setup()
   hi("@keyword.repeat", { fg = pink, bold = true })
   hi("@keyword.exception", { fg = pink, bold = true })
   hi("@keyword.coroutine", { fg = pink, bold = true })
-  hi("@keyword.operator", { fg = fg })
+  hi("@keyword.operator", { fg = pink, bold = true })
 
   hi("@markup.heading", { fg = pink, bold = true })
   hi("@markup.list", { fg = orange, bold = true })
@@ -383,6 +382,12 @@ local function setup()
   hi("@lsp.typemod.type.defaultLibrary", { fg = blue, italic = true })
   hi("@lsp.typemod.parameter.declaration", { fg = orange, italic = true })
   hi("@lsp.typemod.variable.defaultLibrary", { fg = purple })
+  hi("@lsp.typemod.variable.readonly", { fg = purple, bold = true })
+  hi("@lsp.typemod.variable.readonly.typescript", { fg = fg, bold = false })
+  hi(
+    "@lsp.typemod.variable.readonly.typescriptreact",
+    { fg = fg, bold = false }
+  )
   hi("@lsp.typemod.class.declaration", { fg = green })
 end
 
