@@ -24,6 +24,7 @@
   "neotest-jest": { "branch": "main", "commit": "0e7979d51301dfae5ef839d771bd28cf593fde3f" },
   "neotest-playwright": { "branch": "master", "commit": "6266945039dac27a354de33d2f2a66e75485d5e9" },
   "neotest-vitest": { "branch": "main", "commit": "2f19d215d7d4d7f121826f99f6f35a81e2c18a6f" },
+  "nerdy.nvim": { "branch": "main", "commit": "8fd18f0075c480b4e0865464dcd4fb7a42c6889e" },
   "netrw-icons.nvim": { "branch": "main", "commit": "85c6d741d0aa27a4cc419b5af04e0f8b1bc881d5" },
   "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
   "nvim-autopairs": { "branch": "master", "commit": "7b9923abad60b903ece7c52940e1321d39eccc79" },
