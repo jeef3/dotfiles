@@ -19,16 +19,15 @@ symlinks=(
 
   .scripts
 
-  .config/git
-  .config/kitty
+  .config/copilot
   .config/ghostty
+  .config/git
   .config/nvim
   .config/ov
   .config/ranger
   .config/textual
-  .config/todotxt-tui
   .config/tmux
-  .config/wezterm
+  .config/todotxt-tui
 
   .todo.cfg
 )
@@ -44,8 +43,7 @@ else
   skip "Config dir" "already exists, skipping…"
 fi
 
-for symlink in ${symlinks[@]}
-do
+for symlink in ${symlinks[@]}; do
   if [ -e "$HOME/$symlink" ] && ! [ -h "$HOME/$symlink" ]; then
     warn "$symlink" "exists. Please backup and/or remove this first"
   elif [ -h "$HOME/$symlink" ]; then
