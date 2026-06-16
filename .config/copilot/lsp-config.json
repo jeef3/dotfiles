@@ -1,0 +1,21 @@
+{
+  "lspServers": {
+    "python": {
+      "command": "/Users/jeff.knaggs/.local/share/nvim/mason/bin/basedpyright-langserver",
+      "args": ["--stdio"],
+      "fileExtensions": {
+        ".py": "python"
+      }
+    },
+    "typescript": {
+      "command": "/Users/jeff.knaggs/.local/share/nvim/mason/bin/typescript-language-server",
+      "args": ["--stdio"],
+      "fileExtensions": {
+        ".ts": "typescript",
+        ".tsx": "typescriptreact",
+        ".js": "javascript",
+        ".jsx": "javascriptreact"
+      }
+    }
+  }
+}
