@@ -45,7 +45,6 @@ brew "diff-so-fancy"
 brew "difftastic"
 cask "copilot-cli"
 
-
 # IDE Essentials
 brew "neovim"
 brew "tree-sitter"
@@ -80,6 +79,7 @@ brew "rustup"
 # Gifify
 brew "ffmpeg"
 brew "gifsicle"
+brew "imagemagick"
 
 # Terminal
 cask "ghostty"
