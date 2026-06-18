@@ -180,4 +180,28 @@ return {
       processor = "magick_cli",
     },
   },
+
+  {
+    "Juksuu/worktrees.nvim",
+    keys = {
+      {
+        "<leader>gws",
+        "<cmd>lua Snacks.picker.worktrees()<cr>",
+        desc = "Switch",
+      },
+      {
+        "<leader>gwc",
+        "<cmd>lua Snacks.picker.worktrees_new()<cr>",
+        desc = "Create",
+      },
+      {
+        "<leader>gwr",
+        "<cmd>lua Snacks.picker.worktrees_remove()<cr>",
+        desc = "Remove",
+      },
+    },
+    opts = {
+      worktree_path = "../",
+    },
+  },
 }
