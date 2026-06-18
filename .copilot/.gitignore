@@ -1,0 +1,6 @@
+*
+
+!.gitignore
+!lsp-config.json
+!copilot-instructions.md
+!settings.json

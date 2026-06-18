@@ -1,0 +1,19 @@
+{
+  "theme": "auto",
+  "renderMarkdown": true,
+  "showReasoning": true,
+  "footer": {
+    "showModelEffort": false,
+    "showDirectory": true,
+    "showBranch": false,
+    "showContextWindow": true,
+    "showQuota": true,
+    "showAiUsed": true,
+    "showAgent": true,
+    "showCodeChanges": false,
+    "showUsername": false,
+    "showSandbox": true,
+    "showCustom": false
+  },
+  "model": "auto"
+}

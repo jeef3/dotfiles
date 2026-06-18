@@ -19,7 +19,8 @@ symlinks=(
 
   .scripts
 
-  .config/copilot
+  .copilot
+
   .config/ghostty
   .config/git
   .config/nvim
