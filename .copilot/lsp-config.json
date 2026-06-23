@@ -1,5 +1,12 @@
 {
   "lspServers": {
+    "lua": {
+      "command": "${HOME}/.local/share/nvim/mason/bin/lua-language-server",
+      "args": ["--stdio"],
+      "fileExtensions": {
+        ".lua": "lua"
+      }
+    },
     "python": {
       "command": "${HOME}/.local/share/nvim/mason/bin/basedpyright-langserver",
       "args": ["--stdio"],
