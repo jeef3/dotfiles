@@ -1,7 +1,5 @@
 tap "isen-ng/dotnet-sdk-versions"
-tap "leoafarias/fvm"
 tap "oven-sh/bun"
-tap "afnanenayet/tap"
 
 # Base
 brew "coreutils"
@@ -66,7 +64,6 @@ cask "dotnet-sdk8"
 cask "dotnet-sdk8-0-400"
 brew "go"
 brew "haskell-stack"
-brew "leoafarias/fvm/fvm"
 brew "luarocks"
 brew "fnm" # Node version manager, installed NodeJS
 brew "openjdk"
