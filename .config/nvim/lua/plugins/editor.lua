@@ -63,21 +63,6 @@ return {
   { "lewis6991/spaceless.nvim" },
 
   ------------------
-  -- Twilight
-  --
-  -- 🌅 Twilight is a Lua plugin for Neovim 0.5 that dims inactive portions of
-  -- the code you're editing using TreeSitter.
-  --
-  -- https://github.com/folke/twilight.nvim
-  ------------------
-  {
-    "folke/twilight.nvim",
-    cmd = { "Twilight" },
-    enabled = false,
-    opts = {},
-  },
-
-  ------------------
   -- Zen Mode
   --
   -- 🧘 Distraction-free coding for Neovim
@@ -104,5 +89,31 @@ return {
     on_close = function()
       vim.opt.wrap = false
     end,
+  },
+
+  {
+    "lewis6991/hover.nvim",
+    config = true,
+    keys = {
+      {
+        "gK",
+        function()
+          require("hover").enter()
+        end,
+        desc = "Hover actions",
+      },
+      {
+        "<C-n>",
+        function()
+          require("hover").switch("next")
+        end,
+      },
+      {
+        "<C-p>",
+        function()
+          require("hover").switch("previous")
+        end,
+      },
+    },
   },
 }

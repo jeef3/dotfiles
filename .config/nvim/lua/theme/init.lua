@@ -44,7 +44,7 @@ local function setup()
   -- === Editor ===
   hi("Normal", { fg = fg, bg = bg })
   hi("NormalNC", { fg = fg, bg = bg })
-  hi("NormalFloat", { bg = float_bg })
+  hi("NormalFloat", { bg = subtle })
   hi("Cursor", { bg = fg })
   hi("CursorLine", { bg = subtle })
   hi("CursorColumn", { link = "CursorLine" })
