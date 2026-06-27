@@ -66,22 +66,6 @@ return {
   },
 
   ------------------
-  -- Trouble
-  --
-  -- 🚦 A pretty diagnostics, references, telescope results, quickfix and
-  -- location list to help you solve all the trouble your code is causing.
-  --
-  -- https://github.com/folke/trouble.nvim
-  ------------------
-  {
-    "folke/trouble.nvim",
-    -- enabled = false, -- View gone a little weird
-    dependencies = "nvim-tree/nvim-web-devicons",
-    cmd = "Trouble",
-    config = true,
-  },
-
-  ------------------
   -- Peek
   --
   -- Markdown preview plugin for Neovim
