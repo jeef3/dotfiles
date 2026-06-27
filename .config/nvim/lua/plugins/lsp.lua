@@ -110,9 +110,6 @@ return {
             Snacks.picker.lsp_references()
           end, "Show references")
 
-          -- bufmap("n", "K", function()
-          --   vim.lsp.buf.hover({ border = { { " ", "NormalFloat" } } })
-          -- end, "Show docs")
           bufmap("n", "K", function()
             require("hover").open()
           end, "hover.nvim (open)")

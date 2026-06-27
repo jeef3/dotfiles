@@ -45,6 +45,7 @@ local function setup()
   hi("Normal", { fg = fg, bg = bg })
   hi("NormalNC", { fg = fg, bg = bg })
   hi("NormalFloat", { bg = subtle })
+  hi("FloatBorder", { fg = gutter, bg = subtle })
   hi("Cursor", { bg = fg })
   hi("CursorLine", { bg = subtle })
   hi("CursorColumn", { link = "CursorLine" })
@@ -221,12 +222,6 @@ local function setup()
   hi("DapStoppedLine", { bg = orange_bg })
   hi("DapBreakpointRejected", { fg = pink })
   hi("DapBreakpointRejectedLine", { bg = pink_bg })
-
-  -- === LSP Saga ===
-  hi("TitleString", { fg = purple })
-  hi("TitleIcon", { fg = purple })
-  hi("SagaBorder", { fg = purple })
-  hi("SagaNormal", { fg = fg, bg = bg })
 
   -- === Leap ===
   hi("LeapBackdrop", { fg = subtle })

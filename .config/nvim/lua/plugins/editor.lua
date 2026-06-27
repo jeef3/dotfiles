@@ -93,27 +93,25 @@ return {
 
   {
     "lewis6991/hover.nvim",
-    config = true,
-    keys = {
-      {
-        "gK",
-        function()
-          require("hover").enter()
-        end,
-        desc = "Hover actions",
+    config = {
+      --- @type (string|Hover.Config.Provider)[]
+      providers = {
+        "hover.providers.lsp",
+        "hover.providers.dap",
       },
-      {
-        "<C-n>",
-        function()
-          require("hover").switch("next")
-        end,
+      preview_opts = {
+        border = {
+          "🬕",
+          "🬂",
+          "🬨",
+          "▐",
+          "🬷",
+          "🬭",
+          "🬲",
+          "▌",
+        },
       },
-      {
-        "<C-p>",
-        function()
-          require("hover").switch("previous")
-        end,
-      },
+      preview_window = true,
     },
   },
 }
