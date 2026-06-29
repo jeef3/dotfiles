@@ -13,7 +13,10 @@
     "showCodeChanges": false,
     "showUsername": false,
     "showSandbox": true,
-    "showCustom": false
+    "showCustom": false,
+    "showYolo": false,
+    "showCiStatus": true
   },
+  "colorMode": "default",
   "model": "auto"
 }
