@@ -220,4 +220,16 @@ return {
     },
     opts = {},
   },
+
+  ----------------
+  -- sonarqube.nvim
+  --
+  -- A SonarQube LSP client plugin for neovim
+  --
+  -- https://github.com/iamkarasik/sonarqube.nvim
+  ----------------
+  {
+    "iamkarasik/sonarqube.nvim",
+    config = true,
+  },
 }

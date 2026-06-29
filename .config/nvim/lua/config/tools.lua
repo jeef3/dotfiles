@@ -39,6 +39,7 @@ return {
     "omnisharp", -- omnisharp
     "prisma-language-server", -- prismals
     "postgres-language-server", -- postgres_lsp
+    "sonarlint-language-server", -- sonarqube
     "ruff", -- ruff
     "typescript-language-server", -- ts_ls
     "yaml-language-server", -- yamlls
