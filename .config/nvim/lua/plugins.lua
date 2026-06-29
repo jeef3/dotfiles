@@ -104,21 +104,6 @@ return {
   },
 
   ------------------
-  -- image.nvim
-  --
-  -- 🖼️ Bringing images to Neovim.
-  --
-  -- https://github.com/3rd/image.nvim
-  ------------------
-  {
-    "3rd/image.nvim",
-    build = false,
-    opts = {
-      processor = "magick_cli",
-    },
-  },
-
-  ------------------
   -- worktrees.nvim
   --
   -- Git worktree wrapper for neovim

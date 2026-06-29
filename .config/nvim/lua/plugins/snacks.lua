@@ -29,7 +29,9 @@ return {
       },
       {
         "<leader>gl",
-        "<cmd>lua Snacks.lazygit()<cr>",
+        function()
+          Snacks.lazygit()
+        end,
         desc = "Open LazyGit",
       },
     },
@@ -100,6 +102,8 @@ return {
         },
       },
 
+      image = {},
+
       indent = {
         indent = {
           char = "┊",
@@ -115,6 +119,14 @@ return {
             arrow = "►",
           },
         },
+      },
+
+      input = {
+        icon = "󰑕 ",
+        icon_pos = "left",
+        prompt_pos = "title",
+        win = { style = "input", relative = "cursor", row = 1, width = 20 },
+        expand = true,
       },
 
       words = { enabled = true },
