@@ -13,9 +13,9 @@ theme = Theme(
     success="#00d364",
     accent="#00bfff",
     foreground="#d9d8ea",
-    background="#1d1d23",
-    surface="#25252b",
-    panel="#2d2d35",
-    boost="#4b4b5a",
+    background="#151519",
+    surface="#202025",
+    panel="#29292f",
+    boost="#484854",
     dark=True,
 )
