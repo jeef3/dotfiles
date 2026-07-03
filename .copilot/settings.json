@@ -1,21 +1,22 @@
 {
-  "theme": "auto",
+  "theme": "default",
   "renderMarkdown": true,
   "showReasoning": true,
   "footer": {
     "showModelEffort": false,
     "showDirectory": true,
     "showBranch": false,
-    "showContextWindow": true,
+    "showContextWindow": false,
     "showQuota": true,
     "showAiUsed": true,
-    "showAgent": true,
+    "showAgent": false,
     "showCodeChanges": false,
     "showUsername": false,
     "showSandbox": true,
-    "showCustom": false,
     "showYolo": false,
-    "showCiStatus": true
+    "showCiStatus": false,
+    "showPullRequest": false,
+    "showCustom": false
   },
   "colorMode": "default",
   "model": "auto"
