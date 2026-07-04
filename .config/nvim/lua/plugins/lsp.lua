@@ -63,6 +63,21 @@ return {
 
       "saghen/blink.cmp",
       "b0o/schemastore.nvim",
+
+      {
+        "SmiteshP/nvim-navic",
+        opts = { lsp = { auto_attach = true } },
+      },
+
+      {
+        "SmiteshP/nvim-navbuddy",
+        dependencies = {
+          "SmiteshP/nvim-navic",
+          "MunifTanjim/nui.nvim",
+        },
+        opts = { lsp = { auto_attach = true } },
+      },
+
       {
         "folke/lazydev.nvim",
         ft = "lua",
@@ -94,9 +109,9 @@ return {
       vim.lsp.inlay_hint.enable(false)
       vim.api.nvim_create_autocmd("LspAttach", {
         desc = "LSP Attach",
-        callback = function(ev)
+        callback = function(args)
           local bufmap = function(mode, lhs, rhs, desc)
-            vim.keymap.set(mode, lhs, rhs, { buffer = ev.buf, desc = desc })
+            vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, desc = desc })
           end
 
           bufmap("n", "gd", vim.lsp.buf.definition, "Go to definition")
