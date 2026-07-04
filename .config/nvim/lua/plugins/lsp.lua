@@ -114,7 +114,12 @@ return {
             vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, desc = desc })
           end
 
-          bufmap("n", "gd", vim.lsp.buf.definition, "Go to definition")
+          bufmap(
+            "n",
+            "gd",
+            require("snacks").picker.lsp_definitions,
+            "Go to definition"
+          )
 
           bufmap(
             "n",
@@ -122,9 +127,13 @@ return {
             vim.lsp.buf.type_definition,
             "Go to type definition"
           )
-          bufmap("n", "gr", function()
-            Snacks.picker.lsp_references()
-          end, "Show references")
+
+          bufmap(
+            "n",
+            "gr",
+            require("snacks").picker.lsp_references,
+            "Show references"
+          )
 
           bufmap("n", "K", function()
             vim.lsp.buf.hover({
