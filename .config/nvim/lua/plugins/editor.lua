@@ -80,7 +80,6 @@ return {
       plugins = {
         tmux = { enabled = true },
         twilight = { enabled = true },
-        -- kitty = { enabled = true, font = "+4" },
       },
     },
     on_open = function()
@@ -89,29 +88,5 @@ return {
     on_close = function()
       vim.opt.wrap = false
     end,
-  },
-
-  {
-    "lewis6991/hover.nvim",
-    config = {
-      --- @type (string|Hover.Config.Provider)[]
-      providers = {
-        "hover.providers.lsp",
-        "hover.providers.dap",
-      },
-      preview_opts = {
-        border = {
-          "🬕",
-          "🬂",
-          "🬨",
-          "▐",
-          "🬷",
-          "🬭",
-          "🬲",
-          "▌",
-        },
-      },
-      preview_window = true,
-    },
   },
 }

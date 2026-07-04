@@ -30,10 +30,10 @@ window-save-state = always
 # =============================================================================
 # ⚠️  DO NOT EDIT BELOW — generated from theme/palette.sh
 # =============================================================================
-background = #1b1b1f
+background = #151519
 foreground = #d9d8ea
 
-palette = 0=#333339
+palette = 0=#29292f
 palette = 1=#ff3399
 palette = 2=#00d364
 palette = 3=#ffcc66
@@ -42,7 +42,7 @@ palette = 5=#cc66ff
 palette = 6=#00ced1
 palette = 7=#b4b3ce
 
-palette = 8=#545460
+palette = 8=#484854
 palette = 9=#ff72b0
 palette = 10=#67de86
 palette = 11=#ffd686

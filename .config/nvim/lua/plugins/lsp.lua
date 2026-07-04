@@ -91,6 +91,7 @@ return {
         },
       })
 
+      vim.lsp.inlay_hint.enable(false)
       vim.api.nvim_create_autocmd("LspAttach", {
         desc = "LSP Attach",
         callback = function(ev)
@@ -111,8 +112,21 @@ return {
           end, "Show references")
 
           bufmap("n", "K", function()
-            require("hover").open()
-          end, "hover.nvim (open)")
+            vim.lsp.buf.hover({
+              title = "  Documentation",
+              title_pos = "center",
+              border = {
+                "🬕",
+                "🬂",
+                "🬨",
+                "▐",
+                "🬷",
+                "🬭",
+                "🬲",
+                "▌",
+              },
+            })
+          end, "Show hover")
 
           bufmap("n", "[g", function()
             vim.diagnostic.jump({

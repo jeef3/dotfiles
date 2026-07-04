@@ -104,11 +104,7 @@ return {
         },
       },
 
-      lazygit = {
-        win = {
-          position = "float",
-        },
-      },
+      lazygit = {},
 
       image = {},
 
