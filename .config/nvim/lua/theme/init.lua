@@ -76,11 +76,11 @@ local function setup()
   -- === Tabs ===
   hi("TabLine", { fg = gutter, bg = float_bg })
   hi("TabLineSel", { fg = p.silver_200, bg = subtle, bold = true })
-  hi("TabLineFill", { fg = fg, bg = bg })
+  hi("TabLineFill", { fg = fg, bg = float_bg })
   hi("TabLineSeparator", { fg = gutter, bg = float_bg })
   hi("TabLineSeparatorSel", { fg = pink, bg = subtle })
   hi("TabLineModified", { fg = fg, bg = float_bg })
-  hi("TabLineModifiedSel", { fg = fg, bg = bg })
+  hi("TabLineModifiedSel", { fg = fg, bg = subtle })
   hi("TabLineClose", { fg = gutter, bg = float_bg, bold = true })
   hi("TabLineCloseSel", { fg = fg, bg = subtle, bold = true })
 
