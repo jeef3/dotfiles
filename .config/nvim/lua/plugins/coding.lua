@@ -57,7 +57,10 @@ return {
         ghost_text = { enabled = true },
       },
 
-      signature = { enabled = true },
+      signature = {
+        enabled = true,
+        window = { border = { "", "", "", "", "", "", "", "▎" } },
+      },
 
       sources = {
         default = { "lazydev", "lsp", "path", "snippets", "buffer", "copilot" },
