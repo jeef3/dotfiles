@@ -85,7 +85,9 @@ return {
     keys = {
       {
         "<leader>gd",
-        "<cmd>lua diffview_toggle()<CR>",
+        function()
+          diffview_toggle()
+        end,
         desc = "Toggle Git diff view",
       },
     },
