@@ -137,7 +137,7 @@ return {
 
           bufmap("n", "K", function()
             vim.lsp.buf.hover({
-              title = "   Documentation",
+              title = "   Documentation ",
               title_pos = "center",
               border = {
                 "🬕",
