@@ -33,6 +33,8 @@ window-save-state = always
 background = #151519
 foreground = #d9d8ea
 
+split-divider-color = #29292f
+
 palette = 0=#29292f
 palette = 1=#ff3399
 palette = 2=#00d364

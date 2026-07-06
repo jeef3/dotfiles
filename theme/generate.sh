@@ -96,7 +96,7 @@ generate_ghostty() {
   # Remove existing palette/bg/fg lines, header comment, and cleanup extra blank lines
   local tmp
   tmp=$(mktemp)
-  grep -v -E '^(palette|background|foreground) = |^# =+$|^# .* (generated from|DO NOT EDIT)' "$config" | sed '/^$/N;/^\n$/d' > "$tmp"
+  grep -v -E '^(palette|background|foreground) = |^# =+$|^# .* (generated from|DO NOT EDIT)' "$config" | sed '/^$/N;/^\n$/d' >"$tmp"
 
   # Rebuild config: existing settings + palette block appended at bottom
   {
@@ -108,6 +108,8 @@ generate_ghostty() {
 # =============================================================================
 background = ${PALETTE_BG}
 foreground = ${PALETTE_FG}
+
+split-divider-color = ${SILVER_700}
 
 palette = 0=${PALETTE_0}
 palette = 1=${PALETTE_1}
