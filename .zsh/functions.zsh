@@ -7,12 +7,12 @@ if (rindex($a[$#a], "/") != -1) {
 }'
 
 function _up-dir {
-  if [ -z $BUFFER ]; then
-    parent="$(dirname $(pwd))"
-    cd $parent
+  if [ -z "$BUFFER" ]; then
+    parent="$(dirname "$PWD")"
+    cd "$parent"
     zle reset-prompt
   else
-    BUFFER=$(echo $BUFFER | perl -ne $PROG)
+    BUFFER=$(echo "$BUFFER" | perl -ne "$PROG")
   fi
 
 }
