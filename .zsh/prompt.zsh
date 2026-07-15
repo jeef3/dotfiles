@@ -46,7 +46,7 @@ function async_load_rprompt() {
   async_register_callback prompt_worker render_git_status
   async_job prompt_worker :
 
-  RPROMPT="${CURSOR_UP}${BRIGHT_BLACK}▬▬▬  • ${RESET}${CURSOR_DOWN}"
+  RPROMPT="${CURSOR_UP}${BRIGHT_BLACK}🬋🬋🬋🬋🬋 • 🬋${RESET}${CURSOR_DOWN}"
 
   # Clear stale "…" after 5 seconds if git hasn't responded
   sched +5 _rprompt_timeout
