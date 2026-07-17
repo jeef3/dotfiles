@@ -19,7 +19,8 @@ return {
     -- "rnix-lsp",
     "ruff",
     "sourcekit",
-    "ts_ls",
+    -- "ts_ls",
+    "vtsls",
     "yamlls",
   },
 
@@ -42,6 +43,7 @@ return {
     "sonarlint-language-server", -- sonarqube
     "ruff", -- ruff
     "typescript-language-server", -- ts_ls
+    "vtsls", -- vtsls
     "yaml-language-server", -- yamlls
 
     -- Formatters
