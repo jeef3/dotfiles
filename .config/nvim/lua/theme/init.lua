@@ -265,11 +265,14 @@ local function setup()
   -- === Indent ===
   hi("MiniIndentscopeSymbol", { fg = gutter })
 
-  -- === Blink CMP ---
+  -- === Blink CMP ===
   hi("BlinkCmpGhostText", { fg = comment })
   hi("BlinkCmpSignatureHelp", { fg = fg, bg = subtle })
   hi("BlinkCmpSignatureHelpBorder", { fg = pink, bg = subtle })
   hi("BlinkCmpSignatureHelpActiveParameter", { underline = true, bold = true })
+
+  -- === Copilot Chat ===
+  hi("CopilotChat", {})
 
   -- === CSS (legacy vim-syntax fallback) ===
   hi("cssClassName", { fg = green })

@@ -27,7 +27,7 @@ return {
       keymap = {
         ["<C-j>"] = { "select_next", "fallback" },
         ["<C-k>"] = { "select_prev", "fallback" },
-        ["<C-l>"] = { "show_documentation", "hide_documentation" },
+        ["<C-h>"] = { "show_documentation", "hide_documentation" },
         ["<C-xo>"] = { "show", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
         ["<C-space>"] = false,

@@ -24,9 +24,57 @@ return {
         enabled = true,
         auto_trigger = true,
         hide_during_completion = false,
+        keymap = {
+          accept = "<C-l>",
+        },
       },
       nes = { enabled = false },
       panel = { enabled = false },
+    },
+  },
+
+  ----------------
+  -- CopilotChat.nvim
+  --
+  -- Chat with GitHub Copilot in Neovim  --
+  --
+  -- https://github.com/CopilotC-Nvim/CopilotChat.nvim
+  ------------------
+  ---@module "copilot"
+  ---@type LazyPluginSpec
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    build = "make tiktoken",
+    opts = {
+      model = "auto",
+      window = {
+        layout = "float",
+        title = "   Copilot ",
+        title_pos = "center",
+        border = {
+          "🬕",
+          "🬂",
+          "🬨",
+          "▐",
+          "🬷",
+          "🬭",
+          "🬲",
+          "▌",
+        },
+        zindex = 100,
+      },
+
+      headers = {
+        user = "👤 You",
+        assistant = "🤖 Copilot",
+        tool = "🔧 Tool",
+      },
+
+      separator = "━━",
+      auto_fold = true, -- Automatically folds non-assistant messages
     },
   },
 }
