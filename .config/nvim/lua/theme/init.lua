@@ -271,9 +271,6 @@ local function setup()
   hi("BlinkCmpSignatureHelpBorder", { fg = pink, bg = subtle })
   hi("BlinkCmpSignatureHelpActiveParameter", { underline = true, bold = true })
 
-  -- === Copilot Chat ===
-  hi("CopilotChat", {})
-
   -- === CSS (legacy vim-syntax fallback) ===
   hi("cssClassName", { fg = green })
   hi("cssBraces", { fg = fg })

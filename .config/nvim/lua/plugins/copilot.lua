@@ -40,7 +40,7 @@ return {
   --
   -- https://github.com/CopilotC-Nvim/CopilotChat.nvim
   ------------------
-  ---@module "copilot"
+  ---@module "CopilotChat"
   ---@type LazyPluginSpec
   {
     "CopilotC-Nvim/CopilotChat.nvim",
@@ -48,6 +48,8 @@ return {
       "nvim-lua/plenary.nvim",
     },
     build = "make tiktoken",
+
+    ---@type CopilotChat.config.Config
     opts = {
       model = "auto",
       window = {
@@ -67,14 +69,14 @@ return {
         zindex = 100,
       },
 
-      headers = {
-        user = "👤 You",
-        assistant = "🤖 Copilot",
-        tool = "🔧 Tool",
-      },
+      -- headers = {
+      --   user = "👤 You",
+      --   assistant = "🤖 Copilot",
+      --   tool = "🔧 Tool",
+      -- },
 
-      separator = "━━",
-      auto_fold = true, -- Automatically folds non-assistant messages
+      -- separator = "━━",
+      -- auto_fold = true, -- Automatically folds non-assistant messages
     },
   },
 }
