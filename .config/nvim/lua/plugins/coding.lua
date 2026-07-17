@@ -21,14 +21,16 @@ return {
       "giuxtaposition/blink-cmp-copilot",
     },
 
-    ---@module 'blink.cmp'
+    ---@module "blink.cmp"
     ---@type blink.cmp.Config
     opts = {
       keymap = {
         ["<C-j>"] = { "select_next", "fallback" },
         ["<C-k>"] = { "select_prev", "fallback" },
-        ["<C-x><C-o>"] = { "show", "fallback" },
+        ["<C-l>"] = { "show_documentation", "hide_documentation" },
+        ["<C-xo>"] = { "show", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
+        ["<C-space>"] = false,
       },
 
       cmdline = {
@@ -59,22 +61,16 @@ return {
 
       signature = {
         enabled = true,
-        window = { border = { "", "", "", "", "", "", "", "▎" } },
+        window = { border = { "", "", "", " ", "", "", "", "▎" } },
       },
 
       sources = {
-        default = { "lazydev", "lsp", "path", "snippets", "buffer", "copilot" },
+        default = { "lazydev", "lsp", "path" },
         providers = {
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
-            score_offset = 99,
-          },
-          copilot = {
-            name = "copilot",
-            module = "blink-cmp-copilot",
             score_offset = 100,
-            async = true,
           },
         },
       },
