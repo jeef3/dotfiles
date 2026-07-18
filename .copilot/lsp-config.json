@@ -23,6 +23,14 @@
         ".js": "javascript",
         ".jsx": "javascriptreact"
       }
+    },
+    "cpp": {
+      "command": "ccls",
+      "args": ["--stdio"],
+      "fileExtensions": {
+        ".cpp": "cpp",
+        ".h": "cpp"
+      }
     }
   }
 }

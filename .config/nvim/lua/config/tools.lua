@@ -7,6 +7,7 @@ return {
   lsp_configs = {
     "bashls",
     "basedpyright",
+    "ccls",
     "denols",
     "eslint",
     "ghostty",
@@ -18,9 +19,10 @@ return {
     "postgres_lsp",
     -- "rnix-lsp",
     "ruff",
-    "sourcekit",
+    -- "sourcekit",
     -- "ts_ls",
     "vtsls",
+    "sourcekit",
     "yamlls",
   },
 
@@ -47,6 +49,7 @@ return {
     "yaml-language-server", -- yamlls
 
     -- Formatters
+    "clang-format",
     "csharpier",
     "prettier",
     "prettierd",
@@ -59,6 +62,7 @@ return {
   --- @module "conform"
   --- @type table<string, conform.FiletypeFormatter>
   conform_filetypes = {
+    cpp = { "clang-format" },
     cs = { "csharpier" },
     css = prettier_def,
     html = prettier_def,
