@@ -1,10 +1,12 @@
 brew "weechat"
+
 # Language Platforms
 brew "platformio"
 brew "esphome"
 
 # Apps
 cask "bricklink-studio"
+cask "creality-print"
 cask "discord"
 cask "dropbox"
 cask "dosbox"
