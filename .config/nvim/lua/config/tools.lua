@@ -124,7 +124,6 @@ return {
     "rust",
     "scss",
     "swift",
-    "tmux",
     "todotxt",
     "toml",
     "tsx",
