@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# All linked worktrees share the main checkout's .git directory. Derive the
+# project name and placement from it so this works from any worktree.
+main_git_dir="$(git rev-parse --path-format=absolute --git-common-dir)"
+main_worktree_root="$(dirname "$main_git_dir")"
+project_name="$(basename "$main_worktree_root")"
+parent_dir="$(dirname "$main_worktree_root")"
+
+available_branches="$(
+  {
+    git worktree list --porcelain |
+      awk '/^branch refs\/heads\// {sub(/^branch refs\/heads\//, ""); print "worktree\t" $0}'
+    git for-each-ref --format=$'local\t%(refname:strip=2)' refs/heads
+    git for-each-ref --format=$'remote\t%(refname:strip=2)' refs/remotes
+  } | awk -F '\t' '
+    $1 == "worktree" {
+      in_worktree[$2] = 1
+      next
+    }
+    $1 == "local" {
+      local_branches[$2] = 1
+      if (!($2 in in_worktree)) {
+        print
+      }
+      next
+    }
+    $1 == "remote" {
+      remote_branch = $2
+      local_branch = remote_branch
+      sub(/^[^\/]+\//, "", local_branch)
+      if (remote_branch !~ /\/HEAD$/ && !(local_branch in local_branches)) {
+        print
+      }
+    }
+  '
+)"
+
+if [ -z "$available_branches" ]; then
+  printf 'No branches are available for a new worktree.\n' >&2
+  exit 1
+fi
+
+selection="$(printf '%s\n' "$available_branches" |
+  fzf --delimiter=$'\t' --with-nth=2.. --prompt='New worktree branch> ')" || exit 0
+branch_type="${selection%%$'\t'*}"
+branch="${selection#*$'\t'}"
+
+# Keep branch names containing "/" from creating nested directories.
+if [ "$branch_type" = "remote" ]; then
+  local_branch="${branch#*/}"
+else
+  local_branch="$branch"
+fi
+worktree_name="${project_name}-${local_branch//\//-}"
+worktree_path="$parent_dir/$worktree_name"
+
+if [ "$branch_type" = "remote" ]; then
+  git worktree add --guess-remote "$worktree_path" "$local_branch"
+else
+  git worktree add "$worktree_path" "$branch"
+fi

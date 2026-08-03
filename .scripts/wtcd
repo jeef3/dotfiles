@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+choose_worktree() {
+  # Output: absolute path to chosen worktree directory
+  git worktree list --porcelain 2>/dev/null | awk '
+    BEGIN{path=""}
+    /^worktree / {path=$2; print path}
+  ' | fzf
+}
+
+find_worktree_root_for_path() {
+  # Given an absolute path, walk up until you find a ".git" marker
+  # (for worktrees, .git is usually a file that points elsewhere).
+  local p="$1"
+  while [ "$p" != "/" ]; do
+    if [ -e "$p/.git" ]; then
+      echo "$p"
+      return 0
+    fi
+    p="$(dirname "$p")"
+  done
+  return 1
+}
+
+target_worktree="$(choose_worktree)"
+if [ -z "${target_worktree:-}" ]; then
+  exit 0
+fi
+
+# Normalize: ensure no trailing slash issues
+target_worktree="${target_worktree%/}"
+
+# Get all panes in the current window (you said you have three panes in one window)
+# We'll iterate pane ids and use pane_current_path per pane.
+tmux list-panes -F '#{pane_id} #{pane_current_path}' | while read -r pane_id pane_path; do
+  # pane_current_path should be absolute
+  pane_path="${pane_path%/}"
+
+  # Find the worktree root that pane_path belongs to
+  src_root="$(find_worktree_root_for_path "$pane_path" || true)"
+  if [ -z "${src_root:-}" ]; then
+    # If we can't detect the worktree root, just cd to the worktree root
+    tmux send-keys -t "$pane_id" "cd \"$target_worktree\"" C-m
+    continue
+  fi
+
+  # Compute relative path inside that worktree
+  rel="${pane_path#"$src_root"/}"
+  # If pane_path == src_root, rel becomes the whole src_root stripped => may be empty
+  if [ "$rel" = "$pane_path" ]; then
+    rel="" # safety
+  fi
+
+  # Final directory to cd into (keep sub-folder if it exists)
+  dest="$target_worktree"
+  if [ -n "$rel" ]; then
+    dest="$target_worktree/$rel"
+  fi
+
+  # If destination doesn't exist in the new worktree, fall back to worktree root.
+  if [ ! -d "$dest" ]; then
+    dest="$target_worktree"
+  fi
+
+  tmux send-keys -t "$pane_id" "cd \"$dest\"" C-m
+done
