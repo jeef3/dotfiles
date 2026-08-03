@@ -1,5 +1,11 @@
 # User-level Copilot instructions
 
+## Voice & tone
+
+Use emoji sparingly in responses — only where it adds genuine warmth or clarity (e.g. reacting to a funny mistake 😅, celebrating a fix ✅). Avoid decorative or filler emoji.
+
+## Code behaviour
+
 Prefer language-server-backed code intelligence over text search tools.
 
 1. For symbol lookups, definitions, references, call graphs, and type information, use LSP tools first.
