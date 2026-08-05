@@ -31,9 +31,17 @@ fi
 # Normalize: ensure no trailing slash issues
 target_worktree="${target_worktree%/}"
 
-# Get all panes in the current window (you said you have three panes in one window)
-# We'll iterate pane ids and use pane_current_path per pane.
-tmux list-panes -F '#{pane_id} #{pane_current_path}' | while read -r pane_id pane_path; do
+tmux_pane="${TMUX_PANE:-}"
+
+# Outside tmux, the calling shell function changes only its own directory.
+if [ -z "${TMUX:-}" ] || [ -z "$tmux_pane" ] ||
+  ! tmux display-message -p -t "$tmux_pane" '#{pane_id}' >/dev/null 2>&1; then
+  printf '%s\n' "$target_worktree"
+  exit 0
+fi
+
+# Target the window that contains the pane which invoked this command.
+tmux list-panes -t "$tmux_pane" -F '#{pane_id} #{pane_current_path}' | while read -r pane_id pane_path; do
   # pane_current_path should be absolute
   pane_path="${pane_path%/}"
 
@@ -41,7 +49,8 @@ tmux list-panes -F '#{pane_id} #{pane_current_path}' | while read -r pane_id pan
   src_root="$(find_worktree_root_for_path "$pane_path" || true)"
   if [ -z "${src_root:-}" ]; then
     # If we can't detect the worktree root, just cd to the worktree root
-    tmux send-keys -t "$pane_id" "cd \"$target_worktree\"" C-m
+    tmux set-option -p -t "$pane_id" @wtcd-destination "$target_worktree"
+    tmux send-keys -t "$pane_id" C-x C-w
     continue
   fi
 
@@ -63,5 +72,6 @@ tmux list-panes -F '#{pane_id} #{pane_current_path}' | while read -r pane_id pan
     dest="$target_worktree"
   fi
 
-  tmux send-keys -t "$pane_id" "cd \"$dest\"" C-m
+  tmux set-option -p -t "$pane_id" @wtcd-destination "$dest"
+  tmux send-keys -t "$pane_id" C-x C-w
 done
