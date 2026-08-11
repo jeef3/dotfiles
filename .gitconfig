@@ -50,7 +50,7 @@
     untracked = cyan
 
 [mergetool "nvim"]
-    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+    cmd = nvim -f \"$MERGED\" -c \"DiffviewOpen\"
     prompt = false
     keepbackup = false
 [merge]

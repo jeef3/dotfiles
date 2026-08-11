@@ -82,32 +82,11 @@ return {
   ----------------
   {
     "sindrets/diffview.nvim",
-    keys = {
-      {
-        "<leader>gd",
-        function()
-          diffview_toggle()
-        end,
-        desc = "Toggle Git diff view",
-      },
-    },
-    cmd = {
-      "DiffviewToggle",
-    },
     opts = {
-      enhanced_diff_hl = true,
-      signs = {
-        fold_closed = "",
-        fold_open = "",
-        done = "✓",
-      },
-      hooks = {
-        view_enter = function()
-          vim.cmd([[:Gitsigns toggle_numhl true]])
-        end,
-        view_leave = function()
-          vim.cmd([[:Gitsigns toggle_numhl false]])
-        end,
+      view = {
+        merge_tool = {
+          layout = "diff4_mixed",
+        },
       },
     },
   },
