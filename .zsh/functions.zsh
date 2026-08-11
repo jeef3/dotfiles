@@ -22,7 +22,12 @@ bindkey "^h" _up-dir
 function wtcd {
   if [[ -n "${TMUX:-}" && -n "${TMUX_PANE:-}" ]] &&
     tmux display-message -p -t "$TMUX_PANE" '#{pane_id}' >/dev/null 2>&1; then
-    command wtcd
+    local destination
+    destination="$(command wtcd)" || return
+
+    if [[ -n "$destination" && -d "$destination" ]]; then
+      cd -- "$destination"
+    fi
     return
   fi
 

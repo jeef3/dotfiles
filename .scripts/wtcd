@@ -23,6 +23,34 @@ find_worktree_root_for_path() {
   return 1
 }
 
+destination_for_pane_path() {
+  local pane_path="$1"
+  local src_root rel dest
+
+  pane_path="${pane_path%/}"
+  src_root="$(find_worktree_root_for_path "$pane_path" || true)"
+  if [ -z "${src_root:-}" ]; then
+    printf '%s\n' "$target_worktree"
+    return
+  fi
+
+  rel="${pane_path#"$src_root"/}"
+  if [ "$rel" = "$pane_path" ]; then
+    rel=""
+  fi
+
+  dest="$target_worktree"
+  if [ -n "$rel" ]; then
+    dest="$target_worktree/$rel"
+  fi
+
+  if [ ! -d "$dest" ]; then
+    dest="$target_worktree"
+  fi
+
+  printf '%s\n' "$dest"
+}
+
 target_worktree="$(choose_worktree)"
 if [ -z "${target_worktree:-}" ]; then
   exit 0
@@ -42,34 +70,13 @@ fi
 
 # Target the window that contains the pane which invoked this command.
 tmux list-panes -t "$tmux_pane" -F '#{pane_id} #{pane_current_path}' | while read -r pane_id pane_path; do
-  # pane_current_path should be absolute
-  pane_path="${pane_path%/}"
+  dest="$(destination_for_pane_path "$pane_path")"
 
-  # Find the worktree root that pane_path belongs to
-  src_root="$(find_worktree_root_for_path "$pane_path" || true)"
-  if [ -z "${src_root:-}" ]; then
-    # If we can't detect the worktree root, just cd to the worktree root
-    tmux set-option -p -t "$pane_id" @wtcd-destination "$target_worktree"
-    tmux send-keys -t "$pane_id" C-x C-w
+  # The calling shell changes itself after this script returns. Other panes
+  # receive the ZLE binding that reads their pane-local destination.
+  if [ "$pane_id" = "$tmux_pane" ]; then
+    printf '%s\n' "$dest"
     continue
-  fi
-
-  # Compute relative path inside that worktree
-  rel="${pane_path#"$src_root"/}"
-  # If pane_path == src_root, rel becomes the whole src_root stripped => may be empty
-  if [ "$rel" = "$pane_path" ]; then
-    rel="" # safety
-  fi
-
-  # Final directory to cd into (keep sub-folder if it exists)
-  dest="$target_worktree"
-  if [ -n "$rel" ]; then
-    dest="$target_worktree/$rel"
-  fi
-
-  # If destination doesn't exist in the new worktree, fall back to worktree root.
-  if [ ! -d "$dest" ]; then
-    dest="$target_worktree"
   fi
 
   tmux set-option -p -t "$pane_id" @wtcd-destination "$dest"
