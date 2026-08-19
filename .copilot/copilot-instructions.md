@@ -12,3 +12,10 @@ Prefer language-server-backed code intelligence over text search tools.
 2. Use file name search (`fd`) only when locating candidate files or when LSP is unavailable for that language.
 3. Use content search (`ag`) as a fallback after LSP/fd, not as the first option for symbol-level questions.
 4. If an LSP request fails, state that briefly and fall back to `fd` then `ag`.
+
+## Git workflow
+
+- Never run `git push`.
+- Do not create commits for single-task work.
+- For multi-step work performed through planning mode, commits may be created to separate completed pieces of work.
+- When creating commits, inspect and follow the repository's existing commit-message conventions, including whether ticket references are prefixed.
