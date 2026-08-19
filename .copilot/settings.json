@@ -19,5 +19,6 @@
     "showCustom": false
   },
   "colorMode": "default",
-  "model": "auto"
+  "model": "auto",
+  "allowedUrls": ["https://api.github.com"]
 }
