@@ -20,5 +20,5 @@
   },
   "colorMode": "default",
   "model": "auto",
-  "allowedUrls": ["https://api.github.com"]
+  "allowedUrls": ["https://api.github.com", "https://docs.github.com"]
 }
