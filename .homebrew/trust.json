@@ -1,0 +1,5 @@
+{
+  "trustedformulae": [
+    "oven-sh/bun/bun"
+  ]
+}

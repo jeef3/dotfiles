@@ -30,6 +30,8 @@ symlinks=(
   .config/tmux
   .config/todotxt-tui
 
+  .homebrew
+
   .todo.cfg
 )
 
@@ -38,7 +40,6 @@ CONFIG_DIR=~/.config
 
 if [ ! -d "$CONFIG_DIR" ]; then
   mkdir -p $CONFIG_DIR
-
   success "Config dir" "created"
 else
   skip "Config dir" "already exists, skipping…"
