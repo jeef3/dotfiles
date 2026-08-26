@@ -7,6 +7,8 @@ cmd() { printf " $(tput setaf 8)›  $(tput setaf 14)↘️\t$(tput bold)$(tput 
 
 title "Bubu Time!"
 
+export NONINTERACTIVE=1
+
 info "Resetting updates first"
 cmd "brew update-reset"
 brew update-reset
