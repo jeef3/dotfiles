@@ -205,6 +205,7 @@ local function setup()
   hi("SnacksPickerInput", { fg = fg, bg = subtle })
   hi("SnacksPickerBorder", { fg = gutter, bg = subtle })
   hi("SnacksPickerDir", { fg = comment })
+  hi("SnacksPickerFooter", { fg = comment, bg = subtle })
   hi("SnacksPickerList", { fg = white, bg = subtle })
   hi("SnacksPickerMatch", { fg = blue })
   hi(

@@ -56,6 +56,21 @@ return {
 
       picker = {
         notify = { enabled = true },
+        on_change = function(picker, item)
+          local path = ""
+          if item and item.file then
+            path = vim.fs.relpath(picker:cwd(), item.file) or item.file
+          end
+          local box = picker.layout.box_wins[3]
+          if box and box.win then
+            vim.api.nvim_win_set_config(box.win, {
+              footer = path ~= ""
+                  and { { " " .. path .. " ", "SnacksPickerFooter" } }
+                or "",
+              footer_pos = "center",
+            })
+          end
+        end,
         input = {
           prompt = "   ",
           hidden = true,
@@ -98,6 +113,11 @@ return {
               {
                 win = "list",
                 border = { " ", " ", " ", " ", "", "", "", " " },
+              },
+              {
+                box = "vertical",
+                height = 1,
+                border = { "", "", "", " ", " ", " ", " ", " " },
               },
             },
           },
