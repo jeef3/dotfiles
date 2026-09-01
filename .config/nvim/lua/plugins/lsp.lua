@@ -239,7 +239,16 @@ return {
     },
     ---@module "render-markdown"
     ---@type render.md.UserConfig
-    opts = {},
+    opts = {
+      ignore = function(buf)
+        for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+          if pcall(vim.api.nvim_win_get_var, win, "lsp_floating_bufnr") then
+            return true
+          end
+        end
+        return false
+      end,
+    },
     ft = { "markdown", "codecompanion" },
   },
 

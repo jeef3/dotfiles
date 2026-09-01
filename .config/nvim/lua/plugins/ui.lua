@@ -48,6 +48,7 @@ return {
     opts = {
       current_only = true,
       handlers = {
+        cursor = { enable = false },
         gitsigns = { enable = false },
       },
     },
