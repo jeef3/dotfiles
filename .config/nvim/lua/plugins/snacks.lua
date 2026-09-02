@@ -32,6 +32,170 @@ local function package_for_file(file, cwd)
   return name and { name = name, root = vim.fs.dirname(package_json) } or nil
 end
 
+--- Build the input prompt, appending the directory the search is scoped to
+local function prompt_for(kind, cwd)
+  local prompt = " "
+    .. (kind == "files" and "" or "")
+    .. "  "
+  if not cwd then
+    return prompt
+  end
+
+  local root = vim.fs.normalize(vim.fn.getcwd())
+  cwd = vim.fs.normalize(cwd)
+  if cwd == root then
+    return prompt
+  end
+
+  local relative = vim.fs.relpath(root, cwd) or cwd
+  return prompt .. "%*%#SnacksPickerScope#" .. relative .. "/ "
+end
+
+local search
+
+--- Pick a directory, then re-open the original picker scoped to it
+local function pick_dir(kind, picker)
+  local text = picker.input:get()
+  local prev_cwd = picker:cwd()
+  local root = vim.fs.normalize(vim.fn.getcwd())
+  local fd = require("snacks.picker.source.files").get_fd()
+  if not fd then
+    return
+  end
+
+  picker:close()
+
+  vim.schedule(function()
+    local handled = false
+
+    --- Close the directory picker and reopen the search scoped to `dir`
+    local function resume(dir_picker, dir)
+      handled = true
+      dir_picker:close()
+      vim.schedule(function()
+        search(kind, dir, text)
+      end)
+    end
+
+    Snacks.picker.pick({
+      source = "directories",
+      title = "Directories",
+      prompt = " @ ",
+      cwd = root,
+      format = "file",
+      preview = "none",
+      actions = {
+        unscope_dir = function(dir_picker)
+          if dir_picker.input:get() ~= "" then
+            vim.api.nvim_feedkeys(vim.keycode("<bs>"), "in", false)
+            return
+          end
+          resume(dir_picker, root)
+        end,
+        cancel_dir = function(dir_picker)
+          handled = true
+          dir_picker:close()
+        end,
+      },
+      win = {
+        input = {
+          keys = {
+            ["<bs>"] = { "unscope_dir", mode = { "i" } },
+            ["<esc>"] = { "cancel_dir", mode = { "n", "i" } },
+          },
+        },
+      },
+      finder = function(_, ctx)
+        local proc = require("snacks.picker.source.proc").proc(
+          ctx:opts({
+            cmd = fd,
+            args = {
+              "--type",
+              "d",
+              "--color",
+              "never",
+              "--hidden",
+              "-E",
+              ".git",
+            },
+            transform = function(item)
+              item.cwd = root
+              item.file = item.text
+              item.dir = true
+            end,
+          }),
+          ctx
+        )
+        return function(cb)
+          cb({ text = ".", file = root, dir = true })
+          proc(cb)
+        end
+      end,
+      confirm = function(dir_picker, item)
+        resume(dir_picker, item and Snacks.picker.util.path(item) or root)
+      end,
+      on_close = function()
+        if handled then
+          return
+        end
+        vim.schedule(function()
+          search(kind, prev_cwd, text)
+        end)
+      end,
+    })
+  end)
+end
+
+--- Open a files/grep picker, optionally scoped to a directory
+---@param kind "files"|"grep"
+function search(kind, cwd, text)
+  local opts = {
+    hidden = true,
+    prompt = prompt_for(kind, cwd),
+    cwd = cwd,
+    actions = {
+      pick_dir = function(picker)
+        if picker.input:get() ~= "" then
+          vim.api.nvim_feedkeys("@", "in", false)
+          return
+        end
+        pick_dir(kind, picker)
+      end,
+      unscope_dir = function(picker)
+        local root = vim.fs.normalize(vim.fn.getcwd())
+        if picker.input:get() ~= "" or vim.fs.normalize(picker:cwd()) == root then
+          vim.api.nvim_feedkeys(vim.keycode("<bs>"), "in", false)
+          return
+        end
+
+        local text = picker.input:get()
+        picker:close()
+        vim.schedule(function()
+          search(kind, root, text)
+        end)
+      end,
+    },
+    win = {
+      input = {
+        keys = {
+          ["@"] = { "pick_dir", mode = { "i" } },
+          ["<bs>"] = { "unscope_dir", mode = { "i" } },
+        },
+      },
+    },
+  }
+
+  if kind == "files" then
+    opts.title = "Files"
+    opts.pattern = text
+    Snacks.picker.files(opts)
+  else
+    opts.title = "Find in files"
+    opts.search = text
+    Snacks.picker.grep(opts)
+  end
+end
+
 return {
   {
     "folke/snacks.nvim",
@@ -42,22 +206,14 @@ return {
       {
         "<C-t>",
         function()
-          Snacks.picker.files({
-            title = "Files",
-            hidden = true,
-            prompt = "   ",
-          })
+          search("files")
         end,
         desc = "Find files",
       },
       {
         "<C-p>",
         function()
-          Snacks.picker.grep({
-            title = "Find in files",
-            hidden = true,
-            prompt = "   ",
-          })
+          search("grep")
         end,
         desc = "Find in files",
       },
