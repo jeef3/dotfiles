@@ -94,7 +94,8 @@ local function scoped_finder(kind)
         cwd = ctx:cwd(),
         notify = false,
         transform = function(item)
-          local file, line, col, text = item.text:match("^(.-)%z(%d+):(%d+):(.*)$")
+          local file, line, col, text =
+            item.text:match("^(.-)%z(%d+):(%d+):(.*)$")
           if not (file and line and col and text) then
             return false
           end
@@ -171,7 +172,8 @@ end
 
 local function resume_search(picker, state, cwd)
   picker.finder:abort()
-  picker.finder = require("snacks.picker.core.finder").new(scoped_finder(state.kind))
+  picker.finder =
+    require("snacks.picker.core.finder").new(scoped_finder(state.kind))
   picker.opts.source = state.source
   picker.title = state.title
   picker.format = state.format
@@ -204,7 +206,9 @@ local function open(kind, cwd, text)
           resume_search(picker, state, root())
           return
         end
-        if picker.input:get() ~= "" or vim.fs.normalize(picker:cwd()) == root() then
+        if
+          picker.input:get() ~= "" or vim.fs.normalize(picker:cwd()) == root()
+        then
           vim.api.nvim_feedkeys(vim.keycode("<bs>"), "in", false)
           return
         end
@@ -212,7 +216,11 @@ local function open(kind, cwd, text)
       end,
       confirm = function(picker, item, action)
         if state.mode == "directories" then
-          resume_search(picker, state, item and Snacks.picker.util.path(item) or root())
+          resume_search(
+            picker,
+            state,
+            item and Snacks.picker.util.path(item) or root()
+          )
           return
         end
         return require("snacks.picker.actions").confirm(picker, item, action)

@@ -20,7 +20,11 @@ _G.Snacks = {
 }
 
 package.preload["snacks.picker.source.files"] = function()
-  return { get_fd = function() return "fd" end }
+  return {
+    get_fd = function()
+      return "fd"
+    end,
+  }
 end
 package.preload["snacks.picker.source.proc"] = function()
   return {
@@ -37,25 +41,36 @@ local picker = require("snacks_scoped_picker").setup({
 
 assert(picker._prompt_for("files") == " F  ")
 assert(picker._prompt_for("grep") == " G  ")
-assert(picker._prompt_for("files", repo .. "/.config") == " F  %*%#SnacksPickerScope#.config/ ")
+assert(
+  picker._prompt_for("files", repo .. "/.config")
+    == " F  %*%#SnacksPickerScope#.config/ "
+)
 
 local scoped = {
-  cwd = function() return repo .. "/.config" end,
+  cwd = function()
+    return repo .. "/.config"
+  end,
 }
 local formatted = picker._format_scoped_file({ file = "init.lua" }, scoped)
 assert(formatted[2][1] == "@")
 assert(formatted[3].field == "file")
 
 local unscoped = {
-  cwd = function() return repo end,
+  cwd = function()
+    return repo
+  end,
 }
 formatted = picker._format_scoped_file({ file = "init.lua" }, unscoped)
 assert(formatted[2].field == "file")
 
 local context = {
   filter = { search = "needle" },
-  cwd = function() return repo .. "/.config" end,
-  opts = function(_, opts) return opts end,
+  cwd = function()
+    return repo .. "/.config"
+  end,
+  opts = function(_, opts)
+    return opts
+  end,
 }
 picker._scoped_finder("files")(nil, context)
 assert(captured.cmd == "fd")
@@ -75,12 +90,16 @@ assert(vim.deep_equal(item.pos, { 12, 3 }))
 assert(item.line == "needle")
 
 local opened
-_G.Snacks.picker.files = function(opts) opened = opts end
+_G.Snacks.picker.files = function(opts)
+  opened = opts
+end
 picker.files()
 assert(opened.prompt == " F  ")
 assert(opened.title == "Files")
 
-_G.Snacks.picker.grep = function(opts) opened = opts end
+_G.Snacks.picker.grep = function(opts)
+  opened = opts
+end
 picker.grep()
 assert(opened.prompt == " G  ")
 assert(opened.title == "Find in files")
