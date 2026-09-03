@@ -49,6 +49,91 @@ local function prompt_for(kind, cwd)
   return prompt .. "%*%#SnacksPickerScope#" .. relative .. "/ "
 end
 
+--- Prefix scoped results without changing their file paths or match positions.
+local function format_scoped_file(item, picker)
+  local result = Snacks.picker.format.file(item, picker)
+  local root = vim.fs.normalize(vim.fn.getcwd())
+  if vim.fs.normalize(picker:cwd()) ~= root then
+    for index, part in ipairs(result) do
+      if part.resolve or part.field == "file" then
+        table.insert(result, index, { "@", "SnacksPickerScope" })
+        break
+      end
+    end
+  end
+  return result
+end
+
+--- Build a finder which executes within the picker cwd. Snacks' built-in
+--- finders inherit Neovim's cwd, which is wrong after an in-place re-scope.
+local function scoped_finder(kind)
+  if kind == "files" then
+    return function(_, ctx)
+      return require("snacks.picker.source.proc").proc(
+        ctx:opts({
+          cmd = require("snacks.picker.source.files").get_fd(),
+          args = {
+            "--type",
+            "f",
+            "--type",
+            "l",
+            "--color",
+            "never",
+            "--hidden",
+            "-E",
+            ".git",
+          },
+          cwd = ctx:cwd(),
+          transform = function(item)
+            item.cwd = ctx:cwd()
+            item.file = item.text
+          end,
+        }),
+        ctx
+      )
+    end
+  end
+
+  return function(_, ctx)
+    local search = ctx.filter.search
+    if search == "" then
+      return function() end
+    end
+    return require("snacks.picker.source.proc").proc(
+      ctx:opts({
+        cmd = "rg",
+        args = {
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--glob=!.git",
+          "--hidden",
+          "-0",
+          "--",
+          search,
+        },
+        cwd = ctx:cwd(),
+        notify = false,
+        transform = function(item)
+          local file, line, col, text =
+            item.text:match("^(.-)%z(%d+):(%d+):(.*)$")
+          if not (file and line and col and text) then
+            return false
+          end
+          item.cwd = ctx:cwd()
+          item.file = file
+          item.pos = { tonumber(line), tonumber(col) - 1 }
+          item.line = text
+        end,
+      }),
+      ctx
+    )
+  end
+end
+
 --- Re-scope an already-open files/grep picker without recreating its windows.
 local function rescope(picker, state, cwd)
   picker:set_cwd(cwd)
@@ -71,7 +156,6 @@ local function pick_dir(picker, state)
 
   local root = vim.fs.normalize(vim.fn.getcwd())
   state.mode = "directories"
-  state.finder = picker.finder._find
   state.source = picker.opts.source
   state.title = picker.title
   state.format = picker.format
@@ -105,23 +189,24 @@ local function pick_dir(picker, state)
   end)
 
   picker.opts.source = "directories"
-  picker.opts.prompt = " @ "
+  picker.opts.prompt = "   "
   picker.title = "Directories"
   picker.format = Snacks.picker.config.format({ format = "file" })
   picker:set_cwd(root)
-  picker.input:set("")
+  picker.input:set("", "")
   picker:refresh()
 end
 
 --- Restore the original finder and apply the chosen directory as the scope.
 local function resume_search(picker, state, cwd)
   picker.finder:abort()
-  picker.finder = require("snacks.picker.core.finder").new(state.finder)
+  picker.finder =
+    require("snacks.picker.core.finder").new(scoped_finder(state.kind))
   picker.opts.source = state.source
   picker.title = state.title
   picker.format = state.format
   state.mode = "search"
-  picker.input:set("")
+  picker.input:set("", "")
   rescope(picker, state, cwd)
 end
 
@@ -133,6 +218,7 @@ local function search(kind, cwd, text)
     hidden = true,
     prompt = prompt_for(kind, cwd),
     cwd = cwd,
+    format = format_scoped_file,
     actions = {
       pick_dir = function(picker)
         if picker.input:get() ~= "" then
@@ -160,7 +246,7 @@ local function search(kind, cwd, text)
 
         rescope(picker, state, root)
       end,
-      confirm = function(picker, item)
+      confirm = function(picker, item, action)
         if state.mode == "directories" then
           resume_search(
             picker,
@@ -169,7 +255,7 @@ local function search(kind, cwd, text)
           )
           return
         end
-        return require("snacks.picker.actions").confirm(picker, item)
+        return require("snacks.picker.actions").confirm(picker, item, action)
       end,
       escape = function(picker)
         if state.mode == "directories" then
