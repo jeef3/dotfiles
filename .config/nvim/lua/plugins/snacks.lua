@@ -34,9 +34,7 @@ end
 
 --- Build the input prompt, appending the directory the search is scoped to
 local function prompt_for(kind, cwd)
-  local prompt = " "
-    .. (kind == "files" and "" or "")
-    .. "  "
+  local prompt = " " .. (kind == "files" and "" or "") .. "  "
   if not cwd then
     return prompt
   end
@@ -51,104 +49,86 @@ local function prompt_for(kind, cwd)
   return prompt .. "%*%#SnacksPickerScope#" .. relative .. "/ "
 end
 
-local search
+--- Re-scope an already-open files/grep picker without recreating its windows.
+local function rescope(picker, state, cwd)
+  picker:set_cwd(cwd)
+  picker.opts.prompt = prompt_for(state.kind, cwd)
+  picker.input:update()
+  picker:refresh()
+end
 
---- Pick a directory, then re-open the original picker scoped to it
-local function pick_dir(kind, picker)
-  local text = picker.input:get()
-  local prev_cwd = picker:cwd()
-  local root = vim.fs.normalize(vim.fn.getcwd())
+--- Turn the active picker into a directory picker. Snacks permits only one
+--- picker per tab, so replacing its finder preserves the existing UI.
+local function pick_dir(picker, state)
+  if state.mode == "directories" then
+    return
+  end
+
   local fd = require("snacks.picker.source.files").get_fd()
   if not fd then
     return
   end
 
-  picker:close()
+  local root = vim.fs.normalize(vim.fn.getcwd())
+  state.mode = "directories"
+  state.finder = picker.finder._find
+  state.source = picker.opts.source
+  state.title = picker.title
+  state.format = picker.format
 
-  vim.schedule(function()
-    local handled = false
-
-    --- Close the directory picker and reopen the search scoped to `dir`
-    local function resume(dir_picker, dir)
-      handled = true
-      dir_picker:close()
-      vim.schedule(function()
-        search(kind, dir, text)
-      end)
-    end
-
-    Snacks.picker.pick({
-      source = "directories",
-      title = "Directories",
-      prompt = " @ ",
-      cwd = root,
-      format = "file",
-      preview = "none",
-      actions = {
-        unscope_dir = function(dir_picker)
-          if dir_picker.input:get() ~= "" then
-            vim.api.nvim_feedkeys(vim.keycode("<bs>"), "in", false)
-            return
-          end
-          resume(dir_picker, root)
-        end,
-        cancel_dir = function(dir_picker)
-          handled = true
-          dir_picker:close()
-        end,
-      },
-      win = {
-        input = {
-          keys = {
-            ["<bs>"] = { "unscope_dir", mode = { "i" } },
-            ["<esc>"] = { "cancel_dir", mode = { "n", "i" } },
-          },
+  picker.finder:abort()
+  picker.finder = require("snacks.picker.core.finder").new(function(_, ctx)
+    local proc = require("snacks.picker.source.proc").proc(
+      ctx:opts({
+        cmd = fd,
+        args = {
+          "--type",
+          "d",
+          "--color",
+          "never",
+          "--hidden",
+          "-E",
+          ".git",
         },
-      },
-      finder = function(_, ctx)
-        local proc = require("snacks.picker.source.proc").proc(
-          ctx:opts({
-            cmd = fd,
-            args = {
-              "--type",
-              "d",
-              "--color",
-              "never",
-              "--hidden",
-              "-E",
-              ".git",
-            },
-            transform = function(item)
-              item.cwd = root
-              item.file = item.text
-              item.dir = true
-            end,
-          }),
-          ctx
-        )
-        return function(cb)
-          cb({ text = ".", file = root, dir = true })
-          proc(cb)
-        end
-      end,
-      confirm = function(dir_picker, item)
-        resume(dir_picker, item and Snacks.picker.util.path(item) or root)
-      end,
-      on_close = function()
-        if handled then
-          return
-        end
-        vim.schedule(function()
-          search(kind, prev_cwd, text)
-        end)
-      end,
-    })
+        transform = function(item)
+          item.cwd = root
+          item.file = item.text
+          item.dir = true
+        end,
+      }),
+      ctx
+    )
+    return function(cb)
+      cb({ text = ".", file = root, dir = true })
+      proc(cb)
+    end
   end)
+
+  picker.opts.source = "directories"
+  picker.opts.prompt = " @ "
+  picker.title = "Directories"
+  picker.format = Snacks.picker.config.format({ format = "file" })
+  picker:set_cwd(root)
+  picker.input:set("")
+  picker:refresh()
+end
+
+--- Restore the original finder and apply the chosen directory as the scope.
+local function resume_search(picker, state, cwd)
+  picker.finder:abort()
+  picker.finder = require("snacks.picker.core.finder").new(state.finder)
+  picker.opts.source = state.source
+  picker.title = state.title
+  picker.format = state.format
+  state.mode = "search"
+  picker.input:set("")
+  rescope(picker, state, cwd)
 end
 
 --- Open a files/grep picker, optionally scoped to a directory
 ---@param kind "files"|"grep"
-function search(kind, cwd, text)
+local function search(kind, cwd, text)
+  local state = { kind = kind, mode = "search" }
   local opts = {
     hidden = true,
     prompt = prompt_for(kind, cwd),
@@ -159,20 +139,44 @@ function search(kind, cwd, text)
           vim.api.nvim_feedkeys("@", "in", false)
           return
         end
-        pick_dir(kind, picker)
+        pick_dir(picker, state)
       end,
       unscope_dir = function(picker)
         local root = vim.fs.normalize(vim.fn.getcwd())
-        if picker.input:get() ~= "" or vim.fs.normalize(picker:cwd()) == root then
+        if state.mode == "directories" then
+          if picker.input:get() ~= "" then
+            vim.api.nvim_feedkeys(vim.keycode("<bs>"), "in", false)
+            return
+          end
+          resume_search(picker, state, root)
+          return
+        end
+        if
+          picker.input:get() ~= "" or vim.fs.normalize(picker:cwd()) == root
+        then
           vim.api.nvim_feedkeys(vim.keycode("<bs>"), "in", false)
           return
         end
 
-        local text = picker.input:get()
-        picker:close()
-        vim.schedule(function()
-          search(kind, root, text)
-        end)
+        rescope(picker, state, root)
+      end,
+      confirm = function(picker, item)
+        if state.mode == "directories" then
+          resume_search(
+            picker,
+            state,
+            item and Snacks.picker.util.path(item) or vim.fn.getcwd()
+          )
+          return
+        end
+        return require("snacks.picker.actions").confirm(picker, item)
+      end,
+      escape = function(picker)
+        if state.mode == "directories" then
+          picker:close()
+          return
+        end
+        require("snacks.picker.actions").cancel(picker)
       end,
     },
     win = {
@@ -180,6 +184,7 @@ function search(kind, cwd, text)
         keys = {
           ["@"] = { "pick_dir", mode = { "i" } },
           ["<bs>"] = { "unscope_dir", mode = { "i" } },
+          ["<esc>"] = { "escape", mode = { "n", "i" } },
         },
       },
     },
