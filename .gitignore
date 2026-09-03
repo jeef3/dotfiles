@@ -5,5 +5,7 @@
 .config/nvim/lua/.luarc.json
 .config/nvim/plugin
 
+.zcompdump
+.homebrew/trust.json.lock
 .gitconfig.local
 .todo

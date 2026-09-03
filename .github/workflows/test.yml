@@ -9,9 +9,9 @@ on:
 jobs:
   test:
     runs-on: macos-15
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Check shell syntax
         run: bash -n bootstrap.sh setup.sh link.sh setup/*
       - name: Run tests

@@ -1,90 +1,107 @@
 #!/usr/bin/env bash
 
-# set -e
-
 source "$(dirname "$0")/util.sh"
 source "$(dirname "$0")/spinner.sh"
 
-# SERVER=$1
 brewfile=$1
+
+if [ -z "${brewfile:-}" ]; then
+  fail "No brewfile specified"
+  exit 1
+fi
+
+if [ ! -f "$brewfile" ]; then
+  fail "$brewfile" "not found"
+  exit 1
+fi
+
+failures=0
+
+# Let Homebrew parse the Brewfile so we stay compatible with `brew bundle`
+# while keeping our own concise, spinner-based output.
+bundle_list() {
+  brew bundle list --file="$brewfile" "$1" 2>/dev/null
+}
+
+# Exact, whole-line matching. Substring matching would wrongly treat
+# "tree-sitter" as installed when only "tree-sitter-cli" is present.
+is_installed() {
+  printf '%s\n' "$2" | grep -Fxq -- "$1"
+}
 
 title "Brew Setup"
 
-# Taps
+installed_taps=$(brew tap 2>/dev/null)
+
 start_spinner "Tapping" "started…"
-
-tap_cmds=()
-while IFS= read -r line; do
-  if [[ $line == tap* ]]; then
-    tap_cmds+=("$line")
+while IFS= read -r tap; do
+  [ -z "$tap" ] && continue
+  if is_installed "$tap" "$installed_taps"; then
+    continue
   fi
-done < <(cat "$brewfile")
-
-for tap_cmd in "${tap_cmds[@]}";
-do
-  tap=$(echo "$tap_cmd" | sed 's/tap "//; s/"//')
   update_spinner "Tapping" "${tap}…"
-  command="brew $tap_cmd"
-  output=$(eval $command 2>&1)
-done
+  if ! output=$(brew tap "$tap" 2>&1); then
+    stop_spinner
+    fail "$tap" "failed to tap"
+    quote "$output"
+    failures=$((failures + 1))
+    start_spinner "Tapping" "continuing…"
+  fi
+done <<EOF
+$(bundle_list --taps)
+EOF
 stop_spinner
 success "Tapped" "taps"
 
-installed_formulas=$(brew list)
-
-formula_exists() {
-  if $(echo $installed_formulas | grep -w "$1" > /dev/null); then
-    return 0
-  fi
-
-  return 1
-}
-
 title "Install Formulas"
 
-formula_cmds=()
-while IFS= read -r line; do
-  if [[ $line == brew* ]]; then
-    formula_cmds+=("$line")
-  fi
-done < <(cat "$brewfile")
+installed_formulas=$(brew list --formula -1 2>/dev/null)
 
-for formula_cmd in "${formula_cmds[@]}";
-do
-  formula=$(echo "$formula_cmd" | sed 's/brew "//; s/"//')
-  if ! formula_exists $formula; then
-    start_spinner "$formula" "Installing…"
-    command="brew $formula_cmd"
-    output=$(eval $command 2>&1)
+while IFS= read -r formula; do
+  [ -z "$formula" ] && continue
+  if is_installed "$formula" "$installed_formulas"; then
+    skip "$formula" "already installed, skipping"
+    continue
+  fi
+
+  start_spinner "$formula" "installing…"
+  if output=$(brew install --formula "$formula" 2>&1); then
     stop_spinner
     success "$formula" "installed"
   else
-    skip "$formula" "already installed, skipping"
+    stop_spinner
+    fail "$formula" "failed to install"
+    quote "$output"
+    failures=$((failures + 1))
   fi
-done
+done <<EOF
+$(bundle_list --formulae)
+EOF
 
 title "Install Casks"
 
-cask_cmds=()
-while IFS= read -r line; do
-  if [[ $line == cask* ]]; then
-    cask_cmds+=("$line")
-  fi
-done < <(cat "$brewfile")
+installed_casks=$(brew list --cask -1 2>/dev/null)
 
-for cask_cmd in "${cask_cmds[@]}";
-do
-  cask=$(echo "$cask_cmd" | sed 's/cask "//; s/"//')
-  if ! formula_exists $cask; then
-    start_spinner "$cask" "Installing…"
-    command="brew $cask_cmd"
-    output=$(eval $command 2>&1)
+while IFS= read -r cask; do
+  [ -z "$cask" ] && continue
+  if is_installed "$cask" "$installed_casks"; then
+    skip "$cask" "already installed, skipping"
+    continue
+  fi
+
+  start_spinner "$cask" "installing…"
+  if output=$(brew install --cask "$cask" 2>&1); then
     stop_spinner
     success "$cask" "installed"
   else
-    skip "$cask" "already installed, skipping"
+    stop_spinner
+    fail "$cask" "failed to install"
+    quote "$output"
+    failures=$((failures + 1))
   fi
-done
+done <<EOF
+$(bundle_list --casks)
+EOF
 
 title "Clean up"
 
@@ -92,3 +109,8 @@ start_spinner "Formulas and casks" "installed, cleaning up…"
 brew cleanup >/dev/null 2>&1
 stop_spinner
 success "Brew cleaned up"
+
+if [ "$failures" -gt 0 ]; then
+  fail "Brew setup" "$failures package(s) failed to install"
+  exit 1
+fi
