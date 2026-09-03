@@ -126,6 +126,7 @@ local function pick_dir(picker, state)
     return
   end
 
+  local search_root = root()
   state.mode = "directories"
   state.source = picker.opts.source
   state.title = picker.title
@@ -146,7 +147,7 @@ local function pick_dir(picker, state)
           ".git",
         },
         transform = function(item)
-          item.cwd = root()
+          item.cwd = search_root
           item.file = item.text
           item.dir = true
         end,
@@ -154,7 +155,7 @@ local function pick_dir(picker, state)
       ctx
     )
     return function(cb)
-      cb({ text = ".", file = root(), dir = true })
+      cb({ text = ".", file = search_root, dir = true })
       proc(cb)
     end
   end)
@@ -163,7 +164,7 @@ local function pick_dir(picker, state)
   picker.opts.prompt = " " .. config.icons.directories .. "  "
   picker.title = "Directories"
   picker.format = Snacks.picker.config.format({ format = "file" })
-  picker:set_cwd(root())
+  picker:set_cwd(search_root)
   picker.input:set("", "")
   picker:refresh()
 end
