@@ -5,6 +5,7 @@ set -euo pipefail
 # new machine. These tests never print file contents, only pass/fail.
 
 repo_root="$(cd "$(dirname "$0")/.." && pwd)"
+export TERM="${TERM:-xterm-256color}"
 
 if ! command -v zsh >/dev/null 2>&1; then
   echo "test-zsh.sh: zsh not found on PATH" >&2
@@ -41,7 +42,11 @@ temp_home="$(mktemp -d)"
 trap 'rm -rf "$temp_home"' EXIT
 stderr_file="$temp_home/stderr"
 
-if ! HOME="$temp_home" ZDOTDIR="$repo_root" zsh -lic 'exit 0' \
+ln -s "$repo_root/.zsh" "$temp_home/.zsh"
+ln -s "$repo_root/.zshrc" "$temp_home/.zshrc"
+ln -s "$repo_root/.zprofile" "$temp_home/.zprofile"
+
+if ! HOME="$temp_home" ZDOTDIR="$temp_home" zsh -lic 'exit 0' \
   >/dev/null 2>"$stderr_file"; then
   echo "zsh: shell failed to start with the shipped config" >&2
   sed 's/^/  /' "$stderr_file" >&2
