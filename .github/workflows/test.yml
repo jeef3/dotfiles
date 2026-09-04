@@ -51,7 +51,7 @@ jobs:
             cd "$dotfiles"
             source tests/setup-mocks.sh
             setup_install_mocks "$mock_bin" "$log"
-            ./setup.sh --test >/dev/null
+            ./setup.sh --test
           )
 
           test -L "$HOME/.zshrc"
