@@ -21,3 +21,6 @@ export PATH="$HOME/.local/bin:$PATH"
 # Go
 export GOPATH="$HOME/go"
 export PATH="$HOME/go/bin:$PATH"
+
+# Custom scripts
+[[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH

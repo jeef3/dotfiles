@@ -9,17 +9,9 @@ export LANG="en_US.UTF-8"
 
 export EDITOR="nvim"
 export PAGER="ov"
-
-export CLICOLOR=1
-
-# Don’t clear the screen after quitting a manual page
 export MANPAGER="ov"
 
-# Load PATH definitions
-source "$HOME/.zsh/path.zsh"
-
-# Load scripts
-[[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH
+export CLICOLOR=1
 
 # History
 export HISTFILE="$HOME/.zsh_history"
@@ -29,12 +21,16 @@ export SAVEHIST=${HISTSIZE}
 setopt hist_expire_dups_first
 setopt interactive_comments
 
+# Load PATH definitions
+source "$HOME/.zsh/path.zsh"
+
+# Source custom bits
 for file in ~/.zsh/{plugins,prompt,aliases,functions}.zsh; do
   [ -r "$file" ] && source "$file"
 done
 unset file
 
-# Load local secrets (not committed)
+# Load local secrets, if any (not committed)
 [[ -f "$HOME/.env.local" ]] && source "$HOME/.env.local"
 
 export NODE_OPTIONS="--max-old-space-size=8192"
