@@ -97,6 +97,16 @@ else
   echo "  ${GREEN}✓${RESET} ${BOLD}Dotfiles${RESET} ${DIM}— already exists${RESET}"
 fi
 
+if [ -n "${DOTFILES_BOOTSTRAP_REF:-}" ]; then
+  echo "  ${BLUE}…${RESET} ${BOLD}Dotfiles${RESET} ${DIM}— checking out ${DOTFILES_BOOTSTRAP_REF}…${RESET}"
+  (
+    cd "$TARGET_DIR"
+    git fetch --depth 1 origin "$DOTFILES_BOOTSTRAP_REF" 2>/dev/null
+    git checkout --detach "$DOTFILES_BOOTSTRAP_REF" 2>/dev/null
+  )
+  echo "  ${GREEN}✓${RESET} ${BOLD}Dotfiles${RESET} ${DIM}— checked out ${DOTFILES_BOOTSTRAP_REF}${RESET}"
+fi
+
 # --- Git submodules ---
 echo "  ${BLUE}…${RESET} ${BOLD}Git submodules${RESET} ${DIM}— updating…${RESET}"
 (cd "$TARGET_DIR" && git submodule init 2>/dev/null && git submodule update --recursive 2>/dev/null)

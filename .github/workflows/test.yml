@@ -7,7 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  repo-tests:
+    name: Clone repo and run tests
     runs-on: macos-15
     timeout-minutes: 20
     steps:
@@ -18,3 +19,47 @@ jobs:
           zsh -n setup/brew setup/npm setup/rust setup/spinner.zsh tests/*.zsh .zsh/*.zsh
       - name: Run tests
         run: tests/run.sh
+
+  bootstrap-from-scratch:
+    name: Bootstrap from scratch
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - name: Run README bootstrap command, then setup
+        env:
+          DOTFILES_BOOTSTRAP_REF: ${{ github.sha }}
+          DOTFILES_BOOTSTRAP_YES: "1"
+          HOMEBREW_NO_AUTO_UPDATE: "1"
+          HOMEBREW_NO_ENV_HINTS: "1"
+          TERM: xterm-256color
+        run: |
+          set -euo pipefail
+
+          export HOME="$RUNNER_TEMP/home"
+          mkdir -p "$HOME"
+
+          curl -fsSL "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/bootstrap.sh" | bash
+
+          dotfiles="$HOME/projects/dotfiles"
+          test -d "$dotfiles/.git"
+          test "$(git -C "$dotfiles" rev-parse HEAD)" = "${{ github.sha }}"
+
+          mock_bin="$RUNNER_TEMP/mock-bin"
+          log="$RUNNER_TEMP/bootstrap-setup.log"
+
+          (
+            cd "$dotfiles"
+            source tests/setup-mocks.sh
+            setup_install_mocks "$mock_bin" "$log"
+            ./setup.sh --test >/dev/null
+          )
+
+          test -L "$HOME/.zshrc"
+          test -L "$HOME/.config/nvim"
+          grep -qx 'brew install --formula neovim' "$log"
+          grep -qx 'brew install --formula zinit' "$log"
+          grep -qx 'brew install --formula zoxide' "$log"
+          grep -qx 'brew install --formula fnm' "$log"
+          grep -qx 'gh auth status' "$log"
+
+          echo "bootstrap-from-scratch: OK"

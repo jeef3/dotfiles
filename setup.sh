@@ -1,6 +1,21 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+case "${1:-}" in
+  --test)
+    export SPINNER_DELAY="${SPINNER_DELAY:-0}"
+    export HOMEBREW_NO_AUTO_UPDATE="${HOMEBREW_NO_AUTO_UPDATE:-1}"
+    export HOMEBREW_NO_ENV_HINTS="${HOMEBREW_NO_ENV_HINTS:-1}"
+    shift
+    ;;
+  "")
+    ;;
+  *)
+    echo "Usage: $0 [--test]" >&2
+    exit 1
+    ;;
+esac
+
 source "$(dirname "$0")/setup/util.sh"
 
 # Link dotfiles
