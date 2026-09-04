@@ -15,8 +15,9 @@ mock_command() {
   chmod +x "$mock_bin/$name"
 }
 
-# Everything is mocked except Neovim, which is installed for real so the
-# Neovim test suite exercises the version this setup actually provisions.
+# Everything is mocked except the tools later tests need to execute for real.
+# That keeps setup fast while still proving the shell/editor startup path works
+# with the binaries setup provisions.
 real_brew="$(command -v brew || true)"
 if [[ -z "$real_brew" ]]; then
   echo "setup test requires Homebrew on PATH" >&2
@@ -34,10 +35,10 @@ case "\${1:-}" in
   list|tap) exit 0 ;;
   cleanup) exit 0 ;;
   install)
-    # Neovim and zinit are installed for real: the Neovim and zsh test
-    # suites need them, and they are what setup is meant to provision.
+    # Neovim powers the editor tests. zinit, zoxide, and fnm are required by
+    # zsh startup, including prompt/plugin initialisation.
     case "\${3:-}" in
-      neovim|zinit)
+      neovim|zinit|zoxide|fnm)
         if [[ "\${2:-}" == --formula ]]; then
           exec "$real_brew" install --formula "\${3}"
         fi
@@ -83,8 +84,18 @@ test -L "$home/.config/nvim"
 
 grep -qx 'brew install --formula neovim' "$log"
 grep -qx 'brew install --formula zinit' "$log"
+grep -qx 'brew install --formula zoxide' "$log"
+grep -qx 'brew install --formula fnm' "$log"
 if ! command -v nvim >/dev/null 2>&1; then
   echo "setup did not leave nvim available on PATH" >&2
+  exit 1
+fi
+if ! command -v zoxide >/dev/null 2>&1; then
+  echo "setup did not leave zoxide available on PATH" >&2
+  exit 1
+fi
+if ! command -v fnm >/dev/null 2>&1; then
+  echo "setup did not leave fnm available on PATH" >&2
   exit 1
 fi
 
