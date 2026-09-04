@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+# This test exercises the real animated spinner (FIFOs, background process,
+# temp dir lifecycle), so force animation even when running under CI/GitHub
+# Actions, where the spinner would otherwise auto-disable.
+export SPINNER_FORCE=1
+
 source "$(dirname "$0")/../setup/util.sh"
 source "$(dirname "$0")/../setup/spinner.zsh"
 
@@ -50,6 +55,40 @@ if [ -n "$leftover" ]; then
   warn "Cleanup" "leftover temp dirs found: $leftover"
 else
   success "Cleanup" "no leftover temp dirs"
+fi
+
+# Test 5: Plain (non-animated) mode, as used in CI
+info "Test 5" "plain mode (SPINNER_DISABLE / CI detection)"
+plain_output=$(
+  unset SPINNER_FORCE
+  export SPINNER_DISABLE=1
+  source "$(dirname "$0")/../setup/spinner.zsh"
+  start_spinner "Installing" "package one…"
+  update_spinner "Installing" "package one…" # no change, shouldn't repeat
+  update_spinner "Installing" "package two…"
+  stop_spinner
+)
+plain_lines=$(printf '%s\n' "$plain_output" | grep -c '^  Installing')
+if [[ "$plain_output" == *$'\e['* ]]; then
+  fail "Test 5" "plain mode emitted animation escape codes"
+elif [[ "$plain_lines" -ne 2 ]]; then
+  fail "Test 5" "expected 2 plain progress lines, got $plain_lines"
+else
+  success "Test 5" "plain mode prints static, deduplicated progress lines"
+fi
+
+# Test 6: CI environment auto-disables animation
+info "Test 6" "CI auto-detection"
+ci_output=$(
+  unset SPINNER_FORCE
+  export CI=true
+  source "$(dirname "$0")/../setup/spinner.zsh"
+  echo "SPINNER_ANIMATE=$SPINNER_ANIMATE"
+)
+if [[ "$ci_output" == *"SPINNER_ANIMATE=0"* ]]; then
+  success "Test 6" "CI=true auto-disables animation"
+else
+  fail "Test 6" "expected SPINNER_ANIMATE=0 under CI=true, got: $ci_output"
 fi
 
 title "All tests passed!"

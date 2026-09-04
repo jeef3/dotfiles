@@ -6,11 +6,37 @@ SPINNER_FG="${FG_BRIGHT_WHITE}"
 SPINNER_TITLE_STYLE="${BOLD}"
 SPINNER_DESC_STYLE="${FG_WHITE}"
 
+# Whether to animate. Animating in a non-interactive log (e.g. GitHub
+# Actions) just produces unreadable escape-code noise, so fall back to plain
+# progress lines there. SPINNER_DISABLE=1 / SPINNER_FORCE=1 override detection.
+function _spinner_should_animate() {
+  if [[ -n "${SPINNER_FORCE:-}" ]]; then
+    return 0
+  fi
+  if [[ -n "${SPINNER_DISABLE:-}" ]]; then
+    return 1
+  fi
+  if [[ -n "${CI:-}" || -n "${GITHUB_ACTIONS:-}" ]]; then
+    return 1
+  fi
+  if [[ ! -t 1 ]]; then
+    return 1
+  fi
+  return 0
+}
+
+typeset -g SPINNER_ANIMATE=1
+if ! _spinner_should_animate; then
+  SPINNER_ANIMATE=0
+fi
+
 # Internal state
 SPINNER_DIR=""
 TITLE_PIPE=""
 DESCRIPTION_PIPE=""
 SPIN_PID=0
+PLAIN_TITLE=""
+PLAIN_DESCRIPTION=""
 
 function draw_spinner() {
   trap - EXIT
@@ -53,7 +79,18 @@ function draw_spinner() {
   exec 4>&-
 }
 
+function _plain_spinner_line() {
+  printf '  %s %s\n' "$1" "$2"
+}
+
 function start_spinner() {
+  if [[ "$SPINNER_ANIMATE" -eq 0 ]]; then
+    PLAIN_TITLE="$1"
+    PLAIN_DESCRIPTION="$2"
+    _plain_spinner_line "$PLAIN_TITLE" "$PLAIN_DESCRIPTION"
+    return
+  fi
+
   SPINNER_DIR=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-spinner.XXXXXX")
   TITLE_PIPE="$SPINNER_DIR/title.pipe"
   DESCRIPTION_PIPE="$SPINNER_DIR/description.pipe"
@@ -80,11 +117,26 @@ function start_spinner() {
 }
 
 function update_spinner() {
+  if [[ "$SPINNER_ANIMATE" -eq 0 ]]; then
+    if [[ "$1" != "$PLAIN_TITLE" || "$2" != "$PLAIN_DESCRIPTION" ]]; then
+      PLAIN_TITLE="$1"
+      PLAIN_DESCRIPTION="$2"
+      _plain_spinner_line "$PLAIN_TITLE" "$PLAIN_DESCRIPTION"
+    fi
+    return
+  fi
+
   echo "$1" >"$TITLE_PIPE"
   echo "$2" >"$DESCRIPTION_PIPE"
 }
 
 function stop_spinner() {
+  if [[ "$SPINNER_ANIMATE" -eq 0 ]]; then
+    PLAIN_TITLE=""
+    PLAIN_DESCRIPTION=""
+    return
+  fi
+
   if [[ "${SPIN_PID}" -gt 0 ]]; then
     kill -TERM "${SPIN_PID}" >/dev/null 2>&1
     wait "${SPIN_PID}" 2>/dev/null
