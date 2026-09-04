@@ -1,8 +1,8 @@
 # Customisable spinner appearance
 SPINNER_FRAMES=("⠋⠁" "⠈⠙" " ⠹" " ⠸" " ⠼" "⠠⠴" "⠦⠄" "⠧ " "⠇ " "⠏ ")
 SPINNER_DELAY=${SPINNER_DELAY:-0.1}
-SPINNER_BG="${BG_BLUE}"
-SPINNER_FG="${FG_BRIGHT_WHITE}"
+SPINNER_BG=""
+SPINNER_FG="${FG_BLUE}"
 SPINNER_TITLE_STYLE="${BOLD}"
 SPINNER_DESC_STYLE="${FG_WHITE}"
 
