@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 set -euo pipefail
 
 source "$(dirname "$0")/util.sh"
-source "$(dirname "$0")/spinner.sh"
+source "$(dirname "$0")/spinner.zsh"
 
 npmfile=$1
 

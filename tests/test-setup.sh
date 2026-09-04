@@ -29,6 +29,7 @@ echo "brew \$*" >>"$log"
 case "\${1:-}" in
   # Real Brewfile parsing, so the test exercises the actual parser.
   bundle) exec "$real_brew" "\$@" ;;
+  --prefix) exec "$real_brew" "\$@" ;;
   # Pretend nothing is installed yet, like a fresh machine.
   list|tap) exit 0 ;;
   cleanup) exit 0 ;;
@@ -72,7 +73,7 @@ EOF
   cd "$repo_root"
   HOME="$home" PATH="$mock_bin:$PATH" TERM=xterm SPINNER_DELAY=0 \
     HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_ENV_HINTS=1 \
-    bash ./setup.sh >/dev/null
+    ./setup.sh >/dev/null
 )
 
 grep -qx 'gh auth status' "$log"

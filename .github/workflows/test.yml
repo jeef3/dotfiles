@@ -13,6 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Check shell syntax
-        run: bash -n bootstrap.sh setup.sh link.sh setup/*
+        run: |
+          bash -n bootstrap.sh setup.sh link.sh setup/colors.sh setup/icon.sh setup/util.sh tests/*.sh
+          zsh -n setup/brew setup/npm setup/rust setup/spinner.zsh tests/*.zsh .zsh/*.zsh
       - name: Run tests
         run: tests/run.sh

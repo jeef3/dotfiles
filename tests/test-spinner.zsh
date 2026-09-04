@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 source "$(dirname "$0")/../setup/util.sh"
-source "$(dirname "$0")/../setup/spinner.sh"
+source "$(dirname "$0")/../setup/spinner.zsh"
 
 title "Spinner Test"
 

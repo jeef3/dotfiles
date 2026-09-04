@@ -1,4 +1,10 @@
-source "$(dirname "${BASH_SOURCE[0]}")/colors.sh"
+if [ -n "${BASH_SOURCE:-}" ]; then
+  util_file="${BASH_SOURCE[0]}"
+else
+  util_file="${(%):-%N}"
+fi
+
+source "$(dirname "$util_file")/colors.sh"
 
 title() { printf "${SGR0}\n  ${BOLD}${UNDERLINE}$1${SGR0}\n\n"; }
 

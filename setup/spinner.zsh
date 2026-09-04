@@ -13,7 +13,12 @@ DESCRIPTION_PIPE=""
 SPIN_PID=0
 
 function draw_spinner() {
-  local i=0
+  trap - EXIT
+  trap - INT
+  trap - TERM
+  trap - HUP
+
+  local i=1
 
   local title=""
   local description=""
@@ -38,7 +43,8 @@ function draw_spinner() {
 
     fi
 
-    printf '%s\r' "  ${SPINNER_BG}${SPINNER_FG} ${SPINNER_FRAMES[i++ % ${#SPINNER_FRAMES[@]}]} ${SGR0} ${SPINNER_TITLE_STYLE}${title}${SGR0} ${SPINNER_DESC_STYLE}${description}${SGR0}"
+    printf '%s\r' "  ${SPINNER_BG}${SPINNER_FG} ${SPINNER_FRAMES[i]} ${SGR0} ${SPINNER_TITLE_STYLE}${title}${SGR0} ${SPINNER_DESC_STYLE}${description}${SGR0}"
+    i=$((i % ${#SPINNER_FRAMES[@]} + 1))
 
     sleep "${SPINNER_DELAY}"
   done
@@ -70,7 +76,7 @@ function start_spinner() {
 
   SPIN_PID=$!
 
-  trap stop_spinner EXIT INT TERM HUP
+  trap 'stop_spinner' INT TERM HUP
 }
 
 function update_spinner() {
