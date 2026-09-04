@@ -5,8 +5,8 @@ repo_root="$(cd "$(dirname "$0")/.." && pwd)"
 temp_dir="$(mktemp -d)"
 mock_bin="$temp_dir/bin"
 log="$temp_dir/commands.log"
-target_dir="$temp_dir/dotfiles"
-mkdir -p "$mock_bin" "$target_dir"
+home="$temp_dir/home"
+mkdir -p "$mock_bin" "$home"
 trap 'rm -rf "$temp_dir"' EXIT
 
 mock_command() {
@@ -28,11 +28,36 @@ EOF
 mock_command git <<EOF
 #!/usr/bin/env bash
 echo "git \$*" >>"$log"
+if [[ "\${1:-}" == clone ]]; then
+  mkdir -p "\${3}"
+fi
 EOF
 
-printf 'y\n' | PATH="$mock_bin:$PATH" TERM=xterm \
-  bash "$repo_root/bootstrap.sh" "$target_dir" >/dev/null
+mock_command curl <<EOF
+#!/usr/bin/env bash
+echo "curl \$*" >>"$log"
+last_arg=""
+for arg in "\$@"; do
+  last_arg="\$arg"
+done
 
+case "\$last_arg" in
+  https://raw.githubusercontent.com/jeef3/dotfiles/main/bootstrap.sh)
+    cat "$repo_root/bootstrap.sh"
+    ;;
+  *)
+    exit 1
+    ;;
+esac
+EOF
+
+HOME="$home" PATH="$mock_bin:$PATH" TERM=xterm DOTFILES_BOOTSTRAP_YES=1 \
+  bash -c 'curl -fsSL https://raw.githubusercontent.com/jeef3/dotfiles/main/bootstrap.sh | bash' \
+  >/dev/null
+
+target_dir="$home/projects/dotfiles"
+grep -qx 'curl -fsSL https://raw.githubusercontent.com/jeef3/dotfiles/main/bootstrap.sh' "$log"
+grep -qx "git clone https://github.com/jeef3/dotfiles.git $target_dir" "$log"
 grep -qx 'git submodule init' "$log"
 grep -qx 'git submodule update --recursive' "$log"
 if grep -q '^brew ' "$log"; then

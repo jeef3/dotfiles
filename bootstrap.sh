@@ -25,8 +25,19 @@ echo ""
 echo "  This will set up your machine and clone dotfiles to:"
 echo "  📁 ${BOLD}$TARGET_DIR${RESET}"
 echo ""
-read -n 1 -p "  Would you like to continue? (y/n): " answer
-echo ""
+
+if [ "${DOTFILES_BOOTSTRAP_YES:-}" = "1" ]; then
+  answer="y"
+else
+  if [ -r /dev/tty ]; then
+    read -n 1 -p "  Would you like to continue? (y/n): " answer </dev/tty
+    echo ""
+  else
+    echo "  Unable to prompt for confirmation without a terminal."
+    echo "  Re-run with DOTFILES_BOOTSTRAP_YES=1 to continue non-interactively."
+    exit 1
+  fi
+fi
 
 if [ "$answer" != "y" ]; then
   echo ""
@@ -78,6 +89,7 @@ fi
 # --- Clone dotfiles ---
 if [ ! -d "$TARGET_DIR" ]; then
   echo "  ${BLUE}…${RESET} ${BOLD}Dotfiles${RESET} ${DIM}— cloning…${RESET}"
+  mkdir -p "$(dirname "$TARGET_DIR")"
   git clone https://github.com/jeef3/dotfiles.git "$TARGET_DIR" 2>/dev/null
 
   echo "  ${GREEN}✓${RESET} ${BOLD}Dotfiles${RESET} ${DIM}— cloned${RESET}"
