@@ -14,4 +14,8 @@ for test_file in "$test_dir"/test-*.lua; do
   commands+=(-c "luafile $test_file")
 done
 
-nvim --headless -u NONE "${commands[@]}" -c "qa"
+nvim --headless -u NONE \
+  -c "set runtimepath^=$repo_root/.config/nvim" \
+  -c "lua package.path = '$repo_root/.config/nvim/lua/?.lua;$repo_root/.config/nvim/lua/?/init.lua;' .. package.path" \
+  "${commands[@]}" \
+  -c "qa"
