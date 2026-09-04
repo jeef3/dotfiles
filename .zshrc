@@ -1,3 +1,4 @@
+export BREW_HOME=/opt/homebrew
 source "$BREW_HOME/opt/zinit/zinit.zsh"
 
 eval "$(zoxide init zsh)"
@@ -13,6 +14,9 @@ export CLICOLOR=1
 
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="ov"
+
+# Load PATH definitions
+source "$HOME/.zsh/path.zsh"
 
 # Load scripts
 [[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH

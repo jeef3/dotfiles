@@ -34,13 +34,14 @@ if [ "$failures" -gt 0 ]; then
   exit 1
 fi
 
-# Actually start a shell against the shipped config in an isolated HOME. This
-# catches config that parses but errors at load time on a fresh machine.
+# Actually start a login+interactive shell against the shipped config in an
+# isolated HOME. Terminal.app starts login shells, and .zprofile sets variables
+# such as BREW_HOME that .zshrc relies on.
 temp_home="$(mktemp -d)"
 trap 'rm -rf "$temp_home"' EXIT
 stderr_file="$temp_home/stderr"
 
-if ! HOME="$temp_home" ZDOTDIR="$repo_root" zsh -i -c 'exit 0' \
+if ! HOME="$temp_home" ZDOTDIR="$repo_root" zsh -lic 'exit 0' \
   >/dev/null 2>"$stderr_file"; then
   echo "zsh: shell failed to start with the shipped config" >&2
   sed 's/^/  /' "$stderr_file" >&2

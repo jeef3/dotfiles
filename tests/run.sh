@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export TERM="${TERM:-xterm-256color}"
+
 test_dir="$(cd "$(dirname "$0")" && pwd)"
 
 # Bootstrap and setup run first: setup installs Neovim, which the Neovim
