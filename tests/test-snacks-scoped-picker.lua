@@ -104,5 +104,56 @@ picker.grep()
 assert(opened.prompt == " G  ")
 assert(opened.title == "Find in files")
 
+package.preload["snacks.picker.core.finder"] = function()
+  return {
+    new = function(fn)
+      return { fn = fn, abort = function() end }
+    end,
+  }
+end
+
+-- Regression test: live pickers (e.g. grep, bound to <C-p>) must have
+-- opts.live disabled while browsing the directory-picker mode, since the
+-- directories finder ignores the live search string. Otherwise typed input
+-- keeps being routed to filter.search instead of filter.pattern and no
+-- directories are ever matched/shown.
+_G.Snacks.picker.config = {
+  format = function()
+    return function()
+      return {}
+    end
+  end,
+}
+local mock_picker = {
+  input = {
+    get = function()
+      return ""
+    end,
+    set = function() end,
+    update = function() end,
+  },
+  finder = { abort = function() end },
+  opts = { source = "grep", live = true },
+  title = "Find in files",
+  format = function() end,
+  set_cwd = function() end,
+  refresh = function() end,
+}
+opened.actions.pick_dir(mock_picker)
+assert(mock_picker.opts.source == "directories")
+assert(mock_picker.opts.live == false)
+
+-- Confirming a directory selection must restore the original live flag
+-- (true, for grep) so live search behaves normally again once back in
+-- "search" mode.
+_G.Snacks.picker.util = {
+  path = function(item)
+    return item.file
+  end,
+}
+opened.actions.confirm(mock_picker, { file = repo }, "confirm")
+assert(mock_picker.opts.source == "grep")
+assert(mock_picker.opts.live == true)
+
 _G.Snacks = original_snacks
 print("snacks_scoped_picker: OK")

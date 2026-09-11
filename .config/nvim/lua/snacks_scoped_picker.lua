@@ -132,6 +132,7 @@ local function pick_dir(picker, state)
   state.source = picker.opts.source
   state.title = picker.title
   state.format = picker.format
+  state.live = picker.opts.live
 
   picker.finder:abort()
   picker.finder = require("snacks.picker.core.finder").new(function(_, ctx)
@@ -165,6 +166,12 @@ local function pick_dir(picker, state)
   picker.opts.prompt = " " .. config.icons.directories .. "  "
   picker.title = "Directories"
   picker.format = Snacks.picker.config.format({ format = "file" })
+  -- The directories finder ignores the live search string entirely, so the
+  -- picker must fall back to normal fuzzy matching (filter.pattern) while
+  -- browsing directories. Otherwise, for live pickers (e.g. grep/<C-p>),
+  -- typed input keeps being routed to filter.search and the listed
+  -- directories never get matched against what's typed.
+  picker.opts.live = false
   picker:set_cwd(search_root)
   picker.input:set("", "")
   picker:refresh()
@@ -177,6 +184,7 @@ local function resume_search(picker, state, cwd)
   picker.opts.source = state.source
   picker.title = state.title
   picker.format = state.format
+  picker.opts.live = state.live
   state.mode = "search"
   picker.input:set("", "")
   rescope(picker, state, cwd)
