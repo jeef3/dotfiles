@@ -7,7 +7,8 @@ return {
   lsp_configs = {
     "bashls",
     "basedpyright",
-    "ccls",
+    -- "ccls",
+    "clangd",
     "denols",
     "eslint",
     "ghostty",
@@ -22,7 +23,6 @@ return {
     -- "sourcekit",
     -- "ts_ls",
     "vtsls",
-    "sourcekit",
     "yamlls",
   },
 
