@@ -2,6 +2,7 @@ export BREW_HOME=/opt/homebrew
 source "$BREW_HOME/opt/zinit/zinit.zsh"
 
 eval "$(zoxide init zsh)"
+eval "$(wt init zsh)"
 
 # Prefer US English and use UTF-8
 export LC_ALL="en_US.UTF-8"
@@ -30,6 +31,10 @@ for file in ~/.zsh/{plugins,prompt,aliases,functions}.zsh; do
 done
 unset file
 
+if [ -r "$HOME/.extra" ]; then
+  source "$HOME/.extra"
+fi
+
 # Load local secrets, if any (not committed)
 [[ -f "$HOME/.env.local" ]] && source "$HOME/.env.local"
 
@@ -45,3 +50,5 @@ eval "$(fnm completions --shell zsh)"
   }
   compctl -K _rush_completion rush
 }
+
+source <(wt completion zsh)

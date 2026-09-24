@@ -19,3 +19,7 @@ Prefer language-server-backed code intelligence over text search tools.
 - Do not create commits for single-task work.
 - For multi-step work performed through planning mode, commits may be created to separate completed pieces of work.
 - When creating commits, inspect and follow the repository's existing commit-message conventions, including whether ticket references are prefixed.
+
+## Temporary files
+
+- Prefer the current session folder (`$HOME/.copilot/session-state/<session-id>/files/`) for reading and writing temporary artifacts. Use `/tmp` only when a tool or workflow explicitly requires it.

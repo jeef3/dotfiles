@@ -45,10 +45,12 @@ stderr_file="$temp_home/stderr"
 ln -s "$repo_root/.zsh" "$temp_home/.zsh"
 ln -s "$repo_root/.zshrc" "$temp_home/.zshrc"
 ln -s "$repo_root/.zprofile" "$temp_home/.zprofile"
+printf 'DOTFILES_EXTRA_TEST=loaded\n' >"$temp_home/.extra"
 
-if ! HOME="$temp_home" ZDOTDIR="$temp_home" zsh -lic 'exit 0' \
+if ! HOME="$temp_home" ZDOTDIR="$temp_home" zsh -lic \
+  '[[ "$DOTFILES_EXTRA_TEST" == loaded ]]' \
   >/dev/null 2>"$stderr_file"; then
-  echo "zsh: shell failed to start with the shipped config" >&2
+  echo "zsh: shell failed to start with the shipped config or load ~/.extra" >&2
   sed 's/^/  /' "$stderr_file" >&2
   exit 1
 fi
