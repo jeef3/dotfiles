@@ -21,6 +21,7 @@ symlinks=(
 
   .copilot
 
+  .config/cmux
   .config/ghostty
   .config/git
   .config/nvim
@@ -29,6 +30,7 @@ symlinks=(
   .config/textual
   .config/tmux
   .config/todotxt-tui
+  .config/wt
 
   .homebrew
 
