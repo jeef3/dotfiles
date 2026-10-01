@@ -1,0 +1,24 @@
+{
+  "activePaneBorderColor": "#22698a",
+
+  "shortcuts": {
+    "bindings": {
+      "newSurface": ["ctrl+b", "c"],
+      "closeTab": ["ctrl+b", "x"],
+      "splitRight": ["ctrl+b", "shift+5"],
+      "splitDown": ["ctrl+b", "shift+'"],
+
+      "prevSidebarTab": ["ctrl+b", "p"],
+      "nextSidebarTab": ["ctrl+b", "n"],
+      "selectWorkspaceByNumber": ["ctrl+b", "1"],
+
+      "focusNextPane": ["ctrl+b", "o"],
+      "focusLeft": ["ctrl+b", "h"],
+      "focusDown": ["ctrl+b", "j"],
+      "focusUp": ["ctrl+b", "k"],
+      "focusRight": ["ctrl+b", "l"],
+
+      "toggleSplitZoom": ["ctrl+b", "z"]
+    }
+  }
+}
