@@ -1,8 +1,8 @@
 export BREW_HOME=/opt/homebrew
 source "$BREW_HOME/opt/zinit/zinit.zsh"
 
-eval "$(zoxide init zsh)"
-eval "$(wt init zsh)"
+(( $+command[zoxide] )) && eval "$(zoxide init zsh)"
+(( $+commands[wt] )) && eval "$(wt init zsh)"
 
 # Prefer US English and use UTF-8
 export LC_ALL="en_US.UTF-8"
@@ -51,4 +51,4 @@ eval "$(fnm completions --shell zsh)"
   compctl -K _rush_completion rush
 }
 
-source <(wt completion zsh)
+(( $+commands[wt] )) && source <(wt completion zsh
