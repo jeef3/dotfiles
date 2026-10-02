@@ -2,3 +2,5 @@
 todo.txt
 npm-debug.log
 tmux-client-*.log
+
+**/.claude/settings.local.json
