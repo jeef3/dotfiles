@@ -23,3 +23,9 @@ Prefer language-server-backed code intelligence over text search tools.
 ## Temporary files
 
 - Prefer the current session folder (`$HOME/.copilot/session-state/<session-id>/files/`) for reading and writing temporary artifacts. Use `/tmp` only when a tool or workflow explicitly requires it.
+
+## Working directory and tool paths
+
+- Run tools from the directory that owns the task (normally the current repository root or relevant worktree). Use paths relative to that directory rather than `../` or `../../` paths that escape it.
+- For a different repository or worktree, explicitly switch to or open that directory before running tools there. Do not use parent-directory traversal to reach it.
+- If a task genuinely needs access outside the allowed directory, request access rather than trying to avoid the permission check.

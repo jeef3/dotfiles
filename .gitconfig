@@ -127,3 +127,7 @@
 
 [include]
     path = ~/.gitconfig.local
+
+[wt "template.cmux"]
+	command = ~/.config/wt/cmux-workspace.sh
+	multiplexer = cmux
