@@ -1,7 +1,9 @@
 export BREW_HOME=/opt/homebrew
 source "$BREW_HOME/opt/zinit/zinit.zsh"
 
-(( $+command[zoxide] )) && eval "$(zoxide init zsh)"
+source "$HOME/.zsh/path.zsh"
+
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
 (( $+commands[wt] )) && eval "$(wt init zsh)"
 
 # Prefer US English and use UTF-8
@@ -22,9 +24,6 @@ export SAVEHIST=${HISTSIZE}
 setopt hist_expire_dups_first
 setopt interactive_comments
 
-# Load PATH definitions
-source "$HOME/.zsh/path.zsh"
-
 # Source custom bits
 for file in ~/.zsh/{plugins,prompt,aliases,functions}.zsh; do
   [ -r "$file" ] && source "$file"
@@ -39,8 +38,11 @@ fi
 [[ -f "$HOME/.env.local" ]] && source "$HOME/.env.local"
 
 export NODE_OPTIONS="--max-old-space-size=8192"
-eval "$(fnm env --use-on-cd --shell zsh)"
-eval "$(fnm completions --shell zsh)"
+
+((${+commands[fnm]})) && {
+  eval "$(fnm env --use-on-cd --shell zsh)"
+  eval "$(fnm completions --shell zsh)"
+}
 
 ((${+commands[rush]})) && {
   _rush_completion() {
@@ -51,4 +53,4 @@ eval "$(fnm completions --shell zsh)"
   compctl -K _rush_completion rush
 }
 
-(( $+commands[wt] )) && source <(wt completion zsh
+(( $+commands[wt] )) && source <(wt completion zsh)
