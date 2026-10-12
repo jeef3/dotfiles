@@ -23,6 +23,7 @@
   "allowedUrls": [
     "https://api.github.com",
     "https://docs.github.com",
-    "https://raw.githubusercontent.com"
+    "https://raw.githubusercontent.com",
+    "https://docs.espressif.com"
   ]
 }
