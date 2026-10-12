@@ -13,14 +13,23 @@ ws_id=$(cmux workspace list --json | jq -r --arg ref "$ws" '.workspaces[] | sele
 
 (
   cd "$WT_WORKTREE_PATH"
-  # Prefer the PR title if a PR exists; otherwise ask an AI to summarise the branch.
-  desc=$(gh pr view --json title -q .title 2>/dev/null) || desc=$(
-    {
-      git log --oneline origin/master..HEAD
-      git diff --stat origin/master...HEAD
-    } |
-      copilot -p "In under 12 words, describe what this branch is working on: $(cat)" -s 2>/dev/null
-  )
+  if pr_body=$(gh pr view --json body -q .body 2>/dev/null) && [ -n "$pr_body" ]; then
+    desc=$(
+      printf '%s\n' "$pr_body" |
+        sed -E 's/[A-Z][A-Z0-9]+-[0-9]+//g' |
+        copilot -p "In under 12 words, summarize this PR description. Exclude Jira ticket markers: $(cat)" -s 2>/dev/null |
+        sed -E 's/[A-Z][A-Z0-9]+-[0-9]+//g'
+    )
+  else
+    desc=$(
+      {
+        git log --oneline origin/master..HEAD
+        git diff --stat origin/master...HEAD
+      } |
+        copilot -p "In under 12 words, describe what this branch is working on. Exclude Jira ticket markers: $(cat)" -s 2>/dev/null |
+        sed -E 's/[A-Z][A-Z0-9]+-[0-9]+//g'
+    )
+  fi
   [ -n "$desc" ] && cmux workspace-action --workspace "$ws_id" --action set-description --description "$desc"
 ) >/dev/null 2>&1 &
 disown
