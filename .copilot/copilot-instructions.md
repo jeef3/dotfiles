@@ -9,9 +9,9 @@ Use emoji sparingly in responses — only where it adds genuine warmth or clarit
 Prefer language-server-backed code intelligence over text search tools.
 
 1. For symbol lookups, definitions, references, call graphs, and type information, use LSP tools first.
-2. Use file name search (`fd`) only when locating candidate files or when LSP is unavailable for that language.
-3. Use content search (`ag`) as a fallback after LSP/fd, not as the first option for symbol-level questions.
-4. If an LSP request fails, state that briefly and fall back to `fd` then `ag`.
+2. Use the built-in `glob` tool only when locating candidate files or when LSP is unavailable for that language.
+3. Use the built-in `grep` tool as a fallback after LSP/glob, not as the first option for symbol-level questions. Use `view` to read files.
+4. If an LSP request fails, state that briefly and fall back to `glob` then `grep`.
 
 ## Git workflow
 
@@ -26,6 +26,9 @@ Prefer language-server-backed code intelligence over text search tools.
 
 ## Working directory and tool paths
 
-- Run tools from the directory that owns the task (normally the current repository root or relevant worktree). Use paths relative to that directory rather than `../` or `../../` paths that escape it.
-- For a different repository or worktree, explicitly switch to or open that directory before running tools there. Do not use parent-directory traversal to reach it.
+- Every bash call starts at the repo root and `cd` does not persist between calls. Treat the repo root as the only working directory.
+- Use repo-root-relative paths for every tool and command (grep, glob, view, edit, git, bash). Never write `..` in any path or command.
+- `rushx` must run inside a package: use a single downward `cd <apps|libraries>/<pkg> && rushx <script>` per call. Do not chain further commands in that call that reference other packages or the root.
+- To work in another package, make a separate call from the repo root.
+- For a different repository or worktree, switch to it explicitly before running tools there. Do not use parent-directory traversal to reach it.
 - If a task genuinely needs access outside the allowed directory, request access rather than trying to avoid the permission check.
